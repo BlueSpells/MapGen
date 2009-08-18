@@ -1,0 +1,26 @@
+# Untracked files:
+*.obj
+*.pdb
+*.idb
+*.pch
+*.user
+*.def
+*.ncb
+*.suo
+*.aps
+*/debug/
+/debug/
+*/release/
+/release/
+ReadMe.txt
+readme.html
+/AppResources/
+/ApplicationUtils/
+/Common/
+/Communication/
+/MapGenerator/ImageStone/example/
+/MapGenerator/Debug/
+/MapGenerator/Release/
+VC*.txt
+example.html
+Thumbs.db

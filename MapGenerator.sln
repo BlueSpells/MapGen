@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MapGenerator", "MapGenerator\MapGenerator.vcproj", "{8192965D-32EA-455F-AED4-624B7E5B4F1E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A918CE46-F5BB-4C00-996D-5545B350F203} = {A918CE46-F5BB-4C00-996D-5545B350F203}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BarcodeProcessor", "BarcodeProcessor\BarcodeProcessor.vcproj", "{A918CE46-F5BB-4C00-996D-5545B350F203}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8192965D-32EA-455F-AED4-624B7E5B4F1E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8192965D-32EA-455F-AED4-624B7E5B4F1E}.Debug|Win32.Build.0 = Debug|Win32
+		{8192965D-32EA-455F-AED4-624B7E5B4F1E}.Release|Win32.ActiveCfg = Release|Win32
+		{8192965D-32EA-455F-AED4-624B7E5B4F1E}.Release|Win32.Build.0 = Release|Win32
+		{A918CE46-F5BB-4C00-996D-5545B350F203}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A918CE46-F5BB-4C00-996D-5545B350F203}.Debug|Win32.Build.0 = Debug|Win32
+		{A918CE46-F5BB-4C00-996D-5545B350F203}.Release|Win32.ActiveCfg = Release|Win32
+		{A918CE46-F5BB-4C00-996D-5545B350F203}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
