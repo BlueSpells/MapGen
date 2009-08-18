@@ -12,7 +12,7 @@ enum EBasicItemType
 	EBasicItemType_MaxEnum = 32 // 5 bit, values [0..31]
 };
 
-// Roi: Todo - finish this file
+// Roi: Todo - back to basics
 
 class CBasicItem : public IItem
 {
