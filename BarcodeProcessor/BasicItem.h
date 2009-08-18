@@ -12,6 +12,7 @@ enum EBasicItemType
 	EBasicItemType_MaxEnum = 32 // 5 bit, values [0..31]
 };
 
+// Felix: Todo
 
 class CBasicItem : public IItem
 {
