@@ -195,6 +195,7 @@ void CMapGeneratorDlg::OnBnClickedAddObject()
 
 	m_MapGenerator.AddObject((EMapObjectType)ObjectTypeIndex, Location, m_NumberOfObjects, m_Dup);
 	
+	// From here: Barcode Encoding \ Decoding Testing
 	SStructureShape StructureShape(SStructureShape::None, SStructureShape::SShape());
 	SMultiplicity	Multiplicity((m_NumberOfObjects > 1), m_NumberOfObjects);
 	CItemStructure Structure;
