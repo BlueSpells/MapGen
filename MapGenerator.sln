@@ -7,6 +7,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MapGenerator", "MapGenerato
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BarcodeProcessor", "BarcodeProcessor\BarcodeProcessor.vcproj", "{A918CE46-F5BB-4C00-996D-5545B350F203}"
+	ProjectSection(ProjectDependencies) = postProject
+		{16DA1A9A-9124-434D-9B7E-8EC57E877F1C} = {16DA1A9A-9124-434D-9B7E-8EC57E877F1C}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Common", "..\GuideMeLaptopDemo\GuideMeLaptopDemo\Common\Common.vcproj", "{16DA1A9A-9124-434D-9B7E-8EC57E877F1C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,6 +27,10 @@ Global
 		{A918CE46-F5BB-4C00-996D-5545B350F203}.Debug|Win32.Build.0 = Debug|Win32
 		{A918CE46-F5BB-4C00-996D-5545B350F203}.Release|Win32.ActiveCfg = Release|Win32
 		{A918CE46-F5BB-4C00-996D-5545B350F203}.Release|Win32.Build.0 = Release|Win32
+		{16DA1A9A-9124-434D-9B7E-8EC57E877F1C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{16DA1A9A-9124-434D-9B7E-8EC57E877F1C}.Debug|Win32.Build.0 = Debug|Win32
+		{16DA1A9A-9124-434D-9B7E-8EC57E877F1C}.Release|Win32.ActiveCfg = Release|Win32
+		{16DA1A9A-9124-434D-9B7E-8EC57E877F1C}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

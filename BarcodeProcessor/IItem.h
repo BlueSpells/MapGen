@@ -7,10 +7,10 @@ enum EItemType
 {
 	SubItem,
 	Parking,
-	Position,
-	Pavement,
 	BasicComponent,
 	ComplexStructure,
+	Position,
+	Pavement,
 	EItemType_MaxEnum
 };
 DefineHoffmanEnumBitSize(EItemType);

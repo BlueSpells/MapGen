@@ -20,5 +20,9 @@ public:
 	CBasicItem(void);
 	~CBasicItem(void);
 
+	virtual void	InsertItemType();
+	virtual bool	IsOfThisType(CBitPointer *Data);
+	virtual void	Decode(IN const CBitPointer &Data, IN OUT int &UsedBits);
+
 	EBasicItemType m_BasicItemType;
 };

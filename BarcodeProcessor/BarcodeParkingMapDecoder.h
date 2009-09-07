@@ -6,9 +6,13 @@
 #include "ParkingMapHeader.h"
 #include "ParkingDecoder.h"
 
+
+
 class CBarcodeParkingMapDecoder
 {
 public:
+	// version 1 = All PARKING TYPES.
+	// version 0 = TEMPORARY VERSION. current implemented item types
 	CBarcodeParkingMapDecoder(int Version);
 	~CBarcodeParkingMapDecoder(void);
 
@@ -16,11 +20,10 @@ public:
 	bool GetExtractedItemList(std::vector<IItem *> ItemList);
 	bool GetExtractedHeader(CParkingMapHeader &Header);
 
-	std::vector<IItemDecoder *> m_ListOfItemDecoders;
 	std::vector<IItem *> m_ExtractedItemList;
 	CParkingMapHeader m_Header;
 
 private:
-	std::vector<IItemDecoder *> Decoders;
-	CParkingDecoder				*m_ParkingDecoder;
+	std::vector<IItem *> Decoders;
+	CParkingDecoder		 *m_ParkingDecoder;
 };
