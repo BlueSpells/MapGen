@@ -11,8 +11,8 @@ enum EBasicItemType
 	//etc...
 	EBasicItemType_MaxEnum = 32 // 5 bit, values [0..31]
 };
+DefineEnumBitSize(EBasicItemType);
 
-// Roi: Todo - back to basics
 
 class CBasicItem : public IItem
 {
@@ -20,9 +20,12 @@ public:
 	CBasicItem(void);
 	~CBasicItem(void);
 
+	void Encode(	EBasicItemType BasicItem);
+
 	virtual void	InsertItemType();
 	virtual bool	IsOfThisType(CBitPointer *Data);
 	virtual void	Decode(IN const CBitPointer &Data, IN OUT int &UsedBits);
 
+	// Decoded data:
 	EBasicItemType m_BasicItemType;
 };
