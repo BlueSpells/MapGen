@@ -3,7 +3,6 @@
 #include "BitPointer.h"
 #include "BitLib.h"
 
-// Another change
 
 CBasicItem::CBasicItem(void) : IItem(BasicComponent),
 	m_BasicItemType((EBasicItemType)0xFFFFFFFF)
@@ -37,10 +36,17 @@ void CBasicItem::Encode(EBasicItemType BasicItem)
 
 /*virtual*/ void CBasicItem::InsertItemType()
 {
-	(GetBitBuffer())[0] = 0;
+	(GetBitBuffer())[0] = 1;
+	(GetBitBuffer())[1] = 1;
+	(GetBitBuffer())[2] = 1;
+	(GetBitBuffer())[3] = 0;
 }
 
 /*virtual*/ bool CBasicItem::IsOfThisType(CBitPointer *Data)
 {
-	return (*Data[0] == 0);
+	if (*Data[0] != 1) return false;
+	if (*Data[1] != 1) return false;
+	if (*Data[2] != 1) return false;
+	if (*Data[3] != 0) return false;
+	return true;
 }
