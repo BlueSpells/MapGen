@@ -216,7 +216,7 @@ void CMapGeneratorDlg::OnBnClickedAddObject()
 	};
 
 	int UsedBits = 0;
-	ParkingItem->Decode(ParkingItem->GetBitBuffer(), UsedBits);
+	ParkingItem->Decode(ParkingItem->GetBitBuffer(), UsedBits, NULL);
 
 	/*if (ParkingItem)
 		m_BarcodeEncoder.AddItem(ParkingItem);*/

@@ -70,7 +70,7 @@ public:
 
 	virtual void	InsertItemType() {}
 	virtual bool	IsOfThisType(CBitPointer* /*Data*/) {return false;}
-	virtual void	Decode(IN const CBitPointer &Data, IN OUT int &UsedBits);
+	virtual void	Decode(IN const CBitPointer &Data, IN OUT int &UsedBits, IN int* /*Context unnecessary*/);
 
 	// Decoded data:
 	SStructureShape m_StructureShape;

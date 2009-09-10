@@ -3,17 +3,6 @@
 
 #include <vector>
 
-enum EComplexItemUID
-{
-	EComplexItemUID_MaxEnum = 16
-};
-DefineEnumBitSize(EComplexItemUID);
-
-enum ENumberOfItemsInComplexStructure
-{
-	ENumberOfItemsInComplexStructure_MaxEnum = 16
-};
-DefineEnumBitSize(ENumberOfItemsInComplexStructure);
 
 struct SReplication
 {
@@ -35,6 +24,7 @@ DefineEnumBitSize(SReplication::EGapBetweenReplicas);
 DefineEnumBitSize(SReplication::ETimesToReplicate);
 DefineStructBitSize2(SReplication, GapBetweenReplicas, TimesToReplicate);
 
+
 class CComplexItem :
 	public IItem
 {
@@ -42,14 +32,43 @@ public:
 	CComplexItem(void);
 	~CComplexItem(void);
 
-	void Encode(std::vector<IItem *> ListOfEncodedItems, int ComplexItemUID, int NumberOfItems, 
-				bool IsVerticalMirror, bool ISHorizontalMirror, bool IsVeritcalReplication, bool IsHotizontalReplication,
+	// For First Usage \ ComplexItem Definition
+	void Encode(int ComplexItemUID, std::vector<IItem *> ListOfEncodedItems,
+				bool IsVerticalMirror, bool ISHorizontalMirror, 
+				bool IsVeritcalReplication, bool IsHotizontalReplication, bool IsReplicationPartOfDefinition,
 				SReplication *VeritcalReplication = NULL, SReplication *HotizontalReplication = NULL);
 
-	void Encode(int ComplexItemUID);
+	// For Later Uses (after this ComplexItemUID has been defined)
+	void Encode(int ComplexItemUID, bool IsVerticalMirror, bool ISHorizontalMirror, 
+		bool IsVeritcalReplication, bool IsHotizontalReplication,
+		SReplication *VeritcalReplication = NULL, SReplication *HotizontalReplication = NULL);
 
 
 	virtual void	InsertItemType();
 	virtual bool	IsOfThisType(CBitPointer *Data);
-	virtual void	Decode(IN const CBitPointer &Data, IN OUT int &UsedBits) {;}
+	
+	// IMPORTANT NOTE:
+	// Decoding of Complex item is done in two phases.
+	// The first: the ComplexItem only returns its UID.
+	// Then it is recalled in second phase with UsedBits>0 as it returned in first phase, and 
+	// with Context set to 0 if it's first definition and set to 1 if it is not.
+	virtual void	Decode(IN const CBitPointer &Data, IN OUT int &UsedBits, IN int *Context);
+	virtual void	AddDecodedItemToList(IItem *ItemWithinComplex);
+
+private:
+	virtual void	DecodePhase1(IN const CBitPointer &Data, IN OUT int &UsedBits);
+	virtual void	DecodePhase2(IN const CBitPointer &Data, IN OUT int &UsedBits, IN int *Context);
+
+	Int5Bit m_UID;
+	bool m_IsFirstDefinitionOfComplexItem;
+	Int5Bit m_NumberOfObjectsInComplex;
+
+	std::vector<IItem *> m_ListOfEncodedItems;
+	bool m_IsVerticalMirror;
+	bool m_IsHorizontalMirror;
+	bool m_IsVeritcalReplication;
+	bool m_IsHotizontalReplication;
+	bool m_IsReplicationPartOfDefinition;
+	SReplication m_VeritcalReplication;
+	SReplication m_HotizontalReplication;
 };

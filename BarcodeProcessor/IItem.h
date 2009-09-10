@@ -23,7 +23,7 @@ public:
 
 	virtual void	InsertItemType() = 0;
 	virtual bool	IsOfThisType(CBitPointer *Data) = 0;
-	virtual void	Decode(IN const CBitPointer &Data, IN OUT int &UsedBits) = 0;
+	virtual void	Decode(IN const CBitPointer &Data, IN OUT int &UsedBits, IN int *Context /*when necessary*/) = 0;
 
 	EItemType		GetType()									{return m_Type;}
 	CBitPointer&	GetBitBuffer()								{return m_BitBuffer;}

@@ -53,7 +53,7 @@ void CParkingItem::Encode(EParkingAngle ParkingAngle, EParkingType ParkingType,
 }
 
 
-/*virtual*/ void CParkingItem::Decode(IN const CBitPointer &Data, IN OUT int &UsedBits)
+/*virtual*/ void CParkingItem::Decode(IN const CBitPointer &Data, IN OUT int &UsedBits, IN int* /*Context unnecessary*/)
 {
 	int BitsToRead = UsedBits; BitsToRead;
 	CBitPointer BitPtr = Data + BitSize(GetType());
@@ -71,7 +71,7 @@ void CParkingItem::Encode(EParkingAngle ParkingAngle, EParkingType ParkingType,
 	}
 
 	int BitsUsedByItemStructure = 0;
-	m_ItemStructure.Decode(BitPtr, BitsUsedByItemStructure);
+	m_ItemStructure.Decode(BitPtr, BitsUsedByItemStructure, NULL);
 	BitPtr += BitsUsedByItemStructure; // IMPORTANT even if there are no more decodings after the last for UsedBits calculations
 
 	UsedBits = (int)(BitPtr - Data);

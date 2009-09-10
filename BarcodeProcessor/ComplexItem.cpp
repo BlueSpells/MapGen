@@ -29,12 +29,13 @@ CComplexItem::~CComplexItem(void)
 	return true;
 }
 
-void CComplexItem::Encode(std::vector<IItem *> ListOfEncodedItems, int _ComplexItemUID, int _NumberOfItems, 
-			bool IsVerticalMirror, bool ISHorizontalMirror, bool IsVeritcalReplication, bool IsHotizontalReplication,
-			SReplication *VeritcalReplication /*= NULL*/, SReplication *HotizontalReplication /*= NULL*/)
+void CComplexItem::Encode(int ComplexItemUID, std::vector<IItem *> ListOfEncodedItems,
+			bool IsVerticalMirror, bool ISHorizontalMirror, 
+			bool IsVeritcalReplication, bool IsHotizontalReplication, bool IsReplicationPartOfDefinition,
+			SReplication *VeritcalReplication/* = NULL*/, SReplication *HotizontalReplication/* = NULL*/)
 {
-	EComplexItemUID ComplexItemUID = (EComplexItemUID)_ComplexItemUID;
-	ENumberOfItemsInComplexStructure NumberOfItems = (ENumberOfItemsInComplexStructure)_NumberOfItems;
+	Int5Bit UID = ConvertIntToInt5Bit(ComplexItemUID);
+	Int5Bit NumberOfItems = ConvertIntToInt5Bit(ListOfEncodedItems.size());
 
 	size_t TotalNumberOfBitsInItems = 0;
 	for (unsigned int i = 0; i < ListOfEncodedItems.size(); i++)
@@ -42,12 +43,13 @@ void CComplexItem::Encode(std::vector<IItem *> ListOfEncodedItems, int _ComplexI
 		TotalNumberOfBitsInItems += ListOfEncodedItems[i]->GetBitBufferSize();
 	}
 
-	size_t NumberOfBits	= BitSize(ComplexItemUID) 
+	size_t NumberOfBits	= BitSize(UID) 
 		+ BitSize(NumberOfItems) 
 		+ BitSize(IsVerticalMirror)
 		+ BitSize(ISHorizontalMirror)
 		+ BitSize(IsVeritcalReplication)
 		+ BitSize(IsHotizontalReplication)
+		+ BitSize(IsReplicationPartOfDefinition)
 		+ ((IsVeritcalReplication) ? BitSize(*VeritcalReplication) : 0)
 		+ ((IsHotizontalReplication) ? BitSize(*HotizontalReplication) : 0)
 		+ TotalNumberOfBitsInItems;
@@ -55,12 +57,13 @@ void CComplexItem::Encode(std::vector<IItem *> ListOfEncodedItems, int _ComplexI
 	IncreaseBitBufferSize(NumberOfBits);
 
 	CBitPointer BitPtr = AllocateBitBuffer();
-	BitCopyAndContinue(BitPtr, ComplexItemUID);
+	BitCopyAndContinue(BitPtr, UID);
 	BitCopyAndContinue(BitPtr, NumberOfItems);
 	BitCopyAndContinue(BitPtr, IsVerticalMirror);
 	BitCopyAndContinue(BitPtr, ISHorizontalMirror);
 	BitCopyAndContinue(BitPtr, IsVeritcalReplication);
 	BitCopyAndContinue(BitPtr, IsHotizontalReplication);
+	BitCopyAndContinue(BitPtr, IsReplicationPartOfDefinition);
 	if (IsVeritcalReplication)
 	{
 		BitCopyAndContinue(BitPtr, VeritcalReplication->GapBetweenReplicas);
@@ -78,14 +81,105 @@ void CComplexItem::Encode(std::vector<IItem *> ListOfEncodedItems, int _ComplexI
 	}
 }
 
-void CComplexItem::Encode(int _ComplexItemUID)
+void CComplexItem::Encode(int ComplexItemUID, bool IsVerticalMirror, bool ISHorizontalMirror, 
+						  bool IsVeritcalReplication, bool IsHotizontalReplication,
+						  SReplication *VeritcalReplication/* = NULL*/, SReplication *HotizontalReplication /*= NULL*/)
 {
-	EComplexItemUID ComplexItemUID = (EComplexItemUID)_ComplexItemUID;
-
-	size_t NumberOfBits	= BitSize(ComplexItemUID);
+	Int5Bit UID = ConvertIntToInt5Bit(ComplexItemUID);
+		
+	size_t NumberOfBits	= BitSize(UID)
+		+ BitSize(IsVerticalMirror)
+		+ BitSize(ISHorizontalMirror)
+		+ BitSize(IsVeritcalReplication)
+		+ BitSize(IsHotizontalReplication)
+		+ ((IsVeritcalReplication) ? BitSize(*VeritcalReplication) : 0)
+		+ ((IsHotizontalReplication) ? BitSize(*HotizontalReplication) : 0);
 
 	IncreaseBitBufferSize(NumberOfBits);
 
 	CBitPointer BitPtr = AllocateBitBuffer();
-	BitCopyAndContinue(BitPtr, ComplexItemUID);
+	BitCopyAndContinue(BitPtr, UID);
+	BitCopyAndContinue(BitPtr, IsVerticalMirror);
+	BitCopyAndContinue(BitPtr, ISHorizontalMirror);
+	BitCopyAndContinue(BitPtr, IsVeritcalReplication);
+	BitCopyAndContinue(BitPtr, IsHotizontalReplication);
+	if (IsVeritcalReplication)
+	{
+		BitCopyAndContinue(BitPtr, VeritcalReplication->GapBetweenReplicas);
+		BitCopyAndContinue(BitPtr, VeritcalReplication->TimesToReplicate);
+	}
+	if (IsHotizontalReplication)
+	{
+		BitCopyAndContinue(BitPtr, HotizontalReplication->GapBetweenReplicas);
+		BitCopyAndContinue(BitPtr, HotizontalReplication->TimesToReplicate);
+	}
+
+}
+
+
+/*virtual */void CComplexItem::Decode(IN const CBitPointer &Data, IN OUT int &UsedBits, IN int *Context)
+{
+	if (UsedBits == 0)	// first phase
+		DecodePhase1(Data, UsedBits);
+	else				// second phase
+		DecodePhase2(Data, UsedBits, Context);
+}
+
+/*virtual*/ void CComplexItem::DecodePhase1(IN const CBitPointer &Data, IN OUT int &UsedBits)
+{
+	int BitsToRead = UsedBits; BitsToRead;
+	CBitPointer BitPtr = Data + BitSize(GetType());
+
+	BitPasteAndContinue(BitPtr, m_UID);
+
+	UsedBits = (int)(BitPtr - Data);
+}
+
+/*virtual*/ void CComplexItem::DecodePhase2(IN const CBitPointer &Data, IN OUT int &UsedBits, IN int *Context)
+{
+	bool IsFirstTimeDefinition = (Context == 0);
+
+	int BitsOffset = UsedBits;
+	CBitPointer BitPtr = Data + BitsOffset;
+
+	if (IsFirstTimeDefinition)
+		BitPasteAndContinue(BitPtr, m_NumberOfObjectsInComplex);
+
+
+	BitPasteAndContinue(BitPtr, m_IsVerticalMirror);
+	BitPasteAndContinue(BitPtr, m_IsHorizontalMirror);
+	BitPasteAndContinue(BitPtr, m_IsVeritcalReplication);
+	BitPasteAndContinue(BitPtr, m_IsHotizontalReplication);
+
+	if (IsFirstTimeDefinition)
+		BitPasteAndContinue(BitPtr, m_IsReplicationPartOfDefinition);
+
+
+	if (m_IsVeritcalReplication)
+	{
+		BitPasteAndContinue(BitPtr, m_VeritcalReplication.GapBetweenReplicas);
+		BitPasteAndContinue(BitPtr, m_VeritcalReplication.TimesToReplicate);
+	}
+	if (m_IsHotizontalReplication)
+	{
+		BitPasteAndContinue(BitPtr, m_HotizontalReplication.GapBetweenReplicas);
+		BitPasteAndContinue(BitPtr, m_HotizontalReplication.TimesToReplicate);
+	}
+
+	//  Complex item will NOT decode its own items, but will let the ParkingMapDecoder to do it
+	//	for it and later call AddDecodedItemToList, because otherwise the Complex Item would need to know
+	//  all other item types, which is not really good design. Alternately, it could ask the Decoder to give it
+	//  the appropriate item and take if from there, but since there's Decoder intervention anyway, it can 
+	//  simply decode all the items itself and add them to the complex.
+	// 	if (IsFirstTimeDefinition)
+	//		for (unsigned int i = 0; i < (int)m_NumberOfObjectsInComplex; i++)
+	// 		{}
+
+	UsedBits = (int)(BitPtr - Data);
+}
+
+/*virtual */void CComplexItem::AddDecodedItemToList(IItem *ItemWithinComplex)
+{
+	m_ListOfEncodedItems.push_back(ItemWithinComplex);
+	ASSERT(m_ListOfEncodedItems.size() <= (unsigned int)m_NumberOfObjectsInComplex);
 }
