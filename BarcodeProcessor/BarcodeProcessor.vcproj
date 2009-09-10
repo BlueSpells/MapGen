@@ -207,6 +207,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\PositionItem.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\stdafx.cpp"
 				>
 				<FileConfiguration
@@ -302,6 +306,10 @@
 			</File>
 			<File
 				RelativePath=".\ParkingMapHeader.h"
+				>
+			</File>
+			<File
+				RelativePath=".\PositionItem.h"
 				>
 			</File>
 			<File
