@@ -36,4 +36,6 @@ int bitcnt(CBitPointer p_pbitString, int p_iValue, size_t p_cLength);
 //count of bits having value 1
 int bitcnt(CBitPointer p_pbitString, size_t p_cLength);
 
+void bitzero(CBitPointer p_pbitString, size_t p_cLength);
+
 #endif

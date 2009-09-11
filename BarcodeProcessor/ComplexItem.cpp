@@ -2,7 +2,10 @@
 #include "ComplexItem.h"
 #include "BitLib.h"
 
-CComplexItem::CComplexItem(void) : IItem(ComplexStructure)
+CComplexItem::CComplexItem(void) : IItem(ComplexStructure),
+	m_UID(ConvertIntToInt5Bit(0)), m_IsFirstDefinitionOfComplexItem(false), m_NumberOfObjectsInComplex(ConvertIntToInt5Bit(0)),
+	m_IsVerticalMirror(false), m_IsHorizontalMirror(false), m_IsVeritcalReplication(false), 
+	m_IsHotizontalReplication(false), m_IsReplicationPartOfDefinition(false)
 {
 }
 
@@ -137,7 +140,7 @@ void CComplexItem::Encode(int ComplexItemUID, bool IsVerticalMirror, bool ISHori
 
 /*virtual*/ void CComplexItem::DecodePhase2(IN const CBitPointer &Data, IN OUT int &UsedBits, IN int *Context)
 {
-	bool IsFirstTimeDefinition = (Context == 0);
+	bool IsFirstTimeDefinition = (*Context == 0);
 
 	int BitsOffset = UsedBits;
 	CBitPointer BitPtr = Data + BitsOffset;
