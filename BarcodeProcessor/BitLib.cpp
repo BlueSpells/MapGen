@@ -7,6 +7,16 @@
 #include "stdafx.h"
 #include "BitLib.h"
 
+
+void bitzero(CBitPointer p_pbitString, size_t p_cLength)
+{
+	CBitPointer pbitDest = p_pbitString;
+	while(p_cLength--)
+	{
+		*pbitDest++ = 0;
+	}
+}
+
 CBitPointer bitcpy(	CBitPointer p_pbitDestination, 	
 						   CBitPointer p_pbitSource, 
 							size_t p_cLength)

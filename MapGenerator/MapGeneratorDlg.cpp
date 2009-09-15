@@ -5,6 +5,7 @@
 #include "MapGeneratorApp.h"
 #include "MapGeneratorDlg.h"
 #include "BarcodeProcessor\ParkingItem.h"
+#include "BarcodeProcessor\ComplexItem.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -215,12 +216,28 @@ void CMapGeneratorDlg::OnBnClickedAddObject()
 		break;
 	};
 
+	std::vector<IItem *> ItemsInComplex;
+	ItemsInComplex.push_back(ParkingItem);
+	SReplication Rep(25, 5);
+
+	CComplexItem Complex;
+	Complex.Encode(3, ItemsInComplex, true, false, false, true, true, NULL, &Rep);
+
+
 	int UsedBits = 0;
+	Complex.Decode(Complex.GetBitBuffer(), UsedBits, NULL);
+
+	UsedBits;
+	int Context = 0;
+	Complex.Decode(Complex.GetBitBuffer(), UsedBits, &Context);
+
+	UsedBits = 0;
 	ParkingItem->Decode(ParkingItem->GetBitBuffer(), UsedBits, NULL);
 
 	/*if (ParkingItem)
 		m_BarcodeEncoder.AddItem(ParkingItem);*/
 
+	delete ParkingItem;
 	OnBnClickedUpdateMapView();
 }
 

@@ -2,15 +2,17 @@
 
 #include "BitPointer.h"
 #include "ItemHelper.h"
+#include "BitLib.h"
 
+// NOTE: since the item type is Hoffman based the order is extremely important!!
 enum EItemType
 {
 	SubItem,
 	Parking,
-	BasicComponent,
-	ComplexStructure,
 	Position,
 	Pavement,
+	BasicComponent,
+	ComplexStructure,
 	EItemType_MaxEnum
 };
 DefineHoffmanEnumBitSize(EItemType);
@@ -33,7 +35,7 @@ public:
 #pragma warning (disable:4239)
 #pragma warning (disable:4172)
 	CBitPointer&	AllocateBitBuffer()							
-		{m_BitBuffer = new CBitPointer[m_NumberOfBits]; InsertItemType(); return m_BitBuffer+BitSize(m_Type);}
+		{m_BitBuffer = new CBitPointer[m_NumberOfBits]; bitzero(m_BitBuffer, m_NumberOfBits); InsertItemType(); return m_BitBuffer+BitSize(m_Type);}
 #pragma warning(pop)
 
 private:
