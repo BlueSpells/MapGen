@@ -1,6 +1,5 @@
 #include "StdAfx.h"
 #include "BasicItem.h"
-#include "BitPointer.h"
 #include "BitLib.h"
 
 

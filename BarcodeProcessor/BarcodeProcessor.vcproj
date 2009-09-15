@@ -207,6 +207,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\PavementItem.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\PositionItem.cpp"
 				>
 			</File>
@@ -306,6 +310,10 @@
 			</File>
 			<File
 				RelativePath=".\ParkingMapHeader.h"
+				>
+			</File>
+			<File
+				RelativePath=".\PavementItem.h"
 				>
 			</File>
 			<File

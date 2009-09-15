@@ -98,5 +98,6 @@ static Int##NUMBEROFBITS##Bit ConvertIntToInt##NUMBEROFBITS##Bit(int x)					\
 DefineNumericValue(32);
 DefineNumericValue(16);
 DefineNumericValue(8);
+DefineNumericValue(6);
 DefineNumericValue(5);
 DefineNumericValue(4);
