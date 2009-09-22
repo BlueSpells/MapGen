@@ -24,3 +24,5 @@ VC*.txt
 example.html
 Thumbs.db
 BuildLog.htm
+/ScriptCompiler/Debug/
+/ScriptCompiler/Release/

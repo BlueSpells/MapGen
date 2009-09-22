@@ -37,3 +37,5 @@
 #include <crtdbg.h>
 
 #include "stdafx.h"
+
+#include "..\Common\LogEvent.h"

@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="BarcodeProcessor"
-	ProjectGUID="{A918CE46-F5BB-4C00-996D-5545B350F203}"
-	RootNamespace="BarcodeProcessor"
+	Name="ScriptInterpreter"
+	ProjectGUID="{8AF0C974-566C-444F-9F92-2F8635174D45}"
+	RootNamespace="ScriptInterpreter"
 	Keyword="Win32Proj"
 	>
 	<Platforms>
@@ -42,14 +42,14 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories=".."
-				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG"
+				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="2"
 				WarningLevel="4"
 				Detect64BitPortabilityProblems="false"
-				DebugInformationFormat="3"
+				DebugInformationFormat="4"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -106,7 +106,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories=".."
-				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
 				WarningLevel="4"
@@ -151,75 +151,15 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\BarcodeDecoder.cpp"
+				RelativePath=".\ParkingCommand.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\BarcodeEncoder.cpp"
+				RelativePath=".\ScriptInterpreter.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\BarcodeParkingMapDecoder.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\BasicItem.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Bit.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\BitLib.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\BitPointer.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ComplexItem.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ExtendedItem.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\GeneralHeader.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ItemsFactory.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ItemStructure.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ParkingDecoder.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ParkingItem.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ParkingMapHeader.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\PavementItem.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\PositionItem.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\SignedJumpExtendedItem.cpp"
+				RelativePath=".\SimpleScriptReader.cpp"
 				>
 			</File>
 			<File
@@ -249,91 +189,23 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\BarcodeDecoder.h"
+				RelativePath=".\ICommand.h"
 				>
 			</File>
 			<File
-				RelativePath=".\BarcodeEncoder.h"
+				RelativePath=".\IScriptReader.h"
 				>
 			</File>
 			<File
-				RelativePath=".\BarcodeParkingMapDecoder.h"
+				RelativePath=".\ParkingCommand.h"
 				>
 			</File>
 			<File
-				RelativePath=".\BasicItem.h"
+				RelativePath=".\ScriptInterpreter.h"
 				>
 			</File>
 			<File
-				RelativePath=".\Bit.h"
-				>
-			</File>
-			<File
-				RelativePath=".\BitLib.h"
-				>
-			</File>
-			<File
-				RelativePath=".\BitPointer.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ComplexItem.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ExtendedItem.h"
-				>
-			</File>
-			<File
-				RelativePath=".\GeneralHeader.h"
-				>
-			</File>
-			<File
-				RelativePath=".\IHeader.h"
-				>
-			</File>
-			<File
-				RelativePath=".\IItem.h"
-				>
-			</File>
-			<File
-				RelativePath=".\IItemDecoder.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ItemHelper.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ItemsFactory.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ItemStructure.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ParkingDecoder.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ParkingItem.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ParkingMapHeader.h"
-				>
-			</File>
-			<File
-				RelativePath=".\PavementItem.h"
-				>
-			</File>
-			<File
-				RelativePath=".\PositionItem.h"
-				>
-			</File>
-			<File
-				RelativePath=".\SignedJumpExtendedItem.h"
+				RelativePath=".\SimpleScriptReader.h"
 				>
 			</File>
 			<File

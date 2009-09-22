@@ -2,10 +2,10 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="BarcodeProcessor"
-	ProjectGUID="{A918CE46-F5BB-4C00-996D-5545B350F203}"
-	RootNamespace="BarcodeProcessor"
-	Keyword="Win32Proj"
+	Name="ScriptCompiler"
+	ProjectGUID="{11B79634-D736-4CB5-995C-6D8B2C015E37}"
+	RootNamespace="ScriptCompiler"
+	Keyword="MFCProj"
 	>
 	<Platforms>
 		<Platform
@@ -19,9 +19,10 @@
 			Name="Debug|Win32"
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="4"
+			ConfigurationType="1"
 			UseOfMFC="2"
 			CharacterSet="2"
+			WholeProgramOptimization="0"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -37,10 +38,14 @@
 			/>
 			<Tool
 				Name="VCMIDLTool"
+				PreprocessorDefinitions="_DEBUG"
+				MkTypLibCompatible="false"
+				ValidateParameters="false"
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
+				WholeProgramOptimization="false"
 				AdditionalIncludeDirectories=".."
 				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG"
 				MinimalRebuild="true"
@@ -56,15 +61,26 @@
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="_DEBUG"
+				Culture="1033"
+				AdditionalIncludeDirectories="$(IntDir)"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
-				Name="VCLibrarianTool"
+				Name="VCLinkerTool"
+				LinkIncremental="2"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				EntryPointSymbol=""
+				TargetMachine="1"
 			/>
 			<Tool
 				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -76,6 +92,12 @@
 				Name="VCFxCopTool"
 			/>
 			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
+			/>
+			<Tool
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
@@ -83,10 +105,10 @@
 			Name="Release|Win32"
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="4"
+			ConfigurationType="1"
 			UseOfMFC="2"
 			CharacterSet="2"
-			WholeProgramOptimization="1"
+			WholeProgramOptimization="0"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -102,11 +124,16 @@
 			/>
 			<Tool
 				Name="VCMIDLTool"
+				PreprocessorDefinitions="NDEBUG"
+				MkTypLibCompatible="false"
+				ValidateParameters="false"
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				WholeProgramOptimization="false"
 				AdditionalIncludeDirectories=".."
-				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG"
+				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG"
+				MinimalRebuild="false"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
 				WarningLevel="4"
@@ -118,15 +145,27 @@
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="NDEBUG"
+				Culture="1033"
+				AdditionalIncludeDirectories="$(IntDir)"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
-				Name="VCLibrarianTool"
+				Name="VCLinkerTool"
+				LinkIncremental="1"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				TargetMachine="1"
 			/>
 			<Tool
 				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -136,6 +175,12 @@
 			/>
 			<Tool
 				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -151,75 +196,11 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\BarcodeDecoder.cpp"
+				RelativePath=".\ScriptCompiler.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\BarcodeEncoder.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\BarcodeParkingMapDecoder.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\BasicItem.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Bit.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\BitLib.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\BitPointer.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ComplexItem.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ExtendedItem.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\GeneralHeader.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ItemsFactory.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ItemStructure.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ParkingDecoder.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ParkingItem.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ParkingMapHeader.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\PavementItem.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\PositionItem.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\SignedJumpExtendedItem.cpp"
+				RelativePath=".\ScriptCompilerDlg.cpp"
 				>
 			</File>
 			<File
@@ -249,91 +230,15 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\BarcodeDecoder.h"
+				RelativePath=".\Resource.h"
 				>
 			</File>
 			<File
-				RelativePath=".\BarcodeEncoder.h"
+				RelativePath=".\ScriptCompiler.h"
 				>
 			</File>
 			<File
-				RelativePath=".\BarcodeParkingMapDecoder.h"
-				>
-			</File>
-			<File
-				RelativePath=".\BasicItem.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Bit.h"
-				>
-			</File>
-			<File
-				RelativePath=".\BitLib.h"
-				>
-			</File>
-			<File
-				RelativePath=".\BitPointer.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ComplexItem.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ExtendedItem.h"
-				>
-			</File>
-			<File
-				RelativePath=".\GeneralHeader.h"
-				>
-			</File>
-			<File
-				RelativePath=".\IHeader.h"
-				>
-			</File>
-			<File
-				RelativePath=".\IItem.h"
-				>
-			</File>
-			<File
-				RelativePath=".\IItemDecoder.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ItemHelper.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ItemsFactory.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ItemStructure.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ParkingDecoder.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ParkingItem.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ParkingMapHeader.h"
-				>
-			</File>
-			<File
-				RelativePath=".\PavementItem.h"
-				>
-			</File>
-			<File
-				RelativePath=".\PositionItem.h"
-				>
-			</File>
-			<File
-				RelativePath=".\SignedJumpExtendedItem.h"
+				RelativePath=".\ScriptCompilerDlg.h"
 				>
 			</File>
 			<File
@@ -346,6 +251,18 @@
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
+			<File
+				RelativePath=".\res\ScriptCompiler.ico"
+				>
+			</File>
+			<File
+				RelativePath=".\ScriptCompiler.rc"
+				>
+			</File>
+			<File
+				RelativePath=".\res\ScriptCompiler.rc2"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath=".\ReadMe.txt"
@@ -353,5 +270,9 @@
 		</File>
 	</Files>
 	<Globals>
+		<Global
+			Name="RESOURCE_FILE"
+			Value="ScriptCompiler.rc"
+		/>
 	</Globals>
 </VisualStudioProject>
