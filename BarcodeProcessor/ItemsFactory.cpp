@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "ItemsFactory.h"
-
+#include "PositionItem.h"
+#include "PavementItem.h"
 #include "ParkingItem.h"
 #include "BasicItem.h"
 #include "ComplexItem.h"
@@ -23,10 +24,10 @@ CItemsFactory::~CItemsFactory(void)
 		NewItem = new CParkingItem;
 		break;
 	case Position:
-		/*NewItem = new CParkingItem;*/ // TODO
+		NewItem = new CPositionItem;
 		break;
 	case Pavement:
-		/*NewItem = new CParkingItem;*/ // TODO
+		NewItem = new CPavementItem;
 		break;
 	case BasicComponent:
 		NewItem = new CBasicItem;
@@ -34,6 +35,7 @@ CItemsFactory::~CItemsFactory(void)
 	case ComplexStructure:
 		NewItem = new CComplexItem;
 		break;
+	// TODO : add other item types
 	default:
 		ASSERT(false);
 	};

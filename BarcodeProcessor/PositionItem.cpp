@@ -1,6 +1,5 @@
 #include "StdAfx.h"
 #include "PositionItem.h"
-#include "BitPointer.h"
 #include "BitLib.h"
 
 // The position jump is restricted to FORWARD RELATIVE
@@ -30,17 +29,13 @@ void CPositionItem::Encode(EPositionItemType PositionItemType, Int8Bit X, Int8Bi
 
 	CBitPointer BitPtr = AllocateBitBuffer();
 	BitCopyAndContinue(BitPtr, PositionItemType);
-	if (IsHorizontal)
-	{
+	if (IsHorizontal) 
 		BitCopyAndContinue(BitPtr, X);
-	}
-	if (IsVertical)
-	{
+	if (IsVertical)	
 		BitCopyAndContinue(BitPtr, Y);
-	}
 }
 
-/*virtual*/ void CPositionItem::Decode(IN const CBitPointer &Data, IN OUT int &UsedBits)
+/*virtual*/ void CPositionItem::Decode(IN const CBitPointer &Data, IN OUT int &UsedBits, IN int* /*Context unnecessary*/)
 {
 
 	int BitsToRead = UsedBits; BitsToRead;
@@ -48,14 +43,10 @@ void CPositionItem::Encode(EPositionItemType PositionItemType, Int8Bit X, Int8Bi
 
 	BitPasteAndContinue(BitPtr, m_PositionItemType);
 
-	if ((m_PositionItemType == HorizontalJump || m_PositionItemType == DiagonalJump))
-	{
+	if (m_PositionItemType == HorizontalJump || m_PositionItemType == DiagonalJump)
 		BitCopyAndContinue(BitPtr, m_X);
-	}
 	if (m_PositionItemType == VerticalJump || m_PositionItemType == DiagonalJump)
-	{
 		BitCopyAndContinue(BitPtr, m_Y);
-	}
 
 	UsedBits = (int)(BitPtr - Data);
 }
