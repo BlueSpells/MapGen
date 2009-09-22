@@ -93,6 +93,11 @@ enum Int##NUMBEROFBITS##Bit { Int##NUMBEROFBITS##Bit_NumberOfBits = NUMBEROFBITS
 static int BitSize(Int##NUMBEROFBITS##Bit ) {return NUMBEROFBITS;}						\
 static Int##NUMBEROFBITS##Bit ConvertIntToInt##NUMBEROFBITS##Bit(int x)					\
 {ASSERT(x < pow((double)2,NUMBEROFBITS)); return (Int##NUMBEROFBITS##Bit)x;}			\
+struct SignedInt##NUMBEROFBITS##Bit {bool sign; Int##NUMBEROFBITS##Bit value;};			\
+DefineStructBitSize2(SignedInt##NUMBEROFBITS##Bit, sign, value);						\
+static SignedInt##NUMBEROFBITS##Bit ConvertIntToSignedInt##NUMBEROFBITS##Bit(int x)		\
+{SignedInt##NUMBEROFBITS##Bit num; num.sign = (x >= 0);									\
+num.value = ConvertIntToInt##NUMBEROFBITS##Bit(abs(x)); return num;}					
 
 
 DefineNumericValue(32);
