@@ -47,7 +47,7 @@ void CItemStructure::Encode(SStructureShape StructureShape, SMultiplicity Multip
 	};
 }
 
-/*virtual */void CItemStructure::Decode(IN const CBitPointer &Data, IN OUT int &UsedBits, IN int */*Context unnecessary*/)
+/*virtual */void CItemStructure::Decode(IN const CBitPointer &Data, IN OUT int &UsedBits, IN int* /*Context unnecessary*/)
 {
 	int BitsToRead = UsedBits; BitsToRead;
 	CBitPointer BitPtr = Data + BitSize(GetType());
