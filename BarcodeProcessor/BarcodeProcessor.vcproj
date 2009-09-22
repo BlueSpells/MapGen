@@ -183,6 +183,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ExtendedItem.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\GeneralHeader.cpp"
 				>
 			</File>
@@ -212,6 +216,10 @@
 			</File>
 			<File
 				RelativePath=".\PositionItem.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\SignedJumpExtendedItem.cpp"
 				>
 			</File>
 			<File
@@ -273,6 +281,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ExtendedItem.h"
+				>
+			</File>
+			<File
 				RelativePath=".\GeneralHeader.h"
 				>
 			</File>
@@ -318,6 +330,10 @@
 			</File>
 			<File
 				RelativePath=".\PositionItem.h"
+				>
+			</File>
+			<File
+				RelativePath=".\SignedJumpExtendedItem.h"
 				>
 			</File>
 			<File

@@ -8,10 +8,10 @@ CPavementItem::CPavementItem(void) : IItem(Pavement),
 	m_TextureType((ETextureType)0),
 	m_FillType(ConvertIntToInt4Bit(0)),
 	m_IsAdjacentToParking(0),
-	m_SizeOrSide(),								//Init should be added
 	m_SpecialVertexCurvature((ECurvatureType)0),
 	m_ShortenVertexCoordinate(ConvertIntToInt6Bit(0))
 {
+	ZeroMemory(&m_SizeOrSide, sizeof m_SizeOrSide);
 }
 
 CPavementItem::~CPavementItem(void)

@@ -13,6 +13,7 @@ enum EItemType
 	Pavement,
 	BasicComponent,
 	ComplexStructure,
+	ExtendedItem,
 	EItemType_MaxEnum
 };
 DefineHoffmanEnumBitSize(EItemType);
