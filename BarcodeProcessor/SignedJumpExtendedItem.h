@@ -22,7 +22,7 @@ public:
 	CSignedJumpExtendedItem(void);
 	~CSignedJumpExtendedItem(void);
 
-	void Encode(	ESignedJumpItemType PositionItemType, Int9Bit X, Int9Bit Y);
+	void Encode(	ESignedJumpItemType PositionItemType, SignedInt9Bit X, SignedInt9Bit Y);
 
 	virtual void	InsertItemType();
 	virtual bool	IsOfThisType(CBitPointer *Data);
@@ -32,6 +32,6 @@ public:
 
 	// Decoded data:
 	ESignedJumpItemType		m_SignedJumpItemType;
-	Int9Bit					m_X; 
-	Int9Bit					m_Y;
+	SignedInt9Bit			m_X; 
+	SignedInt9Bit			m_Y;
 };

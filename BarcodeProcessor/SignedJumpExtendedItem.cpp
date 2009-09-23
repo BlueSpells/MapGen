@@ -7,8 +7,8 @@
 
 CSignedJumpExtendedItem::CSignedJumpExtendedItem(void) : CExtendedItem(SignedJump),
 	m_SignedJumpItemType((ESignedJumpItemType)0xFFFFFFFF),
-	m_X(ConvertIntToInt9Bit(0)),
-	m_Y(ConvertIntToInt9Bit(0))
+	m_X(ConvertIntToSignedInt9Bit(0)),
+	m_Y(ConvertIntToSignedInt9Bit(0))
 {
 }
 
@@ -16,7 +16,7 @@ CSignedJumpExtendedItem::~CSignedJumpExtendedItem(void)
 {
 }
 
-void CSignedJumpExtendedItem::Encode(ESignedJumpItemType SignedJumpItemType, Int9Bit X, Int9Bit Y)
+void CSignedJumpExtendedItem::Encode(ESignedJumpItemType SignedJumpItemType, SignedInt9Bit X, SignedInt9Bit Y)
 {
 	bool IsHorizontal = (SignedJumpItemType == HorizontalJump || SignedJumpItemType == DiagonalJump);
 	bool IsVertical = (SignedJumpItemType == VerticalJump || SignedJumpItemType == DiagonalJump);
