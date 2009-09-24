@@ -1,84 +1,233 @@
-21.09.09 15:41:45.812|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
-21.09.09 15:41:45.812|INFOHIGH|ScriptCompilerApp Starting
-21.09.09 15:41:45.812|INFOHIGH|ScriptCompilerApp Started
-21.09.09 15:41:46.687|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
-21.09.09 15:41:54.015|INFOHIGH|CResourcedGuiApplication::Close(), Start Closing the ScriptCompilerApp Dialog
-21.09.09 15:41:54.062|INFOHIGH|ScriptCompilerApp Terminated
-21.09.09 16:00:27.109|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
-21.09.09 16:00:27.109|INFOHIGH|ScriptCompilerApp Starting
-21.09.09 16:00:27.109|INFOHIGH|ScriptCompilerApp Started
-21.09.09 16:00:27.671|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
-21.09.09 16:00:27.687|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
-21.09.09 16:05:07.703|ERROR   |CSimpleScriptReader::OpenScriptFile: Failed reading from file MyFirstScript.txt
-21.09.09 16:05:38.500|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
-21.09.09 16:05:38.500|INFOHIGH|ScriptCompilerApp Starting
-21.09.09 16:05:38.500|INFOHIGH|ScriptCompilerApp Started
-21.09.09 16:05:39.046|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
-21.09.09 16:05:39.062|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
-21.09.09 16:07:21.171|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
-21.09.09 16:07:21.171|INFOHIGH|ScriptCompilerApp Starting
-21.09.09 16:07:21.171|INFOHIGH|ScriptCompilerApp Started
-21.09.09 16:07:21.734|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
-21.09.09 16:07:21.734|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
-21.09.09 16:07:40.968|ERROR   |CSimpleScriptReader::OpenScriptFile: Failed reading from file a.r
-21.09.09 16:08:20.812|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
-21.09.09 16:08:20.812|INFOHIGH|ScriptCompilerApp Starting
-21.09.09 16:08:20.812|INFOHIGH|ScriptCompilerApp Started
-21.09.09 16:08:21.312|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
-21.09.09 16:08:21.328|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
-21.09.09 16:08:48.031|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
-21.09.09 16:08:48.031|INFOHIGH|ScriptCompilerApp Starting
-21.09.09 16:08:48.031|INFOHIGH|ScriptCompilerApp Started
-21.09.09 16:08:48.546|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
-21.09.09 16:08:48.562|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
-21.09.09 16:08:54.859|INFOHIGH|CResourcedGuiApplication::Close(), Start Closing the ScriptCompilerApp Dialog
-21.09.09 16:14:53.859|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
-21.09.09 16:14:53.859|INFOHIGH|ScriptCompilerApp Starting
-21.09.09 16:14:53.859|INFOHIGH|ScriptCompilerApp Started
-21.09.09 16:14:54.421|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
-21.09.09 16:14:54.437|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
-21.09.09 16:14:57.687|ERROR   |CSimpleScriptReader::OpenScriptFile: Failed Opening file 
-21.09.09 16:15:02.796|ERROR   |CSimpleScriptReader::OpenScriptFile: Failed Opening file 
-21.09.09 16:15:26.265|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
-21.09.09 16:15:43.625|INFOHIGH|CSimpleScriptReader::CloseScriptFile: File Closed
-21.09.09 16:15:56.234|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
-21.09.09 16:15:59.140|INFOHIGH|CSimpleScriptReader::CloseScriptFile: File Closed
-21.09.09 16:16:00.890|INFOHIGH|CResourcedGuiApplication::Close(), Start Closing the ScriptCompilerApp Dialog
-21.09.09 16:16:00.921|INFOHIGH|ScriptCompilerApp Terminated
-21.09.09 16:16:04.703|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
-21.09.09 16:16:04.703|INFOHIGH|ScriptCompilerApp Starting
-21.09.09 16:16:04.703|INFOHIGH|ScriptCompilerApp Started
-21.09.09 16:16:05.218|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
-21.09.09 16:16:05.218|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
-21.09.09 16:16:08.796|INFOHIGH|CResourcedGuiApplication::Close(), Start Closing the ScriptCompilerApp Dialog
-21.09.09 16:16:26.281|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
-21.09.09 16:16:26.281|INFOHIGH|ScriptCompilerApp Starting
-21.09.09 16:16:26.281|INFOHIGH|ScriptCompilerApp Started
-21.09.09 16:16:26.781|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
-21.09.09 16:16:26.796|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
-21.09.09 16:16:31.515|INFOHIGH|CResourcedGuiApplication::Close(), Start Closing the ScriptCompilerApp Dialog
-21.09.09 17:26:33.312|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
-21.09.09 17:26:33.312|INFOLOW |CThreadWithQueue(LogManager)::OnThreadStart
-21.09.09 17:26:33.312|INFOHIGH|ScriptCompilerApp Starting
-21.09.09 17:26:33.312|INFOHIGH|ScriptCompilerApp Started
-21.09.09 17:26:33.859|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
-21.09.09 17:26:33.875|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
-21.09.09 17:26:44.015|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
-21.09.09 17:26:51.828|WARNING |CScriptInterpreter::InterperetFile: 0 lines read from file! Is file empty?
-21.09.09 17:26:52.687|INFOHIGH|CSimpleScriptReader::CloseScriptFile: File Closed
-21.09.09 17:28:20.968|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
-21.09.09 17:28:20.968|INFOHIGH|ScriptCompilerApp Starting
-21.09.09 17:28:20.968|INFOHIGH|ScriptCompilerApp Started
-21.09.09 17:28:21.515|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
-21.09.09 17:28:21.531|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
-21.09.09 17:28:28.578|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
-21.09.09 17:28:30.765|WARNING |CScriptInterpreter::InterperetFile: 0 lines read from file! Is file empty?
-21.09.09 17:28:37.093|INFOHIGH|CResourcedGuiApplication::Close(), Start Closing the ScriptCompilerApp Dialog
-21.09.09 17:28:37.125|INFOHIGH|ScriptCompilerApp Terminated
-21.09.09 17:28:48.437|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
-21.09.09 17:28:48.437|INFOHIGH|ScriptCompilerApp Starting
-21.09.09 17:28:48.437|INFOHIGH|ScriptCompilerApp Started
-21.09.09 17:28:49.031|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
-21.09.09 17:28:49.031|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
-21.09.09 17:28:51.562|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
-21.09.09 17:28:55.265|WARNING |CScriptInterpreter::InterperetFile: 0 lines read from file! Is file empty?
+23.09.09 17:34:20.265|INFOHIGH|ScriptCompilerApp Starting
+23.09.09 17:34:20.265|INFOHIGH|ScriptCompilerApp Started
+23.09.09 17:34:21.265|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+23.09.09 17:34:21.281|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+23.09.09 17:34:39.046|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
+23.09.09 17:34:48.203|WARNING |CScriptInterpreter::InterperetFile: 0 lines read from file! Is file empty?
+23.09.09 17:37:31.953|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+23.09.09 17:37:31.953|INFOHIGH|ScriptCompilerApp Starting
+23.09.09 17:37:31.953|INFOHIGH|ScriptCompilerApp Started
+23.09.09 17:37:32.515|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+23.09.09 17:37:32.515|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+23.09.09 17:37:35.796|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
+23.09.09 17:37:36.765|WARNING |CScriptInterpreter::InterperetFile: 0 lines read from file! Is file empty?
+23.09.09 17:37:36.765|INFOHIGH|CSimpleScriptReader::CloseScriptFile: File Closed
+23.09.09 17:37:39.828|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
+23.09.09 17:37:40.328|WARNING |CScriptInterpreter::InterperetFile: 0 lines read from file! Is file empty?
+23.09.09 17:37:40.328|INFOHIGH|CSimpleScriptReader::CloseScriptFile: File Closed
+23.09.09 17:37:43.546|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
+23.09.09 17:37:44.015|WARNING |CScriptInterpreter::InterperetFile: 0 lines read from file! Is file empty?
+23.09.09 17:37:44.015|INFOHIGH|CSimpleScriptReader::CloseScriptFile: File Closed
+23.09.09 17:37:53.421|INFOHIGH|CResourcedGuiApplication::Close(), Start Closing the ScriptCompilerApp Dialog
+23.09.09 17:39:58.265|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+23.09.09 17:39:58.265|INFOHIGH|ScriptCompilerApp Starting
+23.09.09 17:39:58.265|INFOHIGH|ScriptCompilerApp Started
+23.09.09 17:39:58.875|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+23.09.09 17:39:58.875|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+23.09.09 17:40:24.437|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+23.09.09 17:40:24.437|INFOHIGH|ScriptCompilerApp Starting
+23.09.09 17:40:24.437|INFOHIGH|ScriptCompilerApp Started
+23.09.09 17:40:25.078|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+23.09.09 17:40:25.093|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+23.09.09 17:40:27.703|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
+23.09.09 17:42:07.531|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+23.09.09 17:42:07.531|INFOHIGH|ScriptCompilerApp Starting
+23.09.09 17:42:07.531|INFOHIGH|ScriptCompilerApp Started
+23.09.09 17:42:08.171|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+23.09.09 17:42:08.187|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+23.09.09 17:42:33.484|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+23.09.09 17:42:33.484|INFOHIGH|ScriptCompilerApp Starting
+23.09.09 17:42:33.484|INFOHIGH|ScriptCompilerApp Started
+23.09.09 17:42:34.140|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+23.09.09 17:42:34.156|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+23.09.09 17:42:36.265|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
+23.09.09 17:45:07.906|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+23.09.09 17:45:07.906|INFOLOW |CThreadWithQueue(LogManager)::OnThreadStart
+23.09.09 17:45:07.906|INFOHIGH|ScriptCompilerApp Starting
+23.09.09 17:45:07.906|INFOHIGH|ScriptCompilerApp Started
+23.09.09 17:45:08.515|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+23.09.09 17:45:08.531|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+23.09.09 17:45:12.468|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
+23.09.09 17:45:42.062|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+23.09.09 17:45:42.062|INFOHIGH|ScriptCompilerApp Starting
+23.09.09 17:45:42.062|INFOHIGH|ScriptCompilerApp Started
+23.09.09 17:45:42.734|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+23.09.09 17:45:42.750|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+23.09.09 17:52:28.218|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+23.09.09 17:52:28.218|INFOHIGH|ScriptCompilerApp Starting
+23.09.09 17:52:28.218|INFOHIGH|ScriptCompilerApp Started
+23.09.09 17:52:28.875|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+23.09.09 17:52:28.890|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+23.09.09 17:52:29.796|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
+23.09.09 17:55:08.046|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+23.09.09 17:55:08.046|INFOHIGH|ScriptCompilerApp Starting
+23.09.09 17:55:08.046|INFOHIGH|ScriptCompilerApp Started
+23.09.09 17:55:08.703|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+23.09.09 17:55:08.718|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+23.09.09 17:55:10.437|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
+23.09.09 17:55:51.390|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+23.09.09 17:55:51.390|INFOLOW |CThreadWithQueue(LogManager)::OnThreadStart
+23.09.09 17:55:51.390|INFOHIGH|ScriptCompilerApp Starting
+23.09.09 17:55:51.390|INFOHIGH|ScriptCompilerApp Started
+23.09.09 17:55:52.125|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+23.09.09 17:55:52.140|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+23.09.09 17:55:53.109|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
+23.09.09 17:57:17.640|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+23.09.09 17:57:17.640|INFOHIGH|ScriptCompilerApp Starting
+23.09.09 17:57:17.640|INFOHIGH|ScriptCompilerApp Started
+23.09.09 17:57:18.296|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+23.09.09 17:57:18.312|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+23.09.09 17:57:19.234|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
+23.09.09 17:57:48.109|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+23.09.09 17:57:48.109|INFOHIGH|ScriptCompilerApp Starting
+23.09.09 17:57:48.109|INFOHIGH|ScriptCompilerApp Started
+23.09.09 17:57:48.843|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+23.09.09 17:57:48.859|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+23.09.09 17:58:31.218|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+23.09.09 17:58:31.218|INFOLOW |CThreadWithQueue(LogManager)::OnThreadStart
+23.09.09 17:58:31.218|INFOHIGH|ScriptCompilerApp Starting
+23.09.09 17:58:31.218|INFOHIGH|ScriptCompilerApp Started
+23.09.09 17:58:32.000|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+23.09.09 17:58:32.015|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+23.09.09 17:58:33.421|INFOHIGH|CResourcedGuiApplication::Close(), Start Closing the ScriptCompilerApp Dialog
+23.09.09 17:58:33.453|INFOHIGH|ScriptCompilerApp Terminated
+23.09.09 17:59:40.515|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+23.09.09 17:59:40.515|INFOHIGH|ScriptCompilerApp Starting
+23.09.09 17:59:40.515|INFOHIGH|ScriptCompilerApp Started
+23.09.09 17:59:41.375|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+23.09.09 17:59:41.390|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+23.09.09 17:59:55.406|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+23.09.09 17:59:55.406|INFOHIGH|ScriptCompilerApp Starting
+23.09.09 17:59:55.406|INFOHIGH|ScriptCompilerApp Started
+23.09.09 17:59:56.265|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+23.09.09 17:59:56.265|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+23.09.09 18:00:29.187|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+23.09.09 18:00:29.187|INFOHIGH|ScriptCompilerApp Starting
+23.09.09 18:00:29.187|INFOHIGH|ScriptCompilerApp Started
+23.09.09 18:00:30.140|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+23.09.09 18:00:30.156|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+23.09.09 18:00:32.375|INFOHIGH|CResourcedGuiApplication::Close(), Start Closing the ScriptCompilerApp Dialog
+23.09.09 18:00:32.406|INFOHIGH|ScriptCompilerApp Terminated
+23.09.09 18:22:49.859|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+23.09.09 18:22:49.859|INFOHIGH|ScriptCompilerApp Starting
+23.09.09 18:22:49.859|INFOHIGH|ScriptCompilerApp Started
+23.09.09 18:22:50.656|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+23.09.09 18:22:50.671|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+23.09.09 18:22:52.046|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
+23.09.09 18:25:13.859|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+23.09.09 18:25:13.859|INFOHIGH|ScriptCompilerApp Starting
+23.09.09 18:25:13.859|INFOHIGH|ScriptCompilerApp Started
+23.09.09 18:25:14.703|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+23.09.09 18:25:14.718|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+23.09.09 18:25:15.890|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
+23.09.09 18:25:46.109|ERROR   |InterperetArgument: Illegal Argument Type=Regular! 1 parameters within! Is space missing?
+24.09.09 10:43:01.370|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+24.09.09 10:43:01.386|INFOHIGH|ScriptCompilerApp Starting
+24.09.09 10:43:01.386|INFOHIGH|ScriptCompilerApp Started
+24.09.09 10:43:02.777|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+24.09.09 10:43:02.792|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+24.09.09 10:43:07.198|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
+24.09.09 10:43:11.027|ERROR   |InterperetArgument: Illegal Argument Type=Regular! 1 parameters within! Is space missing?
+24.09.09 10:43:11.027|ERROR   |CParkingCommand::OnCommandImplementation: [Line #1]: Failed to parse arguments.
+24.09.09 10:43:11.027|ERROR   |CScriptInterpreter::InterperetFile: [Line #1]: Command Parking failed. Something is wrong with arguments?
+24.09.09 10:43:11.027|INFOHIGH|CSimpleScriptReader::CloseScriptFile: File Closed
+24.09.09 10:43:35.948|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
+24.09.09 10:46:01.558|ERROR   |InterperetArgument: Illegal Argument Type=Regular! 1 parameters within! Is space missing?
+24.09.09 10:46:01.558|ERROR   |CParkingCommand::OnCommandImplementation: [Line #1]: Failed to parse arguments.
+24.09.09 10:46:01.558|ERROR   |CScriptInterpreter::InterperetFile: [Line #1]: Command Parking failed. Something is wrong with arguments?
+24.09.09 10:46:01.558|INFOHIGH|CSimpleScriptReader::CloseScriptFile: File Closed
+24.09.09 10:46:06.198|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
+24.09.09 10:48:11.323|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+24.09.09 10:48:11.323|INFOHIGH|ScriptCompilerApp Starting
+24.09.09 10:48:11.323|INFOHIGH|ScriptCompilerApp Started
+24.09.09 10:48:12.198|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+24.09.09 10:48:12.245|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+24.09.09 10:49:26.558|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+24.09.09 10:49:26.558|INFOHIGH|ScriptCompilerApp Starting
+24.09.09 10:49:26.558|INFOHIGH|ScriptCompilerApp Started
+24.09.09 10:49:27.417|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+24.09.09 10:49:27.448|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+24.09.09 10:49:28.495|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
+24.09.09 10:54:50.448|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+24.09.09 10:54:50.448|INFOHIGH|ScriptCompilerApp Starting
+24.09.09 10:54:50.448|INFOHIGH|ScriptCompilerApp Started
+24.09.09 10:54:51.417|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+24.09.09 10:54:51.433|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+24.09.09 10:54:52.527|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
+24.09.09 14:34:25.296|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+24.09.09 14:34:25.296|INFOLOW |CThreadWithQueue(LogManager)::OnThreadStart
+24.09.09 14:34:25.312|INFOHIGH|ScriptCompilerApp Starting
+24.09.09 14:34:25.312|INFOHIGH|ScriptCompilerApp Started
+24.09.09 14:34:26.734|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+24.09.09 14:34:26.750|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+24.09.09 14:34:28.468|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
+24.09.09 14:38:52.656|ERROR   |Assertion failed: ParameterDefinitionVector.size() < 2, file c:\documents and settings\roi\my documents\visual studio 2005\projects\mapgenerator\scriptinterpreter\commandhelper.h, line 285
+
+24.09.09 14:43:01.812|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+24.09.09 14:43:01.812|INFOHIGH|ScriptCompilerApp Starting
+24.09.09 14:43:01.812|INFOHIGH|ScriptCompilerApp Started
+24.09.09 14:43:02.734|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+24.09.09 14:43:02.750|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+24.09.09 14:43:03.953|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
+24.09.09 14:43:34.656|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+24.09.09 14:43:34.656|INFOHIGH|ScriptCompilerApp Starting
+24.09.09 14:43:34.656|INFOHIGH|ScriptCompilerApp Started
+24.09.09 14:43:35.625|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+24.09.09 14:43:35.640|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+24.09.09 14:43:36.968|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
+24.09.09 15:23:17.531|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+24.09.09 15:23:17.531|INFOHIGH|ScriptCompilerApp Starting
+24.09.09 15:23:17.531|INFOHIGH|ScriptCompilerApp Started
+24.09.09 15:23:18.562|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+24.09.09 15:23:18.578|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+24.09.09 15:23:20.609|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
+24.09.09 15:24:23.828|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+24.09.09 15:24:23.828|INFOHIGH|ScriptCompilerApp Starting
+24.09.09 15:24:23.828|INFOHIGH|ScriptCompilerApp Started
+24.09.09 15:24:24.734|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+24.09.09 15:24:24.750|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+24.09.09 15:24:26.328|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
+24.09.09 15:28:08.796|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+24.09.09 15:28:08.796|INFOHIGH|ScriptCompilerApp Starting
+24.09.09 15:28:08.796|INFOHIGH|ScriptCompilerApp Started
+24.09.09 15:28:09.734|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+24.09.09 15:28:09.750|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+24.09.09 15:28:11.250|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
+24.09.09 15:39:23.296|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+24.09.09 15:39:23.296|INFOHIGH|ScriptCompilerApp Starting
+24.09.09 15:39:23.296|INFOHIGH|ScriptCompilerApp Started
+24.09.09 15:39:24.187|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+24.09.09 15:39:24.218|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+24.09.09 15:39:25.328|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
+24.09.09 15:44:11.375|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+24.09.09 15:44:11.375|INFOHIGH|ScriptCompilerApp Starting
+24.09.09 15:44:11.375|INFOHIGH|ScriptCompilerApp Started
+24.09.09 15:44:12.296|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+24.09.09 15:44:12.312|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+24.09.09 15:44:14.312|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
+24.09.09 15:45:04.093|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+24.09.09 15:45:04.093|INFOHIGH|ScriptCompilerApp Starting
+24.09.09 15:45:04.093|INFOHIGH|ScriptCompilerApp Started
+24.09.09 15:45:05.140|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+24.09.09 15:45:05.156|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+24.09.09 15:45:06.578|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
+24.09.09 15:45:47.515|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+24.09.09 15:45:47.515|INFOHIGH|ScriptCompilerApp Starting
+24.09.09 15:45:47.515|INFOHIGH|ScriptCompilerApp Started
+24.09.09 15:45:48.515|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+24.09.09 15:45:48.531|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+24.09.09 15:45:49.625|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
+24.09.09 15:46:08.859|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+24.09.09 15:46:08.859|INFOHIGH|ScriptCompilerApp Starting
+24.09.09 15:46:08.859|INFOHIGH|ScriptCompilerApp Started
+24.09.09 15:46:09.671|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+24.09.09 15:46:09.687|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+24.09.09 15:46:10.593|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
+24.09.09 15:50:15.187|INFO    |CScriptInterpreter::InterperetFile: [Line #1]: Command Parking Parsed Successfully.
+24.09.09 15:54:37.484|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+24.09.09 15:54:37.484|INFOHIGH|ScriptCompilerApp Starting
+24.09.09 15:54:37.484|INFOHIGH|ScriptCompilerApp Started
+24.09.09 15:54:38.687|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+24.09.09 15:54:38.703|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+24.09.09 15:54:40.109|INFOHIGH|CResourcedGuiApplication::Close(), Start Closing the ScriptCompilerApp Dialog
+24.09.09 15:54:40.171|INFOHIGH|ScriptCompilerApp Terminated

@@ -5,7 +5,7 @@
 
 enum EParkingAngle
 {
-	Perpendicular ,
+	Perpendicular,
 	Parallel,
 	Right45Degrees,
 	Left45Degrees,
@@ -35,10 +35,7 @@ DefineEnumBitSize(EParkingOrientation);
 
 struct SPeriodicBetweenPoles
 {
-	enum ENumberOfParkingPlaces 
-	{
-		ENumberOfParkingPlaces_MaxEnum = 16 /*16 values [0..15] = 4 bits*/
-	} NumberOfParkingPlaces;
+	Int4Bit NumberOfParkingPlaces;
 	enum EPolesType
 	{
 		MarksOnRoad,
@@ -49,11 +46,10 @@ struct SPeriodicBetweenPoles
 	}PolesType;
 
 	SPeriodicBetweenPoles(int _NumberOfParkingPlaces, EPolesType _PolesType) 
-		: NumberOfParkingPlaces((ENumberOfParkingPlaces)_NumberOfParkingPlaces), PolesType(_PolesType) {}
+		: NumberOfParkingPlaces(ConvertIntToInt4Bit(_NumberOfParkingPlaces)), PolesType(_PolesType) {}
 	SPeriodicBetweenPoles() {ZeroMemory(this, sizeof(*this));}
 };
 DefineEnumBitSize(SPeriodicBetweenPoles::EPolesType);
-DefineEnumBitSize(SPeriodicBetweenPoles::ENumberOfParkingPlaces);
 DefineStructBitSize2(SPeriodicBetweenPoles, NumberOfParkingPlaces, PolesType);
 
 class CParkingItem : public IItem

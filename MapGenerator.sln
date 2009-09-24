@@ -14,14 +14,22 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Common", "Common\Common.vcproj", "{16DA1A9A-9124-434D-9B7E-8EC57E877F1C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ScriptInterpreter", "ScriptInterpreter\ScriptInterpreter.vcproj", "{8AF0C974-566C-444F-9F92-2F8635174D45}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A918CE46-F5BB-4C00-996D-5545B350F203} = {A918CE46-F5BB-4C00-996D-5545B350F203}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ScriptCompiler", "ScriptCompiler\ScriptCompiler.vcproj", "{11B79634-D736-4CB5-995C-6D8B2C015E37}"
 	ProjectSection(ProjectDependencies) = postProject
-		{E65C0146-9AAD-485E-B4C6-649F88E05C7F} = {E65C0146-9AAD-485E-B4C6-649F88E05C7F}
 		{8AF0C974-566C-444F-9F92-2F8635174D45} = {8AF0C974-566C-444F-9F92-2F8635174D45}
+		{E65C0146-9AAD-485E-B4C6-649F88E05C7F} = {E65C0146-9AAD-485E-B4C6-649F88E05C7F}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ApplicationUtils", "ApplicationUtils\ApplicationUtils.vcproj", "{E65C0146-9AAD-485E-B4C6-649F88E05C7F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{16DA1A9A-9124-434D-9B7E-8EC57E877F1C} = {16DA1A9A-9124-434D-9B7E-8EC57E877F1C}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AppResources", "AppResources\AppResources.vcproj", "{FEE3FA91-D266-44A6-9F60-FBA29B5265A0}"
 	ProjectSection(ProjectDependencies) = postProject
 		{16DA1A9A-9124-434D-9B7E-8EC57E877F1C} = {16DA1A9A-9124-434D-9B7E-8EC57E877F1C}
 	EndProjectSection
@@ -56,6 +64,10 @@ Global
 		{E65C0146-9AAD-485E-B4C6-649F88E05C7F}.Debug|Win32.Build.0 = Debug|Win32
 		{E65C0146-9AAD-485E-B4C6-649F88E05C7F}.Release|Win32.ActiveCfg = Release|Win32
 		{E65C0146-9AAD-485E-B4C6-649F88E05C7F}.Release|Win32.Build.0 = Release|Win32
+		{FEE3FA91-D266-44A6-9F60-FBA29B5265A0}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FEE3FA91-D266-44A6-9F60-FBA29B5265A0}.Debug|Win32.Build.0 = Debug|Win32
+		{FEE3FA91-D266-44A6-9F60-FBA29B5265A0}.Release|Win32.ActiveCfg = Release|Win32
+		{FEE3FA91-D266-44A6-9F60-FBA29B5265A0}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -13,50 +13,33 @@ struct SStructureShape
 		EAngleType_MaxEnum
 	}AngleType;
 
-	union SShape
+	union UShape
 	{
-		enum ESmallAngle
-		{
-			ESmallAngle_MaxEnum = 64
-		} SmallAngle;
-		enum EBigAngle
-		{
-			EBigAngle_MaxEnum = 256
-		} BigAngle;
+		Int6Bit SmallAngle;
+		Int8Bit BigAngle;
 		struct SRadiusCoordinates
 		{
-			enum ERadiusCoordinateValue
-			{
-				ERadiusCoordinateValue_MaxEnum = 256
-			} X, Y;
+			Int8Bit X, Y;
 		} RadiusCoordinates;
 	}Shape;
 
 	SStructureShape() {ZeroMemory(this, sizeof(*this));}
-	SStructureShape(EAngleType _AngleType, SStructureShape::SShape _Shape)
+	SStructureShape(EAngleType _AngleType, SStructureShape::UShape _Shape)
 		: AngleType(_AngleType), Shape(_Shape) {}
 };
 DefineEnumBitSize(SStructureShape::EAngleType);
-DefineEnumBitSize(SStructureShape::SShape::ESmallAngle);
-DefineEnumBitSize(SStructureShape::SShape::EBigAngle);
-DefineEnumBitSize(SStructureShape::SShape::SRadiusCoordinates::ERadiusCoordinateValue);
-DefineStructBitSize2(SStructureShape::SShape::SRadiusCoordinates, X, Y);
+DefineStructBitSize2(SStructureShape::UShape::SRadiusCoordinates, X, Y);
 DefineUnionStructBitSize3(SStructureShape, AngleType, Shape, SmallAngle, BigAngle, RadiusCoordinates);
 
 struct SMultiplicity
 {
 	bool IsMultiplied;
-
-	enum EMultiplied
-	{
-		EMultiplied_MaxEnum = 256
-	}Multiples;
+	Int8Bit Multiples;
 
 	SMultiplicity() {ZeroMemory(this, sizeof(*this));}
 	SMultiplicity(bool _IsMultiplied, int _Multiples = 0) 
-		: IsMultiplied(_IsMultiplied), Multiples((EMultiplied)_Multiples) {}
+		: IsMultiplied(_IsMultiplied), Multiples(ConvertIntToInt8Bit(_Multiples)) {}
 };
-DefineEnumBitSize(SMultiplicity::EMultiplied);
 DefineStructWithBoolBitSize2(SMultiplicity, IsMultiplied, Multiples);
 
 class CItemStructure : public IItem

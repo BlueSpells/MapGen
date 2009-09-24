@@ -24,3 +24,5 @@ Thumbs.db
 BuildLog.htm
 /ScriptCompiler/Debug/
 /ScriptCompiler/Release/
+*.log
+/ApplicationLogs/
