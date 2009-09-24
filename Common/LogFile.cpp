@@ -71,6 +71,7 @@ const char* CLogFile::GetSeverityString(ELogSeverity Severity)
         case LE_INFOLOW:    return "INFOLOW ";
         case LE_INFO:       return "INFO    ";
         case LE_INFOHIGH:   return "INFOHIGH";
+        case LE_NOTICE:     return "NOTICE  ";
         case LE_WARNING:    return "WARNING ";
         case LE_ERROR:      return "ERROR   ";
         case LE_FATAL:      return "FATAL   ";
@@ -170,6 +171,7 @@ void TestLogFile()
     Assert(LogLine(LogFile, LE_INFOLOW,  "InfoLow"));
     Assert(LogLine(LogFile, LE_INFO,     "Info"));
     Assert(LogLine(LogFile, LE_INFOHIGH, "InfoHigh"));
+    Assert(LogLine(LogFile, LE_NOTICE,   "Notice"));
     Assert(LogLine(LogFile, LE_WARNING,  "Warning"));
     Assert(LogLine(LogFile, LE_ERROR,    "Error"));
     DWORD Size = LogFile.GetFileSize();

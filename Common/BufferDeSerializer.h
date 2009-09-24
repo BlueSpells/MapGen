@@ -11,6 +11,7 @@ public:
 	// note: DataToGet must be already allocated to the size of sizeofDataToGet !!!
 	virtual bool GetNextBufferField(BYTE *DataToGet, DWORD sizeofDataToGet);
 
+    virtual bool GetNextCharField(char& DataToGet);
     virtual bool GetNextByteField(BYTE& DataToGet);
     virtual bool GetNextShortField(short& DataToGet);
     virtual bool GetNextUshortField(unsigned short& DataToGet);

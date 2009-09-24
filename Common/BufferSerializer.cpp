@@ -56,6 +56,11 @@ BYTE* CBufferSerializer::GetBuffer()
 	return true;
 }
 
+/*virtual*/ bool CBufferSerializer::AppendChar(char CharValue)
+{
+    return AppendBuffer((BYTE*)&CharValue, sizeof CharValue);
+}
+
 /*virtual*/ bool CBufferSerializer::AppendByte(BYTE ByteValue)
 {
     return AppendBuffer((BYTE*)&ByteValue, sizeof ByteValue);
@@ -98,6 +103,7 @@ BYTE* CBufferSerializer::GetBuffer()
 
 /*virtual*/ bool CBufferSerializer::AppendBool(bool Value)
 {
+    Assert(sizeof Value == 1);
 	return AppendBuffer((BYTE*)&Value, sizeof Value);
 }
 

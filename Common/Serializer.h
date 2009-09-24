@@ -1,6 +1,11 @@
 #pragma once
 
 #include <vector>
+#include "Utils.h"
+#include "LogEvent.h"
+
+#define ByteEnumMinusOne (UCHAR_MAX-1)
+#define IsByteEnumValue(x) (x >= -1  &&  x <= UCHAR_MAX  &&  x != ByteEnumMinusOne)
 
 class ISerializer
 {
@@ -9,6 +14,7 @@ public:
 
     virtual bool AppendBuffer(const BYTE* const Data, UINT DataSize) = 0;
 
+    virtual bool AppendChar(char CharValue) = 0;
     virtual bool AppendByte(BYTE ByteValue) = 0;
     virtual bool AppendShort(short ShortValue) = 0;
     virtual bool AppendUshort(unsigned short UshortValue) = 0;
@@ -29,6 +35,50 @@ public:
         return AppendBuffer(Data, DataSize);
     }
 
+    bool AppendTinyData(const BYTE* const Data, UINT DataSize)
+    {
+        Assert(IsByteValue(DataSize));
+        if (!AppendByte((BYTE)DataSize))
+            return false;
+        return AppendBuffer(Data, DataSize);
+    }
+
+    bool AppendIntAsShort(int IntValue)
+    {
+        Assert(IsShortValue(IntValue));
+        return AppendShort((SHORT)IntValue);
+    }
+
+    bool AppendIntAsUshort(int IntValue)
+    {
+        Assert(IsUshortValue(IntValue));
+        return AppendUshort((USHORT)IntValue);
+    }
+
+    bool AppendIntAsByte(int IntValue)
+    {
+        Assert(IsByteValue(IntValue));
+        return AppendByte((char)IntValue);
+    }
+
+    bool AppendIntAsChar(int IntValue)
+    {
+        Assert(IsCharValue(IntValue));
+        return AppendChar((char)IntValue);
+    }
+
+    bool AppendUintAsUshort(int UshortValue)
+    {
+        Assert(IsUshortValue(UshortValue));
+        return AppendUshort((USHORT)UshortValue);
+    }
+
+    bool AppendUintAsByte(UINT UintValue)
+    {
+        Assert(IsByteValue(UintValue));
+        return AppendByte((BYTE)UintValue);
+    }
+
     bool AppendStr(const std::string& Str)
     {
         return AppendStr(Str.c_str());
@@ -43,6 +93,18 @@ public:
     {
         UINT VectorSize = (UINT)IntVector.size();
         bool Ret = AppendUint(VectorSize);
+        if (!Ret)
+            return false;
+        for (UINT i = 0; i < VectorSize; ++i)
+            Ret = Ret && AppendInt(IntVector[i]);
+        return Ret;
+    }
+
+    bool AppendTinyIntVector(std::vector<int> IntVector)
+    {
+        UINT VectorSize = (UINT)IntVector.size();
+        Assert(IsByteValue(VectorSize));
+        bool Ret = AppendByte((BYTE)VectorSize);
         if (!Ret)
             return false;
         for (UINT i = 0; i < VectorSize; ++i)
@@ -75,6 +137,14 @@ public:
     {
         Assert(sizeof DataToAppend == sizeof(int));
         return AppendInt(DataToAppend);
+    }
+
+    template <typename DataType>
+        bool AppendEnumAsByte (const DataType& DataToAppend)
+    {
+        Assert(sizeof DataToAppend == sizeof(int));
+        Assert(IsByteEnumValue(DataToAppend));
+        return AppendByte((BYTE)(DataToAppend == -1 ? ByteEnumMinusOne : DataToAppend));
     }
 
     template <typename DataType>

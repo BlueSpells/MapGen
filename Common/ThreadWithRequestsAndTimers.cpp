@@ -9,6 +9,16 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
+enum
+{
+    // Note that if the timeout time is bigger than Max execution time of the timers,
+    // There could be some time when there are timers waiting and this thread goes to sleep(wait)
+    TIMEOUT_TIME = 10,
+    TIMERS_MAX_EXECUTION_TIME = 50,
+    REQUESTS_MAX_EXECUTION_TIME = 50,
+    REQUESTS_HIGH_WATER_MARK = 1000,
+    REQUESTS_LOW_WATER_MARK = 400,
+};
 
 //////////////////////////////////////////////////////////////////////////
 CThreadWithRequestsAndTimers::CThreadWithRequestsAndTimers(const char* const ThreadName,
@@ -32,6 +42,7 @@ void CThreadWithRequestsAndTimers::LoopFunction()
 	WaitHandles[1] = m_Queue;
     int NextTimoutTime = TIMEOUT_TIME;
 
+	OnThreadStart();
 	while (true)
 	{
         LogThreadPerformance();
@@ -42,6 +53,7 @@ void CThreadWithRequestsAndTimers::LoopFunction()
 
         if (Result == TerminateThread)
         {
+            HandleThreadClose();
             return; // This will terminate the thread
         }
 

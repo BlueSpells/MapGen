@@ -4,7 +4,6 @@
 
 #include "stdafx.h"
 #include "LogEvent.h"
-#include "Utils.h"
 #include "Config.h"
 #include "ConfigVariables.h"
 #include "TimeStamp.h"
@@ -136,9 +135,19 @@ void VLogEvent(ELogSeverity Severity, const char* Format, va_list Args)
         return;
 
     char Message[MAX_LOG_MESSAGE_SIZE];
-    
-    vsnprintf_s(Message, sizeof Message, _TRUNCATE, Format, Args);
-//    _vsnprintf_s(Message, _TRUNCATE, Format, Args); - this has some error in definition: _Size instead of _Count
+
+    try
+    {
+        vsnprintf_s(Message, sizeof Message, _TRUNCATE, Format, Args);
+        //    _vsnprintf_s(Message, _TRUNCATE, Format, Args); - this has some error in definition: _Size instead of _Count
+    }
+    catch (...)
+    {
+        bool ExceptionOcurredAtVLogEvent = true;
+        Assert(!ExceptionOcurredAtVLogEvent);
+        _snprintf_s(Message, sizeof Message, _TRUNCATE, "VLogEvent: the format [%s] caused an exception", Format);
+        Severity = LE_ERROR;
+    }
 
     // Just to see if we reached max
     Assert(strlen(Message) < sizeof Message);
@@ -188,24 +197,17 @@ const char * GetLogEventLevelStr(int Level)
 {
     switch(Level)
     {
-    case LE_DEBUG:
-        return "LE_DEBUG";
-    case LE_INFOLOW:
-        return "LE_INFOLOW";
-    case LE_INFO:
-        return "LE_INFO";
-    case LE_INFOHIGH:
-        return "LE_INFOHIGH";
-    case LE_WARNING: 
-        return "LE_WARNING";
-    case LE_ERROR:
-        return "LE_ERROR";
-    case LE_FATAL:
-        return "LE_FATAL";
+    RETURN_TYPE_STR(LE_DEBUG);
+    RETURN_TYPE_STR(LE_INFOLOW);
+    RETURN_TYPE_STR(LE_INFO);
+    RETURN_TYPE_STR(LE_INFOHIGH);
+    RETURN_TYPE_STR(LE_NOTICE);
+    RETURN_TYPE_STR(LE_WARNING);
+    RETURN_TYPE_STR(LE_ERROR);
+    RETURN_TYPE_STR(LE_FATAL);
     default:
         return "LE_UNDEFINED";
     }
-    //return "LE_UNDEFINED";
 }
 
 
@@ -215,14 +217,16 @@ static std::string DefaultLogName;
 
 static std::string GetAssertionsFileName()
 {
-    char Fname[MAX_PATH];
+    char Drive[_MAX_DRIVE], Dir[_MAX_DIR], Fname[_MAX_FNAME], Ext[_MAX_EXT];
+    char DefaultAssertionsFileName[_MAX_PATH];
     const char * LogFileName = GetLogFileName();
     if (LogFileName[0] != '\0')
-        _splitpath_s(LogFileName, NULL, 0, NULL, 0, Fname, sizeof Fname, NULL, 0);
+        _splitpath_s(LogFileName, Drive, Dir, Fname, Ext);
     else
-        strncpy_s(Fname, DefaultLogName.c_str(), _TRUNCATE);
-    std::string DefaultAssertionsFileName = std::string("..\\ApplicationLogs\\") + Fname + "Assertions.log";
-    std::string AssertLogFileName = GetConfigString(LogSection, "AssertLogFileName", DefaultAssertionsFileName.c_str());
+        _splitpath_s(DefaultLogName.c_str(), Drive, Dir, Fname, Ext);
+    std::string AssertionsFileName = std::string(Fname) + "Assertions";
+    _makepath_s(DefaultAssertionsFileName, Drive, Dir, AssertionsFileName.c_str(), Ext);
+    std::string AssertLogFileName = GetConfigString(LogSection, "AssertLogFileName", DefaultAssertionsFileName);
     return AssertLogFileName;
 }
 
@@ -238,9 +242,10 @@ void SetLogName(const char * Name)
 
 void DoAssert(const char *Exp, const char *File, unsigned Line)
 {
-    static char *AssertFormat = "Assertion failed: %s, file %s, line %d\n";
+    char Message[1024];
+    sprintf_s(Message, "Assertion failed: %s, file %s, line %d", Exp, File, Line);
     static bool DoBreak = GetConfigBool(LogSection, "BreakOnAssert", true); // allow disabling break
-    LogEvent(LE_ERROR, AssertFormat, Exp, File, Line);
+    LogEvent(LE_ERROR, Message);
     if (DoBreak && !ForceDoNotBreak)
         DebugBreak();
     else
@@ -249,14 +254,19 @@ void DoAssert(const char *Exp, const char *File, unsigned Line)
 
         static std::string AssertLogFileName = GetAssertionsFileName();
         //FILE *f = fopen(AssertLogFileName.c_str(), "at");
-        FILE *f;
-        Verify (fopen_s(&f, AssertLogFileName.c_str(), "at") == 0);
+        FILE *f = NULL;
+        //Verify (fopen_s(&f, AssertLogFileName.c_str(), "at") == 0);
+        fopen_s(&f, AssertLogFileName.c_str(), "at");
         if (f != NULL)
         {
             if (FirstTime)
                 fprintf(f, "--------------------------------------------------------------------------\n");
             FirstTime = false;
-            fprintf(f, AssertFormat, Exp, File, Line);
+            time_t Seconds;
+            int Millis;
+            GetSecondsAndMillis(Seconds, Millis);
+            std::string TimeString = FormatTime(Seconds, Millis);
+            fprintf(f, "%s %s\n", TimeString.c_str(), Message);
             fclose(f);
         }
     }
@@ -336,7 +346,7 @@ void CFilteredLogEventWithFirstOccurrence::NotifyEvent(int Value, ELogSeverity F
         va_list Args;
         va_start(Args, FirstOccuranceFormat);
 
-        VLogEvent(FirstOccuranceSeverity, "%s", Args);
+        VLogEvent(FirstOccuranceSeverity, FirstOccuranceFormat, Args);
 
         m_LastLogTime = CurrentTime;
         return;
@@ -398,7 +408,7 @@ void CPeriodicLogEvent::LogEvent(ELogSeverity Severity, const char* Format, ...)
     va_list Args;
     va_start(Args, Format);
 
-    VLogEvent(Severity, "%s", Args);
+    VLogEvent(Severity, Format, Args);
     return;
 }
 

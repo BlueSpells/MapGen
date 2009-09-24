@@ -20,18 +20,6 @@ private:
     void ProcessRequests();
 
 private:
-    enum
-    {
-        // Note that if the timeout time is bigger than Max execution time of the timers,
-        // There could be some time when there are timers waiting and this thread goes to sleep(wait)
-        TIMEOUT_TIME = 10,
-        TIMERS_MAX_EXECUTION_TIME = 30,
-        REQUESTS_MAX_EXECUTION_TIME = 30,
-        REQUESTS_HIGH_WATER_MARK = 1000,
-        REQUESTS_LOW_WATER_MARK = 400,
-    };
-
-private:
     DWORD m_LastProcessTimers;
     bool m_UseRequestsHighWaterMark;
 };

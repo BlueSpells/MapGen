@@ -33,7 +33,7 @@ int CFileLoader::Load(const char* FileName)
 
 	//open file	and read the contained messages
 	//FILE* fp = fopen(FileName, "rb");
-    FILE * fp;
+    FILE * fp = NULL;
     Verify (fopen_s(&fp, FileName, "rb") == 0);
 	if(fp == NULL)
 	{

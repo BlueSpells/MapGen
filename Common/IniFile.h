@@ -30,6 +30,12 @@ enum EWriteBackMode
     WRITEBACK_MODE_DEFAULT,
 };
 
+#ifdef NDEBUG
+#define NDEBUG_WRITEBACK_MODE_OFF WRITEBACK_MODE_OFF
+#else
+#define NDEBUG_WRITEBACK_MODE_OFF WRITEBACK_MODE_DEFAULT
+#endif
+
 class CIniFile  
 {
 public:

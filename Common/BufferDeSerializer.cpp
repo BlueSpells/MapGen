@@ -12,7 +12,7 @@ CBufferDeSerializer::CBufferDeSerializer(const char* ContextStr, const BYTE* Dat
     m_ContextStr(ContextStr), m_DataPtr(DataOrigin + RelevantOffset), m_DataSize(DataSize - RelevantOffset), m_DataOrigin(DataOrigin + RelevantOffset)
 {
     Assert(RelevantOffset >= 0);
-    Assert(DataSize > RelevantOffset);
+    Assert(DataSize >= RelevantOffset);
 }
 
 CBufferDeSerializer::~CBufferDeSerializer()
@@ -45,6 +45,11 @@ CBufferDeSerializer::~CBufferDeSerializer()
 		}
 		return false; 
 	}
+}
+
+/*virtual*/ bool CBufferDeSerializer::GetNextCharField(char& DataToGet)
+{
+    return GetNextBufferField((BYTE*)&DataToGet, sizeof DataToGet);
 }
 
 /*virtual*/ bool CBufferDeSerializer::GetNextByteField(BYTE& DataToGet)

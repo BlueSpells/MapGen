@@ -6,12 +6,13 @@
 enum ELogSeverity
 {
 	LE_DEBUG = 0,
-    LE_INFOLOW,        // Display on log as dimmed
+    LE_INFOLOW,     // Display on log as dimmed
     LE_INFO,        // Display on log
     LE_INFOHIGH,    // Display on log with some emphasize
+    LE_NOTICE,      // Display on log with stronger emphasize
     LE_WARNING, 
     LE_ERROR, 
-    LE_FATAL        // Error that w cannot live with
+    LE_FATAL        // Error that we cannot live with
 };
 
 const char * GetLogEventLevelStr(int Level);
@@ -26,6 +27,7 @@ const char * GetLogFileName();
 #ifdef  NDEBUG
 #define Assert(exp) ((void)0)
 #define Verify(f)   ((void)(f))
+#define DebugOnly(x) ((void)0)
 #define CheckExpReturn(exp, ContextStr) \
     if(!(exp)) \
     { \
@@ -44,6 +46,7 @@ const char * GetLogFileName();
 void DoAssert(const char *Exp, const char *File, unsigned Line);
 #define Assert(Exp) (void)((Exp) || (DoAssert(#Exp, __FILE__, __LINE__), 0)) 
 #define Verify(f)   Assert(f)
+#define DebugOnly(x) x
 #define CheckExpReturn(exp, ContextStr) Assert(exp)
 #define CheckExpReturnFalse(exp, ContextStr) \
 {  \

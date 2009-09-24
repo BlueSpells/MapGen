@@ -13,6 +13,7 @@ public:
 
     virtual bool AppendBuffer (const BYTE* const Data, UINT DataSize);
 
+    virtual bool AppendChar(char CharValue);
     virtual bool AppendByte(BYTE ByteValue);
     virtual bool AppendShort(short ShortValue);
     virtual bool AppendUshort(unsigned short UshortValue);

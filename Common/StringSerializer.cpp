@@ -18,6 +18,14 @@ void CStringSerializer::AppendDelimiter()
     m_Str += Buf;
     return true;
 }
+/*virtual*/ bool CStringSerializer::AppendChar(char CharValue)
+{
+    AppendDelimiter();
+    char Buf[32];
+    m_Str += OurItoa(CharValue, Buf, 10);
+    return true;
+}
+
 /*virtual*/ bool CStringSerializer::AppendByte(BYTE ByteValue)
 {
     AppendDelimiter();
@@ -87,12 +95,8 @@ void CStringSerializer::AppendDelimiter()
 {
     AppendDelimiter();
     char Buf[128];
-    int Dec=0; int Sign=0;
-    std::string StrValue = OurFcvt(Buf, FloatValue, 5, &Dec, &Sign);
-    StrValue.insert(Dec, ".");
-    if (Sign != 0)
-        StrValue.insert(0, "-");
-    m_Str += StrValue;
+    sprintf_s(Buf, "%f", FloatValue);
+    m_Str += Buf;
     return true;
 }
 /*virtual*/ bool CStringSerializer::AppendStr(const char* Str)

@@ -24,8 +24,10 @@
 #define member_sizeof(_class, _member) sizeof(RTL_FIELD_TYPE(_class, _member))
 #define member_countof(_class, _array) RTL_NUMBER_OF_FIELD(_class, _array)
 
-#define IsByteValue(x) (x >= 0  &&  x < UCHAR_MAX)
-#define IsShortValue(x) (x >= SHRT_MIN  &&  x < SHRT_MAX)
+#define IsCharValue(x) (x >= SCHAR_MIN  &&  x <= SCHAR_MAX)
+#define IsByteValue(x) (x >= 0  &&  x <= UCHAR_MAX)
+#define IsShortValue(x) (x >= SHRT_MIN  &&  x <= SHRT_MAX)
+#define IsUshortValue(x) (x >= 0  &&  x <= USHRT_MAX)
 
 #define ___DEFINE_CPP_OVERLOAD_FUNC_0_0(_ReturnType, _FuncName, _DstType, _Dst) \
     template <size_t _Size> \
@@ -158,7 +160,7 @@ bool CompareHostNames(const char* NameLeft, const char* NameRight);
 int sign(int Value);
 char HexDigit(int Value);
 unsigned char HexValue(char Digit);
-std::string HexPrint(const UCHAR* Buffer, UINT BufferLength, UINT LineLength = 32);
+std::string HexPrint(const UCHAR* Buffer, UINT BufferLength, UINT LineLength = 32, bool AddSpaces = true);
 
 #define BufferToCharArray(data, len, szDest) \
     BufferToString(data, len, szDest, sizeof szDest)
@@ -173,6 +175,7 @@ int ConvertHexToData(
     const char* const HexSource, const int HexSourceSize);
 
 void StringToWString(const std::string& Src, std::wstring& Target);
+void InvertStr(const std::string& Str, std::string& InvertedStr);
 
 
 bool CompareBuffers(const BYTE* Buffer1, const BYTE* Buffer2, int LengthToCompare);
@@ -393,7 +396,7 @@ class CTokenParser
 {
 public:
     CTokenParser(const char* Str);
-    std::string GetNextToken(const char* Delimiters);
+    std::string GetNextToken(const char* Delimiters, bool Trim = false);
     bool MoreTokens() const;
 
 private:

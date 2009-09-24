@@ -204,8 +204,13 @@ bool CLogManager::StartLogManager(int LogFileFlushTime)
     CThreadWithQueue::SetTimeout(LogFileFlushTime * 1000);
     // If the path in the configuration is fully qualified 
     // don't attach to it the program path
-    if(std::string::npos == m_LogDirectory.find(":"))
-        m_LogDirectory = std::string(GetProgramPath()) +  m_LogDirectory;
+//     if(std::string::npos == m_LogDirectory.find(":"))
+//         m_LogDirectory = std::string(GetProgramPath()) +  m_LogDirectory;
+
+    // This makes full path according to current path
+    // We change path to program path, and assume that it does not change
+    m_LogDirectory = GetFullPathName(m_LogDirectory);
+
     //    CreateDirectory(m_LogDirectory.c_str(), NULL);
     // Creates also intermediate directories
     SHCreateDirectoryEx(NULL, m_LogDirectory.c_str(), NULL);

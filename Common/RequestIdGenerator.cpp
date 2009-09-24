@@ -19,7 +19,7 @@ CRequestIdGenerator& CRequestIdGenerator::GetInstance()
 UINT CRequestIdGenerator::GetNextId()
 {
 	CCriticalSectionLocker Lock(m_Lock);
-    if(m_NextId > UINT_MAX)
+    if(m_NextId == 0 || m_NextId > m_MaxValue)
         m_NextId = 1;
 	return m_NextId++;
 }

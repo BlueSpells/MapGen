@@ -9,7 +9,6 @@
 #pragma warning (pop)
 #include <afxmt.h>
 #include "CriticalSection.h"
-//#include "LogEvent.h"
 
 template<typename QueueItem>
 class SafeQueue
@@ -109,7 +108,6 @@ public:
     {
         return m_QueueSize;
     }
-
     virtual operator HANDLE() const
     {
         return (HANDLE) m_Event;

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Serializer.h"
+
 class IDeSerializer
 {
 public:
@@ -8,6 +10,7 @@ public:
     // note: DataToGet must be already allocated to the size of sizeofDataToGet !!!
 	virtual bool GetNextBufferField(BYTE* DataToGet, DWORD sizeofDataToGet) = 0;
 
+    virtual bool GetNextCharField(char& DataToGet) = 0;
     virtual bool GetNextByteField(BYTE& DataToGet) = 0;
     virtual bool GetNextShortField(short& DataToGet) = 0;
     virtual bool GetNextUshortField(unsigned short& DataToGet) = 0;
@@ -31,6 +34,72 @@ public:
             return false;
         DataToGet = new BYTE[sizeofDataToGet];
         return GetNextBufferField(DataToGet, sizeofDataToGet);
+    }
+
+    // note: GetNextTinyDataField allocates the string itself (as the caller of this function
+    //		 is unaware to the size of the string.
+    bool GetNextTinyDataField(BYTE*& DataToGet, UINT& sizeofDataToGet)
+    {
+        BYTE ByteSizeofDataToGet;
+        if (!GetNextByteField(ByteSizeofDataToGet))
+            return false;
+        sizeofDataToGet = ByteSizeofDataToGet;
+        DataToGet = new BYTE[sizeofDataToGet];
+        return GetNextBufferField(DataToGet, sizeofDataToGet);
+    }
+
+    bool GetNextIntAsShortField(int& DataToGet)
+    {
+        SHORT ShortData;
+        if (!GetNextShortField(ShortData))
+            return false;
+        DataToGet = ShortData;
+        return true;
+    }
+
+    bool GetNextIntAsUshortField(int& DataToGet)
+    {
+        USHORT UshortData;
+        if (!GetNextUshortField(UshortData))
+            return false;
+        DataToGet = UshortData;
+        return true;
+    }
+
+    bool GetNextIntAsByteField(int& DataToGet)
+    {
+        BYTE ByteData;
+        if (!GetNextByteField(ByteData))
+            return false;
+        DataToGet = ByteData;
+        return true;
+    }
+
+    bool GetNextIntAsCharField(int& DataToGet)
+    {
+        char CharData;
+        if (!GetNextCharField(CharData))
+            return false;
+        DataToGet = CharData;
+        return true;
+    }
+
+    bool GetNextUintAsUshortField(UINT& DataToGet)
+    {
+        USHORT UshortData;
+        if (!GetNextUshortField(UshortData))
+            return false;
+        DataToGet = UshortData;
+        return true;
+    }
+
+    bool GetNextUintAsByteField(UINT& DataToGet)
+    {
+        BYTE ByteData;
+        if (!GetNextByteField(ByteData))
+            return false;
+        DataToGet = ByteData;
+        return true;
     }
 
     bool GetNextStrField(std::string& DataToGet)
@@ -57,12 +126,25 @@ public:
 
     bool GetNextIntVectorField(std::vector<int>& IntVector)
     {
-        int VectorSize;
-        bool Ret = GetNextIntField(VectorSize);
+        UINT VectorSize;
+        bool Ret = GetNextUintField(VectorSize);
         if (!Ret)
             return false;
         IntVector.resize(VectorSize);
-        for (int i = 0; i < VectorSize; ++i)
+        for (UINT i = 0; i < VectorSize; ++i)
+            Ret = Ret && GetNextIntField(IntVector[i]);
+        return Ret;
+    }
+
+    bool GetNextTinyIntVectorField(std::vector<int>& IntVector)
+    {
+        BYTE ByteVectorSize;
+        bool Ret = GetNextByteField(ByteVectorSize);
+        if (!Ret)
+            return false;
+        UINT VectorSize = ByteVectorSize;
+        IntVector.resize(VectorSize);
+        for (UINT i = 0; i < VectorSize; ++i)
             Ret = Ret && GetNextIntField(IntVector[i]);
         return Ret;
     }
@@ -70,12 +152,12 @@ public:
     template <typename DataType>
     bool GetNextVectorField(std::vector<DataType>& DataVector)
     {
-        int VectorSize;
-        bool Ret = GetNextIntField(VectorSize);
+        UINT VectorSize;
+        bool Ret = GetNextUintField(VectorSize);
         if (!Ret)
             return false;
         DataVector.resize(VectorSize);
-        for (int i = 0; i < VectorSize; ++i)
+        for (UINT i = 0; i < VectorSize; ++i)
             Ret = Ret && GetNextFlatStructField(DataVector[i]);
         return Ret;
     }
@@ -85,6 +167,17 @@ public:
     {
         Assert(sizeof DataToGet == sizeof(int));
         return GetNextIntField(*(int*)&DataToGet);
+    }
+
+    template <typename DataType>
+    bool GetNextEnumAsByteField(DataType& DataToGet)
+    {
+        Assert(sizeof DataToGet == sizeof(int));
+        BYTE ByteDataToGet;
+        if (!GetNextByteField(ByteDataToGet))
+            return false;
+        DataToGet = (DataType)(ByteDataToGet == ByteEnumMinusOne ? -1 : ByteDataToGet);
+        return true;
     }
 
     template <typename DataType>

@@ -403,18 +403,19 @@ unsigned char HexValue(char Digit)
     return 0;
 }
 
-std::string HexPrint(const UCHAR* Buffer, UINT BufferLength, UINT LineLength /*= 32*/)
+std::string HexPrint(const UCHAR* Buffer, UINT BufferLength, UINT LineLength /*= 32*/, bool AddSpaces /*= true*/)
 {
 	std::string Output;
 	for (UINT i=0;i<BufferLength;i++)
 	{
-        if (i > 0)
+        if (AddSpaces && (i > 0))
         {
-            if (i % LineLength == 0)
-                Output.append(1, '\n');
-            else
-                Output.append(1, ' ');
+				if (i % LineLength == 0)
+					Output.append(1, '\n');
+				else
+					Output.append(1, ' ');
         }
+
         Output.append(1, HexDigit(Buffer[i] >> 4));
 		Output.append(1, HexDigit(Buffer[i] & 0xF));
 	}
@@ -502,6 +503,15 @@ void StringToWString(const std::string& Src, std::wstring& Target)
         LogEvent(LE_ERROR, "StringToWString: mbstowcs_s error %d while converting", err);
 
     return;
+}
+
+void InvertStr(const std::string& Str, std::string& InvertedStr)
+{
+    std::string TempStr;
+    size_t Size = Str.size();
+    InvertedStr.resize(Size);
+    for (size_t i = 0; i < Size; ++i)
+        InvertedStr[i] = Str[Size-1-i];
 }
 
 void WaitAndPumpMessages(DWORD WaitTimeInMilli)
@@ -1829,7 +1839,7 @@ CTokenParser::CTokenParser(const char* Str) :
 {
 }
 
-std::string CTokenParser::GetNextToken(const char* Delimiters)
+std::string CTokenParser::GetNextToken(const char* Delimiters, bool Trim /*= false*/)
 {
     if (m_CurrentPlace >= m_Length)
         return "";
@@ -1837,7 +1847,16 @@ std::string CTokenParser::GetNextToken(const char* Delimiters)
     int CurrentPlace = m_CurrentPlace;
     m_CurrentPlace += strcspn(m_TheString + m_CurrentPlace, Delimiters) + 1;
    // m_CurrentPlace = NextPtr == NULL ? m_Length + 1 : NextPtr - m_TheString + 1;
-    return std::string(m_TheString + CurrentPlace, m_CurrentPlace - CurrentPlace - 1);
+    int NumTrailingSpaces = 0;
+    int Length = m_CurrentPlace - CurrentPlace - 1;
+    if (Trim)
+    {
+        for (const char *Ptr = m_TheString + CurrentPlace; *Ptr == ' ' || *Ptr == '\t'; ++Ptr)
+            ++CurrentPlace;
+        for (const char *Ptr = m_TheString + m_CurrentPlace - 1; (*Ptr == ' ' || *Ptr == '\t') && NumTrailingSpaces < Length; --Ptr)
+            ++NumTrailingSpaces;
+    }
+    return std::string(m_TheString + CurrentPlace, Length - NumTrailingSpaces);
 }
 
 bool CTokenParser::MoreTokens() const
