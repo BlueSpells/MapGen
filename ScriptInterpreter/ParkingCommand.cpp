@@ -3,6 +3,7 @@
 #include "CommandHelper.h"
 #include "BarcodeProcessor/ParkingItem.h"
 #include "ScriptSyntaxDefinitions.h"
+#include "BarcodeProcessor/EnumsUtil.h"
 
 CParkingCommand::CParkingCommand(void) : IScriptCommand(ParkingCommand)
 {
@@ -56,7 +57,6 @@ CParkingCommand::~CParkingCommand(void)
 			return CommandFailed;
 	}
 
-
 	SStructureShape StructureShapeValue;
 
 	// First parse the struct itself
@@ -78,13 +78,16 @@ CParkingCommand::~CParkingCommand(void)
 
 	CItemStructure ItemStructure;
 	CParkingItem *ParkingItem = new CParkingItem;
-	//ParkingItem->Encode(ParkingAngleValue, )
-
-	
+//	ParkingItem->Encode(ParkingAngleValue, )
 	
 	/*
 	bool					m_IsPeriodicBetweenPoles;
 	SPeriodicBetweenPoles	m_PeriodicBetweenPoles;*/
+
+	LogEvent(LE_INFO, __FUNCTION__ ": %s Command Parsed Successfully: ParkingType = %s, AngleValue = %s, IsMirrorDoubledValue=%s, Orientation=%s, IsMultiplied=%s(Multiplies=%d), ...", 
+		ParkingCommand, EnumToString(ParkingTypeValue).c_str(), EnumToString(ParkingAngleValue).c_str(), BooleanStr(IsMirrorDoubledValue), EnumToString(OrientationValue).c_str(), 
+		BooleanStr(MultiplicityValue.IsMultiplied), ((MultiplicityValue.IsMultiplied) ? MultiplicityValue.Multiples : 0));
+
 
 	Element = (void *)ParkingItem;
 	ElementType = AddItem;

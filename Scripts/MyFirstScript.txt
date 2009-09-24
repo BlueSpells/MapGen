@@ -1,1 +1,1 @@
-Parking: Type=Regular | Angle=Perpendicular 	 | IsMirrorDoubled=true	| Orientation=Degrees270 | Multiplicity=[true,20]
+Parking: Type=Regular | Angle=Perpendicular 	 | IsMirrorDoubled=true	| Orientation=Degrees270 | Multiplicity=[true,20] | StructureShape=[2,2]
