@@ -5,6 +5,7 @@
 #include "ScriptCompiler.h"
 #include "ScriptCompilerDlg.h"
 #include "Common/Config.h"
+#include "Common/collectionhelper.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -106,6 +107,7 @@ HCURSOR CScriptCompilerDlg::OnQueryDragIcon()
 
 void CScriptCompilerDlg::OnBnClickedButtonLoad()
 {
+	CleanLists();
 	UpdateData();
 	if (!m_IsFileLoaded)
 	{
@@ -136,4 +138,24 @@ void CScriptCompilerDlg::OnBnClickedButtonLoad()
 void CScriptCompilerDlg::OnBnClickedButtonCreate()
 {
 	// ToDo: In the future, in order to support longer scripts, create new thread here!
+}
+
+void CScriptCompilerDlg::CleanLists()
+{
+	while (m_ItemsList.size() > 0)
+	{
+		delete m_ItemsList[0];
+		RemoveValueFromVector(m_ItemsList, m_ItemsList[0]);
+	}
+
+	while (m_HeaderList.size() > 0)
+	{
+		delete m_HeaderList[0];
+		RemoveValueFromVector(m_HeaderList, m_HeaderList[0]);
+	}
+}
+
+/*virtual*/ CScriptCompilerDlg::~CScriptCompilerDlg()
+{
+	CleanLists();
 }

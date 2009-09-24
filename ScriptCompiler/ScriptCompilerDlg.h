@@ -8,7 +8,7 @@
 #include "..\ApplicationUtils/TabDlg.h"
 #include "afxwin.h"
 #include "ScriptInterpreter/SimpleScriptReader.h"
-#include "ScriptInterpreter/scriptinterpreter.h"
+#include "ScriptInterpreter/parkingscriptinterpreter.h"
 
 
 class IItem;
@@ -20,6 +20,7 @@ class CScriptCompilerDlg : public CTabDlg
 // Construction
 public:
 	CScriptCompilerDlg(CWnd* pParent = NULL);	// standard constructor
+	virtual ~CScriptCompilerDlg();
 
 // Dialog Data
 	enum { IDD = IDD_SCRIPTCOMPILER_DIALOG };
@@ -50,10 +51,12 @@ protected:
 	CEdit m_OutputFileEdit;
 	CButton m_CreateBinaryButton;
 
-	CSimpleScriptReader m_ScriptReader;
-	CScriptInterpreter  m_Interpreter;
+	CSimpleScriptReader			m_ScriptReader;
+	CParkingScriptInterpreter	m_Interpreter;
 	bool m_IsFileLoaded;
 
 	std::vector<IItem *> m_ItemsList;
 	std::vector<IHeader *> m_HeaderList;
+
+	void CleanLists();
 };

@@ -1,7 +1,6 @@
 #pragma once
 #include "ICommand.h"
-
-const std::string ParkingCommand = "Parking";
+#include "CommandsDictionary.h"
 
 class CParkingCommand : public IScriptCommand
 {
@@ -9,5 +8,6 @@ public:
 	CParkingCommand(void);
 	~CParkingCommand(void);
 
-	virtual ECommandResult OnCommandImplementation(std::string CommandWord, std::vector<std::string> CommandArguments, void *&Element, EElementType ElementType);
+protected:
+	virtual ECommandResult OnCommandImplementation(IN int ContextLine, IN std::string CommandWord, IN std::vector<std::string> CommandArguments, OUT void *&Element, OUT EElementType &ElementType);
 };

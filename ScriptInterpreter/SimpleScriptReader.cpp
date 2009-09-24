@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "SimpleScriptReader.h"
+#include "ScriptSyntaxDefinitions.h"
 #include "Common/Utils.h"
 
 CSimpleScriptReader::CSimpleScriptReader(void)
@@ -39,8 +40,19 @@ CSimpleScriptReader::~CSimpleScriptReader(void)
 	return true;
 }
 
-const char *SpaceDelimiter = " ";
-const int MaxNumberOfArguments = 64;
+std::string CSimpleScriptReader::CleanTabsAndSpaces(std::string &Argument)
+{
+	std::string CleanedArgument;
+	
+	for (unsigned int i = 0; i < Argument.size(); i++)
+	{
+		if (Argument[i] != ' ' && Argument[i] != '\t')
+			CleanedArgument += Argument[i];
+	}
+
+	Argument = CleanedArgument;
+	return Argument;
+}
 
 /*virtual*/ bool CSimpleScriptReader::ReadLine(std::string &Command, std::vector<std::string> &ParametersList)
 {
@@ -60,13 +72,13 @@ const int MaxNumberOfArguments = 64;
 		return false;
 	}
 
-	Command = Parser.GetNextToken(SpaceDelimiter);
+	Command = CleanTabsAndSpaces(Parser.GetNextToken(CommandDelimiter));
 
 	ParametersList.clear();
 	int i = 0;
 	while (Parser.MoreTokens())
 	{
-		std::string argument = Parser.GetNextToken(SpaceDelimiter);
+		std::string argument = CleanTabsAndSpaces(Parser.GetNextToken(ArgumentsDelimiter));
 		ParametersList.push_back(argument);
 		if (i > MaxNumberOfArguments)
 		{
@@ -75,4 +87,6 @@ const int MaxNumberOfArguments = 64;
 		}
 		i++;
 	}
+
+	return true;
 }

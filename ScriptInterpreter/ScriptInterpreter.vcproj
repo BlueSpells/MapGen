@@ -151,7 +151,15 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\CommandsDictionary.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\ParkingCommand.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ParkingScriptInterpreter.cpp"
 				>
 			</File>
 			<File
@@ -189,6 +197,14 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath=".\CommandHelper.h"
+				>
+			</File>
+			<File
+				RelativePath=".\CommandsDictionary.h"
+				>
+			</File>
+			<File
 				RelativePath=".\ICommand.h"
 				>
 			</File>
@@ -201,7 +217,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ParkingScriptInterpreter.h"
+				>
+			</File>
+			<File
 				RelativePath=".\ScriptInterpreter.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ScriptSyntaxDefinitions.h"
 				>
 			</File>
 			<File

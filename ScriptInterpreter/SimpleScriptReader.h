@@ -13,5 +13,6 @@ public:
 	virtual bool ReadLine(std::string &Command, std::vector<std::string> &ParametersList);
 
 private:
+	std::string CleanTabsAndSpaces(std::string &Argument);
 	CStdioFile m_StreamFile;
 };

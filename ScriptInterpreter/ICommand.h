@@ -22,16 +22,17 @@ public:
 	IScriptCommand(std::string CommandWord) : m_CommandWord(CommandWord) {}
 	~IScriptCommand(void) {}
 
-	ECommandResult OnCommand(std::string CommandWord, std::vector<std::string> CommandArguments, void *&Element, EElementType &ElementType)
+	ECommandResult OnCommand(IN int ContextLine, IN std::string CommandWord, IN std::vector<std::string> CommandArguments, OUT void *&Element, OUT EElementType &ElementType)
 	{
 		if (m_CommandWord == CommandWord)
-			return OnCommandImplementation(CommandWord, CommandArguments, Element, ElementType);
+			return OnCommandImplementation(ContextLine, CommandWord, CommandArguments, Element, ElementType);
 
+		LogEvent(LE_WARNING, __FUNCTION__ ": Problem with Dictionary! Command %s returned CommandUnknown", CommandWord.c_str());
 		return CommandUnknown;
 	}
 
 protected:
-	virtual ECommandResult OnCommandImplementation(std::string CommandWord, std::vector<std::string> CommandArguments, void *&Element, EElementType &ElementType) = 0;
+	virtual ECommandResult OnCommandImplementation(IN int ContextLine, IN std::string CommandWord, IN std::vector<std::string> CommandArguments, OUT void *&Element, OUT EElementType &ElementType) = 0;
 
 private:
 	std::string m_CommandWord;
