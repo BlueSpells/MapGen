@@ -20,7 +20,7 @@ public:
 	CBasicItem(void);
 	~CBasicItem(void);
 
-	void Encode(	EBasicItemType BasicItem);
+	void Encode(	EBasicItemType BasicItemType);
 
 	virtual void	InsertItemType();
 	virtual bool	IsOfThisType(CBitPointer *Data);

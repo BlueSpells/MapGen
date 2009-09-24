@@ -13,13 +13,13 @@ CBasicItem::~CBasicItem(void)
 }
 
 
-void CBasicItem::Encode(EBasicItemType BasicItem)
+void CBasicItem::Encode(EBasicItemType BasicItemType)
 {
-	size_t NumberOfBits	= BitSize(BasicItem);
+	size_t NumberOfBits	= BitSize(BasicItemType);
 	IncreaseBitBufferSize(NumberOfBits);
 
 	CBitPointer BitPtr = AllocateBitBuffer();
-	BitCopyAndContinue(BitPtr, BasicItem);
+	BitCopyAndContinue(BitPtr, BasicItemType);
 }
 
 

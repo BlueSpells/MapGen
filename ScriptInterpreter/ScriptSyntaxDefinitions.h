@@ -54,3 +54,10 @@ static const std::string StructureShape_Shape_RadiusCoordinates		= "RadiusCoordi
 static const std::string StructureShape_Shape_RadiusCoordinates_X	= "X, Int8Bit";
 static const std::string StructureShape_Shape_RadiusCoordinates_Y	= "Y, Int8Bit";
 
+
+
+// BasicItem Syntax:
+// ---------------
+static const char *BasicItemCommand = "BasicItem";
+
+static const std::string BasicItemType			= "Type, enum, Elevator, Staircase,	WC,	CarGate, PayingMachine";

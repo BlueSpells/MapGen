@@ -24,9 +24,9 @@ private:
 };
 
 
-#define AddCommandToCommandsDictionary(CommandWord, CommandClassName)					\
-IScriptCommand *Command = new CommandClassName;											\
-CCommandsDictionary::GetCommandsDictionary()->AddCommand(CommandWord, Command);			\
+#define AddCommandToCommandsDictionary(CommandWord, CommandClassName)								\
+IScriptCommand *Command##CommandClassName = new CommandClassName;									\
+CCommandsDictionary::GetCommandsDictionary()->AddCommand(CommandWord, Command##CommandClassName );	\
 
 // class CommandClassName##Registrar																\
 // {																								\
