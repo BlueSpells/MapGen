@@ -102,6 +102,7 @@ num.value = ConvertIntToInt##NUMBEROFBITS##Bit(abs(x)); return num;}
 
 DefineNumericValue(32);
 DefineNumericValue(16);
+DefineNumericValue(9);
 DefineNumericValue(8);
 DefineNumericValue(6);
 DefineNumericValue(5);

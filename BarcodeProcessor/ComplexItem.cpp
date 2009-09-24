@@ -20,6 +20,7 @@ CComplexItem::~CComplexItem(void)
 	(GetBitBuffer())[1] = 1;
 	(GetBitBuffer())[2] = 1;
 	(GetBitBuffer())[3] = 1;
+	(GetBitBuffer())[4] = 0;
 }
 
 
@@ -29,6 +30,7 @@ CComplexItem::~CComplexItem(void)
 	if (*Data[1] != 1) return false;
 	if (*Data[2] != 1) return false;
 	if (*Data[3] != 1) return false;
+	if (*Data[4] != 0) return false;
 	return true;
 }
 

@@ -151,6 +151,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\AbsoluteJumpExtendedItem.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\BarcodeDecoder.cpp"
 				>
 			</File>
@@ -180,6 +184,10 @@
 			</File>
 			<File
 				RelativePath=".\ComplexItem.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ExtendedItem.cpp"
 				>
 			</File>
 			<File
@@ -215,6 +223,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\SignedJumpExtendedItem.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\stdafx.cpp"
 				>
 				<FileConfiguration
@@ -240,6 +252,10 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath=".\AbsoluteJumpExtendedItem.h"
+				>
+			</File>
 			<File
 				RelativePath=".\BarcodeDecoder.h"
 				>
@@ -270,6 +286,10 @@
 			</File>
 			<File
 				RelativePath=".\ComplexItem.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ExtendedItem.h"
 				>
 			</File>
 			<File
@@ -318,6 +338,10 @@
 			</File>
 			<File
 				RelativePath=".\PositionItem.h"
+				>
+			</File>
+			<File
+				RelativePath=".\SignedJumpExtendedItem.h"
 				>
 			</File>
 			<File
