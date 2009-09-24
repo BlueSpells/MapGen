@@ -26,3 +26,7 @@ BuildLog.htm
 /ScriptCompiler/Release/
 *.log
 /ApplicationLogs/
+/ScriptCompiler/Debug/
+/ScriptCompiler/Release/
+*.manifest
+*.manifest.res
