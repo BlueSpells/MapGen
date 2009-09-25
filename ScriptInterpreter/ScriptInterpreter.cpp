@@ -2,6 +2,7 @@
 #include "ScriptInterpreter.h"
 #include "IScriptReader.h"
 #include "CommandsDictionary.h"
+#include "ScriptSyntaxDefinitions.h"
 
 CScriptInterpreter::CScriptInterpreter(IScriptReader *ScriptReader) : m_ScriptReader(ScriptReader)
 {
@@ -37,6 +38,9 @@ bool CScriptInterpreter::InterperetFile(std::string FileName, std::vector<IHeade
 	EElementType ElementType;
 	while (m_ScriptReader->ReadLine(Command, Arguments))
 	{
+		if (Command == EndOfScript)
+			break; // End reached!
+
 		IScriptCommand *CommandObject = CCommandsDictionary::GetCommandsDictionary()->GetCommand(Command);
 		if (!CommandObject)
 		{

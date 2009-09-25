@@ -12,6 +12,7 @@ static const char *StructBegin				= "[";
 static const char *StructEnd				= "]";
 static const char *CommandEnd				= ";";
 static const char *ParemterNameFromValueSeperator = "=";
+static const char *EndOfScript				= "End";
 
 
 #define ArgumentNameOf(x) #x

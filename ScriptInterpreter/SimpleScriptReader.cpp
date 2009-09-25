@@ -2,7 +2,7 @@
 #include "SimpleScriptReader.h"
 #include "ScriptSyntaxDefinitions.h"
 #include "Common/Utils.h"
-//#include "CommandHelper.h"
+#include "CommandHelper.h"
 
 CSimpleScriptReader::CSimpleScriptReader(void)
 {
@@ -86,9 +86,15 @@ std::string CSimpleScriptReader::CleanTabsAndSpaces(std::string &Argument)
 		}
 
 		if (iLineInCommand == 1) // first line of command contains the command itself
+		{
 			Command = CleanTabsAndSpaces(Parser.GetNextToken(CommandDelimiter));
+			if (Command == EndOfScript)
+			{
+				LogEvent(LE_INFOHIGH, __FUNCTION__ ": Reached end of script (line #%d)", m_LineIndex);
+				return true;
+			}
+		}
 
-		ParametersList.clear();
 		int iArgumentsPerLine = 0;
 		while (Parser.MoreTokens())
 		{
@@ -102,7 +108,10 @@ std::string CSimpleScriptReader::CleanTabsAndSpaces(std::string &Argument)
 					LogEvent(LE_ERROR, __FUNCTION__ ": Command separator should not be used within a parameter! was found in argument %d of line %d", iArgumentsPerLine, m_LineIndex);
 				return false;
 			}
-			ParametersList.push_back(argument);
+
+			if (argument.size() > 0)
+				ParametersList.push_back(argument);
+
 			if (iArgumentsPerLine > MaxNumberOfArgumentsPerLine)
 			{
 				LogEvent(LE_ERROR, __FUNCTION__ ": Line #%d contains more than %d arguments!", m_LineIndex, MaxNumberOfArgumentsPerLine);
@@ -113,7 +122,7 @@ std::string CSimpleScriptReader::CleanTabsAndSpaces(std::string &Argument)
 		if ((ParametersList[ParametersList.size()-1])[ParametersList[ParametersList.size()-1].size()-1] == CommandEnd[0])
 		{
 			HasReachedEndOfLine = true;
-			//CleanCharacter(ParametersList[ParametersList.size()-1], CommandEnd);
+			CleanCharacter(ParametersList[ParametersList.size()-1], CommandEnd);
 		}
 
 		if (iLineInCommand > MaxNumberOfLinesPerCommand)
