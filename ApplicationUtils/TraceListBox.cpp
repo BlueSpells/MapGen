@@ -372,8 +372,8 @@ COLORREF CTraceListBox::GetColor(ELogSeverity Severity)
         return RGB(0, 0, 0);        // Black
     case LE_INFOHIGH:
         return RGB(0, 0, 255);      // Blue
- //   case LE_NOTICE:
- //     return RGB(0, 100, 0);      // Dark Green
+    case LE_NOTICE:
+		return RGB(0, 100, 0);      // Dark Green
     case LE_WARNING:
         return RGB(200, 100, 0);    // Orange
     case LE_ERROR:

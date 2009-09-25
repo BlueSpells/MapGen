@@ -6,6 +6,8 @@
 #include "ScriptCompilerDlg.h"
 #include "Common/Config.h"
 #include "Common/collectionhelper.h"
+#include "BarcodeProcessor/IHeader.h"
+#include "BarcodeProcessor/IItem.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -122,6 +124,14 @@ void CScriptCompilerDlg::OnBnClickedButtonLoad()
 		m_CreateBinaryButton.EnableWindow(TRUE);
 		m_IsFileLoaded = true;
 		WriteConfigString(ScriptConfigSection, "FileName", m_FileName);
+
+		int BufferBitSize = 0;
+		for (unsigned int i = 0; i < m_HeaderList.size(); i++)
+			BufferBitSize += m_HeaderList[i]->GetBitBufferSize();
+		for (unsigned int i = 0; i < m_ItemsList.size(); i++)
+			BufferBitSize += m_ItemsList[i]->GetBitBufferSize();
+
+		LogEvent(LE_INFOHIGH, __FUNCTION__ ": Script is encoded to a bit buffer with the size of: %d bits", BufferBitSize);
 	}
 	else
 	{
