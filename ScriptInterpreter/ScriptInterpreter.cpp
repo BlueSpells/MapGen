@@ -64,7 +64,7 @@ bool CScriptInterpreter::InterperetFile(std::string FileName, std::vector<IHeade
 			CloseFileAndReturnValue(false);
 		};
 
-		// if we got here - command was parsed successfuly!
+		// if we got here - command was parsed successfully!
 		switch (ElementType)
 		{
 		case AddItem:

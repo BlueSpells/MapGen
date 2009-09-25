@@ -3,6 +3,7 @@
 #include "CommandHelper.h"
 #include "BarcodeProcessor/BasicItem.h"
 #include "ScriptSyntaxDefinitions.h"
+#include "BarcodeProcessor/EnumsUtil.h"
 
 CBasicItemCommand::CBasicItemCommand(void) : IScriptCommand(BasicItemCommand)
 {
@@ -30,6 +31,8 @@ CBasicItemCommand::~CBasicItemCommand(void)
 	CBasicItem *BasicItem = new CBasicItem;
 	BasicItem->Encode(BasicItemValue);
 
+	LogEvent(LE_INFO, __FUNCTION__ ": %s Command Parsed Successfully: BasicItemType = %s), ...", 
+		BasicItemCommand, EnumToString(BasicItemValue).c_str());
 
 	Element = (void *)BasicItem;
 	ElementType = AddItem;

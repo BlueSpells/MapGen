@@ -167,6 +167,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\PositionCommand.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\ScriptInterpreter.cpp"
 				>
 			</File>
@@ -226,6 +230,10 @@
 			</File>
 			<File
 				RelativePath=".\ParkingScriptInterpreter.h"
+				>
+			</File>
+			<File
+				RelativePath=".\PositionCommand.h"
 				>
 			</File>
 			<File
