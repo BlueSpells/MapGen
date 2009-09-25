@@ -13,7 +13,7 @@ public:
 	virtual bool OpenScriptFile(CString FileName) = 0;
 	virtual bool CloseScriptFile() = 0;
 	virtual bool ReadLine(std::string &Command, std::vector<std::string> &ParametersList) = 0;
-	bool GetLineIndex() {return m_LineIndex;}
+	int GetLineIndex() {return m_LineIndex;}
 
 protected:
 	int m_LineIndex;
