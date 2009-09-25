@@ -1839,6 +1839,18 @@ CTokenParser::CTokenParser(const char* Str) :
 {
 }
 
+CTokenParser::CTokenParser(CTokenParser &TokenParser)
+{
+	TokenParser.CopyParams(m_TheString, m_CurrentPlace, m_Length);
+}
+
+void CTokenParser::CopyParams(const char* &TheString, int &CurrentPlace, int &Length)
+{
+	TheString = m_TheString;
+	CurrentPlace = m_CurrentPlace;
+	Length = m_Length;
+}
+
 std::string CTokenParser::GetNextToken(const char* Delimiters, bool Trim /*= false*/)
 {
     if (m_CurrentPlace >= m_Length)

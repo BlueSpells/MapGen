@@ -396,8 +396,10 @@ class CTokenParser
 {
 public:
     CTokenParser(const char* Str);
+	CTokenParser(CTokenParser &TokenParser);
     std::string GetNextToken(const char* Delimiters, bool Trim = false);
     bool MoreTokens() const;
+	void CopyParams(const char* &TheString, int &CurrentPlace, int &Length);
 
 private:
     const char* m_TheString;
