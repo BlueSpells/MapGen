@@ -92,20 +92,28 @@ std::string CSimpleScriptReader::CleanTabsAndSpaces(std::string &Argument)
 		int iArgumentsPerLine = 0;
 		while (Parser.MoreTokens())
 		{
+			iArgumentsPerLine++;
 			std::string argument = CleanTabsAndSpaces(Parser.GetNextToken(ArgumentsDelimiter));
+			if (argument.find(CommandDelimiter) != std::string::npos)
+			{
+				if (iArgumentsPerLine == 1)
+					LogEvent(LE_ERROR, __FUNCTION__ ": Command separator was found in an line which should not have contained it. Have you forgotten ';' in line %d?", m_LineIndex-1);
+				else
+					LogEvent(LE_ERROR, __FUNCTION__ ": Command separator should not be used within a parameter! was found in argument %d of line %d", iArgumentsPerLine, m_LineIndex);
+				return false;
+			}
 			ParametersList.push_back(argument);
 			if (iArgumentsPerLine > MaxNumberOfArgumentsPerLine)
 			{
 				LogEvent(LE_ERROR, __FUNCTION__ ": Line #%d contains more than %d arguments!", m_LineIndex, MaxNumberOfArgumentsPerLine);
 				return false;
 			}
-			iArgumentsPerLine++;
 		}
 
 		if ((ParametersList[ParametersList.size()-1])[ParametersList[ParametersList.size()-1].size()-1] == CommandEnd[0])
 		{
 			HasReachedEndOfLine = true;
-			CleanCharacter(ParametersList[ParametersList.size()-1], CommandEnd);
+			//CleanCharacter(ParametersList[ParametersList.size()-1], CommandEnd);
 		}
 
 		if (iLineInCommand > MaxNumberOfLinesPerCommand)

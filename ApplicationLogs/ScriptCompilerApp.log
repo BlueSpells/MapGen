@@ -226,3 +226,65 @@
 25.09.09 15:32:37.531|INFOHIGH|CSimpleScriptReader::CloseScriptFile: File Closed
 25.09.09 15:32:43.593|INFOHIGH|CResourcedGuiApplication::Close(), Start Closing the ScriptCompilerApp Dialog
 25.09.09 15:32:43.796|INFOHIGH|ScriptCompilerApp Terminated
+25.09.09 17:07:50.796|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+25.09.09 17:07:50.796|INFOHIGH|ScriptCompilerApp Starting
+25.09.09 17:07:50.796|INFOHIGH|ScriptCompilerApp Started
+25.09.09 17:07:51.625|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+25.09.09 17:07:51.625|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+25.09.09 17:07:53.687|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
+25.09.09 17:09:18.562|ERROR   |CSimpleScriptReader::ReadLine: Failed to read line #4. perhaps ; is missing?
+25.09.09 17:09:24.609|INFOHIGH|CSimpleScriptReader::CloseScriptFile: File Closed
+25.09.09 17:09:34.453|INFOHIGH|CResourcedGuiApplication::Close(), Start Closing the ScriptCompilerApp Dialog
+25.09.09 17:09:34.484|INFOHIGH|ScriptCompilerApp Terminated
+25.09.09 17:13:30.046|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+25.09.09 17:13:30.046|INFOHIGH|ScriptCompilerApp Starting
+25.09.09 17:13:30.046|INFOHIGH|ScriptCompilerApp Started
+25.09.09 17:13:30.859|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+25.09.09 17:13:30.890|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+25.09.09 17:13:33.718|INFOHIGH|CResourcedGuiApplication::Close(), Start Closing the ScriptCompilerApp Dialog
+25.09.09 17:13:33.750|INFOHIGH|ScriptCompilerApp Terminated
+25.09.09 17:13:44.718|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+25.09.09 17:13:44.718|INFOHIGH|ScriptCompilerApp Starting
+25.09.09 17:13:44.718|INFOHIGH|ScriptCompilerApp Started
+25.09.09 17:13:45.625|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+25.09.09 17:13:45.640|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+25.09.09 17:13:46.765|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
+25.09.09 17:13:50.109|ERROR   |CSimpleScriptReader::ReadLine: Command separator should not be used within a parameter! was found in argument 1 of line 1
+25.09.09 17:13:50.671|INFOHIGH|CSimpleScriptReader::CloseScriptFile: File Closed
+25.09.09 17:14:04.843|INFOHIGH|CResourcedGuiApplication::Close(), Start Closing the ScriptCompilerApp Dialog
+25.09.09 17:14:04.875|INFOHIGH|ScriptCompilerApp Terminated
+25.09.09 17:15:01.812|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+25.09.09 17:15:01.812|INFOHIGH|ScriptCompilerApp Starting
+25.09.09 17:15:01.812|INFOHIGH|ScriptCompilerApp Started
+25.09.09 17:15:02.687|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+25.09.09 17:15:02.703|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+25.09.09 17:15:03.843|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
+25.09.09 17:15:10.187|ERROR   |CSimpleScriptReader::ReadLine: Command separator was found in an line which should not have contained it. Have you forgotten ';' in line 1?
+25.09.09 17:15:14.296|INFOHIGH|CSimpleScriptReader::CloseScriptFile: File Closed
+25.09.09 17:15:18.437|INFOHIGH|CResourcedGuiApplication::Close(), Start Closing the ScriptCompilerApp Dialog
+25.09.09 17:15:18.468|INFOHIGH|ScriptCompilerApp Terminated
+25.09.09 17:15:23.796|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+25.09.09 17:15:23.796|INFOHIGH|ScriptCompilerApp Starting
+25.09.09 17:15:23.796|INFOHIGH|ScriptCompilerApp Started
+25.09.09 17:15:24.656|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+25.09.09 17:15:24.671|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+25.09.09 17:15:25.562|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
+25.09.09 17:16:28.906|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+25.09.09 17:16:28.906|INFOHIGH|ScriptCompilerApp Starting
+25.09.09 17:16:28.906|INFOHIGH|ScriptCompilerApp Started
+25.09.09 17:16:29.843|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+25.09.09 17:16:29.859|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+25.09.09 17:16:30.812|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
+25.09.09 17:17:59.156|INFOHIGH|CConfigLogSeverity: LogSeverity set to 2 (LE_INFO)
+25.09.09 17:17:59.156|INFOHIGH|ScriptCompilerApp Starting
+25.09.09 17:17:59.156|INFOHIGH|ScriptCompilerApp Started
+25.09.09 17:18:00.078|INFOHIGH|CSimpleScriptReader::Init: ScriptReader initialized successfully
+25.09.09 17:18:00.093|INFO    |CResourcedGuiApplication::Init, ScriptCompilerApp Performing Initialization
+25.09.09 17:18:01.062|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
+25.09.09 17:18:49.343|ERROR   |CSimpleScriptReader::ReadLine: Command separator was found in an line which should not have contained it. Have you forgotten ';' in line 1?
+25.09.09 17:18:50.906|INFOHIGH|CSimpleScriptReader::CloseScriptFile: File Closed
+25.09.09 17:19:09.156|INFOHIGH|CSimpleScriptReader::OpenScriptFile: File C:\Documents and Settings\Roi\My Documents\Visual Studio 2005\Projects\MapGenerator\Scripts\MyFirstScript.txt Opened Successfully
+25.09.09 17:19:19.515|ERROR   |CSimpleScriptReader::ReadLine: Command separator was found in an line which should not have contained it. Have you forgotten ';' in line 1?
+25.09.09 17:19:20.281|INFOHIGH|CSimpleScriptReader::CloseScriptFile: File Closed
+25.09.09 17:20:25.546|INFOHIGH|CResourcedGuiApplication::Close(), Start Closing the ScriptCompilerApp Dialog
+25.09.09 17:20:25.593|INFOHIGH|ScriptCompilerApp Terminated
