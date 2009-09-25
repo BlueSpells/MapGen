@@ -8,6 +8,7 @@
 #include "Common/collectionhelper.h"
 #include "BarcodeProcessor/IHeader.h"
 #include "BarcodeProcessor/IItem.h"
+#include "BarcodeProcessor/BitLib.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -130,6 +131,11 @@ void CScriptCompilerDlg::OnBnClickedButtonLoad()
 			BufferBitSize += m_HeaderList[i]->GetBitBufferSize();
 		for (unsigned int i = 0; i < m_ItemsList.size(); i++)
 			BufferBitSize += m_ItemsList[i]->GetBitBufferSize();
+
+		for (unsigned int i = 0; i < m_HeaderList.size(); i++)
+			LogEvent(LE_INFOHIGH, __FUNCTION__ ": Header #%d: %s", i, BinaryString(m_HeaderList[i]->GetBitBuffer(), m_HeaderList[i]->GetBitBufferSize()).c_str());
+		for (unsigned int i = 0; i < m_ItemsList.size(); i++)
+			LogEvent(LE_INFOHIGH, __FUNCTION__ ": Item #%d: %s", i, BinaryString(m_ItemsList[i]->GetBitBuffer(), m_ItemsList[i]->GetBitBufferSize()).c_str());
 
 		LogEvent(LE_INFOHIGH, __FUNCTION__ ": Script is encoded to a bit buffer with the size of: %d bits", BufferBitSize);
 	}

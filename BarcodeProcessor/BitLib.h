@@ -8,6 +8,7 @@
 #define __BITLIB_H__
 
 #include "BitPointer.h"
+#include <string>
 
 typedef CBitPointer BitPtr;
 
@@ -37,5 +38,7 @@ int bitcnt(CBitPointer p_pbitString, int p_iValue, size_t p_cLength);
 int bitcnt(CBitPointer p_pbitString, size_t p_cLength);
 
 void bitzero(CBitPointer p_pbitString, size_t p_cLength);
+
+std::string BinaryString(CBitPointer p_pbitString, size_t p_cLength);
 
 #endif
