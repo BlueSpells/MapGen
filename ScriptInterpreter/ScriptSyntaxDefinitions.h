@@ -55,3 +55,19 @@ static const std::string StructureShape_Shape_RadiusCoordinates		= "RadiusCoordi
 static const std::string StructureShape_Shape_RadiusCoordinates_X	= "X, Int8Bit";
 static const std::string StructureShape_Shape_RadiusCoordinates_Y	= "Y, Int8Bit";
 
+
+
+// BasicItem Syntax:
+// ---------------
+static const char *BasicItemCommand = "BasicItem";
+
+static const std::string BasicItemType			= "Type, enum, Elevator, Staircase, WC, CarGate, PayingMachine";
+
+
+// Position Syntax:
+// ---------------
+static const char *PositionCommand = "Position";
+
+static const std::string PositionItemType		= "Type, enum, CR, HorizontalJump, VerticalJump, DiagonalJump";
+static const std::string X						= "X, Int8Bit";
+static const std::string Y						= "Y, Int8Bit";

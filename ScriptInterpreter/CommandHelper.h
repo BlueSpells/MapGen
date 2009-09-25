@@ -53,8 +53,8 @@ static bool InterperetArguments(IN int ContextLine, IN std::vector<std::string> 
 }
 
 // The following is in order to avoid error on second line of InterperetArgumentValueAsIntXBit
-bool BitSize(std::vector<std::string> Dummy) {return 0xDeadBabe;} 
-bool BitSize(std::string Dummy) {return 0xDeadBabe;} 
+static bool BitSize(std::vector<std::string> Dummy) {return 0xDeadBabe;} 
+static bool BitSize(std::string Dummy) {return 0xDeadBabe;} 
 
 template <class T> 
 bool InterperetArgumentValueAsIntXBit(int ContextLine, std::string ParameterName, std::string ArgumentValue, T &Value)
@@ -115,7 +115,7 @@ static std::vector<std::string> StrToStrVector(std::string Str)
 }
 
 
-bool InterperetArgumentValueAsBool(int ContextLine, std::string ParameterName, std::string ArgumentValue, bool &Value)
+static bool InterperetArgumentValueAsBool(int ContextLine, std::string ParameterName, std::string ArgumentValue, bool &Value)
 {
 	if (LowerCase(ArgumentValue) == "true")
 	{
@@ -133,7 +133,7 @@ bool InterperetArgumentValueAsBool(int ContextLine, std::string ParameterName, s
 	return false;
 }
 
-bool InterperetArgumentValueAsUnion(int ContextLine, std::string ParameterName, std::string ArgumentValue, std::string &Value)
+static bool InterperetArgumentValueAsUnion(int ContextLine, std::string ParameterName, std::string ArgumentValue, std::string &Value)
 {
 	Value = ArgumentValue; // what else to do?
 	// do nothing at this point. interpretation will be done externally
@@ -164,7 +164,7 @@ bool InterperetArgumentValueAsEnum(int ContextLine, std::string ParameterName, s
 }
 
 
-bool ExtractAndInterperetArgumentValueAsBool(int ContextLine, std::string Command, std::string ParameterName, std::map<std::string, std::string> ParsedArguments, bool &Value)
+static bool ExtractAndInterperetArgumentValueAsBool(int ContextLine, std::string Command, std::string ParameterName, std::map<std::string, std::string> ParsedArguments, bool &Value)
 {
 	std::string ArgumentValue;
 	if (!GetValueFromMap(ParsedArguments, ParameterName, ArgumentValue))
@@ -219,7 +219,7 @@ bool ExtractAndInterperetArgumentValueAsEnum(int ContextLine, std::string Comman
 	return true;
 }
 
-std::string CleanCharacter(std::string &Argument, std::string UndesiredChars)
+static std::string CleanCharacter(std::string &Argument, std::string UndesiredChars)
 {
 	std::string CleanedArgument;
 
@@ -240,7 +240,7 @@ std::string CleanCharacter(std::string &Argument, std::string UndesiredChars)
 	return Argument;
 }
 
-bool InterperetArgumentValueAsStruct(int ContextLine, std::string ParameterName, std::string ArgumentValue, std::vector<std::string> &Value, std::vector<std::string> SortedStructFields)
+static bool InterperetArgumentValueAsStruct(int ContextLine, std::string ParameterName, std::string ArgumentValue, std::vector<std::string> &Value, std::vector<std::string> SortedStructFields)
 {
 	if (ArgumentValue[0] != StructBegin[0])
 	{
@@ -292,15 +292,15 @@ bool InterperetArgumentValueAsStruct(int ContextLine, std::string ParameterName,
 	return true;
 }
 
-const char* Int = "Int";
-const char* Bit = "Bit";
-const char* Bool = "bool";
-const char* Enum = "enum";
-const char* Struct = "struct";
-const char* Union = "union";
-const char* List = "list";
+static const char* Int = "Int";
+static const char* Bit = "Bit";
+static const char* Bool = "bool";
+static const char* Enum = "enum";
+static const char* Struct = "struct";
+static const char* Union = "union";
+static const char* List = "list";
 
-bool IsParameterIntXBit(std::string ParameterType)
+static bool IsParameterIntXBit(std::string ParameterType)
 {
 	return (ParameterType.find(Int) == 0 && ParameterType.find(Bit) == ParameterType.size()-3);
 }
