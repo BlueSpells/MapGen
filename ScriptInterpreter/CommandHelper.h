@@ -68,7 +68,7 @@ bool InterperetArgumentValueAsIntXBit(int ContextLine, std::string ParameterName
 		return false;
 	}
 
-	Value = (T)IntegerValue;
+	Value = *((T *)&IntegerValue); // cannot use (T)IntegerValue, as you get error C2440 for std::string
 
 	return true;
 }
@@ -137,7 +137,7 @@ static bool InterperetArgumentValueAsUnion(int ContextLine, std::string Paramete
 {
 	Value = ArgumentValue; // what else to do?
 	// do nothing at this point. interpretation will be done externally
-	return false;
+	return true;
 }
 
 template <class T> 
@@ -147,7 +147,7 @@ bool InterperetArgumentValueAsEnum(int ContextLine, std::string ParameterName, s
 	{
 		if (LowerCase(ArgumentValue) == LowerCase(SortedEnumValues[i]))
 		{
-			Value = (T)i;
+			Value = *(T *)&i; // cannot use (T)IntegerValue, as you get error C2440 for std::string
 			return true;
 		}
 	}
@@ -242,16 +242,16 @@ static std::string CleanCharacter(std::string &Argument, std::string UndesiredCh
 
 static bool InterperetArgumentValueAsStruct(int ContextLine, std::string ParameterName, std::string ArgumentValue, std::vector<std::string> &Value, std::vector<std::string> SortedStructFields)
 {
-	if (ArgumentValue.find(StructBegin[0]) != 0 /*|| ArgumentValue.find_end(StructBegin[0]) != 0*/)
+	if (ArgumentValue[0] != StructBegin[0])
 	{
-		LogEvent(LE_ERROR, __FUNCTION__ ": [Line #%d]: Syntax Error. Parameter %s expected to be a struct, and '[' should appear as first (and only) character of struct! ArgumentValue=%s", 
+		LogEvent(LE_ERROR, __FUNCTION__ ": [Line #%d]: Syntax Error. Parameter %s expected to be a struct, and '[' should appear as first character of struct! ArgumentValue=%s", 
 			ContextLine, ParameterName.c_str(), ArgumentValue.c_str());
 		return false;
 	}
 
-	if (ArgumentValue.find(StructEnd[0]) != ArgumentValue.size()-1 /*|| ArgumentValue.find_end(StructBegin[0]) != ArgumentValue.size()-1*/)
+	if (ArgumentValue[ArgumentValue.size()-1] != StructEnd[0])
 	{
-		LogEvent(LE_ERROR, __FUNCTION__ ": [Line #%d]: Syntax Error. Parameter %s expected to be a struct, and ']' should appear as last (and only) character of struct! ArgumentValue=%s", 
+		LogEvent(LE_ERROR, __FUNCTION__ ": [Line #%d]: Syntax Error. Parameter %s expected to be a struct, and ']' should appear as last character of struct! ArgumentValue=%s", 
 			ContextLine, ParameterName.c_str(), ArgumentValue.c_str());
 		return false;
 	}
@@ -262,9 +262,19 @@ static bool InterperetArgumentValueAsStruct(int ContextLine, std::string Paramet
 
 	CTokenParser StructParser(ArgumentValue.c_str());
 	
+	StructParser.GetNextToken(StructBegin); // pass the first '['. important for internal struct recognition
 	while (StructParser.MoreTokens())
 	{
-		Value.push_back(CleanCharacter(StructParser.GetNextToken(StructFieldsDelimeter), Brackets));
+		CTokenParser InternalStructHelper(StructParser);
+		std::string InternalStructCheck = InternalStructHelper.GetNextToken(StructBegin);
+		if (InternalStructCheck.size() == 0)
+		{
+			Value.push_back(StructParser.GetNextToken(StructEnd) + StructEnd);
+		}
+		else if (InternalStructCheck != StructEnd)
+			Value.push_back(CleanCharacter(StructParser.GetNextToken(StructFieldsDelimeter), Brackets));
+		else
+			StructParser.GetNextToken(StructFieldsDelimeter); // just to pass to next char (which should be last)
 	}
 
 	if (SortedStructFields.size() < Value.size())
@@ -419,7 +429,7 @@ bool ExtractAndInterperetStructField(int ContextLine, std::string StructArgument
 	if (FieldPosition == -1)
 	{
 		LogEvent(LE_ERROR, __FUNCTION__ "struct %s does not contain a field name %s! (mentioned in line %d)",
-			StructName.c_str(), StructType.c_str(), ContextLine);
+			StructName.c_str(), Field.c_str(), ContextLine);
 		return false;
 	}
 
@@ -428,6 +438,63 @@ bool ExtractAndInterperetStructField(int ContextLine, std::string StructArgument
 	if (!InterperetArgumentValue(ContextLine, Field, FieldValue, Value))
 	{
 		LogEvent(LE_ERROR, __FUNCTION__ ": [Line #%d]: Failed to extract field %s from struct %s", ContextLine, FieldName.c_str(), StructName.c_str());
+		return false;
+	}	
+
+	return true;
+}
+
+
+template <class T> 
+bool ExtractAndInterperetUnionField(int ContextLine, std::string UnionArgument, std::string Field, std::string UnionValue, T &Value)
+{
+	std::vector<std::string> UnionDefinitionVector = StrToStrVector(UnionArgument);
+	std::vector<std::string> FieldDefinitionVector = StrToStrVector(Field);
+	if (UnionDefinitionVector.size() < 2)
+	{
+		LogEvent(LE_ERROR, __FUNCTION__ ": Error in Struct definition of %s (mentioned in line %d).", UnionArgument.c_str(), ContextLine);
+		return false;
+	}
+	if (FieldDefinitionVector.size() < 1)
+	{
+		LogEvent(LE_ERROR, __FUNCTION__ ": Error in Field definition of field %s of struct %s (mentioned in line %d).", Field.c_str(), UnionArgument.c_str(), ContextLine);
+		return false;
+	}
+
+	std::string UnionName = UnionDefinitionVector[0];
+	std::string UnionType = UnionDefinitionVector[1];
+	std::string FieldName = FieldDefinitionVector[0];
+
+	Assert(UnionType == Union);
+	if (UnionType != Union)
+	{
+		LogEvent(LE_ERROR, __FUNCTION__ "Argument considered as union (%s) is in fact %s! (mentioned in line %d)",
+			UnionName.c_str(), UnionType.c_str(), ContextLine);
+		return false;
+	}
+
+	bool FieldFound = false;
+	for (unsigned int i = 2; i < UnionDefinitionVector.size(); i++)
+	{
+		if (UnionDefinitionVector[i] == FieldName)
+		{
+			FieldFound = true;
+			break;
+		}
+	}
+
+	if (!FieldFound)
+	{
+		LogEvent(LE_ERROR, __FUNCTION__ "union %s does not contain a field name %s! (mentioned in line %d)",
+			UnionName.c_str(), Field.c_str(), ContextLine);
+		return false;
+	}
+
+	std::string FieldValue = UnionValue;
+
+	if (!InterperetArgumentValue(ContextLine, Field, FieldValue, Value))
+	{
+		LogEvent(LE_ERROR, __FUNCTION__ ": [Line #%d]: Failed to extract field %s from union %s", ContextLine, FieldName.c_str(), UnionName.c_str());
 		return false;
 	}	
 

@@ -1,1 +1,5 @@
-Parking: Type=Regular | Angle=Perpendicular 	 | IsMirrorDoubled=true	| Orientation=Degrees270 | Multiplicity=[true,20] | StructureShape=[2,2]
+Parking: Type=BigParking | Angle=Parallel 	 | IsMirrorDoubled=true	| Orientation=Degrees180 | Multiplicity=[false] | StructureShape=[Circular,[1,2]] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[2,Circular]
+Parking: Type=Regular | Angle=Perpendicular | IsMirrorDoubled=true	| Orientation=Degrees270 | Multiplicity=[true,20] | StructureShape=[AngleUpTo90,2] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[15,Circular]
+Parking: Type=Regular | Angle=Perpendicular | IsMirrorDoubled=true	| Orientation=Degrees270 | Multiplicity=[true,20] | StructureShape=[AngleUpTo360,22] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[15,Circular]
+BasicItem: Type=PayingMachine
+Position: Type=HorizontalJump | X=5 | Y=10

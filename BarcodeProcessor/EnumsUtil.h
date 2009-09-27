@@ -42,7 +42,6 @@ static std::string EnumToString(EnumType Value)										\
 		LogEvent(LE_WARNING, __FUNCTION__ ": %s", TmpStr);						\
 		return TmpStr;															\
 	};																			\
-	return "";																	\
 }\
 
 #define DefineEnumToString3(EnumType, Val1, Val2, Val3)							\
@@ -59,7 +58,6 @@ static std::string EnumToString(EnumType Value)										\
 		LogEvent(LE_WARNING, __FUNCTION__ ": %s", TmpStr);						\
 		return TmpStr;															\
 	};																			\
-	return "";																	\
 }\
 
 DefineEnumToString4(EParkingAngle, Perpendicular, Parallel, Right45Degrees, Left45Degrees);
@@ -67,3 +65,5 @@ DefineEnumToString4(EParkingType, Regular, Handicap, Bikes, BigParking);
 DefineEnumToString4(EParkingOrientation, Degrees0, Degrees90, Degrees180, Degrees270);
 DefineEnumToString5(EBasicItemType, Elevator, Staircase, WC, CarGate, PayingMachine);
 DefineEnumToString4(EPositionItemType, CR, HorizontalJump, VerticalJump, DiagonalJump);
+DefineEnumToString4(SPeriodicBetweenPoles::EPolesType, SPeriodicBetweenPoles::MarksOnRoad, SPeriodicBetweenPoles::Circular, SPeriodicBetweenPoles::Squared, SPeriodicBetweenPoles::Rectangular);
+DefineEnumToString4(SStructureShape::EAngleType, SStructureShape::None, SStructureShape::AngleUpTo90, SStructureShape::AngleUpTo360, SStructureShape::Circular);
