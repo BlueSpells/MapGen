@@ -7,6 +7,7 @@ Parking: Type=Regular
 		IsPeriodicBetweenPoles=true 
 		PeriodicBetweenPoles=[15,Circular];
 BasicItem: Type=PayingMachine;
-Position: Type=HorizontalJump | X=5 | Y=10;
+Position: Type=ForwardDiagonalJump | dX=5 | dY=8;
+SignedJump: Type=CarriageDir | dX=11 | dY=14;
 End
 

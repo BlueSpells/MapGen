@@ -8,9 +8,9 @@
 enum ESignedJumpItemType
 {
 	CarriageDir,
-	HorizontalJump,
-	VerticalJump,
-	DiagonalJump,
+	SignedHorizontalJump,
+	SignedVerticalJump,
+	SignedDiagonalJump,
 	ESignedJumpItemType_MaxEnum
 };
 DefineEnumBitSize(ESignedJumpItemType);
@@ -22,7 +22,7 @@ public:
 	CSignedJumpExtendedItem(void);
 	~CSignedJumpExtendedItem(void);
 
-	void Encode(	ESignedJumpItemType PositionItemType, SignedInt9Bit X, SignedInt9Bit Y);
+	void Encode(	ESignedJumpItemType SignedJumpItemType, SignedInt8Bit dX, SignedInt8Bit dY);
 
 	virtual void	InsertItemType();
 	virtual bool	IsOfThisType(CBitPointer *Data);
@@ -32,6 +32,6 @@ public:
 
 	// Decoded data:
 	ESignedJumpItemType		m_SignedJumpItemType;
-	SignedInt9Bit			m_X; 
-	SignedInt9Bit			m_Y;
+	SignedInt8Bit			m_dX; 
+	SignedInt8Bit			m_dY;
 };

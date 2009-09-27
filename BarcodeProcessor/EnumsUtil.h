@@ -4,6 +4,7 @@
 #include "BarcodeProcessor/BasicItem.h"
 #include "BarcodeProcessor/ParkingItem.h"
 #include "BarcodeProcessor/PositionItem.h"
+#include "BarcodeProcessor/SignedJumpExtendedItem.h"
 
 
 #define EnumName(x) #x
@@ -64,6 +65,8 @@ DefineEnumToString4(EParkingAngle, Perpendicular, Parallel, Right45Degrees, Left
 DefineEnumToString4(EParkingType, Regular, Handicap, Bikes, BigParking);
 DefineEnumToString4(EParkingOrientation, Degrees0, Degrees90, Degrees180, Degrees270);
 DefineEnumToString5(EBasicItemType, Elevator, Staircase, WC, CarGate, PayingMachine);
-DefineEnumToString4(EPositionItemType, CR, HorizontalJump, VerticalJump, DiagonalJump);
+DefineEnumToString4(EPositionItemType, CR, ForwardHorizontalJump, ForwardVerticalJump, ForwardDiagonalJump);
 DefineEnumToString4(SPeriodicBetweenPoles::EPolesType, SPeriodicBetweenPoles::MarksOnRoad, SPeriodicBetweenPoles::Circular, SPeriodicBetweenPoles::Squared, SPeriodicBetweenPoles::Rectangular);
 DefineEnumToString4(SStructureShape::EAngleType, SStructureShape::None, SStructureShape::AngleUpTo90, SStructureShape::AngleUpTo360, SStructureShape::Circular);
+DefineEnumToString4(ESignedJumpItemType, CarriageDir, SignedHorizontalJump, SignedVerticalJump, SignedDiagonalJump);
+

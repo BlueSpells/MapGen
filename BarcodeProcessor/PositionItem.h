@@ -8,9 +8,9 @@
 enum EPositionItemType
 {
 	CR,
-	HorizontalJump,
-	VerticalJump,
-	DiagonalJump,
+	ForwardHorizontalJump,
+	ForwardVerticalJump,
+	ForwardDiagonalJump,
 	EPositionItemType_MaxEnum
 };
 DefineEnumBitSize(EPositionItemType);
@@ -22,7 +22,7 @@ public:
 	CPositionItem(void);
 	~CPositionItem(void);
 
-	void Encode(	EPositionItemType PositionItemType, Int8Bit X, Int8Bit Y);
+	void Encode(	EPositionItemType PositionItemType, Int8Bit dX, Int8Bit dY);
 
 	virtual void	InsertItemType();
 	virtual bool	IsOfThisType(CBitPointer *Data);
@@ -32,6 +32,6 @@ public:
 
 	// Decoded data:
 	EPositionItemType		m_PositionItemType;
-	Int8Bit					m_X; 
-	Int8Bit					m_Y;
+	Int8Bit					m_dX; 
+	Int8Bit					m_dY;
 };

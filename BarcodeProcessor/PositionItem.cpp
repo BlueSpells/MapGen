@@ -8,8 +8,8 @@
 
 CPositionItem::CPositionItem(void) : IItem(Position),
 	m_PositionItemType((EPositionItemType)0xFFFFFFFF),
-	m_X(ConvertIntToInt8Bit(0)),
-	m_Y(ConvertIntToInt8Bit(0))
+	m_dX(ConvertIntToInt8Bit(0)),
+	m_dY(ConvertIntToInt8Bit(0))
 {
 }
 
@@ -17,22 +17,22 @@ CPositionItem::~CPositionItem(void)
 {
 }
 
-void CPositionItem::Encode(EPositionItemType PositionItemType, Int8Bit X, Int8Bit Y)
+void CPositionItem::Encode(EPositionItemType PositionItemType, Int8Bit dX, Int8Bit dY)
 {
-	bool IsHorizontal = (PositionItemType == HorizontalJump || PositionItemType == DiagonalJump);
-	bool IsVertical = (PositionItemType == VerticalJump || PositionItemType == DiagonalJump);
+	bool IsHorizontal = (PositionItemType == ForwardHorizontalJump || PositionItemType == ForwardDiagonalJump);
+	bool IsVertical = (PositionItemType == ForwardVerticalJump || PositionItemType == ForwardDiagonalJump);
 
 	size_t NumberOfBits	= BitSize(PositionItemType) 
-		+ ((IsHorizontal) ? BitSize(X) : 0)
-		+ ((IsVertical) ? BitSize(Y) : 0);
+		+ ((IsHorizontal) ? BitSize(dX) : 0)
+		+ ((IsVertical) ? BitSize(dY) : 0);
 	IncreaseBitBufferSize(NumberOfBits);
 
 	CBitPointer BitPtr = AllocateBitBuffer();
 	BitCopyAndContinue(BitPtr, PositionItemType);
 	if (IsHorizontal) 
-		BitCopyAndContinue(BitPtr, X);
+		BitCopyAndContinue(BitPtr, dX);
 	if (IsVertical)	
-		BitCopyAndContinue(BitPtr, Y);
+		BitCopyAndContinue(BitPtr, dY);
 }
 
 /*virtual*/ void CPositionItem::Decode(IN const CBitPointer &Data, IN OUT int &UsedBits, IN int* /*Context unnecessary*/)
@@ -43,10 +43,10 @@ void CPositionItem::Encode(EPositionItemType PositionItemType, Int8Bit X, Int8Bi
 
 	BitPasteAndContinue(BitPtr, m_PositionItemType);
 
-	if (m_PositionItemType == HorizontalJump || m_PositionItemType == DiagonalJump)
-		BitCopyAndContinue(BitPtr, m_X);
-	if (m_PositionItemType == VerticalJump || m_PositionItemType == DiagonalJump)
-		BitCopyAndContinue(BitPtr, m_Y);
+	if (m_PositionItemType == ForwardHorizontalJump || m_PositionItemType == ForwardDiagonalJump)
+		BitCopyAndContinue(BitPtr, m_dX);
+	if (m_PositionItemType == ForwardVerticalJump || m_PositionItemType == ForwardDiagonalJump)
+		BitCopyAndContinue(BitPtr, m_dY);
 
 	UsedBits = (int)(BitPtr - Data);
 }

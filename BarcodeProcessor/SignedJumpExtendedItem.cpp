@@ -7,8 +7,8 @@
 
 CSignedJumpExtendedItem::CSignedJumpExtendedItem(void) : CExtendedItem(SignedJump),
 	m_SignedJumpItemType((ESignedJumpItemType)0xFFFFFFFF),
-	m_X(ConvertIntToSignedInt9Bit(0)),
-	m_Y(ConvertIntToSignedInt9Bit(0))
+	m_dX(ConvertIntToSignedInt8Bit(0)),
+	m_dY(ConvertIntToSignedInt8Bit(0))
 {
 }
 
@@ -16,22 +16,22 @@ CSignedJumpExtendedItem::~CSignedJumpExtendedItem(void)
 {
 }
 
-void CSignedJumpExtendedItem::Encode(ESignedJumpItemType SignedJumpItemType, SignedInt9Bit X, SignedInt9Bit Y)
+void CSignedJumpExtendedItem::Encode(ESignedJumpItemType SignedJumpItemType, SignedInt8Bit dX, SignedInt8Bit dY)
 {
-	bool IsHorizontal = (SignedJumpItemType == HorizontalJump || SignedJumpItemType == DiagonalJump);
-	bool IsVertical = (SignedJumpItemType == VerticalJump || SignedJumpItemType == DiagonalJump);
+	bool IsHorizontal = (SignedJumpItemType == SignedHorizontalJump || SignedJumpItemType == SignedDiagonalJump);
+	bool IsVertical = (SignedJumpItemType == SignedVerticalJump || SignedJumpItemType == SignedDiagonalJump);
 
 	size_t NumberOfBits	= BitSize(SignedJumpItemType) 
-		+ ((IsHorizontal) ? BitSize(X) : 0)
-		+ ((IsVertical) ? BitSize(Y) : 0);
+		+ ((IsHorizontal) ? BitSize(dX) : 0)
+		+ ((IsVertical) ? BitSize(dY) : 0);
 	IncreaseBitBufferSize(NumberOfBits);
 
 	CBitPointer BitPtr = AllocateBitBuffer();
 	BitCopyAndContinue(BitPtr, SignedJumpItemType);
 	if (IsHorizontal) 
-		BitCopyAndContinue(BitPtr, X);
+		BitCopyAndContinue(BitPtr, dX);
 	if (IsVertical)	
-		BitCopyAndContinue(BitPtr, Y);
+		BitCopyAndContinue(BitPtr, dY);
 }
 
 /*virtual*/ void CSignedJumpExtendedItem::Decode(IN const CBitPointer &Data, IN OUT int &UsedBits, IN int* /*Context unnecessary*/)
@@ -42,10 +42,10 @@ void CSignedJumpExtendedItem::Encode(ESignedJumpItemType SignedJumpItemType, Sig
 
 	BitPasteAndContinue(BitPtr, m_SignedJumpItemType);
 
-	if (m_SignedJumpItemType == HorizontalJump || m_SignedJumpItemType == DiagonalJump)
-		BitCopyAndContinue(BitPtr, m_X);
-	if (m_SignedJumpItemType == VerticalJump || m_SignedJumpItemType == DiagonalJump)
-		BitCopyAndContinue(BitPtr, m_Y);
+	if (m_SignedJumpItemType == SignedHorizontalJump || m_SignedJumpItemType == SignedDiagonalJump)
+		BitCopyAndContinue(BitPtr, m_dX);
+	if (m_SignedJumpItemType == SignedVerticalJump || m_SignedJumpItemType == SignedDiagonalJump)
+		BitCopyAndContinue(BitPtr, m_dY);
 
 	UsedBits = (int)(BitPtr - Data);
 }

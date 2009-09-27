@@ -69,6 +69,14 @@ static const std::string BasicItemType			= "Type, enum, Elevator, Staircase, WC,
 // ---------------
 static const char *PositionCommand = "Position";
 
-static const std::string PositionItemType		= "Type, enum, CR, HorizontalJump, VerticalJump, DiagonalJump";
-static const std::string X						= "X, Int8Bit";
-static const std::string Y						= "Y, Int8Bit";
+static const std::string PositionItemType		= "Type, enum, CR, ForwardHorizontalJump, ForwardVerticalJump, ForwardDiagonalJump";
+static const std::string dX						= "dX, Int8Bit";
+static const std::string dY						= "dY, Int8Bit";
+
+// SignedJump Syntax:
+// ---------------
+static const char *SignedJumpCommand = "SignedJump";
+
+static const std::string SignedJumpItemType		= "Type, enum, CarriageDir, SignedHorizontalJump, SignedVerticalJump, SignedDiagonalJump";
+static const std::string Signed_dX				= "dX, SignedInt8Bit";
+static const std::string Signed_dY				= "dY, SignedInt8Bit";

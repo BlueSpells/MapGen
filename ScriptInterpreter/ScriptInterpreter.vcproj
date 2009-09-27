@@ -175,6 +175,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\SignedJumpCommand.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\SimpleScriptReader.cpp"
 				>
 			</File>
@@ -242,6 +246,10 @@
 			</File>
 			<File
 				RelativePath=".\ScriptSyntaxDefinitions.h"
+				>
+			</File>
+			<File
+				RelativePath=".\SignedJumpCommand.h"
 				>
 			</File>
 			<File

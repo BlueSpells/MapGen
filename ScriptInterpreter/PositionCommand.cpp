@@ -24,30 +24,30 @@ CPositionCommand::~CPositionCommand(void)
 		return CommandFailed;
 	}
 
-	EPositionItemType PositionItemValue;
-	if (!ExtractAndInterperetArgumentValue(ContextLine, PositionCommand, PositionItemType, ParsedArguments, PositionItemValue))
+	EPositionItemType PositionItemTypeValue;
+	if (!ExtractAndInterperetArgumentValue(ContextLine, PositionCommand, PositionItemType, ParsedArguments, PositionItemTypeValue))
 		return CommandFailed;
 
-	bool IsHorizontal = (PositionItemValue == HorizontalJump || PositionItemValue == DiagonalJump);
-	bool IsVertical = (PositionItemValue == VerticalJump || PositionItemValue == DiagonalJump);
+	bool IsHorizontal = (PositionItemTypeValue == ForwardHorizontalJump || PositionItemTypeValue == ForwardDiagonalJump);
+	bool IsVertical = (PositionItemTypeValue == ForwardVerticalJump || PositionItemTypeValue == ForwardDiagonalJump);
 
-	Int8Bit XValue = ConvertIntToInt8Bit(0);	
+	Int8Bit dXValue = ConvertIntToInt8Bit(0);	
 	if (IsHorizontal) 
-		if (!ExtractAndInterperetArgumentValue(ContextLine, PositionCommand, X, ParsedArguments, XValue))
+		if (!ExtractAndInterperetArgumentValue(ContextLine, PositionCommand, dX, ParsedArguments, dXValue))
 			return CommandFailed;
 	
-	Int8Bit YValue = ConvertIntToInt8Bit(0);
+	Int8Bit dYValue = ConvertIntToInt8Bit(0);
 	if (IsVertical) 
-		if (!ExtractAndInterperetArgumentValue(ContextLine, PositionCommand, Y, ParsedArguments, YValue))
+		if (!ExtractAndInterperetArgumentValue(ContextLine, PositionCommand, dY, ParsedArguments, dYValue))
 			return CommandFailed;
 	
 
 	CPositionItem *PositionItem = new CPositionItem;
-	PositionItem->Encode(PositionItemValue, XValue, YValue);
+	PositionItem->Encode(PositionItemTypeValue, dXValue, dYValue);
 
 
-	LogEvent(LE_INFO, __FUNCTION__ ": %s Command Parsed Successfully: PositionItemType = %s), ...", 
-		PositionCommand, EnumToString(PositionItemValue).c_str());
+	LogEvent(LE_INFO, __FUNCTION__ ": %s Command Parsed Successfully: PositionItemType = %s  [dX,dY]=[%d,%d]), ...", 
+		PositionCommand, EnumToString(PositionItemTypeValue).c_str(), dXValue, dYValue);
 
 	Element = (void *)PositionItem;
 	ElementType = AddItem;

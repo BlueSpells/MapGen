@@ -30,3 +30,5 @@ BuildLog.htm
 /ScriptCompiler/Release/
 *.manifest
 *.manifest.res
+*.txt.bak
+*.txt.orig
