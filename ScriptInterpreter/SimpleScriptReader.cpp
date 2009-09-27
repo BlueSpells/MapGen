@@ -45,9 +45,17 @@ std::string CSimpleScriptReader::CleanTabsAndSpaces(std::string &Argument)
 {
 	std::string CleanedArgument;
 	
+	int BracketsCounter = 0;
+
 	for (unsigned int i = 0; i < Argument.size(); i++)
 	{
-		if (Argument[i] != ' ' && Argument[i] != '\t')
+		if (Argument[i] == ListBegin[0])
+			BracketsCounter++;
+
+		if (Argument[i] == ListEnd[0])
+			BracketsCounter--;
+
+		if ((Argument[i] != ' ' && Argument[i] != '\t') || BracketsCounter > 0)
 			CleanedArgument += Argument[i];
 	}
 
