@@ -1,6 +1,7 @@
 #pragma once
 
-static const int MaxNumberOfArguments = 64;
+static const int MaxNumberOfArgumentsPerLine	= 64;
+static const int MaxNumberOfLinesPerCommand		= 64;
 static const char *CommandDelimiter			= ":";
 static const char *ArgumentsDelimiter		= "|";
 static const char *ListDelimeter			= " ";
@@ -11,6 +12,7 @@ static const char *StructBegin				= "[";
 static const char *StructEnd				= "]";
 static const char *CommandEnd				= ";";
 static const char *ParemterNameFromValueSeperator = "=";
+static const char *EndOfScript				= "End";
 
 
 #define ArgumentNameOf(x) #x

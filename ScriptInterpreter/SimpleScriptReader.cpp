@@ -2,6 +2,7 @@
 #include "SimpleScriptReader.h"
 #include "ScriptSyntaxDefinitions.h"
 #include "Common/Utils.h"
+#include "CommandHelper.h"
 
 CSimpleScriptReader::CSimpleScriptReader(void)
 {
@@ -56,37 +57,80 @@ std::string CSimpleScriptReader::CleanTabsAndSpaces(std::string &Argument)
 
 /*virtual*/ bool CSimpleScriptReader::ReadLine(std::string &Command, std::vector<std::string> &ParametersList)
 {
-	CString LineFromFile;
-	bool IsOK = m_StreamFile.ReadString(LineFromFile);
-
-	if (!IsOK)
-		return false;
-
-	m_LineIndex++;
-
-	CTokenParser Parser(LineFromFile);
-
-	if (!Parser.MoreTokens())
-	{
-		LogEvent(LE_ERROR, __FUNCTION__ ": Line #%d doesn't contain any command!", m_LineIndex);
-		return false;
-	}
-
-	Command = CleanTabsAndSpaces(Parser.GetNextToken(CommandDelimiter));
-
 	ParametersList.clear();
-	int i = 0;
-	while (Parser.MoreTokens())
+
+	int FirstLineOfCommand = m_LineIndex + 1;
+
+	int iLineInCommand = 0;
+	bool HasReachedEndOfLine = false;
+	do 
 	{
-		std::string argument = CleanTabsAndSpaces(Parser.GetNextToken(ArgumentsDelimiter));
-		ParametersList.push_back(argument);
-		if (i > MaxNumberOfArguments)
+		m_LineIndex++;
+		iLineInCommand++;
+
+		CString LineFromFile;
+		bool IsOK = m_StreamFile.ReadString(LineFromFile);
+
+		if (!IsOK)
 		{
-			LogEvent(LE_ERROR, __FUNCTION__ ": Line #%d contains more than %d arguments!", m_LineIndex, MaxNumberOfArguments);
+			LogEvent(LE_ERROR, __FUNCTION__ ": Failed to read line #%d. perhaps ; is missing?", m_LineIndex);
 			return false;
 		}
-		i++;
-	}
 
-	return true;
+		CTokenParser Parser(LineFromFile);
+
+		if (!Parser.MoreTokens())
+		{
+			LogEvent(LE_ERROR, __FUNCTION__ ": Line #%d doesn't contain any command!", m_LineIndex);
+			return false;
+		}
+
+		if (iLineInCommand == 1) // first line of command contains the command itself
+		{
+			Command = CleanTabsAndSpaces(Parser.GetNextToken(CommandDelimiter));
+			if (Command == EndOfScript)
+			{
+				LogEvent(LE_INFOHIGH, __FUNCTION__ ": Reached end of script (line #%d)", m_LineIndex);
+				return true;
+			}
+		}
+
+		int iArgumentsPerLine = 0;
+		while (Parser.MoreTokens())
+		{
+			iArgumentsPerLine++;
+			std::string argument = CleanTabsAndSpaces(Parser.GetNextToken(ArgumentsDelimiter));
+			if (argument.find(CommandDelimiter) != std::string::npos)
+			{
+				if (iArgumentsPerLine == 1)
+					LogEvent(LE_ERROR, __FUNCTION__ ": Command separator was found in an line which should not have contained it. Have you forgotten ';' in line %d?", m_LineIndex-1);
+				else
+					LogEvent(LE_ERROR, __FUNCTION__ ": Command separator should not be used within a parameter! was found in argument %d of line %d", iArgumentsPerLine, m_LineIndex);
+				return false;
+			}
+
+			if (argument.size() > 0)
+				ParametersList.push_back(argument);
+
+			if (iArgumentsPerLine > MaxNumberOfArgumentsPerLine)
+			{
+				LogEvent(LE_ERROR, __FUNCTION__ ": Line #%d contains more than %d arguments!", m_LineIndex, MaxNumberOfArgumentsPerLine);
+				return false;
+			}
+		}
+
+		if ((ParametersList[ParametersList.size()-1])[ParametersList[ParametersList.size()-1].size()-1] == CommandEnd[0])
+		{
+			HasReachedEndOfLine = true;
+			CleanCharacter(ParametersList[ParametersList.size()-1], CommandEnd);
+		}
+
+		if (iLineInCommand > MaxNumberOfLinesPerCommand)
+		{
+			LogEvent(LE_ERROR, __FUNCTION__ ": Command %s in line %d is spread over more than %d lines!", Command, FirstLineOfCommand, MaxNumberOfLinesPerCommand);
+			return false;
+		}
+	} while(!HasReachedEndOfLine);
+	
+	return HasReachedEndOfLine;
 }
