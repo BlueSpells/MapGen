@@ -47,7 +47,7 @@ void CParkingMapHeader::Encode(SParkingGarageID m_GarageID, ETextLanguage m_Text
 		BitCopyAndContinue(BitPtr, m_TargerDescription);
 }
 
-/*virtual*/ void CParkingMapHeader::Decode(IN const CBitPointer &Data, IN OUT int &UsedBits)
+/*virtual*/ void CParkingMapHeader::Decode(IN const CBitPointer &Data, IN OUT int &UsedBits, IN int * /*Context unnecessary*/)
 {
 	int BitsToRead = UsedBits; BitsToRead;
 	CBitPointer BitPtr = Data;

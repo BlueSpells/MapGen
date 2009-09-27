@@ -84,7 +84,7 @@ static int BitSize(ITEM ITEMVALUE) {return BitSize(ITEMVALUE.SUBITEMBOOL) + ((IT
 #define BitDecodeAndContinue(DecodingObject, BitPtr)			\
 {																\
 	int UsedBytes = 0;											\
-	DecodingObject->Decode(BitPtr, UsedBytes);					\
+	DecodingObject->Decode(BitPtr, UsedBytes, NULL);			\
 	BitPtr += UsedBytes;										\
 }
 
@@ -107,3 +107,8 @@ DefineNumericValue(8);
 DefineNumericValue(6);
 DefineNumericValue(5);
 DefineNumericValue(4);
+
+
+#define AddItemToBitString(Item, BitPtr, BitString)	\
+BitString += BinaryString(BitPtr, BitSize(Item));	\
+BitString += " | ";		  BitPtr += BitSize(Item);

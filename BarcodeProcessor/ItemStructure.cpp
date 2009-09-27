@@ -75,3 +75,30 @@ void CItemStructure::Encode(SStructureShape StructureShape, SMultiplicity Multip
 
 	UsedBits = (int)(BitPtr - Data);
 }
+
+
+/*virtual*/	std::string	CItemStructure::GetItemBitBufferParsedString(std::string ParsedString, CBitPointer BitPtr)
+{
+	AddItemToBitString(m_StructureShape.AngleType, BitPtr, ParsedString);
+	AddItemToBitString(m_Multiplicity.IsMultiplied, BitPtr, ParsedString);
+	
+	if (m_Multiplicity.IsMultiplied)
+		AddItemToBitString(m_Multiplicity.Multiples, BitPtr, ParsedString);
+
+	switch (m_StructureShape.AngleType)
+	{
+	case SStructureShape::None:
+		break;
+	case SStructureShape::AngleUpTo90:
+		AddItemToBitString(m_StructureShape.Shape.SmallAngle, BitPtr, ParsedString);
+		break;
+	case SStructureShape::AngleUpTo360:
+		AddItemToBitString(m_StructureShape.Shape.BigAngle, BitPtr, ParsedString);
+		break;
+	case SStructureShape::Circular:
+		AddItemToBitString(m_StructureShape.Shape.RadiusCoordinates, BitPtr, ParsedString);
+		break;
+	};
+
+	return ParsedString;
+}
