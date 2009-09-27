@@ -88,3 +88,13 @@ int bitcnt(CBitPointer p_pbitString, size_t p_cLength)
 {
 	return bitcnt(p_pbitString, 1, p_cLength);
 }
+
+std::string BinaryString(CBitPointer p_pbitString, size_t p_cLength)
+{
+	std::string retval;
+
+	for (size_t i = 0; i < p_cLength; i++)
+		retval += (p_pbitString[i] == 0 ? '0' : '1');
+
+	return retval;
+}

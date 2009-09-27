@@ -341,6 +341,9 @@ bool InterperetArgumentValue(int ContextLine, std::vector<std::string> Parameter
 	if (ParameterType == Union)
 		return InterperetArgumentValueAsUnion(ContextLine, ParameterName, ArgumentValue, (std::string &)Value);
 
+	if (ParameterType == List)
+		return InterperetArgumentValueAsList(ContextLine, ParameterName, ArgumentValue, (std::vector<std::string> &)Value, FurtherDefinitions);
+
 	LogEvent(LE_ERROR, __FUNCTION__ ": Unrecognized Parameter Type definition of %s (Unrecognized Type: %s) (mentioned in line %d).", ParameterName.c_str(), ParameterType.c_str(), ContextLine);
 	Assert(false);
 	return false;
@@ -398,7 +401,7 @@ bool ExtractAndInterperetStructField(int ContextLine, std::string StructArgument
 		LogEvent(LE_ERROR, __FUNCTION__ ": Error in Struct definition of %s (mentioned in line %d).", StructArgument.c_str(), ContextLine);
 		return false;
 	}
-	if (FieldDefinitionVector.size() < 1)
+	if (FieldDefinitionVector.size() < 2)
 	{
 		LogEvent(LE_ERROR, __FUNCTION__ ": Error in Field definition of field %s of struct %s (mentioned in line %d).", Field.c_str(), StructArgument.c_str(), ContextLine);
 		return false;
@@ -455,7 +458,7 @@ bool ExtractAndInterperetUnionField(int ContextLine, std::string UnionArgument, 
 		LogEvent(LE_ERROR, __FUNCTION__ ": Error in Struct definition of %s (mentioned in line %d).", UnionArgument.c_str(), ContextLine);
 		return false;
 	}
-	if (FieldDefinitionVector.size() < 1)
+	if (FieldDefinitionVector.size() < 2)
 	{
 		LogEvent(LE_ERROR, __FUNCTION__ ": Error in Field definition of field %s of struct %s (mentioned in line %d).", Field.c_str(), UnionArgument.c_str(), ContextLine);
 		return false;
@@ -495,6 +498,117 @@ bool ExtractAndInterperetUnionField(int ContextLine, std::string UnionArgument, 
 	if (!InterperetArgumentValue(ContextLine, Field, FieldValue, Value))
 	{
 		LogEvent(LE_ERROR, __FUNCTION__ ": [Line #%d]: Failed to extract field %s from union %s", ContextLine, FieldName.c_str(), UnionName.c_str());
+		return false;
+	}	
+
+	return true;
+}
+
+static bool InterperetArgumentValueAsList(int ContextLine, std::string ParameterName, std::string ArgumentValue, std::vector<std::string> &Value, std::vector<std::string> AdditionalInformation)
+{
+	if (ArgumentValue[0] != ListBegin[0])
+	{
+		LogEvent(LE_ERROR, __FUNCTION__ ": [Line #%d]: Syntax Error. Parameter %s expected to be a list, and '[' should appear as first character of struct! ArgumentValue=%s", 
+			ContextLine, ParameterName.c_str(), ArgumentValue.c_str());
+		return false;
+	}
+
+	if (ArgumentValue[ArgumentValue.size()-1] != ListEnd[0])
+	{
+		LogEvent(LE_ERROR, __FUNCTION__ ": [Line #%d]: Syntax Error. Parameter %s expected to be a list, and ']' should appear as last character of struct! ArgumentValue=%s", 
+			ContextLine, ParameterName.c_str(), ArgumentValue.c_str());
+	
+		return false;
+	}
+
+	if (AdditionalInformation.size() != 2)
+	{
+		LogEvent(LE_ERROR, __FUNCTION__ ": [Line #%d]: Error in list definition of Parameter %s. List must define minimum and maximum allowed length!", 
+			ContextLine, ParameterName.c_str());
+
+		return false;
+	}
+
+	int minLength = atoi(AdditionalInformation[0].c_str());
+	int maxLength = atoi(AdditionalInformation[1].c_str());
+
+	std::string Brackets;
+	Brackets = ListBegin;
+	Brackets += ListEnd;
+
+	CTokenParser ListParser(ArgumentValue.c_str());
+
+	ListParser.GetNextToken(ListBegin); // pass the first '['. important for internal struct recognition
+	while (ListParser.MoreTokens())
+	{
+		CTokenParser InternalListHelper(ListParser);
+		std::string InternalListCheck = InternalListHelper.GetNextToken(ListBegin);
+		if (InternalListCheck.size() == 0)
+		{
+			Value.push_back(ListParser.GetNextToken(ListEnd) + ListEnd);
+		}
+		else if (InternalListCheck != ListEnd)
+			Value.push_back(CleanCharacter(ListParser.GetNextToken(ListItemsDelimeter), Brackets));
+		else
+			ListParser.GetNextToken(ListItemsDelimeter); // just to pass to next char (which should be last)
+	}
+
+	if (maxLength != -1 && Value.size() > maxLength)
+	{
+		LogEvent(LE_ERROR, __FUNCTION__ ": [Line #%d]: Parameter %s expected to have maximum %d items, yet it contains %d items (values: %s)!!", 
+			ContextLine, ParameterName.c_str(), maxLength, Value.size(), ArgumentValue.c_str());
+		return false;
+	}
+	if (minLength != -1 && Value.size() < minLength)
+	{
+		LogEvent(LE_ERROR, __FUNCTION__ ": [Line #%d]: Parameter %s expected to have minimum %d items, yet it contains %d items (values: %s)!!", 
+			ContextLine, ParameterName.c_str(), minLength, Value.size(), ArgumentValue.c_str());
+		return false;
+	}
+
+	return true;
+}
+
+template <class T> 
+bool ExtractAndInterperetListItem(int ContextLine, std::string ListArgument, std::string ItemType, std::vector<std::string> ListVector, T &Value, int ItemIndex)
+{
+	std::vector<std::string> ListDefinitionVector = StrToStrVector(ListArgument);
+	std::vector<std::string> ItemDefinitionVector = StrToStrVector(ItemType);
+	if (ListDefinitionVector.size() < 2)
+	{
+		LogEvent(LE_ERROR, __FUNCTION__ ": Error in List definition of %s (mentioned in line %d).", ListArgument.c_str(), ContextLine);
+		return false;
+	}
+	if (ItemDefinitionVector.size() < 2)
+	{
+		LogEvent(LE_ERROR, __FUNCTION__ ": Error in Field definition of item %s of list %s (mentioned in line %d).", ItemType.c_str(), ListArgument.c_str(), ContextLine);
+		return false;
+	}
+
+	std::string ListName = ListDefinitionVector[0];
+	std::string ListType = ListDefinitionVector[1];
+	std::string ItemName = ItemDefinitionVector[0];
+
+	Assert(ListType == List);
+	if (ListType != List)
+	{
+		LogEvent(LE_ERROR, __FUNCTION__ "Argument considered as list (%s) is in fact %s! (mentioned in line %d)",
+			ListName.c_str(), ListType.c_str(), ContextLine);
+		return false;
+	}
+
+	if (ItemIndex < 0 || ItemIndex > ListVector.size()-1)
+	{
+		LogEvent(LE_ERROR, __FUNCTION__ "Requested Item Index (%d) of list %s exceeds List Vector length [%d] (mentioned in line %d)",
+			ItemIndex, ListName.c_str(), ListVector.size(), ContextLine);
+		return false;
+	}
+
+	std::string ItemValue = ListVector[ItemIndex];
+
+	if (!InterperetArgumentValue(ContextLine, ItemType, ItemValue, Value))
+	{
+		LogEvent(LE_ERROR, __FUNCTION__ ": [Line #%d]: Failed to extract Item %d (%s) from list %s", ContextLine, ItemIndex, ItemType.c_str(), ListName.c_str());
 		return false;
 	}	
 

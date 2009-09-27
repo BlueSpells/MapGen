@@ -6,6 +6,7 @@ Parking: Type=Regular
 		StructureShape=[AngleUpTo360,22]
 		IsPeriodicBetweenPoles=true 
 		PeriodicBetweenPoles=[15,Circular];
+Parking: Type=BigParking | Angle=Perpendicular | IsMirrorDoubled=true	| Orientation=Degrees180 | Multiplicity=[false] | StructureShape=[Circular,[1,2]] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[2,Circular];
 BasicItem: Type=PayingMachine;
 Position: Type=ForwardDiagonalJump | dX=5 | dY=8;
 SignedJump: Type=CarriageDir | dX=11 | dY=14;
