@@ -190,3 +190,43 @@ void CComplexItem::Encode(int ComplexItemUID, bool IsVerticalMirror, bool ISHori
 	m_ListOfEncodedItems.push_back(ItemWithinComplex);
 	ASSERT(m_ListOfEncodedItems.size() <= (unsigned int)m_NumberOfObjectsInComplex);
 }
+
+/*virtual*/	std::string	CComplexItem::GetItemBitBufferParsedString(std::string ParsedString, CBitPointer BitPtr)
+{
+	int UsedBits = 0;
+	Decode(GetBitBuffer(), UsedBits, NULL);
+
+	int IsFirstTimeFlag = (m_IsFirstDefinitionOfComplexItem) ? 0 : 1;
+	Decode(GetBitBuffer(), UsedBits, &IsFirstTimeFlag);
+
+	// The above is the ComplexItem's version of Decode. 
+	
+
+	// From here should start the regular GetItemBitBufferParsedString implementation
+
+	AddItemToBitString(m_UID, BitPtr, ParsedString);
+
+	if (m_IsFirstDefinitionOfComplexItem)
+		AddItemToBitString(m_NumberOfObjectsInComplex, BitPtr, ParsedString);
+
+	AddItemToBitString(m_IsVerticalMirror, BitPtr, ParsedString);
+	AddItemToBitString(m_IsHorizontalMirror, BitPtr, ParsedString);
+	AddItemToBitString(m_IsVeritcalReplication, BitPtr, ParsedString);
+	AddItemToBitString(m_IsHotizontalReplication, BitPtr, ParsedString);
+	
+	if (m_IsFirstDefinitionOfComplexItem)
+		AddItemToBitString(m_IsReplicationPartOfDefinition, BitPtr, ParsedString);
+
+	if (m_IsVeritcalReplication)
+	{
+		AddItemToBitString(m_VeritcalReplication.GapBetweenReplicas, BitPtr, ParsedString);
+		AddItemToBitString(m_VeritcalReplication.TimesToReplicate, BitPtr, ParsedString);
+	}
+	if (m_IsHotizontalReplication)
+	{
+		AddItemToBitString(m_HotizontalReplication.GapBetweenReplicas, BitPtr, ParsedString);
+		AddItemToBitString(m_HotizontalReplication.TimesToReplicate, BitPtr, ParsedString);
+	}
+
+	return ParsedString;
+}

@@ -69,7 +69,7 @@ void CParkingMapHeader::Encode(SParkingGarageID m_GarageID, ETextLanguage m_Text
 	UsedBits = (int)(BitPtr - Data);
 }
 
-/*virtual*/	std::string	CParkingMapHeader::GetBitBufferParsedString(std::string ParsedString, CBitPointer BitPtr)
+/*virtual*/	std::string	CParkingMapHeader::GetHeaderBitBufferParsedString(std::string ParsedString, CBitPointer BitPtr)
 {
 	int UsedBits = 0;
 	Decode(GetBitBuffer(), UsedBits, NULL);

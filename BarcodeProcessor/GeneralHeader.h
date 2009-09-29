@@ -24,7 +24,7 @@ public:
 
 	virtual void Decode(IN const CBitPointer &Data, IN OUT int &UsedBits, IN int * /*Context unnecessary*/);
 
-	virtual	std::string	GetBitBufferParsedString(std::string ParsedString, CBitPointer BitPtr);
+	virtual	std::string	GetHeaderBitBufferParsedString(std::string ParsedString, CBitPointer BitPtr);
 
 	Int32Bit m_Signature;
 	Int4Bit  m_Version;

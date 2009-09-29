@@ -55,6 +55,8 @@ public:
 	virtual void	Decode(IN const CBitPointer &Data, IN OUT int &UsedBits, IN int *Context);
 	virtual void	AddDecodedItemToList(IItem *ItemWithinComplex);
 
+	virtual	std::string	GetItemBitBufferParsedString(std::string ParsedString, CBitPointer BitPtr);
+
 private:
 	virtual void	DecodePhase1(IN const CBitPointer &Data, IN OUT int &UsedBits);
 	virtual void	DecodePhase2(IN const CBitPointer &Data, IN OUT int &UsedBits, IN int *Context);
