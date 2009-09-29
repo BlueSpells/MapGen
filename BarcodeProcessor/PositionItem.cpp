@@ -51,6 +51,20 @@ void CPositionItem::Encode(EPositionItemType PositionItemType, Int8Bit dX, Int8B
 	UsedBits = (int)(BitPtr - Data);
 }
 
+/*virtual*/	std::string	CPositionItem::GetItemBitBufferParsedString(std::string ParsedString, CBitPointer BitPtr)
+{
+	int UsedBits = 0;
+	Decode(GetBitBuffer(), UsedBits, NULL);
+	AddItemToBitString(m_PositionItemType, BitPtr, ParsedString);
+
+	if (m_PositionItemType == ForwardHorizontalJump || m_PositionItemType == ForwardDiagonalJump)
+		AddItemToBitString(m_dX, BitPtr, ParsedString);
+	if (m_PositionItemType == ForwardVerticalJump || m_PositionItemType == ForwardDiagonalJump)
+		AddItemToBitString(m_dY, BitPtr, ParsedString);
+
+	return ParsedString;
+}
+
 /*virtual*/ void CPositionItem::InsertItemType()
 {
 	(GetBitBuffer())[0] = 1;

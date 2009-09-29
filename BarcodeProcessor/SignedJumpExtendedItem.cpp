@@ -50,6 +50,20 @@ void CSignedJumpExtendedItem::Encode(ESignedJumpItemType SignedJumpItemType, Sig
 	UsedBits = (int)(BitPtr - Data);
 }
 
+/*virtual*/	std::string	CSignedJumpExtendedItem::GetItemBitBufferParsedString(std::string ParsedString, CBitPointer BitPtr)
+{
+	int UsedBits = 0;
+	Decode(GetBitBuffer(), UsedBits, NULL);
+	AddItemToBitString(m_SignedJumpItemType, BitPtr, ParsedString);
+
+	if (m_SignedJumpItemType == SignedHorizontalJump || m_SignedJumpItemType == SignedDiagonalJump)
+		AddItemToBitString(m_dX, BitPtr, ParsedString);
+	if (m_SignedJumpItemType == SignedVerticalJump || m_SignedJumpItemType == SignedDiagonalJump)
+		AddItemToBitString(m_dY, BitPtr, ParsedString);
+
+	return ParsedString;
+}
+
 /*virtual*/ void CSignedJumpExtendedItem::InsertItemType()
 {
 	CExtendedItem::InsertItemType();

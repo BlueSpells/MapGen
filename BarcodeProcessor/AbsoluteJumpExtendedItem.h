@@ -6,9 +6,9 @@
 enum EAbsoluteJumpItemType
 {
 	Unused,
-	HorizontalJump,
-	VerticalJump,
-	DiagonalJump,
+	AbsoluteHorizontalJump,
+	AbsoluteVerticalJump,
+	AbsoluteDiagonalJump,
 	EAbsoluteJumpItemType_MaxEnum
 };
 DefineEnumBitSize(EAbsoluteJumpItemType);
@@ -26,10 +26,10 @@ public:
 	virtual bool	IsOfThisType(CBitPointer *Data);
 	virtual void	Decode(IN const CBitPointer &Data, IN OUT int &UsedBits, IN int* /*Context unnecessary*/);
 
-
+	virtual	std::string	GetItemBitBufferParsedString(std::string ParsedString, CBitPointer BitPtr);
 
 	// Decoded data:
 	EAbsoluteJumpItemType		m_AbsoluteJumpItemType;
-	Int16Bit				m_X; 
-	Int16Bit				m_Y;
+	Int16Bit					m_X; 
+	Int16Bit					m_Y;
 };

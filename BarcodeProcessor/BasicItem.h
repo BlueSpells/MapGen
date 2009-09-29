@@ -26,6 +26,8 @@ public:
 	virtual bool	IsOfThisType(CBitPointer *Data);
 	virtual void	Decode(IN const CBitPointer &Data, IN OUT int &UsedBits, IN int * /*Context unnecessary*/);
 
+	virtual	std::string	GetItemBitBufferParsedString(std::string ParsedString, CBitPointer BitPtr);
+
 	// Decoded data:
 	EBasicItemType m_BasicItemType;
 };

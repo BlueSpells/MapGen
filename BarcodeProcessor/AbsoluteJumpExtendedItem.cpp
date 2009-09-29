@@ -16,8 +16,8 @@ CAbsoluteJumpExtendedItem::~CAbsoluteJumpExtendedItem(void)
 
 void CAbsoluteJumpExtendedItem::Encode(EAbsoluteJumpItemType AbsoluteJumpItemType, Int16Bit X, Int16Bit Y)
 {
-	bool IsHorizontal = (AbsoluteJumpItemType == HorizontalJump || AbsoluteJumpItemType == DiagonalJump);
-	bool IsVertical = (AbsoluteJumpItemType == VerticalJump || AbsoluteJumpItemType == DiagonalJump);
+	bool IsHorizontal = (AbsoluteJumpItemType == AbsoluteHorizontalJump || AbsoluteJumpItemType == AbsoluteDiagonalJump);
+	bool IsVertical = (AbsoluteJumpItemType == AbsoluteVerticalJump || AbsoluteJumpItemType == AbsoluteDiagonalJump);
 
 	size_t NumberOfBits	= BitSize(AbsoluteJumpItemType) 
 		+ ((IsHorizontal) ? BitSize(X) : 0)
@@ -40,12 +40,26 @@ void CAbsoluteJumpExtendedItem::Encode(EAbsoluteJumpItemType AbsoluteJumpItemTyp
 
 	BitPasteAndContinue(BitPtr, m_AbsoluteJumpItemType);
 
-	if (m_AbsoluteJumpItemType == HorizontalJump || m_AbsoluteJumpItemType == DiagonalJump)
+	if (m_AbsoluteJumpItemType == AbsoluteHorizontalJump || m_AbsoluteJumpItemType == AbsoluteDiagonalJump)
 		BitCopyAndContinue(BitPtr, m_X);
-	if (m_AbsoluteJumpItemType == VerticalJump || m_AbsoluteJumpItemType == DiagonalJump)
+	if (m_AbsoluteJumpItemType == AbsoluteVerticalJump || m_AbsoluteJumpItemType == AbsoluteDiagonalJump)
 		BitCopyAndContinue(BitPtr, m_Y);
 
 	UsedBits = (int)(BitPtr - Data);
+}
+
+/*virtual*/	std::string	CAbsoluteJumpExtendedItem::GetItemBitBufferParsedString(std::string ParsedString, CBitPointer BitPtr)
+{
+	int UsedBits = 0;
+	Decode(GetBitBuffer(), UsedBits, NULL);
+	AddItemToBitString(m_AbsoluteJumpItemType, BitPtr, ParsedString);
+
+	if (m_AbsoluteJumpItemType == AbsoluteHorizontalJump || m_AbsoluteJumpItemType == AbsoluteDiagonalJump)
+		AddItemToBitString(m_X, BitPtr, ParsedString);
+	if (m_AbsoluteJumpItemType == AbsoluteVerticalJump || m_AbsoluteJumpItemType == AbsoluteDiagonalJump)
+		AddItemToBitString(m_Y, BitPtr, ParsedString);
+
+	return ParsedString;
 }
 
 /*virtual*/ void CAbsoluteJumpExtendedItem::InsertItemType()

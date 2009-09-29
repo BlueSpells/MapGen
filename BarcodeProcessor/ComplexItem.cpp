@@ -39,6 +39,8 @@ void CComplexItem::Encode(int ComplexItemUID, std::vector<IItem *> ListOfEncoded
 			bool IsVeritcalReplication, bool IsHotizontalReplication, bool IsReplicationPartOfDefinition,
 			SReplication *VeritcalReplication/* = NULL*/, SReplication *HotizontalReplication/* = NULL*/)
 {
+	m_IsFirstDefinitionOfComplexItem = true;
+
 	Int5Bit UID = ConvertIntToInt5Bit(ComplexItemUID);
 	Int5Bit NumberOfItems = ConvertIntToInt5Bit(ListOfEncodedItems.size());
 

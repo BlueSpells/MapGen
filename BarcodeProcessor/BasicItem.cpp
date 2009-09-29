@@ -33,6 +33,16 @@ void CBasicItem::Encode(EBasicItemType BasicItemType)
 	UsedBits = (int)(BitPtr - Data);
 }
 
+
+/*virtual*/	std::string	CBasicItem::GetItemBitBufferParsedString(std::string ParsedString, CBitPointer BitPtr)
+{
+	int UsedBits = 0;
+	Decode(GetBitBuffer(), UsedBits, NULL);
+	AddItemToBitString(m_BasicItemType, BitPtr, ParsedString);
+	return ParsedString;
+}
+
+
 /*virtual*/ void CBasicItem::InsertItemType()
 {
 	(GetBitBuffer())[0] = 1;
@@ -49,3 +59,4 @@ void CBasicItem::Encode(EBasicItemType BasicItemType)
 	if (*Data[3] != 0) return false;
 	return true;
 }
+

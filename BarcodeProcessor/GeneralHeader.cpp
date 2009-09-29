@@ -36,3 +36,15 @@ void CGeneralHeader::Encode(Int32Bit Signature, Int4Bit Version, EBarcodeType Ba
 	
 	UsedBits = (int)(BitPtr - Data);
 }
+
+/*virtual*/	std::string	CGeneralHeader::GetBitBufferParsedString(std::string ParsedString, CBitPointer BitPtr)
+{
+	int UsedBits = 0;
+	Decode(GetBitBuffer(), UsedBits, NULL);
+
+	AddItemToBitString(m_Signature, BitPtr, ParsedString);
+	AddItemToBitString(m_Version, BitPtr, ParsedString);
+	AddItemToBitString(m_BarcodeType, BitPtr, ParsedString);
+
+	return ParsedString;
+}

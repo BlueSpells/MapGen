@@ -134,6 +134,53 @@ void CPavementItem::Encode(	EShapeType ShapeType, ETextureType TextureType, Int4
 }
 
 
+/*virtual*/	std::string	CPavementItem::GetItemBitBufferParsedString(std::string ParsedString, CBitPointer BitPtr)
+{
+	int UsedBits = 0;
+	Decode(GetBitBuffer(), UsedBits, NULL);
+	
+	AddItemToBitString(m_ShapeType, BitPtr, ParsedString);
+	AddItemToBitString(m_TextureType, BitPtr, ParsedString);
+	if (m_TextureType == SolidFill)
+		AddItemToBitString(m_FillType, BitPtr, ParsedString);
+
+	AddItemToBitString(m_IsAdjacentToParking, BitPtr, ParsedString);
+	AddItemToBitString(m_SpecialVertexCurvature, BitPtr, ParsedString);
+	if (m_IsAdjacentToParking)
+	{
+		AddItemToBitString(m_SizeOrSide.Side, BitPtr, ParsedString);
+		AddItemToBitString(m_ShortenVertexCoordinate, BitPtr, ParsedString);
+	}
+	else
+		AddItemToBitString(m_SizeOrSide.Size, BitPtr, ParsedString);
+
+
+	int ListOfVerticesSize = int(m_ShapeType) + 2 - int(m_IsAdjacentToParking);
+
+	if (m_IsAdjacentToParking || m_SizeOrSide.Size)
+	{ //6 bit
+		for (int i =0; i < ListOfVerticesSize; i++)
+		{
+			SVertexParameters FullVertex;
+			AddItemToBitString(FullVertex.X.Size6bits, BitPtr, ParsedString);
+			AddItemToBitString(FullVertex.X.Size6bits, BitPtr, ParsedString);
+			AddItemToBitString(FullVertex.X.Size6bits, BitPtr, ParsedString);
+		}
+	}
+	else  
+	{ //8 bit
+		for (int i = 0; i < ListOfVerticesSize; i++)
+		{
+			SVertexParameters FullVertex;
+			AddItemToBitString(FullVertex.X.Size8bits, BitPtr, ParsedString);
+			AddItemToBitString(FullVertex.X.Size8bits, BitPtr, ParsedString);
+			AddItemToBitString(FullVertex.X.Size8bits, BitPtr, ParsedString);
+		}
+	}
+
+	return ParsedString;
+}
+
 /*virtual*/ void CPavementItem::InsertItemType()
 {
 	(GetBitBuffer())[0] = 1;
