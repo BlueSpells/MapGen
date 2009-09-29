@@ -188,3 +188,18 @@ void CComplexItem::Encode(int ComplexItemUID, bool IsVerticalMirror, bool ISHori
 	m_ListOfEncodedItems.push_back(ItemWithinComplex);
 	ASSERT(m_ListOfEncodedItems.size() <= (unsigned int)m_NumberOfObjectsInComplex);
 }
+
+/*virtual*/	std::string	CComplexItem::GetItemBitBufferParsedString(std::string ParsedString, CBitPointer BitPtr)
+{
+	int UsedBits = 0;
+	Decode(GetBitBuffer(), UsedBits, NULL);
+
+	int IsFirstTimeFlag = (m_IsFirstDefinitionOfComplexItem) ? 0 : 1;
+	Decode(GetBitBuffer(), UsedBits, &IsFirstTimeFlag);
+
+	// The above is the ComplexItem's version of Decode. 
+	
+
+	// From here should start the regular GetItemBitBufferParsedString implementation
+	FELIX_DO_NOT_FORGET_TO_IMPLEMENT_COMPLEX_ITEM;
+}

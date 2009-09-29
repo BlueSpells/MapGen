@@ -12,6 +12,9 @@ public:
 
 	virtual void		Decode(IN const CBitPointer &Data, IN OUT int &UsedBits, IN int *Context /*when necessary*/) = 0;
 	/*virtual void		Encode();*/ //- Todo in the future?
+	
+	// Note, GetBitBufferParsedString assumes Item has just been Encoded!!
+	// and performs Decode on its own buffer in order to parse it correctly.
 	virtual	std::string	GetBitBufferParsedString() = 0;
 
 	CBitPointer&	GetBitBuffer()								{return m_BitBuffer;}
