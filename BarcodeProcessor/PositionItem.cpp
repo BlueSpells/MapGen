@@ -44,9 +44,9 @@ void CPositionItem::Encode(EPositionItemType PositionItemType, Int8Bit dX, Int8B
 	BitPasteAndContinue(BitPtr, m_PositionItemType);
 
 	if (m_PositionItemType == ForwardHorizontalJump || m_PositionItemType == ForwardDiagonalJump)
-		BitCopyAndContinue(BitPtr, m_dX);
+		BitPasteAndContinue(BitPtr, m_dX);
 	if (m_PositionItemType == ForwardVerticalJump || m_PositionItemType == ForwardDiagonalJump)
-		BitCopyAndContinue(BitPtr, m_dY);
+		BitPasteAndContinue(BitPtr, m_dY);
 
 	UsedBits = (int)(BitPtr - Data);
 }

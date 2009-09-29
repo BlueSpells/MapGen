@@ -49,7 +49,7 @@ CSignedJumpCommand::~CSignedJumpCommand(void)
 	LogEvent(LE_INFO, __FUNCTION__ ": %s Command Parsed Successfully: SignedJumpItemType = %s  [dX,dY]=[%d,%d]), ...", 
 		SignedJumpCommand, EnumToString(SignedJumpItemTypeValue).c_str(), dXValue, dYValue);
 
-	Element = (void *)SignedJumpCommand;
+	Element = (void *)SignedJumpExtendedItem;
 	ElementType = AddItem;
 	return CommandSucceeded;
 }

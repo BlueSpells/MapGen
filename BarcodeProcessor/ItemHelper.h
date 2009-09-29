@@ -77,6 +77,7 @@ static int BitSize(ITEM ITEMVALUE) {return BitSize(ITEMVALUE.SUBITEMBOOL) + ((IT
 
 #define BitPasteAndContinue(SourceBitPtr, DestinationData)										\
 {																								\
+	ZeroMemory(&DestinationData, sizeof DestinationData);										\
 	bitcpy(CBitPointer(&(DestinationData), 0), SourceBitPtr, BitSize(DestinationData));			\
 	SourceBitPtr += BitSize(DestinationData);													\
 }
@@ -110,5 +111,7 @@ DefineNumericValue(4);
 
 
 #define AddItemToBitString(Item, BitPtr, BitString)	\
+{													\
 BitString += BinaryString(BitPtr, BitSize(Item));	\
-BitString += " | ";		  BitPtr += BitSize(Item);
+BitString += " | ";		  BitPtr += BitSize(Item);	\
+}

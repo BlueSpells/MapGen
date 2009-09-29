@@ -22,12 +22,8 @@ public:
 	size_t			GetBitBufferSize()							{return m_NumberOfBits;}
 	std::string		GetBitBufferRawString()						{return BinaryString(m_BitBuffer, m_NumberOfBits);};
 
-#pragma warning(push)
-#pragma warning (disable:4239)
-#pragma warning (disable:4172)
 	virtual CBitPointer&	AllocateBitBuffer()							
 	{m_BitBuffer = new CBitPointer[m_NumberOfBits]; bitzero(m_BitBuffer, m_NumberOfBits); return m_BitBuffer;}
-#pragma warning(pop)
 
 private:
 	CBitPointer m_BitBuffer;

@@ -43,9 +43,9 @@ void CSignedJumpExtendedItem::Encode(ESignedJumpItemType SignedJumpItemType, Sig
 	BitPasteAndContinue(BitPtr, m_SignedJumpItemType);
 
 	if (m_SignedJumpItemType == SignedHorizontalJump || m_SignedJumpItemType == SignedDiagonalJump)
-		BitCopyAndContinue(BitPtr, m_dX);
+		BitPasteAndContinue(BitPtr, m_dX);
 	if (m_SignedJumpItemType == SignedVerticalJump || m_SignedJumpItemType == SignedDiagonalJump)
-		BitCopyAndContinue(BitPtr, m_dY);
+		BitPasteAndContinue(BitPtr, m_dY);
 
 	UsedBits = (int)(BitPtr - Data);
 }

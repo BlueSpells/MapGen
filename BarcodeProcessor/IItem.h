@@ -26,8 +26,12 @@ public:
 	virtual bool	IsOfThisType(CBitPointer *Data) = 0;
 	EItemType		GetType() {return m_Type;}
 	
+#pragma warning(push)
+#pragma warning (disable:4239)
+#pragma warning (disable:4172)
 	virtual CBitPointer&	AllocateBitBuffer()							
 	{IAbstractBarcodeElement::AllocateBitBuffer(); InsertItemType(); return GetBitBuffer()+BitSize(m_Type);}
+#pragma warning(pop)
 
 	virtual	std::string	GetBitBufferParsedString()
 	{std::string Str; CBitPointer BitPtr = GetBitBuffer(); AddItemToBitString(m_Type, BitPtr, Str); return GetItemBitBufferParsedString(Str, BitPtr);}
