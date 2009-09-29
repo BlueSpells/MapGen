@@ -25,7 +25,7 @@ void CGeneralHeader::Encode(Int32Bit Signature, Int4Bit Version, EBarcodeType Ba
 	BitCopyAndContinue(BitPtr, BarcodeType);
 }
 
-void CGeneralHeader::Decode(IN const CBitPointer &Data, IN OUT int &UsedBits)
+/*virtual*/ void CGeneralHeader::Decode(IN const CBitPointer &Data, IN OUT int &UsedBits, IN int * /*Context unnecessary*/)
 {
 	int BitsToRead = UsedBits; BitsToRead;
 	CBitPointer BitPtr = Data;

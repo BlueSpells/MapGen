@@ -89,5 +89,5 @@ public:
 		bool					 m_IsTargetPosition,
 		bool					 m_IsTargetDescription,
 		SPositionInParking		 m_TargetPosition);
-	virtual void Decode(IN const CBitPointer &Data, IN OUT int &UsedBits);
+	virtual void		Decode(IN const CBitPointer &Data, IN OUT int &UsedBits, IN int * /*Context unnecessary*/);
 };

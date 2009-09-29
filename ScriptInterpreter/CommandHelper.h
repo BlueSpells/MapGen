@@ -67,8 +67,43 @@ bool InterperetArgumentValueAsIntXBit(int ContextLine, std::string ParameterName
 			ContextLine, ParameterName.c_str(), ArgumentValue.c_str(), IntegerValue, MaxVal);
 		return false;
 	}
+	if (IntegerValue <0 )
+	{
+		LogEvent(LE_ERROR, __FUNCTION__ ": [Line #%d]: Parameter %s contains value %s (=%d) Negative values are not allowed for non-signed IntXBit variables!!", 
+			ContextLine, ParameterName.c_str(), ArgumentValue.c_str(), IntegerValue, MaxVal);
+		return false;
+	}
 
 	Value = *((T *)&IntegerValue); // cannot use (T)IntegerValue, as you get error C2440 for std::string
+
+	return true;
+}
+
+
+template <class T>
+bool InterperetArgumentValueAsSignedIntXBit(int ContextLine, std::string ParameterName, std::string ArgumentValue, T &Value)
+{
+	int IntegerValue = atoi(ArgumentValue.c_str());
+	int MaxVal = (int)pow((double)2, BitSize(Value)-1/*the bool takes 1 bit as well*/) - 1;
+	if (IntegerValue > MaxVal)
+	{
+		LogEvent(LE_ERROR, __FUNCTION__ ": [Line #%d]: Parameter %s contains value %s (=%d) which is higher than maximum allowed (%d)!!", 
+			ContextLine, ParameterName.c_str(), ArgumentValue.c_str(), IntegerValue, MaxVal);
+		return false;
+	}
+	if (IntegerValue < -MaxVal)
+	{
+		LogEvent(LE_ERROR, __FUNCTION__ ": [Line #%d]: Parameter %s contains value %s (=%d) which is lower than minimum allowed (%d)!!", 
+			ContextLine, ParameterName.c_str(), ArgumentValue.c_str(), IntegerValue, -MaxVal);
+		return false;
+	}
+
+	// The following is a patchy trick, but will do the job, and will save us from doing a switch 
+	// to all types of SignedIntXBit, or use memcpy to copy the value directly to place in memory.
+	// The trick is based on the fact that all SignedIntXBit are composed of a boolean field
+	// and an enum field, the later takes 4 bytes for all various bit amount alternatives.
+
+	Value = *((T *)&ConvertIntToSignedInt32Bit(IntegerValue)); // cannot use (T)IntegerValue, as you get error C2440 for std::string
 
 	return true;
 }
@@ -292,6 +327,7 @@ static bool InterperetArgumentValueAsStruct(int ContextLine, std::string Paramet
 	return true;
 }
 
+static const char* SignedInt = "SignedInt";
 static const char* Int = "Int";
 static const char* Bit = "Bit";
 static const char* Bool = "bool";
@@ -305,6 +341,11 @@ static bool IsParameterIntXBit(std::string ParameterType)
 	return (ParameterType.find(Int) == 0 && ParameterType.find(Bit) == ParameterType.size()-3);
 }
 
+static bool IsParameterSignedIntXBit(std::string ParameterType)
+{
+	return (ParameterType.find(SignedInt) == 0 && ParameterType.find(Bit) == ParameterType.size()-3);
+}
+
 template <class T> 
 bool InterperetArgumentValue(int ContextLine, std::vector<std::string> ParameterDefinitionVector, std::string ArgumentValue, T &Value)
 {
@@ -316,6 +357,9 @@ bool InterperetArgumentValue(int ContextLine, std::vector<std::string> Parameter
 	// BASIC TYPES
 	if (IsParameterIntXBit(ParameterType))
 		return InterperetArgumentValueAsIntXBit(ContextLine, ParameterName, ArgumentValue, Value);
+
+	if (IsParameterSignedIntXBit(ParameterType))
+		return InterperetArgumentValueAsSignedIntXBit(ContextLine, ParameterName, ArgumentValue, Value);
 	
 	if (ParameterType == Bool)
 		return InterperetArgumentValueAsBool(ContextLine, ParameterName, ArgumentValue, (bool &)Value);

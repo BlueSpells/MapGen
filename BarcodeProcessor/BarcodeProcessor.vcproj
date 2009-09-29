@@ -301,6 +301,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\IAbstractBarcodeElement.h"
+				>
+			</File>
+			<File
 				RelativePath=".\IHeader.h"
 				>
 			</File>

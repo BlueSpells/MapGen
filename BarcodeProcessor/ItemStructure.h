@@ -55,6 +55,8 @@ public:
 	virtual bool	IsOfThisType(CBitPointer* /*Data*/) {return false;}
 	virtual void	Decode(IN const CBitPointer &Data, IN OUT int &UsedBits, IN int* /*Context unnecessary*/);
 
+	virtual	std::string	GetItemBitBufferParsedString(std::string ParsedString, CBitPointer BitPtr);
+
 	// Decoded data:
 	SStructureShape m_StructureShape;
 	SMultiplicity	m_Multiplicity;

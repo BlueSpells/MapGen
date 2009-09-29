@@ -86,3 +86,22 @@ void CParkingItem::Encode(EParkingAngle ParkingAngle, EParkingType ParkingType,
 {
 	return (*Data[0] == 0);
 }
+
+
+/*virtual*/	std::string	CParkingItem::GetItemBitBufferParsedString(std::string ParsedString, CBitPointer BitPtr)
+{
+	int UsedBits = 0;
+	Decode(GetBitBuffer(), UsedBits, NULL);
+	AddItemToBitString(m_ParkingAngle, BitPtr, ParsedString);
+	AddItemToBitString(m_ParkingType, BitPtr, ParsedString);
+	AddItemToBitString(m_IsMirrorDoubled, BitPtr, ParsedString);
+	AddItemToBitString(m_Orientation, BitPtr, ParsedString);
+	AddItemToBitString(m_IsPeriodicBetweenPoles, BitPtr, ParsedString);
+	if (m_IsPeriodicBetweenPoles)
+	{
+		AddItemToBitString(m_PeriodicBetweenPoles.NumberOfParkingPlaces, BitPtr, ParsedString);
+		AddItemToBitString(m_PeriodicBetweenPoles.PolesType, BitPtr, ParsedString);
+	}
+
+	return m_ItemStructure.GetItemBitBufferParsedString(ParsedString, BitPtr);
+}
