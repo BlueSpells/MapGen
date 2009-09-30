@@ -16,5 +16,6 @@ Parking: Type=BigParking | Angle=Perpendicular | IsMirrorDoubled=true	| Orientat
 BasicItem: Type=PayingMachine;
 Position: Type=ForwardDiagonalJump | dX=5 | dY=8;
 SignedJump: Type=CarriageDir | dX=11 | dY=14;
+SignedJump: Type=SignedDiagonalJump | dX=11 | dY=14;
 End
 
