@@ -26,6 +26,7 @@ bool CMapViewer::ShowMap(RECT ViewRect, const FCObjImageExtended &MapImage)
 	m_Viewer.SetBitmap(FCWin32::CreateDDBHandle (*GeneratedView));
 
 	delete GeneratedView;
+	return true;
 }
 
 

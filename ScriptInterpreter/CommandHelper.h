@@ -53,8 +53,8 @@ static bool InterperetArguments(IN int ContextLine, IN std::vector<std::string> 
 }
 
 // The following is in order to avoid error on second line of InterperetArgumentValueAsIntXBit
-static bool BitSize(std::vector<std::string> Dummy) {return 0xDeadBabe;} 
-static bool BitSize(std::string Dummy) {return 0xDeadBabe;} 
+static int BitSize(std::vector<std::string> Dummy) {return 0xDeadBabe;} 
+static int BitSize(std::string Dummy) {return 0xDeadBabe;} 
 
 template <class T> 
 bool InterperetArgumentValueAsIntXBit(int ContextLine, std::string ParameterName, std::string ArgumentValue, T &Value)
@@ -103,7 +103,10 @@ bool InterperetArgumentValueAsSignedIntXBit(int ContextLine, std::string Paramet
 	// The trick is based on the fact that all SignedIntXBit are composed of a boolean field
 	// and an enum field, the later takes 4 bytes for all various bit amount alternatives.
 
+#pragma warning(push)
+#pragma warning (disable:4238)
 	Value = *((T *)&ConvertIntToSignedInt32Bit(IntegerValue)); // cannot use (T)IntegerValue, as you get error C2440 for std::string
+#pragma warning(pop)
 
 	return true;
 }
@@ -111,8 +114,8 @@ bool InterperetArgumentValueAsSignedIntXBit(int ContextLine, std::string Paramet
 static std::string LowerCase(std::string &originstr)
 {
 	std::string str = originstr;
-	for(int i=0; i<str.size();++i)
-		str[i] = tolower(str[i]);
+	for(unsigned int i=0; i<str.size();++i)
+		str[i] = (char)tolower(str[i]);
 	return str;
 }
 
@@ -168,7 +171,7 @@ static bool InterperetArgumentValueAsBool(int ContextLine, std::string Parameter
 	return false;
 }
 
-static bool InterperetArgumentValueAsUnion(int ContextLine, std::string ParameterName, std::string ArgumentValue, std::string &Value)
+static bool InterperetArgumentValueAsUnion(int /*ContextLine*/, std::string ParameterName, std::string ArgumentValue, std::string &Value)
 {
 	Value = ArgumentValue; // what else to do?
 	// do nothing at this point. interpretation will be done externally
@@ -254,7 +257,7 @@ bool ExtractAndInterperetArgumentValueAsEnum(int ContextLine, std::string Comman
 	return true;
 }
 
-static std::string CleanCharacter(std::string &Argument, std::string UndesiredChars)
+static std::string &CleanCharacter(std::string &Argument, std::string UndesiredChars)
 {
 	std::string CleanedArgument;
 
@@ -307,7 +310,12 @@ static bool InterperetArgumentValueAsStruct(int ContextLine, std::string Paramet
 			Value.push_back(StructParser.GetNextToken(StructEnd) + StructEnd);
 		}
 		else if (InternalStructCheck != StructEnd)
+		{
+#pragma warning(push)
+#pragma warning (disable:4239)
 			Value.push_back(CleanCharacter(StructParser.GetNextToken(StructFieldsDelimeter), Brackets));
+#pragma warning(pop)
+		}
 		else
 			StructParser.GetNextToken(StructFieldsDelimeter); // just to pass to next char (which should be last)
 	}
@@ -592,18 +600,23 @@ static bool InterperetArgumentValueAsList(int ContextLine, std::string Parameter
 			Value.push_back(ListParser.GetNextToken(ListEnd) + ListEnd);
 		}
 		else if (InternalListCheck != ListEnd)
+		{
+#pragma warning(push)
+#pragma warning (disable:4239)
 			Value.push_back(CleanCharacter(ListParser.GetNextToken(ListItemsDelimeter), Brackets));
+#pragma warning(pop)
+		}
 		else
 			ListParser.GetNextToken(ListItemsDelimeter); // just to pass to next char (which should be last)
 	}
 
-	if (maxLength != -1 && Value.size() > maxLength)
+	if (maxLength != -1 && (int)Value.size() > maxLength)
 	{
 		LogEvent(LE_ERROR, __FUNCTION__ ": [Line #%d]: Parameter %s expected to have maximum %d items, yet it contains %d items (values: %s)!!", 
 			ContextLine, ParameterName.c_str(), maxLength, Value.size(), ArgumentValue.c_str());
 		return false;
 	}
-	if (minLength != -1 && Value.size() < minLength)
+	if (minLength != -1 && (int)Value.size() < minLength)
 	{
 		LogEvent(LE_ERROR, __FUNCTION__ ": [Line #%d]: Parameter %s expected to have minimum %d items, yet it contains %d items (values: %s)!!", 
 			ContextLine, ParameterName.c_str(), minLength, Value.size(), ArgumentValue.c_str());

@@ -31,8 +31,9 @@ CBarcodeParkingMapDecoder::~CBarcodeParkingMapDecoder(void)
 }
 
 
-bool CBarcodeParkingMapDecoder::Decode(IN const CBitPointer &Data, IN OUT int &UsedBits)
+bool CBarcodeParkingMapDecoder::Decode(IN const CBitPointer &/*Data*/, IN OUT int &/*UsedBits*/)
 {
+	// Todo: Implement this !!
 	/*while ()*/
 	return false;
 }
@@ -42,7 +43,8 @@ bool CBarcodeParkingMapDecoder::GetExtractedItemList(std::vector<IItem *> ItemLi
 	return false;
 }
 
-bool CBarcodeParkingMapDecoder::GetExtractedHeader(CParkingMapHeader &Header)
+bool CBarcodeParkingMapDecoder::GetExtractedHeader(CParkingMapHeader &/*Header*/)
 {
+	// Todo: Implement this !!
 	return false;
 }

@@ -25,7 +25,6 @@
 		LogEvent(LE_WARNING, __FUNCTION__ ": %s", TmpStr);						\
 		return TmpStr;															\
 	};																			\
-	return "";																	\
 }\
 
 #define DefineEnumToString4(EnumType, Val1, Val2, Val3, Val4)					\

@@ -48,7 +48,8 @@ FCObjImageExtended *CMapGenerator::PrepareObjectImage(EMapObjectType Object, int
 	FCObjImageExtended *ObjectImage = new FCObjImageExtended;
 	const char *BitmapFileName = GetBitmapFileNameForObject(Object);
 	ObjectImage->Load(BitmapFileName);
-	int TheHeight = ObjectImage->Height();
+	/*int TheHeight = ObjectImage->Height();*/  //ToDo: why did I create this variable in the first place?
+												// perhaps it should be taken into consideration when Expanding frame??
 
 	if (Quantity > 1)
 	{
