@@ -1,3 +1,7 @@
+%Our First Script !!! :)
+%-----------------------
+
+% Some parking items...
 Parking: Type=BigParking | Angle=Parallel 	 | IsMirrorDoubled=true	| Orientation=Degrees180 | Multiplicity=[false] | StructureShape=[Circular,[1,2]] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[2,Circular];
 Parking: Type=Regular | Angle=Perpendicular | IsMirrorDoubled=true	| Orientation=Degrees270 | Multiplicity=[true,20] | StructureShape=[AngleUpTo90,2] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[15,Circular];
 Parking: Type=Regular 
@@ -7,6 +11,8 @@ Parking: Type=Regular
 		IsPeriodicBetweenPoles=true 
 		PeriodicBetweenPoles=[15,Circular];
 Parking: Type=BigParking | Angle=Perpendicular | IsMirrorDoubled=true	| Orientation=Degrees180 | Multiplicity=[false] | StructureShape=[Circular,[1,2]] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[2,Circular];
+
+% Other Items...
 BasicItem: Type=PayingMachine;
 Position: Type=ForwardDiagonalJump | dX=5 | dY=8;
 SignedJump: Type=CarriageDir | dX=11 | dY=14;

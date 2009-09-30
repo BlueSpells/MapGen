@@ -68,8 +68,8 @@ std::string CSimpleScriptReader::CleanTabsAndSpaces(std::string &Argument)
 	ParametersList.clear();
 
 	int FirstLineOfCommand = m_LineIndex + 1;
-
 	int iLineInCommand = 0;
+
 	bool HasReachedEndOfLine = false;
 	do 
 	{
@@ -83,6 +83,22 @@ std::string CSimpleScriptReader::CleanTabsAndSpaces(std::string &Argument)
 		{
 			LogEvent(LE_ERROR, __FUNCTION__ ": Failed to read line #%d. perhaps ; is missing?", m_LineIndex);
 			return false;
+		}
+
+		if (LineFromFile[0] == CommentMark[0])
+		{
+			LogEvent(LE_INFO, __FUNCTION__ ": Line #%d contains a comment: %s. Moving to next line..", m_LineIndex, LineFromFile);
+			FirstLineOfCommand = m_LineIndex + 1;
+			iLineInCommand = 0;
+			continue;
+		}
+
+		if (LineFromFile.GetLength() == 0)
+		{
+			LogEvent(LE_INFO, __FUNCTION__ ": Line #%d is empty. Moving to next line..", m_LineIndex);
+			FirstLineOfCommand = m_LineIndex + 1;
+			iLineInCommand = 0;
+			continue;
 		}
 
 		CTokenParser Parser(LineFromFile);
