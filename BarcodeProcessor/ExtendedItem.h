@@ -26,7 +26,18 @@ public:
 
 	virtual void	InsertItemType();
 	virtual bool	IsOfThisType(CBitPointer *Data);
+	EExtendedItems  GetExtenededType() {return m_ExtendedItemType;}
 
+	CBitPointer&	GetExtendedItemContentBuffer() {return IItem::GetItemContentBuffer()+BitSize(m_ExtendedItemType);}
+	virtual CBitPointer&	AllocateBitBuffer()	{IItem::AllocateBitBuffer(); return GetExtendedItemContentBuffer();}
+
+
+	virtual	std::string	GetItemBitBufferParsedString(std::string ParsedString, CBitPointer BitPtr)
+		{AddItemToBitString(m_ExtendedItemType, BitPtr, ParsedString); return GetExtendedItemBitBufferParsedString(ParsedString, BitPtr);}
+
+	virtual	std::string	GetExtendedItemBitBufferParsedString(std::string ParsedString, CBitPointer BitPtr) = 0;
+
+private:
 	// Decoded data:
 	EExtendedItems m_ExtendedItemType;
 };

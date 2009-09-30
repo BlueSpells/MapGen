@@ -36,7 +36,7 @@ void CAbsoluteJumpExtendedItem::Encode(EAbsoluteJumpItemType AbsoluteJumpItemTyp
 {
 
 	int BitsToRead = UsedBits; BitsToRead;
-	CBitPointer BitPtr = Data + BitSize(GetType());
+	CBitPointer BitPtr = Data + BitSize(GetType()) + BitSize(GetExtenededType());
 
 	BitPasteAndContinue(BitPtr, m_AbsoluteJumpItemType);
 
@@ -48,7 +48,7 @@ void CAbsoluteJumpExtendedItem::Encode(EAbsoluteJumpItemType AbsoluteJumpItemTyp
 	UsedBits = (int)(BitPtr - Data);
 }
 
-/*virtual*/	std::string	CAbsoluteJumpExtendedItem::GetItemBitBufferParsedString(std::string ParsedString, CBitPointer BitPtr)
+/*virtual*/	std::string	CAbsoluteJumpExtendedItem::GetExtendedItemBitBufferParsedString(std::string ParsedString, CBitPointer BitPtr)
 {
 	int UsedBits = 0;
 	Decode(GetBitBuffer(), UsedBits, NULL);
@@ -65,9 +65,9 @@ void CAbsoluteJumpExtendedItem::Encode(EAbsoluteJumpItemType AbsoluteJumpItemTyp
 /*virtual*/ void CAbsoluteJumpExtendedItem::InsertItemType()
 {
 	CExtendedItem::InsertItemType();
-	(GetBitBuffer())[0] = 0;
-	(GetBitBuffer())[1] = 0;
-	(GetBitBuffer())[2] = 1;
+	(GetItemContentBuffer())[0] = 0;
+	(GetItemContentBuffer())[1] = 0;
+	(GetItemContentBuffer())[2] = 1;
 }
 
 /*virtual*/ bool CAbsoluteJumpExtendedItem::IsOfThisType(CBitPointer *Data)

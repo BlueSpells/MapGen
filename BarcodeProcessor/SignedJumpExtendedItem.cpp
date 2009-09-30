@@ -29,28 +29,28 @@ void CSignedJumpExtendedItem::Encode(ESignedJumpItemType SignedJumpItemType, Sig
 	CBitPointer BitPtr = AllocateBitBuffer();
 	BitCopyAndContinue(BitPtr, SignedJumpItemType);
 	if (IsHorizontal) 
-		BitCopyAndContinue(BitPtr, dX);
+		BitCopySignedXBitAndContinue(BitPtr, dX);
 	if (IsVertical)	
-		BitCopyAndContinue(BitPtr, dY);
+		BitCopySignedXBitAndContinue(BitPtr, dY);
 }
 
 /*virtual*/ void CSignedJumpExtendedItem::Decode(IN const CBitPointer &Data, IN OUT int &UsedBits, IN int* /*Context unnecessary*/)
 {
 
 	int BitsToRead = UsedBits; BitsToRead;
-	CBitPointer BitPtr = Data + BitSize(GetType());
+	CBitPointer BitPtr = Data + BitSize(GetType()) + BitSize(GetExtenededType());
 
 	BitPasteAndContinue(BitPtr, m_SignedJumpItemType);
 
 	if (m_SignedJumpItemType == SignedHorizontalJump || m_SignedJumpItemType == SignedDiagonalJump)
-		BitPasteAndContinue(BitPtr, m_dX);
+		BitPasteSignedXBitAndContinue(BitPtr, m_dX);
 	if (m_SignedJumpItemType == SignedVerticalJump || m_SignedJumpItemType == SignedDiagonalJump)
-		BitPasteAndContinue(BitPtr, m_dY);
+		BitPasteSignedXBitAndContinue(BitPtr, m_dY);
 
 	UsedBits = (int)(BitPtr - Data);
 }
 
-/*virtual*/	std::string	CSignedJumpExtendedItem::GetItemBitBufferParsedString(std::string ParsedString, CBitPointer BitPtr)
+/*virtual*/	std::string	CSignedJumpExtendedItem::GetExtendedItemBitBufferParsedString(std::string ParsedString, CBitPointer BitPtr)
 {
 	int UsedBits = 0;
 	Decode(GetBitBuffer(), UsedBits, NULL);
@@ -67,9 +67,9 @@ void CSignedJumpExtendedItem::Encode(ESignedJumpItemType SignedJumpItemType, Sig
 /*virtual*/ void CSignedJumpExtendedItem::InsertItemType()
 {
 	CExtendedItem::InsertItemType();
-	(GetBitBuffer())[0] = 0;
-	(GetBitBuffer())[1] = 0;
-	(GetBitBuffer())[2] = 0;
+	(GetItemContentBuffer())[0] = 0;
+	(GetItemContentBuffer())[1] = 0;
+	(GetItemContentBuffer())[2] = 0;
 }
 
 /*virtual*/ bool CSignedJumpExtendedItem::IsOfThisType(CBitPointer *Data)
