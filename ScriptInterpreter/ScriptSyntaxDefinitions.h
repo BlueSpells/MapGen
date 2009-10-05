@@ -13,7 +13,7 @@ static const char *StructEnd				= "]";
 static const char *CommandEnd				= ";";
 static const char *ParemterNameFromValueSeperator = "=";
 static const char *EndOfScript				= "End";
-
+static const char *CommentMark				= "%";
 
 #define ArgumentNameOf(x) #x
 static const char *StrVectorDelimiter = ", ";		// note: this is not part of the script language but is the separator between 

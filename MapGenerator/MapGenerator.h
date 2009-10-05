@@ -1,6 +1,12 @@
 #pragma once
 
+// ToDo: in the future perhaps solve some the warnings in ImageStone (if it becomes a real integral part of the code)
 #pragma warning( push, 3 )
+#pragma warning(disable:4996)
+#pragma warning(disable:4819)
+#pragma warning(disable:4267)
+#pragma warning(disable:4311)
+#pragma warning(disable:4189)
 #include "ImageStone/ImageStone.h"
 #pragma warning( pop )
 

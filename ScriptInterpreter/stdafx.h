@@ -39,3 +39,5 @@
 #include "stdafx.h"
 
 #include "..\Common\LogEvent.h"
+
+#pragma 

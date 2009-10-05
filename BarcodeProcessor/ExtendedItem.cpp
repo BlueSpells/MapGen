@@ -31,4 +31,3 @@ CExtendedItem::~CExtendedItem(void)
 	if (*Data[4] != 1) return false;
 	return true;
 }
-

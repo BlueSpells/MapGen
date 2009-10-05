@@ -68,8 +68,8 @@ std::string CSimpleScriptReader::CleanTabsAndSpaces(std::string &Argument)
 	ParametersList.clear();
 
 	int FirstLineOfCommand = m_LineIndex + 1;
-
 	int iLineInCommand = 0;
+
 	bool HasReachedEndOfLine = false;
 	do 
 	{
@@ -77,12 +77,28 @@ std::string CSimpleScriptReader::CleanTabsAndSpaces(std::string &Argument)
 		iLineInCommand++;
 
 		CString LineFromFile;
-		bool IsOK = m_StreamFile.ReadString(LineFromFile);
+		BOOL IsOK = m_StreamFile.ReadString(LineFromFile);
 
-		if (!IsOK)
+		if (IsOK == FALSE)
 		{
 			LogEvent(LE_ERROR, __FUNCTION__ ": Failed to read line #%d. perhaps ; is missing?", m_LineIndex);
 			return false;
+		}
+
+		if (LineFromFile[0] == CommentMark[0])
+		{
+			LogEvent(LE_INFO, __FUNCTION__ ": Line #%d contains a comment: %s. Moving to next line..", m_LineIndex, LineFromFile);
+			FirstLineOfCommand = m_LineIndex + 1;
+			iLineInCommand = 0;
+			continue;
+		}
+
+		if (LineFromFile.GetLength() == 0)
+		{
+			LogEvent(LE_INFO, __FUNCTION__ ": Line #%d is empty. Moving to next line..", m_LineIndex);
+			FirstLineOfCommand = m_LineIndex + 1;
+			iLineInCommand = 0;
+			continue;
 		}
 
 		CTokenParser Parser(LineFromFile);
@@ -95,7 +111,10 @@ std::string CSimpleScriptReader::CleanTabsAndSpaces(std::string &Argument)
 
 		if (iLineInCommand == 1) // first line of command contains the command itself
 		{
+#pragma warning(push)
+#pragma warning (disable:4239)
 			Command = CleanTabsAndSpaces(Parser.GetNextToken(CommandDelimiter));
+#pragma warning(pop)
 			if (Command == EndOfScript)
 			{
 				LogEvent(LE_INFOHIGH, __FUNCTION__ ": Reached end of script (line #%d)", m_LineIndex);
@@ -107,7 +126,10 @@ std::string CSimpleScriptReader::CleanTabsAndSpaces(std::string &Argument)
 		while (Parser.MoreTokens())
 		{
 			iArgumentsPerLine++;
+#pragma warning(push)
+#pragma warning (disable:4239)
 			std::string argument = CleanTabsAndSpaces(Parser.GetNextToken(ArgumentsDelimiter));
+#pragma warning(pop)
 			if (argument.find(CommandDelimiter) != std::string::npos)
 			{
 				if (iArgumentsPerLine == 1)

@@ -20,7 +20,7 @@ CCommandsDictionary::~CCommandsDictionary(void)
 		CommandsToDelete.push_back(Iter->second);
 	}
 
-	for (int i = 0; i < CommandsToRemove.size(); i++)
+	for (unsigned int i = 0; i < CommandsToRemove.size(); i++)
 	{
 		delete CommandsToDelete[i];
 		RemoveValueFromMap(m_CommandsDictionary, CommandsToRemove[i]);

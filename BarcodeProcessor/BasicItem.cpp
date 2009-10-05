@@ -23,7 +23,7 @@ void CBasicItem::Encode(EBasicItemType BasicItemType)
 }
 
 
-/*virtual*/ void CBasicItem::Decode(IN const CBitPointer &Data, IN OUT int &UsedBits, IN int */*Context unnecessary*/)
+/*virtual*/ void CBasicItem::Decode(IN const CBitPointer &Data, IN OUT int &UsedBits, IN int* /*Context unnecessary*/)
 {
 	int BitsToRead = UsedBits; BitsToRead;
 	CBitPointer BitPtr = Data + BitSize(GetType());

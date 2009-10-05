@@ -22,7 +22,10 @@ CMapGeneratorDlg::CMapGeneratorDlg(CWnd* pParent /*=NULL*/)
 	, m_MoreObjects(false)
 	, m_Dup(DUPLICATE_DOWN)
 	, m_FileName(_T(""))
+#pragma warning( push, 3 )
+#pragma warning(disable:4355) // not to worry. m_MapViewer only stores this and doesn't access it !!
 	, m_MapViewer(this)
+#pragma warning( pop )
 	, sourcey(0)
 	, sourcex(0)
 	, m_LoadFileName(_T("AutoSave.Bmp"))
@@ -272,7 +275,7 @@ void CMapGeneratorDlg::OnBnClickedUpdateMapView()
 }
 
 
-afx_msg void CMapGeneratorDlg::OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
+afx_msg void CMapGeneratorDlg::OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* /*pScrollBar*/)
 {
 	switch (nSBCode)
 	{
@@ -291,7 +294,7 @@ afx_msg void CMapGeneratorDlg::OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* pS
 	m_MapViewer.ScrollDown(sourcey + (rc.bottom - rc.top)/2);
 }
 
-afx_msg void CMapGeneratorDlg::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
+afx_msg void CMapGeneratorDlg::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* /*pScrollBar*/)
 {
 	switch (nSBCode)
 	{

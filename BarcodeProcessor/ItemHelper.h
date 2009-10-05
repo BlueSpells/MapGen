@@ -65,8 +65,18 @@ static int BitSize(ITEM ITEMVALUE) {return BitSize(ITEMVALUE.SUBITEMBOOL) + ((IT
 
 #define BitCopyAndContinue(DestinationBitPtr, SourceData)										\
 {																								\
+	ASSERT((std::string(typeid(SourceData).name())).find("Signed") == std::string::npos			\
+			|| (std::string(typeid(SourceData).name())).find("Bit") == std::string::npos);		\
 	bitcpy(DestinationBitPtr, CBitPointer(&(SourceData), 0), BitSize(SourceData));				\
 	DestinationBitPtr += BitSize(SourceData);													\
+}
+
+#define BitCopySignedXBitAndContinue(DestinationBitPtr, SourceData)								\
+{																								\
+	ASSERT((std::string(typeid(SourceData).name())).find("Signed") != std::string::npos			\
+			&& (std::string(typeid(SourceData).name())).find("Bit") != std::string::npos);		\
+	BitCopyAndContinue(DestinationBitPtr, SourceData.sign);										\
+	BitCopyAndContinue(DestinationBitPtr, SourceData.value);									\
 }
 
 #define BitCopyItemAndContinue(DestinationBitPtr, SourceItem)									\
@@ -78,8 +88,18 @@ static int BitSize(ITEM ITEMVALUE) {return BitSize(ITEMVALUE.SUBITEMBOOL) + ((IT
 #define BitPasteAndContinue(SourceBitPtr, DestinationData)										\
 {																								\
 	ZeroMemory(&DestinationData, sizeof DestinationData);										\
+	ASSERT((std::string(typeid(DestinationData).name())).find("Signed") == std::string::npos	\
+			|| (std::string(typeid(DestinationData).name())).find("Bit") == std::string::npos);	\
 	bitcpy(CBitPointer(&(DestinationData), 0), SourceBitPtr, BitSize(DestinationData));			\
 	SourceBitPtr += BitSize(DestinationData);													\
+}
+
+#define BitPasteSignedXBitAndContinue(SourceBitPtr, DestinationData)							\
+{																								\
+	ASSERT((std::string(typeid(DestinationData).name())).find("Signed") != std::string::npos	\
+			&& (std::string(typeid(DestinationData).name())).find("Bit") != std::string::npos);	\
+	BitPasteAndContinue(SourceBitPtr, DestinationData.sign);									\
+	BitPasteAndContinue(SourceBitPtr, DestinationData.value);									\
 }
 
 #define BitDecodeAndContinue(DecodingObject, BitPtr)			\
