@@ -31,7 +31,7 @@ CBasicItemCommand::~CBasicItemCommand(void)
 	CBasicItem *BasicItem = new CBasicItem;
 	BasicItem->Encode(BasicItemValue);
 
-	LogEvent(LE_INFO, __FUNCTION__ ": %s Command Parsed Successfully: BasicItemType = %s), ...", 
+	LogEvent(LE_INFO, __FUNCTION__ ": %s Command Parsed Successfully: BasicItemType = %s)", 
 		BasicItemCommand, EnumToString(BasicItemValue).c_str());
 
 	Element = (void *)BasicItem;

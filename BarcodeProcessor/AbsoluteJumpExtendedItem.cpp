@@ -41,9 +41,9 @@ void CAbsoluteJumpExtendedItem::Encode(EAbsoluteJumpItemType AbsoluteJumpItemTyp
 	BitPasteAndContinue(BitPtr, m_AbsoluteJumpItemType);
 
 	if (m_AbsoluteJumpItemType == AbsoluteHorizontalJump || m_AbsoluteJumpItemType == AbsoluteDiagonalJump)
-		BitCopyAndContinue(BitPtr, m_X);
+		BitPasteAndContinue(BitPtr, m_X);
 	if (m_AbsoluteJumpItemType == AbsoluteVerticalJump || m_AbsoluteJumpItemType == AbsoluteDiagonalJump)
-		BitCopyAndContinue(BitPtr, m_Y);
+		BitPasteAndContinue(BitPtr, m_Y);
 
 	UsedBits = (int)(BitPtr - Data);
 }

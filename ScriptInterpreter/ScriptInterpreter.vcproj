@@ -151,6 +151,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\AbsoluteJumpCommand.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\BasicItemCommand.cpp"
 				>
 			</File>
@@ -159,11 +163,23 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GeneralHeaderCommand.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\ParkingCommand.cpp"
 				>
 			</File>
 			<File
+				RelativePath=".\ParkingMapHeaderCommand.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\ParkingScriptInterpreter.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\PavementCommand.cpp"
 				>
 			</File>
 			<File
@@ -209,6 +225,10 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath=".\AbsoluteJumpCommand.h"
+				>
+			</File>
+			<File
 				RelativePath=".\BasicItemCommand.h"
 				>
 			</File>
@@ -218,6 +238,10 @@
 			</File>
 			<File
 				RelativePath=".\CommandsDictionary.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GeneralHeaderCommand.h"
 				>
 			</File>
 			<File
@@ -233,7 +257,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ParkingMapHeaderCommand.h"
+				>
+			</File>
+			<File
 				RelativePath=".\ParkingScriptInterpreter.h"
+				>
+			</File>
+			<File
+				RelativePath=".\PavementCommand.h"
 				>
 			</File>
 			<File

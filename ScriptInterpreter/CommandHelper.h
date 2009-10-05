@@ -552,14 +552,14 @@ static bool InterperetArgumentValueAsList(int ContextLine, std::string Parameter
 {
 	if (ArgumentValue[0] != ListBegin[0])
 	{
-		LogEvent(LE_ERROR, __FUNCTION__ ": [Line #%d]: Syntax Error. Parameter %s expected to be a list, and '[' should appear as first character of struct! ArgumentValue=%s", 
+		LogEvent(LE_ERROR, __FUNCTION__ ": [Line #%d]: Syntax Error. Parameter %s expected to be a list, and '{' should appear as first character of list! ArgumentValue=%s", 
 			ContextLine, ParameterName.c_str(), ArgumentValue.c_str());
 		return false;
 	}
 
 	if (ArgumentValue[ArgumentValue.size()-1] != ListEnd[0])
 	{
-		LogEvent(LE_ERROR, __FUNCTION__ ": [Line #%d]: Syntax Error. Parameter %s expected to be a list, and ']' should appear as last character of struct! ArgumentValue=%s", 
+		LogEvent(LE_ERROR, __FUNCTION__ ": [Line #%d]: Syntax Error. Parameter %s expected to be a list, and '}' should appear as last character of list! ArgumentValue=%s", 
 			ContextLine, ParameterName.c_str(), ArgumentValue.c_str());
 	
 		return false;
@@ -582,7 +582,7 @@ static bool InterperetArgumentValueAsList(int ContextLine, std::string Parameter
 
 	CTokenParser ListParser(ArgumentValue.c_str());
 
-	ListParser.GetNextToken(ListBegin); // pass the first '['. important for internal struct recognition
+	ListParser.GetNextToken(ListBegin); // pass the first '{'. important for internal list recognition
 	while (ListParser.MoreTokens())
 	{
 		CTokenParser InternalListHelper(ListParser);

@@ -1,3 +1,6 @@
+GeneralHeader: Signature=8 | Version=1 | BarcodeType=ParkingMap;
+ParkingMapHeader: ParkingGarageID=[1,2,3,4] | TextLanguage=Hebrew | ParkingGarageDimensions=[31,30] | ParkingSpaceDimensions=[3,2] | 
+					FloorAndSection=[1,0] | CurrentPosition=[0,0] | IsTargetPosition=false | IsTargetDescription=false;
 Parking: Type=BigParking | Angle=Parallel 	 | IsMirrorDoubled=true	| Orientation=Degrees180 | Multiplicity=[false] | StructureShape=[Circular,[1,2]] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[2,Circular];
 Parking: Type=Regular | Angle=Perpendicular | IsMirrorDoubled=true	| Orientation=Degrees270 | Multiplicity=[true,20] | StructureShape=[AngleUpTo90,2] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[15,Circular];
 Parking: Type=Regular 
@@ -10,5 +13,6 @@ Parking: Type=BigParking | Angle=Perpendicular | IsMirrorDoubled=true	| Orientat
 BasicItem: Type=PayingMachine;
 Position: Type=ForwardDiagonalJump | dX=5 | dY=8;
 SignedJump: Type=CarriageDir | dX=11 | dY=14;
+AbsoluteJump: Type=AbsoluteDiagonalJump | X=7 | Y=14;
 End
 

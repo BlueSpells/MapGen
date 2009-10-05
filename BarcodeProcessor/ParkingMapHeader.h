@@ -79,16 +79,18 @@ public:
 	bool					 m_IsTargetPosition;
 	bool					 m_IsTargetDescription;
 	SPositionInParking		 m_TargetPosition;
-	char					 m_TargerDescription[MAX_STR_LEN];
+	char					 m_TargetDescription[MAX_STR_LEN];
 
-	void Encode(SParkingGarageID m_GarageID, ETextLanguage m_TextLanguage, 
-		SParkingGarageDimensions m_GarageDimensions, 
-		SParkingSpaceDimensions	 m_ParkingSpaceDimensions,
-		SFloorAndSection		 m_FloorAndSection,
-		SPositionInParking		 m_CurrentPosition,
-		bool					 m_IsTargetPosition,
-		bool					 m_IsTargetDescription,
-		SPositionInParking		 m_TargetPosition);
+	void Encode(SParkingGarageID GarageID, ETextLanguage TextLanguage, 
+		SParkingGarageDimensions GarageDimensions, 
+		SParkingSpaceDimensions	 ParkingSpaceDimensions,
+		SFloorAndSection		 FloorAndSection,
+		SPositionInParking		 CurrentPosition,
+		bool					 IsTargetPosition,
+		bool					 IsTargetDescription,
+		SPositionInParking		 TargetPosition,
+		char					 TargetDescription[MAX_STR_LEN]);
+
 	virtual void		Decode(IN const CBitPointer &Data, IN OUT int &UsedBits, IN int * /*Context unnecessary*/);
 
 	virtual	std::string	GetHeaderBitBufferParsedString(std::string ParsedString, CBitPointer BitPtr);

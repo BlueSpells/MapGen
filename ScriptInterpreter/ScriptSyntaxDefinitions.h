@@ -29,6 +29,53 @@ static const char *StrVectorDelimiter = ", ";		// note: this is not part of the 
 // In struct: the name of the fields, ORDERED as expected to be filled by the user
 // In union: the name of the fields
 
+
+
+// GeneralHeader Syntax:
+// ---------------
+static const char *GeneralHeaderCommand = "GeneralHeader";
+
+static const std::string Signature			= "Signature, Int32Bit";
+static const std::string Version			= "Version, Int4Bit";
+static const std::string BarcodeType		= "BarcodeType, enum, ParkingMap";
+
+
+// ParkingMapHeader Syntax:
+// ---------------
+static const char *ParkingMapHeaderCommand = "ParkingMapHeader";
+
+static const std::string TextLanguage						= "TextLanguage, enum, Empty, English, Hebrew";
+
+static const std::string ParkingGarageID					= "ParkingGarageID, struct, A, B, C, D";
+static const std::string ParkingGarageID_A					= "A, Int8Bit";
+static const std::string ParkingGarageID_B					= "B, Int8Bit";
+static const std::string ParkingGarageID_C					= "C, Int8Bit";
+static const std::string ParkingGarageID_D					= "D, Int8Bit";
+
+static const std::string ParkingGarageDimensions			= "ParkingGarageDimensions, struct, Width, Height";
+static const std::string ParkingGarageDimensions_Width		= "Width, Int16Bit";
+static const std::string ParkingGarageDimensions_Height		= "Height, Int16Bit";
+
+static const std::string ParkingSpaceDimensions				= "ParkingSpaceDimensions, struct, Width, Height";
+static const std::string ParkingSpaceDimensions_Width		= "Width, Int8Bit";
+static const std::string ParkingSpaceDimensions_Height		= "Height, Int8Bit";
+
+static const std::string FloorAndSection				= "FloorAndSection, struct, Floor, Section";
+static const std::string FloorAndSection_Floor			= "Floor, Int4Bit";
+static const std::string FloorAndSection_Section		= "Section, Int4Bit";
+
+static const std::string CurrentPosition				= "CurrentPosition, struct, X, Y";
+static const std::string CurrentPosition_X				= "X, Int8Bit";
+static const std::string CurrentPosition_Y				= "Y, Int8Bit";
+
+static const std::string IsTargetPosition				= "IsTargetPosition, bool";
+static const std::string IsTargetDescription			= "IsTargetDescription, bool";
+//static const std::string TargetDescription			= "TargetDescription, char";
+static const std::string TargetPosition					= "TargetPosition, struct, X, Y";
+static const std::string TargetPosition_X				= "X, Int8Bit";
+static const std::string TargetPosition_Y				= "Y, Int8Bit";
+
+
 // Parking Syntax:
 // ---------------
 static const char *ParkingCommand = "Parking";
@@ -80,3 +127,37 @@ static const char *SignedJumpCommand = "SignedJump";
 static const std::string SignedJumpItemType		= "Type, enum, CarriageDir, SignedHorizontalJump, SignedVerticalJump, SignedDiagonalJump";
 static const std::string Signed_dX				= "dX, SignedInt8Bit";
 static const std::string Signed_dY				= "dY, SignedInt8Bit";
+
+
+// AbsoluteJump Syntax:
+// ---------------
+static const char *AbsoluteJumpCommand = "AbsoluteJump";
+
+static const std::string AbsoluteJumpItemType		= "Type, enum, Unused, AbsoluteHorizontalJump, AbsoluteVerticalJump, AbsoluteDiagonalJump";
+static const std::string X							= "X, Int16Bit";
+static const std::string Y							= "Y, Int16Bit";
+
+
+// Pavement Syntax:
+// ---------------
+static const char *PavementCommand = "Pavement";
+
+static const std::string Shape								= "Shape, enum, Triangle, Rect, Pentagon, Hexagon";
+static const std::string Texture							= "Texture, enum, Texture_Pavement, Texture_Building, Texture_NoParking, SolidFill";
+static const std::string FillType							= "Fill, Int4bit";
+static const std::string IsAdjacentToParking				= "IsAdjacentToParking, bool";
+static const std::string SizeOrSide							= "SizeOrSide, union, Side, Size";
+static const std::string SizeOrSide_Side					= "Side, bool";
+static const std::string SizeOrSide_Size					= "Size, bool";
+static const std::string SpecialVertexCurvature				= "SpecialVertexCurvature, enum, Linear, Convex, Concave, Rectangular";
+static const std::string ShortenVertexCoordinate			= "ShortenVertexCoordinate, Int6bit";
+static const std::string VertexList							= "VertexList, list, 0, 5" ; 
+static const std::string VertexList_VertexParameters		= "Vertex, struct, CurvatureType, X, Y";
+static const std::string VertexParameters_CurvatureType		= "CurvatureType, enum, Linear, Convex, Concave, Rectangular";
+static const std::string VertexParameters_X					= "X, union, Size8bits, Size6bits";
+static const std::string VertexParameters_X_Size8bits		= "Size8bits, Int8bit";
+static const std::string VertexParameters_X_Size6bits		= "Size6bits, Int6bit";
+static const std::string VertexParameters_Y					= "Y, union, Size8bits, Size6bits";
+static const std::string VertexParameters_Y_Size8bits		= "Size8bits, Int8bit";
+static const std::string VertexParameters_Y_Size6bits		= "Size6bits, Int6bit";
+

@@ -11,40 +11,41 @@ CParkingMapHeader::~CParkingMapHeader(void)
 }
 
 
-void CParkingMapHeader::Encode(SParkingGarageID m_GarageID, ETextLanguage m_TextLanguage, 
-			SParkingGarageDimensions m_GarageDimensions, 
-			SParkingSpaceDimensions	 m_ParkingSpaceDimensions,
-			SFloorAndSection		 m_FloorAndSection,
-			SPositionInParking		 m_CurrentPosition,
-			bool					 m_IsTargetPosition,
-			bool					 m_IsTargetDescription,
-			SPositionInParking		 m_TargetPosition)
+void CParkingMapHeader::Encode(SParkingGarageID GarageID, ETextLanguage TextLanguage, 
+			SParkingGarageDimensions GarageDimensions, 
+			SParkingSpaceDimensions	 ParkingSpaceDimensions,
+			SFloorAndSection		 FloorAndSection,
+			SPositionInParking		 CurrentPosition,
+			bool					 IsTargetPosition,
+			bool					 IsTargetDescription,
+			SPositionInParking		 TargetPosition,
+			char					 TargetDescription[MAX_STR_LEN])
 {
-	size_t NumberOfBits	= BitSize(m_GarageID) 
-		+ BitSize(m_TextLanguage) 
-		+ BitSize(m_GarageDimensions)
-		+ BitSize(m_ParkingSpaceDimensions) 
-		+ BitSize(m_FloorAndSection)
-		+ BitSize(m_CurrentPosition) 
-		+ BitSize(m_IsTargetPosition)
-		+ BitSize(m_IsTargetDescription) 
-		+ ((m_IsTargetPosition) ? BitSize(m_TargetPosition) : 0)
-		+ ((m_IsTargetDescription) ? BitSize(m_TargerDescription) : 0);
+	size_t NumberOfBits	= BitSize(GarageID) 
+		+ BitSize(TextLanguage) 
+		+ BitSize(GarageDimensions)
+		+ BitSize(ParkingSpaceDimensions) 
+		+ BitSize(FloorAndSection)
+		+ BitSize(CurrentPosition) 
+		+ BitSize(IsTargetPosition)
+		+ BitSize(IsTargetDescription) 
+		+ ((IsTargetPosition) ? BitSize(TargetPosition) : 0)
+		/*+ ((IsTargetDescription) ? BitSize(TargetDescription) : 0)*/;
 	IncreaseBitBufferSize(NumberOfBits);
 
 	CBitPointer BitPtr = AllocateBitBuffer();
-	BitCopyAndContinue(BitPtr, m_GarageID);
-	BitCopyAndContinue(BitPtr, m_TextLanguage);
-	BitCopyAndContinue(BitPtr, m_GarageDimensions);
-	BitCopyAndContinue(BitPtr, m_ParkingSpaceDimensions);
-	BitCopyAndContinue(BitPtr, m_FloorAndSection);
-	BitCopyAndContinue(BitPtr, m_CurrentPosition);
-	BitCopyAndContinue(BitPtr, m_IsTargetPosition);
-	BitCopyAndContinue(BitPtr, m_IsTargetDescription);
-	if (m_IsTargetPosition)
-		BitCopyAndContinue(BitPtr, m_TargetPosition);
-	if (m_IsTargetDescription)
-		BitCopyAndContinue(BitPtr, m_TargerDescription);
+	BitCopyAndContinue(BitPtr, GarageID);
+	BitCopyAndContinue(BitPtr, TextLanguage);
+	BitCopyAndContinue(BitPtr, GarageDimensions);
+	BitCopyAndContinue(BitPtr, ParkingSpaceDimensions);
+	BitCopyAndContinue(BitPtr, FloorAndSection);
+	BitCopyAndContinue(BitPtr, CurrentPosition);
+	BitCopyAndContinue(BitPtr, IsTargetPosition);
+	BitCopyAndContinue(BitPtr, IsTargetDescription);
+	if (IsTargetPosition)
+		BitCopyAndContinue(BitPtr, TargetPosition);
+	if (IsTargetDescription)
+		/*BitCopyAndContinue(BitPtr, TargetDescription)*/;
 }
 
 /*virtual*/ void CParkingMapHeader::Decode(IN const CBitPointer &Data, IN OUT int &UsedBits, IN int * /*Context unnecessary*/)
@@ -63,7 +64,7 @@ void CParkingMapHeader::Encode(SParkingGarageID m_GarageID, ETextLanguage m_Text
 	if (m_IsTargetPosition)
 		BitPasteAndContinue(BitPtr, m_TargetPosition);
 	if (m_IsTargetDescription)
-		BitPasteAndContinue(BitPtr, m_TargerDescription);
+		/*BitPasteAndContinue(BitPtr, m_TargetDescription)*/;
 
 
 	UsedBits = (int)(BitPtr - Data);
@@ -74,19 +75,30 @@ void CParkingMapHeader::Encode(SParkingGarageID m_GarageID, ETextLanguage m_Text
 	int UsedBits = 0;
 	Decode(GetBitBuffer(), UsedBits, NULL);
 
-	AddItemToBitString(m_GarageID, BitPtr, ParsedString);
+	AddItemToBitString(m_GarageID.A, BitPtr, ParsedString);
+	AddItemToBitString(m_GarageID.B, BitPtr, ParsedString);
+	AddItemToBitString(m_GarageID.C, BitPtr, ParsedString);
+	AddItemToBitString(m_GarageID.D, BitPtr, ParsedString);
+
 	AddItemToBitString(m_TextLanguage, BitPtr, ParsedString);
-	AddItemToBitString(m_GarageDimensions, BitPtr, ParsedString);
-	AddItemToBitString(m_ParkingSpaceDimensions, BitPtr, ParsedString);
-	AddItemToBitString(m_FloorAndSection, BitPtr, ParsedString);
-	AddItemToBitString(m_CurrentPosition, BitPtr, ParsedString);
+	AddItemToBitString(m_GarageDimensions.Height, BitPtr, ParsedString);
+	AddItemToBitString(m_GarageDimensions.Width, BitPtr, ParsedString);
+	AddItemToBitString(m_ParkingSpaceDimensions.Height, BitPtr, ParsedString);
+	AddItemToBitString(m_ParkingSpaceDimensions.Width, BitPtr, ParsedString);
+	AddItemToBitString(m_FloorAndSection.Floor, BitPtr, ParsedString);
+	AddItemToBitString(m_FloorAndSection.Section, BitPtr, ParsedString);
+	AddItemToBitString(m_CurrentPosition.X, BitPtr, ParsedString);
+	AddItemToBitString(m_CurrentPosition.Y, BitPtr, ParsedString);
 	AddItemToBitString(m_IsTargetPosition, BitPtr, ParsedString);
 	AddItemToBitString(m_IsTargetDescription, BitPtr, ParsedString);
 
 	if (m_IsTargetPosition)
-		AddItemToBitString(m_TargetPosition, BitPtr, ParsedString);
+	{
+		AddItemToBitString(m_TargetPosition.X, BitPtr, ParsedString);
+		AddItemToBitString(m_TargetPosition.Y, BitPtr, ParsedString);
+	}
 	if (m_IsTargetDescription)
-		AddItemToBitString(m_TargerDescription, BitPtr, ParsedString);
+		/*AddItemToBitString(m_TargetDescription, BitPtr, ParsedString)*/;
 
 	return ParsedString;
 }
