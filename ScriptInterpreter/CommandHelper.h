@@ -654,7 +654,7 @@ bool ExtractAndInterperetListItem(int ContextLine, std::string ListArgument, std
 		return false;
 	}
 
-	if (ItemIndex < 0 || ItemIndex > ListVector.size()-1)
+	if (ItemIndex < 0 || ItemIndex > (int)ListVector.size()-1)
 	{
 		LogEvent(LE_ERROR, __FUNCTION__ "Requested Item Index (%d) of list %s exceeds List Vector length [%d] (mentioned in line %d)",
 			ItemIndex, ListName.c_str(), ListVector.size(), ContextLine);

@@ -21,6 +21,9 @@ Position: Type=ForwardDiagonalJump | dX=5 | dY=8;
 SignedJump: Type=CarriageDir | dX=11 | dY=14;
 AbsoluteJump: Type=AbsoluteDiagonalJump | X=7 | Y=14;
 
-Complex: UID=1 | NumberOfObjectsInComplex=2 | IsReplicationPartOfDefinition=false | IsVerticalMirror=false | IsHorizontalMirror=false | IsVerticalReplication=false | IsHorizontalReplication = false | ListOfEncodedItems = [BasicItem: Type=PayingMachine, BasicItem: Type=PayingMachine];
+% Encoding of a complex item with two inner items
+%Complex: UID=1 | NumberOfObjectsInComplex=2 | IsReplicationPartOfDefinition=false | IsVerticalMirror=false | IsHorizontalMirror=false | IsVerticalReplication=false | IsHorizontalReplication = false;
+%	BasicItem: Type=PayingMachine;
+%	Position: Type=ForwardDiagonalJump | dX=5 | dY=8;
 End
 
