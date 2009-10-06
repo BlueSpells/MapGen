@@ -34,38 +34,31 @@ CComplexItem::~CComplexItem(void)
 	return true;
 }
 
-void CComplexItem::Encode(int ComplexItemUID, std::vector<IItem *> ListOfEncodedItems,
+
+void CComplexItem::Encode(int ComplexItemUID, int NumberOfEncodedItems,
 			bool IsVerticalMirror, bool IsHorizontalMirror, 
 			bool IsVerticalReplication, bool IsHorizontalReplication, bool IsReplicationPartOfDefinition,
-			SReplication *VerticalReplication/* = NULL*/, SReplication *HorizontalReplication/* = NULL*/)
+			SReplication *VerticalReplication /*= NULL*/, SReplication *HorizontalReplication /*= NULL*/)
 {
 	m_IsFirstDefinitionOfComplexItem = true;
 
 	Int5Bit UID = ConvertIntToInt5Bit(ComplexItemUID);
-	Int5Bit NumberOfItems = ConvertIntToInt5Bit(ListOfEncodedItems.size());
-
-	size_t TotalNumberOfBitsInItems = 0;
-	for (unsigned int i = 0; i < ListOfEncodedItems.size(); i++)
-	{
-		TotalNumberOfBitsInItems += ListOfEncodedItems[i]->GetBitBufferSize();
-	}
 
 	size_t NumberOfBits	= BitSize(UID) 
-		+ BitSize(NumberOfItems) 
+		+ BitSize(NumberOfEncodedItems) 
 		+ BitSize(IsVerticalMirror)
 		+ BitSize(IsHorizontalMirror)
 		+ BitSize(IsVerticalReplication)
 		+ BitSize(IsHorizontalReplication)
 		+ BitSize(IsReplicationPartOfDefinition)
 		+ ((IsVerticalReplication) ? BitSize(*VerticalReplication) : 0)
-		+ ((IsHorizontalReplication) ? BitSize(*HorizontalReplication) : 0)
-		+ TotalNumberOfBitsInItems;
-	
+		+ ((IsHorizontalReplication) ? BitSize(*HorizontalReplication) : 0);
+
 	IncreaseBitBufferSize(NumberOfBits);
 
 	CBitPointer BitPtr = AllocateBitBuffer();
 	BitCopyAndContinue(BitPtr, UID);
-	BitCopyAndContinue(BitPtr, NumberOfItems);
+	BitCopyAndContinue(BitPtr, NumberOfEncodedItems);
 	BitCopyAndContinue(BitPtr, IsVerticalMirror);
 	BitCopyAndContinue(BitPtr, IsHorizontalMirror);
 	BitCopyAndContinue(BitPtr, IsVerticalReplication);
@@ -81,7 +74,29 @@ void CComplexItem::Encode(int ComplexItemUID, std::vector<IItem *> ListOfEncoded
 		BitCopyAndContinue(BitPtr, HorizontalReplication->GapBetweenReplicas);
 		BitCopyAndContinue(BitPtr, HorizontalReplication->TimesToReplicate);
 	}
+}
 
+
+void CComplexItem::Encode(int ComplexItemUID, std::vector<IItem *> ListOfEncodedItems,
+			bool IsVerticalMirror, bool IsHorizontalMirror, 
+			bool IsVerticalReplication, bool IsHorizontalReplication, bool IsReplicationPartOfDefinition,
+			SReplication *VerticalReplication/* = NULL*/, SReplication *HorizontalReplication/* = NULL*/)
+{
+	size_t TotalNumberOfBitsInItems = 0;
+	for (unsigned int i = 0; i < ListOfEncodedItems.size(); i++)
+	{
+		TotalNumberOfBitsInItems += ListOfEncodedItems[i]->GetBitBufferSize();
+	}
+	IncreaseBitBufferSize(TotalNumberOfBitsInItems);
+
+
+	Int5Bit NumberOfItems = ConvertIntToInt5Bit(ListOfEncodedItems.size());
+	Encode(ComplexItemUID, NumberOfItems, IsVerticalMirror, IsHorizontalMirror, 
+		IsVerticalReplication, IsHorizontalReplication, IsReplicationPartOfDefinition,
+		VerticalReplication, HorizontalReplication);
+
+
+	CBitPointer BitPtr = GetBitBuffer() + GetBitBufferSize() - TotalNumberOfBitsInItems;
 	for (unsigned int i = 0; i < ListOfEncodedItems.size(); i++)
 	{
 		BitCopyItemAndContinue(BitPtr, *ListOfEncodedItems[i]);

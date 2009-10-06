@@ -41,6 +41,15 @@ public:
 				bool IsVerticalReplication, bool IsHorizontalReplication, bool IsReplicationPartOfDefinition,
 				SReplication *VerticalReplication = NULL, SReplication *HorizontalReplication = NULL);
 
+	// The following Encode does not add the items contained by the complex item, but creates only the complex header.
+	// The items themselves will be encoded and added separately later.
+	// The ComplexCommand uses this overload version of Encode.
+	void Encode(int ComplexItemUID, int NumberOfEncodedItems,
+		bool IsVerticalMirror, bool IsHorizontalMirror, 
+		bool IsVerticalReplication, bool IsHorizontalReplication, bool IsReplicationPartOfDefinition,
+		SReplication *VerticalReplication = NULL, SReplication *HorizontalReplication = NULL);
+
+
 	// For Later Uses (after this ComplexItemUID has been defined)
 	void Encode(int ComplexItemUID, bool IsVerticalMirror, bool ISHorizontalMirror, 
 		bool IsVerticalReplication, bool IsHorizontalReplication,
