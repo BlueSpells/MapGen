@@ -138,6 +138,32 @@ static const std::string X							= "X, Int16Bit";
 static const std::string Y							= "Y, Int16Bit";
 
 
+// ComplexItem Syntax:
+// ---------------
+static const char *ComplexItemCommand = "Complex";
+
+static const std::string UID										= "UID, int";
+static const std::string NumberOfObjectsInComplex					= "NumberOfObjects, Int5Bit";
+static const std::string IsReplicationPartOfDefinition				= "IsReplicationPartOfDefinition, bool";
+static const std::string IsVerticalMirror							= "IsVerticalMirror, bool";
+static const std::string IsHorizontalMirror							= "IsHorizontalMirror, bool";
+static const std::string IsVerticalReplication						= "IsVerticalReplication, bool";
+static const std::string IsHorizontalReplication					= "IsHorizontalReplication, bool";
+static const std::string VerticalReplication						= "VerticalReplication, struct, GapBetweenReplicas, TimesToReplicate";
+static const std::string VerticalReplication_GapBetweenReplicas		= "GapBetweenReplicas, Int6Bit";
+static const std::string VerticalReplication_TimesToReplicate		= "TimesToReplicate, Int6Bit";
+static const std::string HorizontalReplication						= "HorizontalReplication, struct, GapBetweenReplicas, TimesToReplicate";
+static const std::string HorizontalReplication_GapBetweenReplicas	= "GapBetweenReplicas, Int6Bit";
+static const std::string HorizontalReplication_TimesToReplicate		= "TimesToReplicate, Int6Bit";
+static const std::string ListOfEncodedItems							= "ListOfEncodedItems, list, 2, -1" ;
+static const std::string ListOfEncodedItems_Item					= "Item, IItem" ;
+
+
+
+
+
+
+
 // Pavement Syntax:
 // ---------------
 static const char *PavementCommand = "Pavement";

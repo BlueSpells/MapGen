@@ -6,6 +6,7 @@
 #include "PositionCommand.h"
 #include "SignedJumpCommand.h"
 #include "AbsoluteJumpCommand.h"
+#include "ComplexItemCommand.h"
 #include "GeneralHeaderCommand.h"
 #include "ParkingMapHeaderCommand.h"
 #include "ScriptSyntaxDefinitions.h"
@@ -18,6 +19,7 @@ CParkingScriptInterpreter::CParkingScriptInterpreter(IScriptReader *ScriptReader
 	AddCommandToCommandsDictionary(SignedJumpCommand, CSignedJumpCommand);
 	AddCommandToCommandsDictionary(AbsoluteJumpCommand, CAbsoluteJumpCommand);
 //	AddCommandToCommandsDictionary(PavementCommand, CPavementCommand);
+	AddCommandToCommandsDictionary(ComplexItemCommand, CComplexItemCommand);
 	AddCommandToCommandsDictionary(GeneralHeaderCommand, CGeneralHeaderCommand);
 	AddCommandToCommandsDictionary(ParkingMapHeaderCommand, CParkingMapHeaderCommand);
 	

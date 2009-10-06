@@ -165,6 +165,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ComplexItemCommand.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\GeneralHeaderCommand.cpp"
 				>
 			</File>
@@ -240,6 +244,10 @@
 			</File>
 			<File
 				RelativePath=".\CommandsDictionary.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ComplexItemCommand.h"
 				>
 			</File>
 			<File

@@ -6,7 +6,7 @@
 
 struct SReplication
 {
-	enum EGapBetweenReplicas
+/*	enum EGapBetweenReplicas
 	{
 		EGapBetweenReplicas_MaxEnum = 64	
 	}GapBetweenReplicas;
@@ -14,14 +14,17 @@ struct SReplication
 	enum ETimesToReplicate
 	{
 		ETimesToReplicate_MaxEnum = 64	
-	}TimesToReplicate;
+	}TimesToReplicate;*/
+
+	Int6Bit GapBetweenReplicas;
+	Int6Bit TimesToReplicate;
 
 	SReplication() {ZeroMemory(this, sizeof(*this));}
 	SReplication(int _GapBetweenReplicas, int _TimesToReplicate)
-		: GapBetweenReplicas((EGapBetweenReplicas)_GapBetweenReplicas), TimesToReplicate((ETimesToReplicate)_TimesToReplicate) {}
+		: GapBetweenReplicas(ConvertIntToInt6Bit(_GapBetweenReplicas)), TimesToReplicate(ConvertIntToInt6Bit(_TimesToReplicate)) {}
 };
-DefineEnumBitSize(SReplication::EGapBetweenReplicas);
-DefineEnumBitSize(SReplication::ETimesToReplicate);
+//DefineEnumBitSize(SReplication::EGapBetweenReplicas);
+//DefineEnumBitSize(SReplication::ETimesToReplicate);
 DefineStructBitSize2(SReplication, GapBetweenReplicas, TimesToReplicate);
 
 
@@ -34,14 +37,14 @@ public:
 
 	// For First Usage \ ComplexItem Definition
 	void Encode(int ComplexItemUID, std::vector<IItem *> ListOfEncodedItems,
-				bool IsVerticalMirror, bool ISHorizontalMirror, 
-				bool IsVeritcalReplication, bool IsHotizontalReplication, bool IsReplicationPartOfDefinition,
-				SReplication *VeritcalReplication = NULL, SReplication *HotizontalReplication = NULL);
+				bool IsVerticalMirror, bool IsHorizontalMirror, 
+				bool IsVerticalReplication, bool IsHorizontalReplication, bool IsReplicationPartOfDefinition,
+				SReplication *VerticalReplication = NULL, SReplication *HorizontalReplication = NULL);
 
 	// For Later Uses (after this ComplexItemUID has been defined)
 	void Encode(int ComplexItemUID, bool IsVerticalMirror, bool ISHorizontalMirror, 
-		bool IsVeritcalReplication, bool IsHotizontalReplication,
-		SReplication *VeritcalReplication = NULL, SReplication *HotizontalReplication = NULL);
+		bool IsVerticalReplication, bool IsHorizontalReplication,
+		SReplication *VerticalReplication = NULL, SReplication *HorizontalReplication = NULL);
 
 
 	virtual void	InsertItemType();
@@ -68,9 +71,9 @@ private:
 	std::vector<IItem *> m_ListOfEncodedItems;
 	bool m_IsVerticalMirror;
 	bool m_IsHorizontalMirror;
-	bool m_IsVeritcalReplication;
-	bool m_IsHotizontalReplication;
+	bool m_IsVerticalReplication;
+	bool m_IsHorizontalReplication;
 	bool m_IsReplicationPartOfDefinition;
-	SReplication m_VeritcalReplication;
-	SReplication m_HotizontalReplication;
+	SReplication m_VerticalReplication;
+	SReplication m_HorizontalReplication;
 };

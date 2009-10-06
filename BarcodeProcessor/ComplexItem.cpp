@@ -4,8 +4,8 @@
 
 CComplexItem::CComplexItem(void) : IItem(ComplexStructure),
 	m_UID(ConvertIntToInt5Bit(0)), m_IsFirstDefinitionOfComplexItem(false), m_NumberOfObjectsInComplex(ConvertIntToInt5Bit(0)),
-	m_IsVerticalMirror(false), m_IsHorizontalMirror(false), m_IsVeritcalReplication(false), 
-	m_IsHotizontalReplication(false), m_IsReplicationPartOfDefinition(false)
+	m_IsVerticalMirror(false), m_IsHorizontalMirror(false), m_IsVerticalReplication(false), 
+	m_IsHorizontalReplication(false), m_IsReplicationPartOfDefinition(false)
 {
 }
 
@@ -35,9 +35,9 @@ CComplexItem::~CComplexItem(void)
 }
 
 void CComplexItem::Encode(int ComplexItemUID, std::vector<IItem *> ListOfEncodedItems,
-			bool IsVerticalMirror, bool ISHorizontalMirror, 
-			bool IsVeritcalReplication, bool IsHotizontalReplication, bool IsReplicationPartOfDefinition,
-			SReplication *VeritcalReplication/* = NULL*/, SReplication *HotizontalReplication/* = NULL*/)
+			bool IsVerticalMirror, bool IsHorizontalMirror, 
+			bool IsVerticalReplication, bool IsHorizontalReplication, bool IsReplicationPartOfDefinition,
+			SReplication *VerticalReplication/* = NULL*/, SReplication *HorizontalReplication/* = NULL*/)
 {
 	m_IsFirstDefinitionOfComplexItem = true;
 
@@ -53,12 +53,12 @@ void CComplexItem::Encode(int ComplexItemUID, std::vector<IItem *> ListOfEncoded
 	size_t NumberOfBits	= BitSize(UID) 
 		+ BitSize(NumberOfItems) 
 		+ BitSize(IsVerticalMirror)
-		+ BitSize(ISHorizontalMirror)
-		+ BitSize(IsVeritcalReplication)
-		+ BitSize(IsHotizontalReplication)
+		+ BitSize(IsHorizontalMirror)
+		+ BitSize(IsVerticalReplication)
+		+ BitSize(IsHorizontalReplication)
 		+ BitSize(IsReplicationPartOfDefinition)
-		+ ((IsVeritcalReplication) ? BitSize(*VeritcalReplication) : 0)
-		+ ((IsHotizontalReplication) ? BitSize(*HotizontalReplication) : 0)
+		+ ((IsVerticalReplication) ? BitSize(*VerticalReplication) : 0)
+		+ ((IsHorizontalReplication) ? BitSize(*HorizontalReplication) : 0)
 		+ TotalNumberOfBitsInItems;
 	
 	IncreaseBitBufferSize(NumberOfBits);
@@ -67,19 +67,19 @@ void CComplexItem::Encode(int ComplexItemUID, std::vector<IItem *> ListOfEncoded
 	BitCopyAndContinue(BitPtr, UID);
 	BitCopyAndContinue(BitPtr, NumberOfItems);
 	BitCopyAndContinue(BitPtr, IsVerticalMirror);
-	BitCopyAndContinue(BitPtr, ISHorizontalMirror);
-	BitCopyAndContinue(BitPtr, IsVeritcalReplication);
-	BitCopyAndContinue(BitPtr, IsHotizontalReplication);
+	BitCopyAndContinue(BitPtr, IsHorizontalMirror);
+	BitCopyAndContinue(BitPtr, IsVerticalReplication);
+	BitCopyAndContinue(BitPtr, IsHorizontalReplication);
 	BitCopyAndContinue(BitPtr, IsReplicationPartOfDefinition);
-	if (IsVeritcalReplication)
+	if (IsVerticalReplication)
 	{
-		BitCopyAndContinue(BitPtr, VeritcalReplication->GapBetweenReplicas);
-		BitCopyAndContinue(BitPtr, VeritcalReplication->TimesToReplicate);
+		BitCopyAndContinue(BitPtr, VerticalReplication->GapBetweenReplicas);
+		BitCopyAndContinue(BitPtr, VerticalReplication->TimesToReplicate);
 	}
-	if (IsHotizontalReplication)
+	if (IsHorizontalReplication)
 	{
-		BitCopyAndContinue(BitPtr, HotizontalReplication->GapBetweenReplicas);
-		BitCopyAndContinue(BitPtr, HotizontalReplication->TimesToReplicate);
+		BitCopyAndContinue(BitPtr, HorizontalReplication->GapBetweenReplicas);
+		BitCopyAndContinue(BitPtr, HorizontalReplication->TimesToReplicate);
 	}
 
 	for (unsigned int i = 0; i < ListOfEncodedItems.size(); i++)
@@ -88,37 +88,37 @@ void CComplexItem::Encode(int ComplexItemUID, std::vector<IItem *> ListOfEncoded
 	}
 }
 
-void CComplexItem::Encode(int ComplexItemUID, bool IsVerticalMirror, bool ISHorizontalMirror, 
-						  bool IsVeritcalReplication, bool IsHotizontalReplication,
-						  SReplication *VeritcalReplication/* = NULL*/, SReplication *HotizontalReplication /*= NULL*/)
+void CComplexItem::Encode(int ComplexItemUID, bool IsVerticalMirror, bool IsHorizontalMirror, 
+						  bool IsVerticalReplication, bool IsHorizontalReplication,
+						  SReplication *VerticalReplication/* = NULL*/, SReplication *HorizontalReplication /*= NULL*/)
 {
 	Int5Bit UID = ConvertIntToInt5Bit(ComplexItemUID);
 		
 	size_t NumberOfBits	= BitSize(UID)
 		+ BitSize(IsVerticalMirror)
-		+ BitSize(ISHorizontalMirror)
-		+ BitSize(IsVeritcalReplication)
-		+ BitSize(IsHotizontalReplication)
-		+ ((IsVeritcalReplication) ? BitSize(*VeritcalReplication) : 0)
-		+ ((IsHotizontalReplication) ? BitSize(*HotizontalReplication) : 0);
+		+ BitSize(IsHorizontalMirror)
+		+ BitSize(IsVerticalReplication)
+		+ BitSize(IsHorizontalReplication)
+		+ ((IsVerticalReplication) ? BitSize(*VerticalReplication) : 0)
+		+ ((IsHorizontalReplication) ? BitSize(*HorizontalReplication) : 0);
 
 	IncreaseBitBufferSize(NumberOfBits);
 
 	CBitPointer BitPtr = AllocateBitBuffer();
 	BitCopyAndContinue(BitPtr, UID);
 	BitCopyAndContinue(BitPtr, IsVerticalMirror);
-	BitCopyAndContinue(BitPtr, ISHorizontalMirror);
-	BitCopyAndContinue(BitPtr, IsVeritcalReplication);
-	BitCopyAndContinue(BitPtr, IsHotizontalReplication);
-	if (IsVeritcalReplication)
+	BitCopyAndContinue(BitPtr, IsHorizontalMirror);
+	BitCopyAndContinue(BitPtr, IsVerticalReplication);
+	BitCopyAndContinue(BitPtr, IsHorizontalReplication);
+	if (IsVerticalReplication)
 	{
-		BitCopyAndContinue(BitPtr, VeritcalReplication->GapBetweenReplicas);
-		BitCopyAndContinue(BitPtr, VeritcalReplication->TimesToReplicate);
+		BitCopyAndContinue(BitPtr, VerticalReplication->GapBetweenReplicas);
+		BitCopyAndContinue(BitPtr, VerticalReplication->TimesToReplicate);
 	}
-	if (IsHotizontalReplication)
+	if (IsHorizontalReplication)
 	{
-		BitCopyAndContinue(BitPtr, HotizontalReplication->GapBetweenReplicas);
-		BitCopyAndContinue(BitPtr, HotizontalReplication->TimesToReplicate);
+		BitCopyAndContinue(BitPtr, HorizontalReplication->GapBetweenReplicas);
+		BitCopyAndContinue(BitPtr, HorizontalReplication->TimesToReplicate);
 	}
 
 }
@@ -155,22 +155,22 @@ void CComplexItem::Encode(int ComplexItemUID, bool IsVerticalMirror, bool ISHori
 
 	BitPasteAndContinue(BitPtr, m_IsVerticalMirror);
 	BitPasteAndContinue(BitPtr, m_IsHorizontalMirror);
-	BitPasteAndContinue(BitPtr, m_IsVeritcalReplication);
-	BitPasteAndContinue(BitPtr, m_IsHotizontalReplication);
+	BitPasteAndContinue(BitPtr, m_IsVerticalReplication);
+	BitPasteAndContinue(BitPtr, m_IsHorizontalReplication);
 
 	if (IsFirstTimeDefinition)
 		BitPasteAndContinue(BitPtr, m_IsReplicationPartOfDefinition);
 
 
-	if (m_IsVeritcalReplication)
+	if (m_IsVerticalReplication)
 	{
-		BitPasteAndContinue(BitPtr, m_VeritcalReplication.GapBetweenReplicas);
-		BitPasteAndContinue(BitPtr, m_VeritcalReplication.TimesToReplicate);
+		BitPasteAndContinue(BitPtr, m_VerticalReplication.GapBetweenReplicas);
+		BitPasteAndContinue(BitPtr, m_VerticalReplication.TimesToReplicate);
 	}
-	if (m_IsHotizontalReplication)
+	if (m_IsHorizontalReplication)
 	{
-		BitPasteAndContinue(BitPtr, m_HotizontalReplication.GapBetweenReplicas);
-		BitPasteAndContinue(BitPtr, m_HotizontalReplication.TimesToReplicate);
+		BitPasteAndContinue(BitPtr, m_HorizontalReplication.GapBetweenReplicas);
+		BitPasteAndContinue(BitPtr, m_HorizontalReplication.TimesToReplicate);
 	}
 
 	//  Complex item will NOT decode its own items, but will let the ParkingMapDecoder to do it
@@ -211,21 +211,21 @@ void CComplexItem::Encode(int ComplexItemUID, bool IsVerticalMirror, bool ISHori
 
 	AddItemToBitString(m_IsVerticalMirror, BitPtr, ParsedString);
 	AddItemToBitString(m_IsHorizontalMirror, BitPtr, ParsedString);
-	AddItemToBitString(m_IsVeritcalReplication, BitPtr, ParsedString);
-	AddItemToBitString(m_IsHotizontalReplication, BitPtr, ParsedString);
+	AddItemToBitString(m_IsVerticalReplication, BitPtr, ParsedString);
+	AddItemToBitString(m_IsHorizontalReplication, BitPtr, ParsedString);
 	
 	if (m_IsFirstDefinitionOfComplexItem)
 		AddItemToBitString(m_IsReplicationPartOfDefinition, BitPtr, ParsedString);
 
-	if (m_IsVeritcalReplication)
+	if (m_IsVerticalReplication)
 	{
-		AddItemToBitString(m_VeritcalReplication.GapBetweenReplicas, BitPtr, ParsedString);
-		AddItemToBitString(m_VeritcalReplication.TimesToReplicate, BitPtr, ParsedString);
+		AddItemToBitString(m_VerticalReplication.GapBetweenReplicas, BitPtr, ParsedString);
+		AddItemToBitString(m_VerticalReplication.TimesToReplicate, BitPtr, ParsedString);
 	}
-	if (m_IsHotizontalReplication)
+	if (m_IsHorizontalReplication)
 	{
-		AddItemToBitString(m_HotizontalReplication.GapBetweenReplicas, BitPtr, ParsedString);
-		AddItemToBitString(m_HotizontalReplication.TimesToReplicate, BitPtr, ParsedString);
+		AddItemToBitString(m_HorizontalReplication.GapBetweenReplicas, BitPtr, ParsedString);
+		AddItemToBitString(m_HorizontalReplication.TimesToReplicate, BitPtr, ParsedString);
 	}
 
 	return ParsedString;
