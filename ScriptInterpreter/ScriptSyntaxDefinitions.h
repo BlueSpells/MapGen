@@ -142,7 +142,7 @@ static const std::string Y							= "Y, Int16Bit";
 // ---------------
 static const char *ComplexItemCommand = "Complex";
 
-static const std::string UID										= "UID, int";
+static const std::string UID										= "UID, Int5Bit";
 static const std::string NumberOfObjectsInComplex					= "NumberOfObjects, Int5Bit";
 static const std::string IsReplicationPartOfDefinition				= "IsReplicationPartOfDefinition, bool";
 static const std::string IsVerticalMirror							= "IsVerticalMirror, bool";
@@ -155,8 +155,8 @@ static const std::string VerticalReplication_TimesToReplicate		= "TimesToReplica
 static const std::string HorizontalReplication						= "HorizontalReplication, struct, GapBetweenReplicas, TimesToReplicate";
 static const std::string HorizontalReplication_GapBetweenReplicas	= "GapBetweenReplicas, Int6Bit";
 static const std::string HorizontalReplication_TimesToReplicate		= "TimesToReplicate, Int6Bit";
-static const std::string ListOfEncodedItems							= "ListOfEncodedItems, list, 2, -1" ;
-static const std::string ListOfEncodedItems_Item					= "Item, IItem" ;
+//static const std::string ListOfEncodedItems							= "ListOfEncodedItems, list, 2, -1" ;
+//static const std::string ListOfEncodedItems_Item					= "Item, IItem" ;
 
 
 
@@ -177,13 +177,13 @@ static const std::string SizeOrSide_Side					= "Side, bool";
 static const std::string SizeOrSide_Size					= "Size, bool";
 static const std::string SpecialVertexCurvature				= "SpecialVertexCurvature, enum, Linear, Convex, Concave, Rectangular";
 static const std::string ShortenVertexCoordinate			= "ShortenVertexCoordinate, Int6bit";
-static const std::string VertexList							= "VertexList, list, 0, 5" ; 
-static const std::string VertexList_VertexParameters		= "Vertex, struct, CurvatureType, X, Y";
-static const std::string VertexParameters_CurvatureType		= "CurvatureType, enum, Linear, Convex, Concave, Rectangular";
-static const std::string VertexParameters_X					= "X, union, Size8bits, Size6bits";
-static const std::string VertexParameters_X_Size8bits		= "Size8bits, Int8bit";
-static const std::string VertexParameters_X_Size6bits		= "Size6bits, Int6bit";
-static const std::string VertexParameters_Y					= "Y, union, Size8bits, Size6bits";
-static const std::string VertexParameters_Y_Size8bits		= "Size8bits, Int8bit";
-static const std::string VertexParameters_Y_Size6bits		= "Size6bits, Int6bit";
+static const std::string VertexList										= "VertexList, list, 0, 5" ; 
+static const std::string VertexList_VertexParameters					= "Vertex, struct, CurvatureType, X, Y";
+static const std::string VertexList_VertexParameters_CurvatureType		= "CurvatureType, enum, Linear, Convex, Concave, Rectangular";
+static const std::string VertexList_VertexParameters_X					= "X, union, Size8bits, Size6bits";
+static const std::string VertexList_VertexParameters_X_Size8bits		= "Size8bits, Int8bit";
+static const std::string VertexList_VertexParameters_X_Size6bits		= "Size6bits, Int6bit";
+static const std::string VertexList_VertexParameters_Y					= "Y, union, Size8bits, Size6bits";
+static const std::string VertexList_VertexParameters_Y_Size8bits		= "Size8bits, Int8bit";
+static const std::string VertexList_VertexParameters_Y_Size6bits		= "Size6bits, Int6bit";
 

@@ -24,7 +24,7 @@ CComplexItemCommand::~CComplexItemCommand(void)
 		return CommandFailed;
 	}
 
-	int UID_Value;
+	Int5Bit UID_Value;
 	if (!ExtractAndInterperetArgumentValue(ContextLine, ComplexItemCommand, UID, ParsedArguments, UID_Value))
 		return CommandFailed;
 
@@ -74,37 +74,26 @@ CComplexItemCommand::~CComplexItemCommand(void)
 	}
 
 	CComplexItem *ComplexItem = new CComplexItem;
-	std::vector<IItem *> ListOfEncodedItemsValue;
-	std::vector<std::string> ListOfItemsVector;
-	if(!ExtractAndInterperetArgumentValue(ContextLine, ComplexItemCommand, ListOfEncodedItems, ParsedArguments, ListOfItemsVector))
+	bool IsReplicationPartOfDefinitionValue;
+	Int5Bit NumberOfObjectsInComplexValue;
+	if (!ExtractAndInterperetArgumentValue(ContextLine, ComplexItemCommand, IsReplicationPartOfDefinition, ParsedArguments, IsReplicationPartOfDefinitionValue))
 	{
-		ComplexItem->Encode(UID_Value, IsVerticalMirrorValue, IsHorizontalMirrorValue, IsVerticalReplicationValue,
+		if (!ExtractAndInterperetArgumentValue(ContextLine, ComplexItemCommand, NumberOfObjectsInComplex, ParsedArguments, NumberOfObjectsInComplexValue))
+		{
+			ComplexItem->Encode(UID_Value, IsVerticalMirrorValue, IsHorizontalMirrorValue, IsVerticalReplicationValue,
 							IsHorizontalReplicationValue, ((IsVerticalReplicationValue) ? &VerticalReplicationValue : NULL),
 							((IsHorizontalReplicationValue) ? &HorizontalReplicationValue : NULL));
 
-		LogEvent(LE_INFO, __FUNCTION__ ": %s Command Parsed Successfully: UID = %d, IsVerticalMirror = %s, IsHorizontalMirror = %s, IsVerticalReplication = %s, IsHorizontalReplication = %s, VerticalReplication = [%d %d], HorizontalReplication = [%d %d])", 
-			ComplexItemCommand, UID_Value, BooleanStr(IsVerticalMirrorValue), BooleanStr(IsHorizontalMirrorValue), BooleanStr(IsVerticalReplicationValue), BooleanStr(IsHorizontalReplicationValue), 
-			VerticalReplicationValue.TimesToReplicate, VerticalReplicationValue.GapBetweenReplicas, HorizontalReplicationValue.TimesToReplicate, HorizontalReplicationValue.GapBetweenReplicas );
-
+			LogEvent(LE_INFO, __FUNCTION__ ": %s Command Parsed Successfully: UID = %d, IsVerticalMirror = %s, IsHorizontalMirror = %s, IsVerticalReplication = %s, IsHorizontalReplication = %s, VerticalReplication = [%d %d], HorizontalReplication = [%d %d])", 
+				ComplexItemCommand, UID_Value, BooleanStr(IsVerticalMirrorValue), BooleanStr(IsHorizontalMirrorValue), BooleanStr(IsVerticalReplicationValue), BooleanStr(IsHorizontalReplicationValue), 
+				VerticalReplicationValue.TimesToReplicate, VerticalReplicationValue.GapBetweenReplicas, HorizontalReplicationValue.TimesToReplicate, HorizontalReplicationValue.GapBetweenReplicas );
+		}
 	}
 	else
 	{		
-		bool IsReplicationPartOfDefinitionValue;
-		if (!ExtractAndInterperetArgumentValue(ContextLine, ComplexItemCommand, IsReplicationPartOfDefinition, ParsedArguments, IsReplicationPartOfDefinitionValue))
-			return CommandFailed;
-		Int5Bit NumberOfObjectsInComplexValue;
 		if (!ExtractAndInterperetArgumentValue(ContextLine, ComplexItemCommand, NumberOfObjectsInComplex, ParsedArguments, NumberOfObjectsInComplexValue))
 			return CommandFailed;
-
-		for (int i = 0; i < NumberOfObjectsInComplexValue; i++)
-		{
-			IItem *ItemWithinComplex = NULL;
-			if(!ExtractAndInterperetListItem(ContextLine, ListOfEncodedItems, ListOfEncodedItems_Item, ListOfItemsVector, ItemWithinComplex, i))
-				return CommandFailed;
-			ListOfEncodedItemsValue.push_back(ItemWithinComplex);
-		}
-		
-		ComplexItem->Encode(UID_Value, ListOfEncodedItemsValue, IsVerticalMirrorValue, IsHorizontalMirrorValue, 
+		ComplexItem->Encode(UID_Value, NumberOfObjectsInComplexValue, IsVerticalMirrorValue, IsHorizontalMirrorValue, 
 							IsVerticalReplicationValue,	IsHorizontalReplicationValue, IsReplicationPartOfDefinitionValue, 
 							((IsVerticalReplicationValue) ? &VerticalReplicationValue : NULL),
 							((IsHorizontalReplicationValue) ? &HorizontalReplicationValue : NULL));
@@ -115,10 +104,6 @@ CComplexItemCommand::~CComplexItemCommand(void)
 	}
 
 
-
-
-//	LogEvent(LE_INFO, __FUNCTION__ ": %s Command Parsed Successfully: BasicItemType = %s)", 
-//		BasicItemCommand, EnumToString(BasicItemValue).c_str());
 
 	Element = (void *)ComplexItem;
 	ElementType = AddItem;

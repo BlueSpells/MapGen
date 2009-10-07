@@ -9,7 +9,7 @@ enum ETextLanguage
 	Hebrew,
 	ETextLanguage_MaxEnum
 };
-DefineHoffmanEnumBitSize(ETextLanguage);
+DefineEnumBitSize(ETextLanguage);
 
 struct SParkingGarageID
 {

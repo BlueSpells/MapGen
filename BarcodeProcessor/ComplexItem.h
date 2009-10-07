@@ -6,16 +6,6 @@
 
 struct SReplication
 {
-/*	enum EGapBetweenReplicas
-	{
-		EGapBetweenReplicas_MaxEnum = 64	
-	}GapBetweenReplicas;
-
-	enum ETimesToReplicate
-	{
-		ETimesToReplicate_MaxEnum = 64	
-	}TimesToReplicate;*/
-
 	Int6Bit GapBetweenReplicas;
 	Int6Bit TimesToReplicate;
 
@@ -23,8 +13,6 @@ struct SReplication
 	SReplication(int _GapBetweenReplicas, int _TimesToReplicate)
 		: GapBetweenReplicas(ConvertIntToInt6Bit(_GapBetweenReplicas)), TimesToReplicate(ConvertIntToInt6Bit(_TimesToReplicate)) {}
 };
-//DefineEnumBitSize(SReplication::EGapBetweenReplicas);
-//DefineEnumBitSize(SReplication::ETimesToReplicate);
 DefineStructBitSize2(SReplication, GapBetweenReplicas, TimesToReplicate);
 
 
@@ -36,7 +24,7 @@ public:
 	~CComplexItem(void);
 
 	// For First Usage \ ComplexItem Definition
-	void Encode(int ComplexItemUID, std::vector<IItem *> ListOfEncodedItems,
+	void Encode(Int5Bit ComplexItemUID, std::vector<IItem *> ListOfEncodedItems,
 				bool IsVerticalMirror, bool IsHorizontalMirror, 
 				bool IsVerticalReplication, bool IsHorizontalReplication, bool IsReplicationPartOfDefinition,
 				SReplication *VerticalReplication = NULL, SReplication *HorizontalReplication = NULL);
@@ -44,14 +32,14 @@ public:
 	// The following Encode does not add the items contained by the complex item, but creates only the complex header.
 	// The items themselves will be encoded and added separately later.
 	// The ComplexCommand uses this overload version of Encode.
-	void Encode(int ComplexItemUID, int NumberOfEncodedItems,
+	void Encode(Int5Bit ComplexItemUID, Int5Bit NumberOfEncodedItems,
 		bool IsVerticalMirror, bool IsHorizontalMirror, 
 		bool IsVerticalReplication, bool IsHorizontalReplication, bool IsReplicationPartOfDefinition,
 		SReplication *VerticalReplication = NULL, SReplication *HorizontalReplication = NULL);
 
 
 	// For Later Uses (after this ComplexItemUID has been defined)
-	void Encode(int ComplexItemUID, bool IsVerticalMirror, bool ISHorizontalMirror, 
+	void Encode(Int5Bit ComplexItemUID, bool IsVerticalMirror, bool ISHorizontalMirror, 
 		bool IsVerticalReplication, bool IsHorizontalReplication,
 		SReplication *VerticalReplication = NULL, SReplication *HorizontalReplication = NULL);
 
