@@ -163,8 +163,8 @@ void CPavementItem::Encode(	EShapeType ShapeType, ETextureType TextureType, Int4
 		{
 			SVertexParameters FullVertex;
 			AddItemToBitString(FullVertex.X.Size6bits, BitPtr, ParsedString);
-			AddItemToBitString(FullVertex.X.Size6bits, BitPtr, ParsedString);
-			AddItemToBitString(FullVertex.X.Size6bits, BitPtr, ParsedString);
+			AddItemToBitString(FullVertex.Y.Size6bits, BitPtr, ParsedString);
+			AddItemToBitString(FullVertex.CurvatureType, BitPtr, ParsedString);
 		}
 	}
 	else  
@@ -173,8 +173,8 @@ void CPavementItem::Encode(	EShapeType ShapeType, ETextureType TextureType, Int4
 		{
 			SVertexParameters FullVertex;
 			AddItemToBitString(FullVertex.X.Size8bits, BitPtr, ParsedString);
-			AddItemToBitString(FullVertex.X.Size8bits, BitPtr, ParsedString);
-			AddItemToBitString(FullVertex.X.Size8bits, BitPtr, ParsedString);
+			AddItemToBitString(FullVertex.Y.Size8bits, BitPtr, ParsedString);
+			AddItemToBitString(FullVertex.CurvatureType, BitPtr, ParsedString);
 		}
 	}
 

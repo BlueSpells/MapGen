@@ -35,16 +35,17 @@ CComplexItem::~CComplexItem(void)
 }
 
 
-void CComplexItem::Encode(int ComplexItemUID, int NumberOfEncodedItems,
+void CComplexItem::Encode(Int5Bit ComplexItemUID, Int5Bit NumberOfEncodedItems,
 			bool IsVerticalMirror, bool IsHorizontalMirror, 
 			bool IsVerticalReplication, bool IsHorizontalReplication, bool IsReplicationPartOfDefinition,
 			SReplication *VerticalReplication /*= NULL*/, SReplication *HorizontalReplication /*= NULL*/)
 {
 	m_IsFirstDefinitionOfComplexItem = true;
 
-	Int5Bit UID = ConvertIntToInt5Bit(ComplexItemUID);
+//	Int5Bit UID = ConvertIntToInt5Bit(ComplexItemUID);
+//	Int5Bit NumberOfObjectsInComplex = ConvertIntToInt5Bit(NumberOfEncodedItems);
 
-	size_t NumberOfBits	= BitSize(UID) 
+	size_t NumberOfBits	= BitSize(ComplexItemUID) 
 		+ BitSize(NumberOfEncodedItems) 
 		+ BitSize(IsVerticalMirror)
 		+ BitSize(IsHorizontalMirror)
@@ -57,7 +58,7 @@ void CComplexItem::Encode(int ComplexItemUID, int NumberOfEncodedItems,
 	IncreaseBitBufferSize(NumberOfBits);
 
 	CBitPointer BitPtr = AllocateBitBuffer();
-	BitCopyAndContinue(BitPtr, UID);
+	BitCopyAndContinue(BitPtr, ComplexItemUID);
 	BitCopyAndContinue(BitPtr, NumberOfEncodedItems);
 	BitCopyAndContinue(BitPtr, IsVerticalMirror);
 	BitCopyAndContinue(BitPtr, IsHorizontalMirror);
@@ -77,7 +78,7 @@ void CComplexItem::Encode(int ComplexItemUID, int NumberOfEncodedItems,
 }
 
 
-void CComplexItem::Encode(int ComplexItemUID, std::vector<IItem *> ListOfEncodedItems,
+void CComplexItem::Encode(Int5Bit ComplexItemUID, std::vector<IItem *> ListOfEncodedItems,
 			bool IsVerticalMirror, bool IsHorizontalMirror, 
 			bool IsVerticalReplication, bool IsHorizontalReplication, bool IsReplicationPartOfDefinition,
 			SReplication *VerticalReplication/* = NULL*/, SReplication *HorizontalReplication/* = NULL*/)
@@ -103,13 +104,13 @@ void CComplexItem::Encode(int ComplexItemUID, std::vector<IItem *> ListOfEncoded
 	}
 }
 
-void CComplexItem::Encode(int ComplexItemUID, bool IsVerticalMirror, bool IsHorizontalMirror, 
+void CComplexItem::Encode(Int5Bit ComplexItemUID, bool IsVerticalMirror, bool IsHorizontalMirror, 
 						  bool IsVerticalReplication, bool IsHorizontalReplication,
 						  SReplication *VerticalReplication/* = NULL*/, SReplication *HorizontalReplication /*= NULL*/)
 {
-	Int5Bit UID = ConvertIntToInt5Bit(ComplexItemUID);
+//	Int5Bit UID = ConvertIntToInt5Bit(ComplexItemUID);
 		
-	size_t NumberOfBits	= BitSize(UID)
+	size_t NumberOfBits	= BitSize(ComplexItemUID)
 		+ BitSize(IsVerticalMirror)
 		+ BitSize(IsHorizontalMirror)
 		+ BitSize(IsVerticalReplication)
@@ -120,7 +121,7 @@ void CComplexItem::Encode(int ComplexItemUID, bool IsVerticalMirror, bool IsHori
 	IncreaseBitBufferSize(NumberOfBits);
 
 	CBitPointer BitPtr = AllocateBitBuffer();
-	BitCopyAndContinue(BitPtr, UID);
+	BitCopyAndContinue(BitPtr, ComplexItemUID);
 	BitCopyAndContinue(BitPtr, IsVerticalMirror);
 	BitCopyAndContinue(BitPtr, IsHorizontalMirror);
 	BitCopyAndContinue(BitPtr, IsVerticalReplication);

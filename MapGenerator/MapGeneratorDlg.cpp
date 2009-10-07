@@ -224,7 +224,7 @@ void CMapGeneratorDlg::OnBnClickedAddObject()
 	SReplication Rep(25, 5);
 
 	CComplexItem Complex;
-	Complex.Encode(3, ItemsInComplex, true, false, false, true, true, NULL, &Rep);
+	Complex.Encode(ConvertIntToInt5Bit(3), ItemsInComplex, true, false, false, true, true, NULL, &Rep);
 
 
 	int UsedBits = 0;
