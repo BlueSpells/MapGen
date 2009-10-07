@@ -93,13 +93,16 @@ std::string CSimpleScriptReader::CleanTabsAndSpaces(std::string &Argument)
 			continue;
 		}
 
-		if (LineFromFile.GetLength() == 0)
+#pragma warning(push)
+#pragma warning (disable:4239)
+		if (CleanTabsAndSpaces(std::string(LineFromFile)).size() == 0)
 		{
 			LogEvent(LE_INFO, __FUNCTION__ ": Line #%d is empty. Moving to next line..", m_LineIndex);
 			FirstLineOfCommand = m_LineIndex + 1;
 			iLineInCommand = 0;
 			continue;
 		}
+#pragma warning(pop)
 
 		CTokenParser Parser(LineFromFile);
 
