@@ -41,20 +41,17 @@ CPavementCommand::~CPavementCommand(void)
 	if (!ExtractAndInterperetArgumentValue(ContextLine, PavementCommand, IsAdjacentToParking, ParsedArguments, IsAdjacentToParkingValue))
 		return CommandFailed;
 
+	// Dealing with the following union field differently than normal.
+	// Instead of first getting the union and then parsing it, the code asks directly for the 
+	// exact union value by using different names of the different union possibilities:
 	USizeOrSide SizeOrSide_Value;
-	// First parse the union itself
-	std::string SizeOrSideStr;
-	if (!ExtractAndInterperetArgumentValue(ContextLine, PavementCommand, SizeOrSide, ParsedArguments, SizeOrSideStr))
-		return CommandFailed;
-
-	// then parse its fields
 	if (IsAdjacentToParkingValue)
 	{
-		if (!ExtractAndInterperetUnionField(ContextLine, SizeOrSide, SizeOrSide_Side, SizeOrSideStr, SizeOrSide_Value.Side))
+		if (!ExtractAndInterperetArgumentValue(ContextLine, PavementCommand, SizeOrSide_Side, ParsedArguments, SizeOrSide_Value.Side))
 			return CommandFailed;
 	}
 	else
-		if (!ExtractAndInterperetUnionField(ContextLine, SizeOrSide, SizeOrSide_Size, SizeOrSideStr, SizeOrSide_Value.Size))
+		if (!ExtractAndInterperetArgumentValue(ContextLine, PavementCommand, SizeOrSide_Size, ParsedArguments, SizeOrSide_Value.Size))
 			return CommandFailed;
 
 	ECurvatureType SpecialVertexCurvatureValue;
@@ -72,9 +69,9 @@ CPavementCommand::~CPavementCommand(void)
 	if(!ExtractAndInterperetArgumentValue(ContextLine, PavementCommand, VertexList, ParsedArguments, ListOfVerticesVector))
 		return CommandFailed;
 
-	int ListOfVerticesSize = int(ShapeValue) + 2 - int(IsAdjacentToParkingValue);
+	int ListOfVerticesSize = (int)ShapeValue + 2 - (int)IsAdjacentToParkingValue;
 	
-	for (int i =0; i < ListOfVerticesSize; i++)
+	for (unsigned int i =0; i < ListOfVerticesVector.size(); i++)
 	{
 		SVertexParameters FullVertexValue;
 		std::vector<std::string> FullVertexVector;
