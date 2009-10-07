@@ -55,7 +55,7 @@ void CParkingMapHeader::Encode(SParkingGarageID GarageID, ETextLanguage TextLang
 		BitCopyAndContinue(BitPtr, TargetPosition.Y);
 	}
 	if (IsTargetDescription)
-		/*BitCopyAndContinue(BitPtr, TargetDescription)*/;
+		/*BitCopyAndContinue(BitPtr, TargetDescription)*/BitPtr;
 }
 
 /*virtual*/ void CParkingMapHeader::Decode(IN const CBitPointer &Data, IN OUT int &UsedBits, IN int * /*Context unnecessary*/)
@@ -85,7 +85,7 @@ void CParkingMapHeader::Encode(SParkingGarageID GarageID, ETextLanguage TextLang
 	}
 
 	if (m_IsTargetDescription)
-		/*BitPasteAndContinue(BitPtr, m_TargetDescription)*/;
+		/*BitPasteAndContinue(BitPtr, m_TargetDescription)*/BitPtr;
 
 
 	UsedBits = (int)(BitPtr - Data);
@@ -119,7 +119,7 @@ void CParkingMapHeader::Encode(SParkingGarageID GarageID, ETextLanguage TextLang
 		AddItemToBitString(m_TargetPosition.Y, BitPtr, ParsedString);
 	}
 	if (m_IsTargetDescription)
-		/*AddItemToBitString(m_TargetDescription, BitPtr, ParsedString)*/;
+		/*AddItemToBitString(m_TargetDescription, BitPtr, ParsedString)*/BitPtr;
 
 	return ParsedString;
 }

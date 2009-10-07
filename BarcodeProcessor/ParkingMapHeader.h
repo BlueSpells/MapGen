@@ -4,7 +4,7 @@
 
 enum ETextLanguage
 {
-	Empty,		// One space needs to be empty. Doesn't take bits.
+//	Empty,		// One space needs to be empty. Doesn't take bits. - this line is only relevant for Hoffman!!
 	English,
 	Hebrew,
 	ETextLanguage_MaxEnum
