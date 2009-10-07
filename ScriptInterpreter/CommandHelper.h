@@ -354,6 +354,16 @@ static bool IsParameterSignedIntXBit(std::string ParameterType)
 	return (ParameterType.find(SignedInt) == 0 && ParameterType.find(Bit) == ParameterType.size()-3);
 }
 
+
+#define VERIFY_AT_LEAST_ONE_ADDITIONAL_PARAM														\
+if (FurtherDefinitions.size() == 0)																	\
+{																									\
+	LogEvent(LE_ERROR, __FUNCTION__ ": Parameter Type is %s, and expected to have at least one %s defined (mentioned in line %d).", \
+		ParameterType.c_str(), ((ParameterType == Enum) ? "enum value" : "field"), ContextLine);	\
+	return false;																					\
+}
+
+
 template <class T> 
 bool InterperetArgumentValue(int ContextLine, std::vector<std::string> ParameterDefinitionVector, std::string ArgumentValue, T &Value)
 {
@@ -377,27 +387,33 @@ bool InterperetArgumentValue(int ContextLine, std::vector<std::string> Parameter
 	for (unsigned int i = 2; i < ParameterDefinitionVector.size(); i++)
 		FurtherDefinitions.push_back(ParameterDefinitionVector[i]);
 
-	if (FurtherDefinitions.size() == 0)
+	if (ParameterType == Enum)
 	{
-		LogEvent(LE_ERROR, __FUNCTION__ ": Parameter Type is %d, and expected to have at least one %s defined (mentioned in line %d).", 
-			ParameterType.c_str(), ((ParameterType == Enum) ? "enum value" : "field"), ContextLine);
-		return false;
+		VERIFY_AT_LEAST_ONE_ADDITIONAL_PARAM;
+		return InterperetArgumentValueAsEnum(ContextLine, ParameterName, ArgumentValue, Value, FurtherDefinitions);
 	}
 
-	if (ParameterType == Enum)
-		return InterperetArgumentValueAsEnum(ContextLine, ParameterName, ArgumentValue, Value, FurtherDefinitions);
-
 	if (ParameterType == Struct)
+	{
+		VERIFY_AT_LEAST_ONE_ADDITIONAL_PARAM;
 		return InterperetArgumentValueAsStruct(ContextLine, ParameterName, ArgumentValue, (std::vector<std::string> &)Value, FurtherDefinitions);
+	}
 
 	if (ParameterType == Union)
+	{
+		VERIFY_AT_LEAST_ONE_ADDITIONAL_PARAM;
 		return InterperetArgumentValueAsUnion(ContextLine, ParameterName, ArgumentValue, (std::string &)Value);
+	}
 
 	if (ParameterType == List)
+	{
+		VERIFY_AT_LEAST_ONE_ADDITIONAL_PARAM;
 		return InterperetArgumentValueAsList(ContextLine, ParameterName, ArgumentValue, (std::vector<std::string> &)Value, FurtherDefinitions);
+	}
 
-	LogEvent(LE_ERROR, __FUNCTION__ ": Unrecognized Parameter Type definition of %s (Unrecognized Type: %s) (mentioned in line %d).", ParameterName.c_str(), ParameterType.c_str(), ContextLine);
-	Assert(false);
+	LogEvent(LE_ERROR, __FUNCTION__ ": Unrecognized Parameter Type definition of %s (Unrecognized Type: %s) (mentioned in line %d).", 
+		ParameterName.c_str(), ParameterType.c_str(), ContextLine);
+
 	return false;
 }
 
