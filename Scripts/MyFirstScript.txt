@@ -26,7 +26,7 @@ Complex: UID=1 | NumberOfObjects=2 | IsReplicationPartOfDefinition=false | IsVer
 	BasicItem: Type=PayingMachine;
 	Position: Type=ForwardDiagonalJump | dX=5 | dY=8;
 	
-Pavement: Shape=Triangle | Texture=Texture_Pavement | IsAdjacentToParking=true | Side=false | SpecialVertexCurvature=Linear | VertexList={[Linear,2,3]};
+Pavement: Shape=Rect | Texture=Texture_Pavement | Fill=14 | IsAdjacentToParking=false | Size=false | SpecialVertexCurvature=Convex | ShortenVertexCoordinate = 7 | VertexList={[Linear,2,3] [Convex,4,5] [Rectangular,7,8]};
 End
 
 {  [x,1,2]  }

@@ -155,13 +155,6 @@ static const std::string VerticalReplication_TimesToReplicate		= "TimesToReplica
 static const std::string HorizontalReplication						= "HorizontalReplication, struct, GapBetweenReplicas, TimesToReplicate";
 static const std::string HorizontalReplication_GapBetweenReplicas	= "GapBetweenReplicas, Int6Bit";
 static const std::string HorizontalReplication_TimesToReplicate		= "TimesToReplicate, Int6Bit";
-//static const std::string ListOfEncodedItems							= "ListOfEncodedItems, list, 2, -1" ;
-//static const std::string ListOfEncodedItems_Item					= "Item, IItem" ;
-
-
-
-
-
 
 
 // Pavement Syntax:

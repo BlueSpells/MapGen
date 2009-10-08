@@ -69,8 +69,10 @@ CPavementCommand::~CPavementCommand(void)
 	if(!ExtractAndInterperetArgumentValue(ContextLine, PavementCommand, VertexList, ParsedArguments, ListOfVerticesVector))
 		return CommandFailed;
 
-	int ListOfVerticesSize = (int)ShapeValue + 2 - (int)IsAdjacentToParkingValue;
-	
+	unsigned int ListOfVerticesSize = (int)ShapeValue + 2 - (int)IsAdjacentToParkingValue;
+	if (!(ListOfVerticesSize ==	ListOfVerticesVector.size()))
+		return CommandFailed;
+
 	for (unsigned int i =0; i < ListOfVerticesVector.size(); i++)
 	{
 		SVertexParameters FullVertexValue;
@@ -95,7 +97,7 @@ CPavementCommand::~CPavementCommand(void)
 				return CommandFailed;
 		}
 		else
-		{
+		{ //8 bit
 			if (!ExtractAndInterperetStructField(ContextLine, VertexList_VertexParameters, VertexList_VertexParameters_X, FullVertexVector, FullVertexCoordinatesStr))
 				return CommandFailed;
 			if (!ExtractAndInterperetUnionField(ContextLine, VertexList_VertexParameters_X, VertexList_VertexParameters_X_Size8bits, FullVertexCoordinatesStr, FullVertexValue.X.Size8bits))
@@ -109,57 +111,46 @@ CPavementCommand::~CPavementCommand(void)
 		ListOfVerticesValue.push_back(FullVertexValue);
 	}
 
+	CString TextureAndFillStr;
+	if (!IsAdjacentToParkingValue)
+	{
+		TextureAndFillStr.Format(" Texture = %s,", EnumToString(TextureValue).c_str());
+		if (TextureValue == SolidFill)
+			TextureAndFillStr.AppendFormat(" FillType = %d,", FillValue);
+	}
+
+	CString ShortenVertexCoordinateStr;
+	if (IsAdjacentToParkingValue)
+		ShortenVertexCoordinateStr.Format(" ShortenVertexCoordinate = %d,", ShortenVertexCoordinateValue);
+
+
+	CString SizeOrSideStr;
+	if (IsAdjacentToParkingValue)
+		SizeOrSideStr.Format("Side=%s", BooleanStr(SizeOrSide_Value.Side));
+	else
+		SizeOrSideStr.Format("Size=%s", BooleanStr(SizeOrSide_Value.Size));
+
+	CString ListOfVerticesStr;
+	if (IsAdjacentToParkingValue || SizeOrSide_Value.Size)
+		ListOfVerticesStr = "Vertex(6bit)=";
+	else
+		ListOfVerticesStr = "Vertex(8bit)=";
+	for (unsigned int i =0; i < ListOfVerticesValue.size(); i++)
+	{
+		if (IsAdjacentToParkingValue || SizeOrSide_Value.Size)
+			ListOfVerticesStr.AppendFormat("(%s, %d, %d)", EnumToString(ListOfVerticesValue[i].CurvatureType).c_str(), ListOfVerticesValue[i].X.Size6bits, ListOfVerticesValue[i].Y.Size6bits);
+		else
+			ListOfVerticesStr.AppendFormat("(%s, %d, %d)", EnumToString(ListOfVerticesValue[i].CurvatureType).c_str(), ListOfVerticesValue[i].X.Size8bits, ListOfVerticesValue[i].Y.Size8bits);
+	}
 
 
 	CPavementItem *PavementItem = new CPavementItem;
 	PavementItem->Encode(ShapeValue, TextureValue, FillValue, IsAdjacentToParkingValue, SizeOrSide_Value, ListOfVerticesValue, SpecialVertexCurvatureValue, ShortenVertexCoordinateValue );
 
-	if (IsAdjacentToParkingValue || SizeOrSide_Value.Size)
-		LogEvent(LE_INFO, __FUNCTION__ ": %s Command Parsed Successfully: Shape = %s, Texture = %s, FillType = %d, IsAdjacentToParking = %s, SizeOrSide = %s, SpecialVertexCurvature = %s, ShortenVertexCoordinate = %d, Vertex(6bit)=(%s, %d, %d)", 
-			PavementCommand, EnumToString(ShapeValue).c_str(), EnumToString(TextureValue).c_str(), FillValue, BooleanStr(SizeOrSide_Value.Size), EnumToString(SpecialVertexCurvatureValue).c_str(), ShortenVertexCoordinate, 
-			EnumToString(ListOfVerticesValue[0].CurvatureType).c_str(), ListOfVerticesValue[0].X.Size6bits, ListOfVerticesValue[0].Y.Size6bits);
-	else
-		LogEvent(LE_INFO, __FUNCTION__ ": %s Command Parsed Successfully: Shape = %s, Texture = %s, FillType = %d, IsAdjacentToParking = %s, SizeOrSide = %s, SpecialVertexCurvature = %s, ShortenVertexCoordinate = %d, Vertex(8bit)=(%s, %d, %d)", 
-		PavementCommand, EnumToString(ShapeValue).c_str(), EnumToString(TextureValue).c_str(), FillValue, BooleanStr(SizeOrSide_Value.Size), EnumToString(SpecialVertexCurvatureValue).c_str(), ShortenVertexCoordinate, 
-		EnumToString(ListOfVerticesValue[0].CurvatureType).c_str(), ListOfVerticesValue[0].X.Size8bits, ListOfVerticesValue[0].Y.Size8bits);
-
+	LogEvent(LE_INFO, __FUNCTION__ ": %s Command Parsed Successfully: IsAdjacentToParking = %s, %s, Shape = %s,%s SpecialVertexCurvature = %s,%s %s)", 
+		PavementCommand, BooleanStr(IsAdjacentToParkingValue), SizeOrSideStr, EnumToString(ShapeValue).c_str(), TextureAndFillStr, EnumToString(SpecialVertexCurvatureValue).c_str(), ShortenVertexCoordinateStr, ListOfVerticesStr);
 
 	Element = (void *)PavementItem;
 	ElementType = AddItem;
 	return CommandSucceeded;
 }
-
-/*
-
-CComplexItem *ComplexItem = new CComplexItem;
-std::vector<IItem *> ListOfEncodedItemsValue;
-std::vector<std::string> ListOfItemsVector;
-if(!ExtractAndInterperetArgumentValue(ContextLine, ComplexItemCommand, ListOfEncodedItems, ParsedArguments, ListOfItemsVector))
-{
-ComplexItem->Encode(UID_Value, IsVerticalMirrorValue, IsHorizontalMirrorValue, IsVerticalReplicationValue,
-IsHorizontalReplicationValue, ((IsVerticalReplicationValue) ? &VerticalReplicationValue : NULL),
-((IsHorizontalReplicationValue) ? &HorizontalReplicationValue : NULL));
-
-LogEvent(LE_INFO, __FUNCTION__ ": %s Command Parsed Successfully: UID = %d, IsVerticalMirror = %s, IsHorizontalMirror = %s, IsVerticalReplication = %s, IsHorizontalReplication = %s, VerticalReplication = [%d %d], HorizontalReplication = [%d %d])", 
-ComplexItemCommand, UID_Value, BooleanStr(IsVerticalMirrorValue), BooleanStr(IsHorizontalMirrorValue), BooleanStr(IsVerticalReplicationValue), BooleanStr(IsHorizontalReplicationValue), 
-VerticalReplicationValue.TimesToReplicate, VerticalReplicationValue.GapBetweenReplicas, HorizontalReplicationValue.TimesToReplicate, HorizontalReplicationValue.GapBetweenReplicas );
-
-}
-else
-{		
-bool IsReplicationPartOfDefinitionValue;
-if (!ExtractAndInterperetArgumentValue(ContextLine, ComplexItemCommand, IsReplicationPartOfDefinition, ParsedArguments, IsReplicationPartOfDefinitionValue))
-return CommandFailed;
-Int5Bit NumberOfObjectsInComplexValue;
-if (!ExtractAndInterperetArgumentValue(ContextLine, ComplexItemCommand, NumberOfObjectsInComplex, ParsedArguments, NumberOfObjectsInComplexValue))
-return CommandFailed;
-
-for (int i = 0; i < NumberOfObjectsInComplexValue; i++)
-{
-IItem *ItemWithinComplex = NULL;
-if(!ExtractAndInterperetListItem(ContextLine, ListOfEncodedItems, ListOfEncodedItems_Item, ListOfItemsVector, ItemWithinComplex, i))
-return CommandFailed;
-ListOfEncodedItemsValue.push_back(ItemWithinComplex);
-}
-
-*/
