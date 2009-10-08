@@ -52,13 +52,13 @@ static const std::string ParkingGarageID_B					= "B, Int8Bit";
 static const std::string ParkingGarageID_C					= "C, Int8Bit";
 static const std::string ParkingGarageID_D					= "D, Int8Bit";
 
-static const std::string ParkingGarageDimensions			= "ParkingGarageDimensions, struct, Width, Height";
-static const std::string ParkingGarageDimensions_Width		= "Width, Int16Bit";
+static const std::string ParkingGarageDimensions			= "ParkingGarageDimensions, struct, Height, Width";
 static const std::string ParkingGarageDimensions_Height		= "Height, Int16Bit";
+static const std::string ParkingGarageDimensions_Width		= "Width, Int16Bit";
 
-static const std::string ParkingSpaceDimensions				= "ParkingSpaceDimensions, struct, Width, Height";
-static const std::string ParkingSpaceDimensions_Width		= "Width, Int8Bit";
+static const std::string ParkingSpaceDimensions				= "ParkingSpaceDimensions, struct, Height, Width";
 static const std::string ParkingSpaceDimensions_Height		= "Height, Int8Bit";
+static const std::string ParkingSpaceDimensions_Width		= "Width, Int8Bit";
 
 static const std::string FloorAndSection				= "FloorAndSection, struct, Floor, Section";
 static const std::string FloorAndSection_Floor			= "Floor, Int4Bit";

@@ -15,7 +15,7 @@ CSimpleScriptReader::~CSimpleScriptReader(void)
 
 /*virtual*/ bool CSimpleScriptReader::Init()
 {
-	LogEvent(LE_INFOHIGH, __FUNCTION__ ": ScriptReader initialized successfully");
+	LogEvent(LE_INFOLOW, __FUNCTION__ ": ScriptReader initialized successfully");
 	return true;
 }
 
@@ -37,7 +37,7 @@ CSimpleScriptReader::~CSimpleScriptReader(void)
 {
 	m_StreamFile.Close();
 
-	LogEvent(LE_INFOHIGH, __FUNCTION__ ": File Closed");
+	LogEvent(LE_DEBUG, __FUNCTION__ ": File Closed");
 	return true;
 }
 
@@ -87,7 +87,7 @@ std::string CSimpleScriptReader::CleanTabsAndSpaces(std::string &Argument)
 
 		if (LineFromFile[0] == CommentMark[0])
 		{
-			LogEvent(LE_INFO, __FUNCTION__ ": Line #%d contains a comment: %s. Moving to next line..", m_LineIndex, LineFromFile);
+			LogEvent(LE_DEBUG, __FUNCTION__ ": Line #%d contains a comment: %s. Moving to next line..", m_LineIndex, LineFromFile);
 			FirstLineOfCommand = m_LineIndex + 1;
 			iLineInCommand = 0;
 			continue;
@@ -97,7 +97,7 @@ std::string CSimpleScriptReader::CleanTabsAndSpaces(std::string &Argument)
 #pragma warning (disable:4239)
 		if (CleanTabsAndSpaces(std::string(LineFromFile)).size() == 0)
 		{
-			LogEvent(LE_INFO, __FUNCTION__ ": Line #%d is empty. Moving to next line..", m_LineIndex);
+			LogEvent(LE_DEBUG, __FUNCTION__ ": Line #%d is empty. Moving to next line..", m_LineIndex);
 			FirstLineOfCommand = m_LineIndex + 1;
 			iLineInCommand = 0;
 			continue;
@@ -120,7 +120,7 @@ std::string CSimpleScriptReader::CleanTabsAndSpaces(std::string &Argument)
 #pragma warning(pop)
 			if (Command == EndOfScript)
 			{
-				LogEvent(LE_INFOHIGH, __FUNCTION__ ": Reached end of script (line #%d)", m_LineIndex);
+				LogEvent(LE_INFOLOW, __FUNCTION__ ": Reached end of script (line #%d)", m_LineIndex);
 				return true;
 			}
 		}

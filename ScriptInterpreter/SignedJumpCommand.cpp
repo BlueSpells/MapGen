@@ -31,23 +31,31 @@ CSignedJumpCommand::~CSignedJumpCommand(void)
 	bool IsHorizontal = (SignedJumpItemTypeValue == SignedHorizontalJump || SignedJumpItemTypeValue == SignedDiagonalJump);
 	bool IsVertical = (SignedJumpItemTypeValue == SignedVerticalJump || SignedJumpItemTypeValue == SignedDiagonalJump);
 
-	SignedInt8Bit dXValue = ConvertIntToSignedInt8Bit(0);	
+	SignedInt8Bit dXValue = ConvertIntToSignedInt8Bit(0);
+	CString dXStr;
 	if (IsHorizontal) 
+	{
 		if (!ExtractAndInterperetArgumentValue(ContextLine, SignedJumpCommand, Signed_dX, ParsedArguments, dXValue))
 			return CommandFailed;
+		dXStr.Format(", dX = %c%d", ((dXValue.sign) ? '+' : '-'), dXValue.value);
+	}
 
 	SignedInt8Bit dYValue = ConvertIntToSignedInt8Bit(0);
+	CString dYStr;
 	if (IsVertical) 
+	{
 		if (!ExtractAndInterperetArgumentValue(ContextLine, SignedJumpCommand, Signed_dY, ParsedArguments, dYValue))
 			return CommandFailed;
+		dYStr.Format(", dY = %c%d", ((dYValue.sign) ? '+' : '-'), dYValue.value);
+	}
 
 
 	CSignedJumpExtendedItem *SignedJumpExtendedItem = new CSignedJumpExtendedItem;
 	SignedJumpExtendedItem->Encode(SignedJumpItemTypeValue, dXValue, dYValue);
 
 
-	LogEvent(LE_INFO, __FUNCTION__ ": %s Command Parsed Successfully: SignedJumpItemType = %s  [dX,dY]=[%d,%d]), ...", 
-		SignedJumpCommand, EnumToString(SignedJumpItemTypeValue).c_str(), dXValue, dYValue);
+	LogEvent(LE_INFO, __FUNCTION__ ": %s Command Parsed Successfully: SignedJumpItemType = %s%s%s)", 
+		SignedJumpCommand, EnumToString(SignedJumpItemTypeValue).c_str(), dXStr, dYStr);
 
 	Element = (void *)SignedJumpExtendedItem;
 	ElementType = AddItem;

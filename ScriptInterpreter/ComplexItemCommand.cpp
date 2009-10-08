@@ -42,6 +42,7 @@ CComplexItemCommand::~CComplexItemCommand(void)
 		return CommandFailed;
 
 	SReplication VerticalReplicationValue;
+	CString VerticalReplicationStr;
 	VerticalReplicationValue.GapBetweenReplicas = ConvertIntToInt6Bit(0);
 	VerticalReplicationValue.TimesToReplicate = ConvertIntToInt6Bit(0);
 	if (IsVerticalReplicationValue)
@@ -55,9 +56,11 @@ CComplexItemCommand::~CComplexItemCommand(void)
 			return CommandFailed;
 		if (!ExtractAndInterperetStructField(ContextLine, VerticalReplication, VerticalReplication_TimesToReplicate, VerticalReplicationVector, VerticalReplicationValue.TimesToReplicate))
 			return CommandFailed;
+		VerticalReplicationStr.Format(", VerticalReplication = [Gap=%d Replication=%d]", VerticalReplicationValue.GapBetweenReplicas, VerticalReplicationValue.TimesToReplicate);
 	}
 
 	SReplication HorizontalReplicationValue;
+	CString HorizontalReplicationStr;
 	HorizontalReplicationValue.GapBetweenReplicas = ConvertIntToInt6Bit(0);
 	HorizontalReplicationValue.TimesToReplicate = ConvertIntToInt6Bit(0);
 	if (IsHorizontalReplicationValue)
@@ -71,6 +74,7 @@ CComplexItemCommand::~CComplexItemCommand(void)
 			return CommandFailed;
 		if (!ExtractAndInterperetStructField(ContextLine, HorizontalReplication, HorizontalReplication_TimesToReplicate, HorizontalReplicationVector, HorizontalReplicationValue.TimesToReplicate))
 			return CommandFailed;
+		HorizontalReplicationStr.Format(", HorizontalReplication = [Gap=%d Replication=%d]", HorizontalReplicationValue.GapBetweenReplicas, HorizontalReplicationValue.TimesToReplicate);
 	}
 
 	CComplexItem *ComplexItem = new CComplexItem;
@@ -84,9 +88,9 @@ CComplexItemCommand::~CComplexItemCommand(void)
 							IsHorizontalReplicationValue, ((IsVerticalReplicationValue) ? &VerticalReplicationValue : NULL),
 							((IsHorizontalReplicationValue) ? &HorizontalReplicationValue : NULL));
 
-			LogEvent(LE_INFO, __FUNCTION__ ": %s Command Parsed Successfully: UID = %d, IsVerticalMirror = %s, IsHorizontalMirror = %s, IsVerticalReplication = %s, IsHorizontalReplication = %s, VerticalReplication = [%d %d], HorizontalReplication = [%d %d])", 
-				ComplexItemCommand, UID_Value, BooleanStr(IsVerticalMirrorValue), BooleanStr(IsHorizontalMirrorValue), BooleanStr(IsVerticalReplicationValue), BooleanStr(IsHorizontalReplicationValue), 
-				VerticalReplicationValue.TimesToReplicate, VerticalReplicationValue.GapBetweenReplicas, HorizontalReplicationValue.TimesToReplicate, HorizontalReplicationValue.GapBetweenReplicas );
+			LogEvent(LE_INFO, __FUNCTION__ ": %s Command Parsed Successfully: UID = %d, IsVerticalMirror = %s, IsHorizontalMirror = %s, IsVerticalReplication = %s, IsHorizontalReplication = %s,%s%s)", 
+				ComplexItemCommand, UID_Value, BooleanStr(IsVerticalMirrorValue), BooleanStr(IsHorizontalMirrorValue), 
+				BooleanStr(IsVerticalReplicationValue), BooleanStr(IsHorizontalReplicationValue), VerticalReplicationStr, HorizontalReplicationStr);
 		}
 	}
 	else
@@ -98,9 +102,8 @@ CComplexItemCommand::~CComplexItemCommand(void)
 							((IsVerticalReplicationValue) ? &VerticalReplicationValue : NULL),
 							((IsHorizontalReplicationValue) ? &HorizontalReplicationValue : NULL));
 
-		LogEvent(LE_INFO, __FUNCTION__ ": %s Command Parsed Successfully: UID = %d, NumberOfObjectsInComplex = %d, IsReplicationPartOfDefinition = %s, IsVerticalMirror = %s, IsHorizontalMirror = %s, IsVerticalReplication = %s, IsHorizontalReplication = %s, VerticalReplication = [%d %d], HorizontalReplication = [%d %d])", 
-					ComplexItemCommand, UID_Value, NumberOfObjectsInComplexValue, BooleanStr(IsReplicationPartOfDefinitionValue), BooleanStr(IsVerticalMirrorValue), BooleanStr(IsHorizontalMirrorValue), BooleanStr(IsVerticalReplicationValue), BooleanStr(IsHorizontalReplicationValue), 
-					VerticalReplicationValue.TimesToReplicate, VerticalReplicationValue.GapBetweenReplicas, HorizontalReplicationValue.TimesToReplicate, HorizontalReplicationValue.GapBetweenReplicas );
+		LogEvent(LE_INFO, __FUNCTION__ ": %s Command Parsed Successfully: UID = %d, NumberOfObjectsInComplex = %d, IsVerticalMirror = %s, IsHorizontalMirror = %s, IsVerticalReplication = %s, IsHorizontalReplication = %s, IsReplicationPartOfDefinition = %s%s%s)", 
+					ComplexItemCommand, UID_Value, NumberOfObjectsInComplexValue, BooleanStr(IsVerticalMirrorValue), BooleanStr(IsHorizontalMirrorValue), BooleanStr(IsVerticalReplicationValue), BooleanStr(IsHorizontalReplicationValue), BooleanStr(IsReplicationPartOfDefinitionValue), VerticalReplicationStr, HorizontalReplicationStr);
 	}
 
 

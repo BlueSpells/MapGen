@@ -127,11 +127,11 @@ void CScriptCompilerDlg::OnBnClickedButtonLoad()
 		WriteConfigString(ScriptConfigSection, "FileName", m_FileName);
 
 
-		LogEvent(LE_INFOHIGH, __FUNCTION__ ": RAW STRINGS, as they appear in memory: ");
+		LogEvent(LE_DEBUG, __FUNCTION__ ": RAW STRINGS, as they appear in memory: ");
 		for (unsigned int i = 0; i < m_HeaderList.size(); i++)
-			LogEvent(LE_INFOHIGH, __FUNCTION__ ": Header #%d: %s", i, m_HeaderList[i]->GetBitBufferRawString().c_str());
+			LogEvent(LE_DEBUG, __FUNCTION__ ": Header #%d: %s", i, m_HeaderList[i]->GetBitBufferRawString().c_str());
 		for (unsigned int i = 0; i < m_ItemsList.size(); i++)
-			LogEvent(LE_INFOHIGH, __FUNCTION__ ": Item #%d: %s", i, m_ItemsList[i]->GetBitBufferRawString().c_str());
+			LogEvent(LE_DEBUG, __FUNCTION__ ": Item #%d: %s", i, m_ItemsList[i]->GetBitBufferRawString().c_str());
 
 		LogEvent(LE_INFOHIGH, __FUNCTION__ ": PARSED STRINGS, parsed by every item according to the different fields: ");
 		for (unsigned int i = 0; i < m_HeaderList.size(); i++)

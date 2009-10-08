@@ -31,23 +31,32 @@ CPositionCommand::~CPositionCommand(void)
 	bool IsHorizontal = (PositionItemTypeValue == ForwardHorizontalJump || PositionItemTypeValue == ForwardDiagonalJump);
 	bool IsVertical = (PositionItemTypeValue == ForwardVerticalJump || PositionItemTypeValue == ForwardDiagonalJump);
 
-	Int8Bit dXValue = ConvertIntToInt8Bit(0);	
-	if (IsHorizontal) 
+	Int8Bit dXValue = ConvertIntToInt8Bit(0);
+	CString dXStr;
+	if (IsHorizontal)
+	{
 		if (!ExtractAndInterperetArgumentValue(ContextLine, PositionCommand, dX, ParsedArguments, dXValue))
 			return CommandFailed;
+		dXStr.Format(", dX = %d", dXValue);
+	}
+
 	
 	Int8Bit dYValue = ConvertIntToInt8Bit(0);
+	CString dYStr;
 	if (IsVertical) 
+	{
 		if (!ExtractAndInterperetArgumentValue(ContextLine, PositionCommand, dY, ParsedArguments, dYValue))
 			return CommandFailed;
+		dYStr.Format(", dY = %d", dYValue);
+	}
 	
 
 	CPositionItem *PositionItem = new CPositionItem;
 	PositionItem->Encode(PositionItemTypeValue, dXValue, dYValue);
 
 
-	LogEvent(LE_INFO, __FUNCTION__ ": %s Command Parsed Successfully: PositionItemType = %s  [dX,dY]=[%d,%d]), ...", 
-		PositionCommand, EnumToString(PositionItemTypeValue).c_str(), dXValue, dYValue);
+	LogEvent(LE_INFO, __FUNCTION__ ": %s Command Parsed Successfully: PositionItemType = %s%s%s  )", 
+		PositionCommand, EnumToString(PositionItemTypeValue).c_str(), dXStr, dYStr);
 
 	Element = (void *)PositionItem;
 	ElementType = AddItem;

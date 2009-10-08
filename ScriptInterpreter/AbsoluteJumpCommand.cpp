@@ -32,22 +32,30 @@ CAbsoluteJumpCommand::~CAbsoluteJumpCommand(void)
 	bool IsVertical = (AbsoluteJumpItemTypeValue == AbsoluteVerticalJump || AbsoluteJumpItemTypeValue == AbsoluteDiagonalJump);
 
 	Int16Bit XValue = ConvertIntToInt16Bit(0);	
+	CString XStr;
 	if (IsHorizontal) 
+	{
 		if (!ExtractAndInterperetArgumentValue(ContextLine, AbsoluteJumpCommand, X, ParsedArguments, XValue))
 			return CommandFailed;
+		XStr.Format(", dX = %d", XValue);
+	}
 
 	Int16Bit YValue = ConvertIntToInt16Bit(0);
+	CString YStr;
 	if (IsVertical) 
+	{
 		if (!ExtractAndInterperetArgumentValue(ContextLine, AbsoluteJumpCommand, Y, ParsedArguments, YValue))
 			return CommandFailed;
+		YStr.Format(", dY = %d", YValue);
+	}
 
 
 	CAbsoluteJumpExtendedItem *AbsoluteJumpExtendedItem = new CAbsoluteJumpExtendedItem;
 	AbsoluteJumpExtendedItem->Encode(AbsoluteJumpItemTypeValue, XValue, YValue);
 
 
-	LogEvent(LE_INFO, __FUNCTION__ ": %s Command Parsed Successfully: SignedJumpItemType = %s  [dX,dY]=[%d,%d])", 
-		AbsoluteJumpCommand, EnumToString(AbsoluteJumpItemTypeValue).c_str(), XValue, YValue);
+	LogEvent(LE_INFO, __FUNCTION__ ": %s Command Parsed Successfully: SignedJumpItemType = %s%s%s)", 
+		AbsoluteJumpCommand, EnumToString(AbsoluteJumpItemTypeValue).c_str(), XStr, YStr);
 
 	Element = (void *)AbsoluteJumpExtendedItem;
 	ElementType = AddItem;

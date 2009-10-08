@@ -3,8 +3,8 @@
 
 % Some parking items...
 GeneralHeader: Signature=8 | Version=1 | BarcodeType=ParkingMap;
-ParkingMapHeader: ParkingGarageID=[1,2,3,4] | TextLanguage=English | ParkingGarageDimensions=[31,30] | ParkingSpaceDimensions=[3,2] | 
-					FloorAndSection=[1,0] | CurrentPosition=[0,0] | IsTargetPosition=false | IsTargetDescription=false;
+ParkingMapHeader: ParkingGarageID=[1,2,3,4] | TextLanguage=Hebrew | ParkingGarageDimensions=[31,30] | ParkingSpaceDimensions=[3,2] | 
+					FloorAndSection=[5,6] | CurrentPosition=[3,4] | IsTargetPosition=true | IsTargetDescription=false | TargetPosition=[7,8];
 %Parking: Type=BigParking | Angle=Parallel 	 | IsMirrorDoubled=true	| Orientation=Degrees180 | Multiplicity=[false] | StructureShape=[Circular,[1,2]] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[2,Circular];
 %Parking: Type=Regular | Angle=Perpendicular | IsMirrorDoubled=true	| Orientation=Degrees270 | Multiplicity=[true,20] | StructureShape=[AngleUpTo90,2] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[15,Circular];
 Parking: Type=Regular 
@@ -17,16 +17,14 @@ Parking: Type=Regular
 
 % Other Items...
 %BasicItem: Type=PayingMachine;
-%Position: Type=ForwardDiagonalJump | dX=5 | dY=8;
-%SignedJump: Type=CarriageDir | dX=11 | dY=14;
-%AbsoluteJump: Type=AbsoluteDiagonalJump | X=7 | Y=14;
+%Position: Type=CR | dX=5 | dY=8;
+%SignedJump: Type=SignedDiagonalJump | dX=5 | dY=-14;
+AbsoluteJump: Type=AbsoluteVerticalJump | X=7 | Y=14;
 
 % Encoding of a complex item with two inner items
-Complex: UID=1 | NumberOfObjects=2 | IsReplicationPartOfDefinition=false | IsVerticalMirror=true | IsHorizontalMirror=false | IsVerticalReplication=false | IsHorizontalReplication = false;
-	BasicItem: Type=PayingMachine;
-	Position: Type=ForwardDiagonalJump | dX=5 | dY=8;
+%Complex: UID=1 | NumberOfObjects=2 | IsReplicationPartOfDefinition=true | IsVerticalMirror=true | IsHorizontalMirror=false | IsVerticalReplication=true | IsHorizontalReplication = false | VerticalReplication=[1,2] | HorizontalReplication=[3,4];
+%	BasicItem: Type=PayingMachine;
+%	Position: Type=ForwardDiagonalJump | dX=5 | dY=8;
 	
-Pavement: Shape=Rect | Texture=Texture_Pavement | Fill=14 | IsAdjacentToParking=false | Size=false | SpecialVertexCurvature=Convex | ShortenVertexCoordinate = 7 | VertexList={[Linear,2,3] [Convex,4,5] [Rectangular,7,8]};
+%Pavement: Shape=Rect | Texture=Texture_Pavement | Fill=14 | IsAdjacentToParking=false | Size=false | SpecialVertexCurvature=Convex | ShortenVertexCoordinate = 7 | VertexList={[Linear,2,3] [Convex,4,5] [Rectangular,7,8]};
 End
-
-{  [x,1,2]  }

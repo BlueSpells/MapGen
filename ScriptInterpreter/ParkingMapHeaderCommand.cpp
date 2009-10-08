@@ -113,15 +113,17 @@ CParkingMapHeaderCommand::~CParkingMapHeaderCommand(void)
 			return CommandFailed;
 	}
 	
+	CString TargetDescriptionStr;
 	char TargetDescriptionValue[] = {' '};
 	if (IsTargetDescriptionValue)
 	{
-//		char TargetDescriptionValue = 
+//		TargetDescriptionValue = 
+		TargetDescriptionStr.Format(", TargetDescription = %s", TargetDescriptionValue);
 	}
 
-	CString TargetPositionStatus;
+	CString TargetPositionStr;
 	if (IsTargetPositionValue)
-		TargetPositionStatus.Format(", TargetPosition=(%d,%d)", TargetPositionValue.X, TargetPositionValue.Y);
+		TargetPositionStr.Format(", TargetPosition=(%d,%d)", TargetPositionValue.X, TargetPositionValue.Y);
 	
 
 
@@ -131,15 +133,15 @@ CParkingMapHeaderCommand::~CParkingMapHeaderCommand(void)
 							TargetPositionValue, TargetDescriptionValue);
 
 
-	LogEvent(LE_INFO, __FUNCTION__ ": %s Command Parsed Successfully: GarageID = %d %d %d %d, Language = %s, GarageDimensions = [%d %d], ParkingSpaceDimensions = [%d %d], Floor = %d, Section = %d, CurrentPosition = (%d %d), TargetPositionStatus = %s %s, TargetDescriptionStatus = [] )", 
+	LogEvent(LE_INFO, __FUNCTION__ ": %s Command Parsed Successfully: GarageID = %d %d %d %d, Language = %s, GarageDimensions = [%d %d], ParkingSpaceDimensions = [%d %d], Floor = %d, Section = %d, CurrentPosition = (%d %d), IsTargetPositionStatus = %s, IsTargetDescriptionStatus = %s%s%s)", 
 		ParkingMapHeaderCommand, ParkingGarageID_Value.A, ParkingGarageID_Value.B, 
 		ParkingGarageID_Value.C, ParkingGarageID_Value.D, EnumToString(TextLanguageValue).c_str(),
-		ParkingGarageDimensionsValue.Width, ParkingGarageDimensionsValue.Height,
-		ParkingSpaceDimensionsValue.Width, ParkingSpaceDimensionsValue.Height,
+		ParkingGarageDimensionsValue.Height, ParkingGarageDimensionsValue.Width,
+		ParkingSpaceDimensionsValue.Height, ParkingSpaceDimensionsValue.Width,
 		FloorAndSectionValue.Floor, FloorAndSectionValue.Section,
 		CurrentPositionValue.X, CurrentPositionValue.Y,
-		BooleanStr(IsTargetPositionValue), ((IsTargetPositionValue) ? TargetPositionStatus : "")/*,
-		BooleanStr(IsTargetDescriptionValue), ((IsTargetDescriptionValue) ? TargetDescriptionValue : NULL)*/);
+		BooleanStr(IsTargetPositionValue), BooleanStr(IsTargetDescriptionValue), 
+		TargetPositionStr, TargetDescriptionStr);
 
 
 	Element = (void *)ParkingMapHeader;
