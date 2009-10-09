@@ -210,12 +210,12 @@ void CMapGeneratorDlg::OnBnClickedAddObject()
 	{
 	case NORMAL_PARKING:
 		ParkingItem = new CParkingItem;
-		((CParkingItem *)ParkingItem)->Encode(Perpendicular, Regular, false, Degrees0, Structure, false);
+		((CParkingItem *)ParkingItem)->Encode(Perpendicular, Regular, false, false, Degrees0, Structure, false);
 		break;
 	case PARALLEL_PARKING:
 		SPeriodicBetweenPoles Periodic(12, SPeriodicBetweenPoles::Circular);
 		ParkingItem = new CParkingItem;
-		((CParkingItem *)ParkingItem)->Encode(Parallel, Handicap, true, Degrees180, Structure, true, &Periodic);
+		((CParkingItem *)ParkingItem)->Encode(Parallel, Handicap, true, false, Degrees180, Structure, true, &Periodic);
 		break;
 	};
 

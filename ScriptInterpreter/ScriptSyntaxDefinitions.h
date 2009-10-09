@@ -83,12 +83,13 @@ static const char *ParkingCommand = "Parking";
 static const std::string ParkingAngle			= "Angle, enum, Perpendicular, Parallel, Right45Degrees, Left45Degrees";
 static const std::string ParkingType			= "Type, enum, Regular, Handicap, Bikes, BigParking";
 static const std::string IsMirrorDoubled		= "IsMirrorDoubled, bool";
+static const std::string IsWallBetweenMirrors 	= "IsWallBetweenMirrors, bool";
 static const std::string Orientation			= "Orientation, enum, Degrees0, Degrees90, Degrees180, Degrees270";
 static const std::string IsPeriodicBetweenPoles = "IsPeriodicBetweenPoles, bool";
 
 static const std::string PeriodicBetweenPoles						= "PeriodicBetweenPoles, struct, NumberOfParkingPlaces, PolesType";
 static const std::string PeriodicBetweenPoles_NumberOfParkingPlaces = "NumberOfParkingPlaces, Int4Bit";
-static const std::string PeriodicBetweenPoles_PolesType				= "PolesType, enum, MarksOnRoad, Circular, Squared, Rectangular, EPolesType_MaxEnum";
+static const std::string PeriodicBetweenPoles_PolesType				= "PolesType, enum, MarksOnRoad, Circular, Squared, Wall, EPolesType_MaxEnum";
 
 static const std::string Multiplicity						= "Multiplicity, struct, IsMultiplied, Multiples";
 static const std::string Multiplicity_IsMultiplied			= "IsMultiplied, bool";

@@ -69,7 +69,15 @@ CPavementCommand::~CPavementCommand(void)
 	if(!ExtractAndInterperetArgumentValue(ContextLine, PavementCommand, VertexList, ParsedArguments, ListOfVerticesVector))
 		return CommandFailed;
 
-	unsigned int ListOfVerticesSize = (int)ShapeValue + 2 - (int)IsAdjacentToParkingValue;
+	unsigned int ListOfVerticesSize;
+	if ((ShapeValue == Rect) && (SpecialVertexCurvatureValue == Rectangular))
+	{
+		ListOfVerticesSize = 1;
+	}
+	else
+	{	
+		ListOfVerticesSize = (int)ShapeValue + 2 - (int)IsAdjacentToParkingValue;
+	}
 	if (!(ListOfVerticesSize ==	ListOfVerticesVector.size()))
 		return CommandFailed;
 

@@ -12,6 +12,7 @@ CParkingItem::CParkingItem(void) : IItem(Parking),
 	m_ParkingAngle((EParkingAngle)0),
 	m_ParkingType((EParkingType)0),
 	m_IsMirrorDoubled(0),
+	m_IsWallBetweenMirrors(0),
 	m_Orientation((EParkingOrientation)0),
 	m_IsPeriodicBetweenPoles(0)
 {
@@ -24,13 +25,14 @@ CParkingItem::~CParkingItem(void)
 
 
 void CParkingItem::Encode(EParkingAngle ParkingAngle, EParkingType ParkingType, 
-						  bool IsMirrorDoubled, EParkingOrientation Orientation,
+						  bool IsMirrorDoubled, bool IsWallBetweenMirrors, EParkingOrientation Orientation,
 						  CItemStructure ItemStructure,
 						  bool IsPeriodicBetweenPoles, SPeriodicBetweenPoles *PeriodicBetweenPoles /*= NULL*/)
 {
 	size_t NumberOfBits	= BitSize(ParkingAngle) 
 						+ BitSize(ParkingType) 
 						+ BitSize(IsMirrorDoubled)
+						+ ((IsMirrorDoubled) ? BitSize(IsWallBetweenMirrors) : 0)
 						+ BitSize(Orientation)
 						+ BitSize(IsPeriodicBetweenPoles)
 						+ ((IsPeriodicBetweenPoles) ? BitSize(*PeriodicBetweenPoles) : 0)
@@ -41,6 +43,8 @@ void CParkingItem::Encode(EParkingAngle ParkingAngle, EParkingType ParkingType,
 	BitCopyAndContinue(BitPtr, ParkingAngle);
 	BitCopyAndContinue(BitPtr, ParkingType);
 	BitCopyAndContinue(BitPtr, IsMirrorDoubled);
+	if (IsMirrorDoubled)
+		BitCopyAndContinue(BitPtr, IsWallBetweenMirrors);
 	BitCopyAndContinue(BitPtr, Orientation);
 	BitCopyAndContinue(BitPtr, IsPeriodicBetweenPoles);
 	if (IsPeriodicBetweenPoles)
@@ -62,6 +66,8 @@ void CParkingItem::Encode(EParkingAngle ParkingAngle, EParkingType ParkingType,
 	BitPasteAndContinue(BitPtr, m_ParkingAngle);
 	BitPasteAndContinue(BitPtr, m_ParkingType);
 	BitPasteAndContinue(BitPtr, m_IsMirrorDoubled);
+	if (m_IsMirrorDoubled)
+		BitPasteAndContinue(BitPtr, m_IsWallBetweenMirrors);
 	BitPasteAndContinue(BitPtr, m_Orientation);
 	BitPasteAndContinue(BitPtr, m_IsPeriodicBetweenPoles);
 	if (m_IsPeriodicBetweenPoles)
@@ -95,6 +101,8 @@ void CParkingItem::Encode(EParkingAngle ParkingAngle, EParkingType ParkingType,
 	AddItemToBitString(m_ParkingAngle, BitPtr, ParsedString);
 	AddItemToBitString(m_ParkingType, BitPtr, ParsedString);
 	AddItemToBitString(m_IsMirrorDoubled, BitPtr, ParsedString);
+	if (m_IsMirrorDoubled)
+		AddItemToBitString(m_IsWallBetweenMirrors, BitPtr, ParsedString);
 	AddItemToBitString(m_Orientation, BitPtr, ParsedString);
 	AddItemToBitString(m_IsPeriodicBetweenPoles, BitPtr, ParsedString);
 	if (m_IsPeriodicBetweenPoles)

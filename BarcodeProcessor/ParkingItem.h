@@ -41,7 +41,7 @@ struct SPeriodicBetweenPoles
 		MarksOnRoad,
 		Circular,
 		Squared,
-		Rectangular,
+		Wall,
 		EPolesType_MaxEnum
 	}PolesType;
 
@@ -59,7 +59,7 @@ public:
 	~CParkingItem(void);
 
 	void Encode(	EParkingAngle ParkingAngle, EParkingType ParkingType, 
-					bool IsMirrorDoubled, EParkingOrientation Orientation,
+					bool IsMirrorDoubled, bool IsWallBetweenMirrors, EParkingOrientation Orientation,
 					CItemStructure ItemStructure,
 					bool IsPeriodicBetweenPoles, SPeriodicBetweenPoles *PeriodicBetweenPoles = NULL);
 
@@ -74,6 +74,7 @@ public:
 	EParkingAngle			m_ParkingAngle;
 	EParkingType			m_ParkingType; 
 	bool					m_IsMirrorDoubled;
+	bool					m_IsWallBetweenMirrors;
 	EParkingOrientation		m_Orientation;
 	CItemStructure			m_ItemStructure;
 	bool					m_IsPeriodicBetweenPoles;

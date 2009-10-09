@@ -111,7 +111,15 @@ void CPavementItem::Encode(	EShapeType ShapeType, ETextureType TextureType, Int4
 	if (m_IsAdjacentToParking)
 		BitPasteAndContinue(BitPtr, m_ShortenVertexCoordinate);
 
-	unsigned int ListOfVerticesSize = (int)m_ShapeType + 2 - (int)m_IsAdjacentToParking;
+	unsigned int ListOfVerticesSize;
+	if ((m_ShapeType == Rect) && (m_SpecialVertexCurvature == Rectangular))
+	{
+		ListOfVerticesSize = 1;
+	}
+	else
+	{	
+		ListOfVerticesSize = (int)m_ShapeType + 2 - (int)m_IsAdjacentToParking;
+	}
 	for (unsigned int i =0; i < ListOfVerticesSize; i++)
 	{
 		SVertexParameters FullVertex;
@@ -128,50 +136,6 @@ void CPavementItem::Encode(	EShapeType ShapeType, ETextureType TextureType, Int4
 		}
 		m_ListOfVertices.push_back(FullVertex);
 	}
-
-/*
-
-	BitPasteAndContinue(BitPtr, m_ShapeType);
-	BitPasteAndContinue(BitPtr, m_TextureType);
-	if (m_TextureType == SolidFill)
-		BitPasteAndContinue(BitPtr, m_FillType);
-	BitPasteAndContinue(BitPtr, m_IsAdjacentToParking);
-	BitCopyAndContinue(BitPtr, m_SpecialVertexCurvature);
-	if (m_IsAdjacentToParking)
-	{
-		BitCopyAndContinue(BitPtr, m_SizeOrSide.Side);
-		BitCopyAndContinue(BitPtr, m_ShortenVertexCoordinate);
-	}
-	else
-		BitCopyAndContinue(BitPtr, m_SizeOrSide.Size);
-
-
-
-	int ListOfVerticesSize = (int)m_ShapeType + 2 - (int)m_IsAdjacentToParking;
-
-	if (m_IsAdjacentToParking || m_SizeOrSide.Size)
-	{ //6 bit
-		for (int i =0; i < ListOfVerticesSize; i++)
-		{
-			SVertexParameters FullVertex;
-			BitPasteAndContinue(BitPtr, FullVertex.X.Size6bits);
-			BitPasteAndContinue(BitPtr, FullVertex.Y.Size6bits);
-			BitPasteAndContinue(BitPtr, FullVertex.CurvatureType);
-			m_ListOfVertices.push_back(FullVertex);
-		}
-	}
-	else  
-	{ //8 bit
-		for (int i = 0; i < ListOfVerticesSize; i++)
-		{
-			SVertexParameters FullVertex;
-			BitPasteAndContinue(BitPtr, FullVertex.X.Size8bits);
-			BitPasteAndContinue(BitPtr, FullVertex.Y.Size8bits);
-			BitPasteAndContinue(BitPtr, FullVertex.CurvatureType);
-			m_ListOfVertices.push_back(FullVertex);
-		}
-	}
-	*/
 
 	UsedBits = (int)(BitPtr - Data);
 }
@@ -202,7 +166,15 @@ void CPavementItem::Encode(	EShapeType ShapeType, ETextureType TextureType, Int4
 	if (m_IsAdjacentToParking)
 		AddItemToBitString(m_ShortenVertexCoordinate, BitPtr, ParsedString);
 
-	unsigned int ListOfVerticesSize = (int)m_ShapeType + 2 - (int)m_IsAdjacentToParking;
+	unsigned int ListOfVerticesSize;
+	if ((m_ShapeType == Rect) && (m_SpecialVertexCurvature == Rectangular))
+	{
+		ListOfVerticesSize = 1;
+	}
+	else
+	{	
+		ListOfVerticesSize = (int)m_ShapeType + 2 - (int)m_IsAdjacentToParking;
+	}
 	for (unsigned int i =0; i < ListOfVerticesSize; i++)
 	{
 		SVertexParameters FullVertex;
@@ -218,45 +190,6 @@ void CPavementItem::Encode(	EShapeType ShapeType, ETextureType TextureType, Int4
 			AddItemToBitString(FullVertex.Y.Size8bits, BitPtr, ParsedString);
 		}
 	}
-
-/*	AddItemToBitString(m_ShapeType, BitPtr, ParsedString);
-	AddItemToBitString(m_TextureType, BitPtr, ParsedString);
-	if (m_TextureType == SolidFill)
-		AddItemToBitString(m_FillType, BitPtr, ParsedString);
-
-	AddItemToBitString(m_IsAdjacentToParking, BitPtr, ParsedString);
-	AddItemToBitString(m_SpecialVertexCurvature, BitPtr, ParsedString);
-	if (m_IsAdjacentToParking)
-	{
-		AddItemToBitString(m_SizeOrSide.Side, BitPtr, ParsedString);
-		AddItemToBitString(m_ShortenVertexCoordinate, BitPtr, ParsedString);
-	}
-	else
-		AddItemToBitString(m_SizeOrSide.Size, BitPtr, ParsedString);
-
-
-	int ListOfVerticesSize = (int)m_ShapeType + 2 - (int)m_IsAdjacentToParking;
-
-	if (m_IsAdjacentToParking || m_SizeOrSide.Size)
-	{ //6 bit
-		for (int i =0; i < ListOfVerticesSize; i++)
-		{
-			SVertexParameters FullVertex;
-			AddItemToBitString(FullVertex.X.Size6bits, BitPtr, ParsedString);
-			AddItemToBitString(FullVertex.Y.Size6bits, BitPtr, ParsedString);
-			AddItemToBitString(FullVertex.CurvatureType, BitPtr, ParsedString);
-		}
-	}
-	else  
-	{ //8 bit
-		for (int i = 0; i < ListOfVerticesSize; i++)
-		{
-			SVertexParameters FullVertex;
-			AddItemToBitString(FullVertex.X.Size8bits, BitPtr, ParsedString);
-			AddItemToBitString(FullVertex.Y.Size8bits, BitPtr, ParsedString);
-			AddItemToBitString(FullVertex.CurvatureType, BitPtr, ParsedString);
-		}
-	}  */
 
 	return ParsedString;
 }

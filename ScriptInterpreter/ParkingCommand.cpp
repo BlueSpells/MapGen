@@ -36,6 +36,15 @@ CParkingCommand::~CParkingCommand(void)
 	if (!ExtractAndInterperetArgumentValue(ContextLine, ParkingCommand, IsMirrorDoubled, ParsedArguments, IsMirrorDoubledValue))
 		return CommandFailed;
 
+	bool IsWallBetweenMirrorsValue = false;
+	CString IsWallBetweenMirrorsStr;
+	if (IsMirrorDoubledValue)
+	{
+		if (!ExtractAndInterperetArgumentValue(ContextLine, ParkingCommand, IsWallBetweenMirrors, ParsedArguments, IsWallBetweenMirrorsValue))
+			return CommandFailed;
+		IsWallBetweenMirrorsStr.Format(", IsWallBetweenMirrors = %s,", BooleanStr(IsWallBetweenMirrorsValue));
+	}
+
 	EParkingOrientation	OrientationValue;
 	if (!ExtractAndInterperetArgumentValue(ContextLine, ParkingCommand, Orientation, ParsedArguments, OrientationValue))
 		return CommandFailed;
@@ -124,7 +133,7 @@ CParkingCommand::~CParkingCommand(void)
 	ItemStructure.Encode(StructureShapeValue, MultiplicityValue);
 
 	CParkingItem *ParkingItem = new CParkingItem;
-	ParkingItem->Encode(ParkingAngleValue, ParkingTypeValue, IsMirrorDoubledValue, OrientationValue, ItemStructure, IsPeriodicBetweenPolesValue, ((IsPeriodicBetweenPolesValue) ? &PeriodicBetweenPolesValue : NULL));
+	ParkingItem->Encode(ParkingAngleValue, ParkingTypeValue, IsMirrorDoubledValue, IsWallBetweenMirrorsValue, OrientationValue, ItemStructure, IsPeriodicBetweenPolesValue, ((IsPeriodicBetweenPolesValue) ? &PeriodicBetweenPolesValue : NULL));
 	
 	CString PeriodicBetweenPolesStatus;
 	if (IsPeriodicBetweenPolesValue)
@@ -154,8 +163,8 @@ CParkingCommand::~CParkingCommand(void)
 		Assert(false);
 	};
 
-	LogEvent(LE_INFO, __FUNCTION__ ": [Line #%d]: %s Command Parsed Successfully: ParkingType = %s, AngleValue = %s, IsMirrorDoubledValue=%s, Orientation=%s, IsPeriodicBetweenPoles=%s%s, IsMultiplied=%s(Multiplies=%d), StructureShapeValue.AngleType=%s%s.", 
-		ContextLine, ParkingCommand, EnumToString(ParkingTypeValue).c_str(), EnumToString(ParkingAngleValue).c_str(), BooleanStr(IsMirrorDoubledValue), EnumToString(OrientationValue).c_str(), 
+	LogEvent(LE_INFO, __FUNCTION__ ": [Line #%d]: %s Command Parsed Successfully: ParkingType = %s, AngleValue = %s, IsMirrorDoubledValue=%s%s, Orientation=%s, IsPeriodicBetweenPoles=%s%s, IsMultiplied=%s(Multiplies=%d), StructureShapeValue.AngleType=%s%s.", 
+		ContextLine, ParkingCommand, EnumToString(ParkingTypeValue).c_str(), EnumToString(ParkingAngleValue).c_str(), BooleanStr(IsMirrorDoubledValue), IsWallBetweenMirrorsStr, EnumToString(OrientationValue).c_str(), 
 		BooleanStr(IsPeriodicBetweenPolesValue), PeriodicBetweenPolesStatus, 
 		BooleanStr(MultiplicityValue.IsMultiplied), ((MultiplicityValue.IsMultiplied) ? MultiplicityValue.Multiples : 0),
 		EnumToString(StructureShapeValue.AngleType).c_str(), StructureShapeStatus);
