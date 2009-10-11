@@ -146,7 +146,7 @@ void CScriptCompilerDlg::OnBnClickedButtonLoad()
 		for (unsigned int i = 0; i < m_ItemsList.size(); i++)
 			BufferBitSize += m_ItemsList[i]->GetBitBufferSize();
 
-		LogEvent(LE_INFOHIGH, __FUNCTION__ ": Script is encoded to a bit buffer with the size of: %d bits", BufferBitSize);
+		LogEvent(LE_INFOHIGH, __FUNCTION__ ": Script is encoded to a bit buffer with the size of: %d bits (%d%%)", BufferBitSize, BufferBitSize*100/2953/8);
 	}
 	else
 	{
