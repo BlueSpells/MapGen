@@ -4,6 +4,12 @@
 #include "Common/collectionhelper.h"
 #include "Common/LogEvent.h"
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 CCommandsDictionary::CCommandsDictionary(void)
 {
 }
@@ -36,6 +42,15 @@ CCommandsDictionary::~CCommandsDictionary(void)
 		m_This = new CCommandsDictionary;
 
 	return m_This;
+}
+
+/*static*/ void CCommandsDictionary::DestroyCommandsDictionary()
+{
+	Assert(m_This != NULL);
+	if (m_This != NULL)
+		delete m_This;
+
+	m_This = NULL;
 }
 
 

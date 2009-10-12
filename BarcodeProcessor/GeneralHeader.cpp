@@ -2,6 +2,13 @@
 #include "GeneralHeader.h"
 #include "BitLib.h"
 
+
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 CGeneralHeader::CGeneralHeader(void) : m_Signature(ConvertIntToInt32Bit(0)), 
 	m_Version(ConvertIntToInt4Bit(0)), m_BarcodeType((EBarcodeType)0)
 {

@@ -14,6 +14,13 @@ CAbsoluteJumpExtendedItem::~CAbsoluteJumpExtendedItem(void)
 {
 }
 
+
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 void CAbsoluteJumpExtendedItem::Encode(EAbsoluteJumpItemType AbsoluteJumpItemType, Int16Bit X, Int16Bit Y)
 {
 	bool IsHorizontal = (AbsoluteJumpItemType == AbsoluteHorizontalJump || AbsoluteJumpItemType == AbsoluteDiagonalJump);

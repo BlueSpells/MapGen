@@ -1,6 +1,13 @@
 #include "StdAfx.h"
 #include "MapViewGenerator.h"
 
+
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 CMapViewGenerator::CMapViewGenerator() : m_MapImage(NULL)
 {
 }

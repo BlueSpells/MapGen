@@ -11,6 +11,13 @@ CBarcodeDecoder::~CBarcodeDecoder(void)
 {
 }
 
+
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 void CBarcodeDecoder::DecodeBuffer(IN BYTE *Data, IN int DataSize, 
 								   OUT std::vector<IHeader *> HeaderList, OUT std::vector<IItem *> ItemList)
 {

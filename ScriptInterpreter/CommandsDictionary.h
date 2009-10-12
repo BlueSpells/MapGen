@@ -9,6 +9,7 @@ class CCommandsDictionary
 // Singleton
 public:
 	static CCommandsDictionary* GetCommandsDictionary();
+	static void					DestroyCommandsDictionary();
 private:
 	static CCommandsDictionary* m_This;
 	CCommandsDictionary(void);

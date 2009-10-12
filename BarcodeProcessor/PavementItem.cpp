@@ -3,6 +3,12 @@
 #include "BitLib.h"
 
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 CPavementItem::CPavementItem(void) : IItem(Pavement),
 	m_ShapeType((EShapeType)0),
 	m_TextureType((ETextureType)0),
