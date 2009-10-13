@@ -6,6 +6,16 @@
 #include "Common/collectionhelper.h"
 #include "ScriptSyntaxDefinitions.h"
 
+static const char* SignedInt	= "SignedInt";
+static const char* Int			= "Int";
+static const char* Bit			= "Bit";
+static const char* Bool			= "bool";
+static const char* Enum			= "enum";
+static const char* Struct		= "struct";
+static const char* Union		= "union";
+static const char* List			= "list";
+
+
 static bool InterperetArgument(IN std::string Argument, OUT std::string &Parameter, OUT std::string &Value)
 {
 	CTokenParser Parser(Argument.c_str());
@@ -58,7 +68,13 @@ static int BitSize(std::string Dummy) {return 0xDeadBabe;}
 
 template <class T> 
 bool InterperetArgumentValueAsIntXBit(int ContextLine, std::string ParameterName, std::string ArgumentValue, T &Value)
-{
+{	
+	ASSERT((std::string(typeid(Value).name())).find(Enum) == 0);
+	ASSERT((std::string(typeid(Value).name())).find(Int) == strlen(Enum)+1);
+	ASSERT((std::string(typeid(Value).name())).find(Bit) == (std::string(typeid(Value).name())).size()-strlen(Bit));
+	ASSERT((std::string(typeid(Value).name())).find(SignedInt) == std::string::npos);
+
+
 	int IntegerValue = atoi(ArgumentValue.c_str());
 	int MaxVal = (int)pow((double)2, BitSize(Value)) - 1;
 	if (IntegerValue > MaxVal)
@@ -83,6 +99,11 @@ bool InterperetArgumentValueAsIntXBit(int ContextLine, std::string ParameterName
 template <class T>
 bool InterperetArgumentValueAsSignedIntXBit(int ContextLine, std::string ParameterName, std::string ArgumentValue, T &Value)
 {
+	ASSERT((std::string(typeid(Value).name())).find(Struct) == 0);
+	ASSERT((std::string(typeid(Value).name())).find(SignedInt) == strlen(Struct)+1);
+	ASSERT((std::string(typeid(Value).name())).find(Bit) == (std::string(typeid(Value).name())).size()-strlen(Bit));
+
+
 	int IntegerValue = atoi(ArgumentValue.c_str());
 	int MaxVal = (int)pow((double)2, BitSize(Value)-1/*the bool takes 1 bit as well*/) - 1;
 	if (IntegerValue > MaxVal)
@@ -155,6 +176,9 @@ static std::vector<std::string> StrToStrVector(std::string Str)
 
 static bool InterperetArgumentValueAsBool(int ContextLine, std::string ParameterName, std::string ArgumentValue, bool &Value)
 {
+	ASSERT((std::string(typeid(Value).name())).find(Bool) == 0);
+
+
 	if (LowerCase(ArgumentValue) == "true")
 	{
 		Value = true;
@@ -173,6 +197,10 @@ static bool InterperetArgumentValueAsBool(int ContextLine, std::string Parameter
 
 static bool InterperetArgumentValueAsUnion(int /*ContextLine*/, std::string ParameterName, std::string ArgumentValue, std::string &Value)
 {
+	ASSERT((std::string(typeid(Value).name())).find("class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >") == 0);
+	// 	and NOT!!: ASSERT((std::string(typeid(Value).name())).find(Union) == std::string::npos);
+
+
 	Value = ArgumentValue; // what else to do?
 	// do nothing at this point. interpretation will be done externally
 	return true;
@@ -181,6 +209,9 @@ static bool InterperetArgumentValueAsUnion(int /*ContextLine*/, std::string Para
 template <class T> 
 bool InterperetArgumentValueAsEnum(int ContextLine, std::string ParameterName, std::string ArgumentValue, T &Value, std::vector<std::string> SortedEnumValues)
 {
+	ASSERT((std::string(typeid(Value).name())).find(Enum) == 0);
+
+
 	for (unsigned int i = 0; i < SortedEnumValues.size(); i++)
 	{
 		if (LowerCase(ArgumentValue) == LowerCase(SortedEnumValues[i]))
@@ -280,6 +311,9 @@ static std::string &CleanCharacter(std::string &Argument, std::string UndesiredC
 
 static bool InterperetArgumentValueAsStruct(int ContextLine, std::string ParameterName, std::string ArgumentValue, std::vector<std::string> &Value, std::vector<std::string> SortedStructFields)
 {
+	ASSERT((std::string(typeid(Value).name())).find("class std::vector<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,class std::allocator<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > > >") == 0);
+
+
 	if (ArgumentValue[0] != StructBegin[0])
 	{
 		LogEvent(LE_ERROR, __FUNCTION__ ": [Line #%d]: Syntax Error. Parameter %s expected to be a struct, and '[' should appear as first character of struct! ArgumentValue=%s", 
@@ -334,15 +368,6 @@ static bool InterperetArgumentValueAsStruct(int ContextLine, std::string Paramet
 
 	return true;
 }
-
-static const char* SignedInt = "SignedInt";
-static const char* Int = "Int";
-static const char* Bit = "Bit";
-static const char* Bool = "bool";
-static const char* Enum = "enum";
-static const char* Struct = "struct";
-static const char* Union = "union";
-static const char* List = "list";
 
 static bool IsParameterIntXBit(std::string ParameterType)
 {
@@ -574,6 +599,9 @@ bool ExtractAndInterperetUnionField(int ContextLine, std::string UnionArgument, 
 
 static bool InterperetArgumentValueAsList(int ContextLine, std::string ParameterName, std::string ArgumentValue, std::vector<std::string> &Value, std::vector<std::string> AdditionalInformation)
 {
+	ASSERT((std::string(typeid(Value).name())).find("class std::vector<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,class std::allocator<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > > >") == 0);
+
+
 	if (ArgumentValue[0] != ListBegin[0])
 	{
 		LogEvent(LE_ERROR, __FUNCTION__ ": [Line #%d]: Syntax Error. Parameter %s expected to be a list, and '{' should appear as first character of list! ArgumentValue=%s", 

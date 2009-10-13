@@ -2,6 +2,13 @@
 #include "PositionItem.h"
 #include "BitLib.h"
 
+
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 // The position jump is restricted to FORWARD RELATIVE
 // Position units will be in physical decimeters (0.1m)
 // The relative position is cyclic

@@ -2,6 +2,13 @@
 #include "ComplexItem.h"
 #include "BitLib.h"
 
+
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 CComplexItem::CComplexItem(void) : IItem(ComplexStructure),
 	m_UID(ConvertIntToInt5Bit(0)), m_IsFirstDefinitionOfComplexItem(false), m_NumberOfObjectsInComplex(ConvertIntToInt5Bit(0)),
 	m_IsVerticalMirror(false), m_IsHorizontalMirror(false), m_IsVerticalReplication(false), 

@@ -15,6 +15,13 @@ CBarcodeEncoder::~CBarcodeEncoder(void)
 {
 }
 
+
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 bool CBarcodeEncoder::CreateHeaders(std::vector<IHeader *>HeaderList)
 {
 	// Can call this function only once, and for empty m_BarcodeBitPointer buffer!!

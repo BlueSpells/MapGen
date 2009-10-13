@@ -7,6 +7,13 @@
 #include "stdafx.h"
 #include "Bit.h"
 
+
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 const int CBit::s_nDirectlyAccessedBits =  sizeof(CBit::Word) * 8;
 
 CBit::CBit()

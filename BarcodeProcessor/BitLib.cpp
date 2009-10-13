@@ -8,6 +8,12 @@
 #include "BitLib.h"
 
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 void bitzero(CBitPointer p_pbitString, size_t p_cLength)
 {
 	CBitPointer pbitDest = p_pbitString;
