@@ -1,4 +1,4 @@
-%Map for image002.jmp (small)
+%Map for image002.jpg (small)
 %-----------------------
 
 GeneralHeader: Signature=8 | Version=1 | BarcodeType=ParkingMap;
@@ -80,7 +80,7 @@ Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=false	| Orientation=Deg
 
 %Upper area left to center(stairs, elevators and other shit)
 AbsoluteJump: Type=AbsoluteVerticalJump | X=100 | Y=0;
-Pavement: Shape=Rect | Texture=Texture_Building | IsAdjacentToParking=false | Size=false | SpecialVertexCurvature=Rectangular | VertexList={[Linear,62,58]};
+Pavement: Shape=Rect | Texture=Texture_Building | IsAdjacentToParking=false | Size=true | SpecialVertexCurvature=Rectangular | VertexList={[Linear,62,58]};
 BasicItem: Type=Staircase;
 BasicItem: Type=Elevator;
 Pavement: Shape=Rect | Texture=Texture_Building | IsAdjacentToParking=false | Size=true | SpecialVertexCurvature=Rectangular | VertexList={[Rectangular,40,12]};
