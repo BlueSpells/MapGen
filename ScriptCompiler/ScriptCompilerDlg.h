@@ -57,6 +57,7 @@ protected:
 
 	std::vector<IItem *> m_ItemsList;
 	std::vector<IHeader *> m_HeaderList;
+	int *m_ItemsCounter;
 
 	void CleanLists();
 };
