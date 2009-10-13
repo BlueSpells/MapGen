@@ -11,12 +11,17 @@
 #include "BarcodeProcessor/ParkingMapHeader.h"
 #include "BarcodeProcessor/GeneralHeader.h"
 
-
+#define HandleDefualtOfEnumToString(EnumType)								\
+	default:																\
+	char TmpStr[64];														\
+	sprintf_s(TmpStr, "%s Unknown Value [%d]", EnumName(EnumType), Value);	\
+	LogEvent(LE_WARNING, __FUNCTION__ ": %s", TmpStr);						\
+	return TmpStr;															
 
 #define EnumName(x) #x
 
-#define DefineEnumToString5(EnumType, Val1, Val2, Val3, Val4, Val5)				\
-	static std::string EnumToString(EnumType Value)									\
+#define DefineEnumToString7(EnumType, Val1, Val2, Val3, Val4, Val5, Val6, Val7)	\
+	static std::string EnumToString(EnumType Value)								\
 {																				\
 	switch(Value)																\
 	{																			\
@@ -25,11 +30,23 @@
 	RETURN_TYPE_STR(Val3);														\
 	RETURN_TYPE_STR(Val4);														\
 	RETURN_TYPE_STR(Val5);														\
-		default:																\
-		char TmpStr[64];														\
-		sprintf_s(TmpStr, "%s Unknown Value [%d]", EnumName(EnumType), Value);	\
-		LogEvent(LE_WARNING, __FUNCTION__ ": %s", TmpStr);						\
-		return TmpStr;															\
+	RETURN_TYPE_STR(Val6);														\
+	RETURN_TYPE_STR(Val7);														\
+	HandleDefualtOfEnumToString(EnumType)										\
+	};																			\
+}\
+
+#define DefineEnumToString5(EnumType, Val1, Val2, Val3, Val4, Val5)				\
+	static std::string EnumToString(EnumType Value)								\
+{																				\
+	switch(Value)																\
+	{																			\
+	RETURN_TYPE_STR(Val1);														\
+	RETURN_TYPE_STR(Val2);														\
+	RETURN_TYPE_STR(Val3);														\
+	RETURN_TYPE_STR(Val4);														\
+	RETURN_TYPE_STR(Val5);														\
+	HandleDefualtOfEnumToString(EnumType)										\
 	};																			\
 }\
 
@@ -42,11 +59,7 @@ static std::string EnumToString(EnumType Value)										\
 		RETURN_TYPE_STR(Val2);													\
 		RETURN_TYPE_STR(Val3);													\
 		RETURN_TYPE_STR(Val4);													\
-		default:																\
-		char TmpStr[64];														\
-		sprintf_s(TmpStr, "%s Unknown Value [%d]", EnumName(EnumType), Value);	\
-		LogEvent(LE_WARNING, __FUNCTION__ ": %s", TmpStr);						\
-		return TmpStr;															\
+		HandleDefualtOfEnumToString(EnumType)									\
 	};																			\
 }\
 
@@ -58,11 +71,7 @@ static std::string EnumToString(EnumType Value)									\
 	RETURN_TYPE_STR(Val1);														\
 	RETURN_TYPE_STR(Val2);														\
 	RETURN_TYPE_STR(Val3);														\
-		default:																\
-		char TmpStr[64];														\
-		sprintf_s(TmpStr, "%s Unknown Value [%d]", EnumName(EnumType), Value);	\
-		LogEvent(LE_WARNING, __FUNCTION__ ": %s", TmpStr);						\
-		return TmpStr;															\
+	HandleDefualtOfEnumToString(EnumType)										\
 	};																			\
 }\
 
@@ -73,11 +82,7 @@ static std::string EnumToString(EnumType Value)									\
 	{																			\
 	RETURN_TYPE_STR(Val1);														\
 	RETURN_TYPE_STR(Val2);														\
-		default:																\
-		char TmpStr[64];														\
-		sprintf_s(TmpStr, "%s Unknown Value [%d]", EnumName(EnumType), Value);	\
-		LogEvent(LE_WARNING, __FUNCTION__ ": %s", TmpStr);						\
-		return TmpStr;															\
+	HandleDefualtOfEnumToString(EnumType)										\
 	};																			\
 }\
 
@@ -88,11 +93,7 @@ static std::string EnumToString(EnumType Value)									\
 	switch(Value)																\
 	{																			\
 	RETURN_TYPE_STR(Val1);														\
-		default:																\
-		char TmpStr[64];														\
-		sprintf_s(TmpStr, "%s Unknown Value [%d]", EnumName(EnumType), Value);	\
-		LogEvent(LE_WARNING, __FUNCTION__ ": %s", TmpStr);						\
-		return TmpStr;															\
+	HandleDefualtOfEnumToString(EnumType)										\
 	};																			\
 }\
 
@@ -111,4 +112,4 @@ DefineEnumToString2(ETextLanguage, English, Hebrew);
 DefineEnumToString4(EShapeType, Triangle, Rect, Pentagon, Hexagon);
 DefineEnumToString4(ETextureType, Texture_Pavement, Texture_Building, Texture_NoParking, SolidFill);
 DefineEnumToString4(ECurvatureType, Linear, Convex, Concave, Rectangular);
-
+DefineEnumToString7(EItemType, SubItem, Parking, Position, Pavement, BasicComponent, ComplexStructure, ExtendedItem);
