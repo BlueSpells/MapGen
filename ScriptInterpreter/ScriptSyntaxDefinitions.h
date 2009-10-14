@@ -89,7 +89,7 @@ static const std::string IsPeriodicBetweenPoles = "IsPeriodicBetweenPoles, bool"
 
 static const std::string PeriodicBetweenPoles						= "PeriodicBetweenPoles, struct, NumberOfParkingPlaces, PolesType";
 static const std::string PeriodicBetweenPoles_NumberOfParkingPlaces = "NumberOfParkingPlaces, Int4Bit";
-static const std::string PeriodicBetweenPoles_PolesType				= "PolesType, enum, MarksOnRoad, Circular, Squared, Wall, EPolesType_MaxEnum";
+static const std::string PeriodicBetweenPoles_PolesType				= "PolesType, enum, Pavement, Circular, Squared, Wall, EPolesType_MaxEnum";
 
 static const std::string Multiplicity						= "Multiplicity, struct, IsMultiplied, Multiples";
 static const std::string Multiplicity_IsMultiplied			= "IsMultiplied, bool";
@@ -143,6 +143,7 @@ static const std::string Y							= "Y, Int16Bit";
 // ---------------
 static const char *ComplexItemCommand = "Complex";
 
+static const std::string IsNew										= "IsNew, bool";
 static const std::string UID										= "UID, Int5Bit";
 static const std::string NumberOfObjectsInComplex					= "NumberOfObjects, Int5Bit";
 static const std::string IsReplicationPartOfDefinition				= "IsReplicationPartOfDefinition, bool";

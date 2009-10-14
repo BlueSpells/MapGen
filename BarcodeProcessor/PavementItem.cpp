@@ -32,7 +32,7 @@ void CPavementItem::Encode(	EShapeType ShapeType, ETextureType TextureType, Int4
 	size_t NumberOfBits	= BitSize(ShapeType) 
 						+ ((!IsAdjacentToParking) ? BitSize(TextureType) : 0 )
 						+ (((TextureType == SolidFill) && (!IsAdjacentToParking)) ? BitSize(FillType) : 0)
-						+ BitSize(IsAdjacentToParking)
+//						+ BitSize(IsAdjacentToParking)
 						+ ((IsAdjacentToParking) ? BitSize(SizeOrSide.Side) : BitSize(SizeOrSide.Size))
 						+ BitSize(SpecialVertexCurvature)
 						+ ((IsAdjacentToParking) ? BitSize(ShortenVertexCoordinate) : 0);
@@ -54,7 +54,7 @@ void CPavementItem::Encode(	EShapeType ShapeType, ETextureType TextureType, Int4
 	IncreaseBitBufferSize(NumberOfBits);
 
 	CBitPointer BitPtr = AllocateBitBuffer();
-	BitCopyAndContinue(BitPtr, IsAdjacentToParking);
+//	BitCopyAndContinue(BitPtr, IsAdjacentToParking);
 	if (IsAdjacentToParking)
 	{
 		BitCopyAndContinue(BitPtr, SizeOrSide.Side);
@@ -92,12 +92,14 @@ void CPavementItem::Encode(	EShapeType ShapeType, ETextureType TextureType, Int4
 }
 
 
-/*virtual*/ void CPavementItem::Decode(IN const CBitPointer &Data, IN OUT int &UsedBits, IN int* /*Context unnecessary*/)
+/*virtual*/ void CPavementItem::Decode(IN const CBitPointer &Data, IN OUT int &UsedBits, IN int *Context)
 {
+	bool m_IsAdjacentToParking = *(bool *)Context;
+
 	int BitsToRead = UsedBits; BitsToRead;
 	CBitPointer BitPtr = Data + BitSize(GetType());
 
-	BitPasteAndContinue(BitPtr, m_IsAdjacentToParking);
+//	BitPasteAndContinue(BitPtr, m_IsAdjacentToParking);
 	if (m_IsAdjacentToParking)
 	{
 		BitPasteAndContinue(BitPtr, m_SizeOrSide.Side);
@@ -150,9 +152,9 @@ void CPavementItem::Encode(	EShapeType ShapeType, ETextureType TextureType, Int4
 /*virtual*/	std::string	CPavementItem::GetItemBitBufferParsedString(std::string ParsedString, CBitPointer BitPtr)
 {
 	int UsedBits = 0;
-	Decode(GetBitBuffer(), UsedBits, NULL);
+	Decode(GetBitBuffer(), UsedBits, (int*)&m_IsAdjacentToParking);
 	
-	AddItemToBitString(m_IsAdjacentToParking, BitPtr, ParsedString);
+//	AddItemToBitString(m_IsAdjacentToParking, BitPtr, ParsedString);
 	if (m_IsAdjacentToParking)
 	{
 		AddItemToBitString(m_SizeOrSide.Side, BitPtr, ParsedString);

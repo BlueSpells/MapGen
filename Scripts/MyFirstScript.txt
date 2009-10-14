@@ -19,12 +19,12 @@ Parking: Type=Regular
 %BasicItem: Type=PayingMachine;
 %Position: Type=CR | dX=5 | dY=8;
 %SignedJump: Type=SignedDiagonalJump | dX=5 | dY=-14;
-AbsoluteJump: Type=AbsoluteVerticalJump | X=7 | Y=14;
+%AbsoluteJump: Type=AbsoluteVerticalJump | X=7 | Y=14;
 
 % Encoding of a complex item with two inner items
-%Complex: UID=1 | NumberOfObjects=2 | IsReplicationPartOfDefinition=true | IsVerticalMirror=true | IsHorizontalMirror=false | IsVerticalReplication=true | IsHorizontalReplication = false | VerticalReplication=[1,2] | HorizontalReplication=[3,4];
-%	BasicItem: Type=PayingMachine;
-%	Position: Type=ForwardDiagonalJump | dX=5 | dY=8;
+%Complex: UID=1 | IsNew = true |NumberOfObjects=2 | IsReplicationPartOfDefinition=true | IsVerticalMirror=true | IsHorizontalMirror=false | IsVerticalReplication=true | IsHorizontalReplication = false | VerticalReplication=[1,2] | HorizontalReplication=[3,4];
+	BasicItem: Type=PayingMachine;
+	Position: Type=ForwardDiagonalJump | dX=5 | dY=8;
 	
 %Pavement: Shape=Rect | Texture=Texture_Pavement | Fill=14 | IsAdjacentToParking=false | Size=false | SpecialVertexCurvature=Convex | ShortenVertexCoordinate = 7 | VertexList={[Linear,2,3] [Convex,4,5] [Rectangular,7,8]};
 End

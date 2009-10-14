@@ -35,7 +35,7 @@ Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=true	|  IsWallBetweenMi
 SignedJump: Type=SignedDiagonalJump | dX=40 | dY=-46;
 SignedJump: Type=CarriageDir; 
 %Horizontal
-Complex: UID=1 | NumberOfObjects=4 | IsReplicationPartOfDefinition=true | IsVerticalMirror=false | IsHorizontalMirror=false | IsVerticalReplication=true | IsHorizontalReplication = false | VerticalReplication=[32,1];
+Complex: UID=1 | IsNew = true | NumberOfObjects=4 | IsReplicationPartOfDefinition=true | IsVerticalMirror=false | IsHorizontalMirror=false | IsVerticalReplication=true | IsHorizontalReplication = false | VerticalReplication=[32,1];
 Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=true	|  IsWallBetweenMirrors=true | Orientation=Degrees90 | Multiplicity=[false] | StructureShape=[None,0] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[3,Squared];
 Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=true	|  IsWallBetweenMirrors=false | Orientation=Degrees90 | Multiplicity=[true,2] | StructureShape=[None,0] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[3,Squared];
 Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=true	|  IsWallBetweenMirrors=false | Orientation=Degrees90 | Multiplicity=[false] | StructureShape=[None,0] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[2,Squared];
