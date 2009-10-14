@@ -103,37 +103,41 @@ CParkingCommand::~CParkingCommand(void)
 	// then parse its fields
 	if (!ExtractAndInterperetStructField(ContextLine, StructureShape, StructureShape_AngleType, StructureShapeVector, StructureShapeValue.AngleType))
 		return CommandFailed;
-	std::string UnionStr;
-	if (!ExtractAndInterperetStructField(ContextLine, StructureShape, StructureShape_Shape, StructureShapeVector, UnionStr))
-		return CommandFailed;
 
-	switch (StructureShapeValue.AngleType)
+	if (StructureShapeValue.AngleType != SStructureShape::None)
 	{
-	case SStructureShape::None:
-		break;
-	case SStructureShape::AngleUpTo90:
-		if (!ExtractAndInterperetUnionField(ContextLine, StructureShape_Shape, StructureShape_Shape_SmallAngle, UnionStr, StructureShapeValue.Shape.SmallAngle))
-			return CommandFailed;
-		break;
-	case SStructureShape::AngleUpTo360:
-		if (!ExtractAndInterperetUnionField(ContextLine, StructureShape_Shape, StructureShape_Shape_BigAngle, UnionStr, StructureShapeValue.Shape.BigAngle))
-			return CommandFailed;
-		break;
-	case SStructureShape::Circular:
-	{
-		std::vector<std::string> RadiusCoordinatesVector;
-		if (!ExtractAndInterperetUnionField(ContextLine, StructureShape_Shape, StructureShape_Shape_RadiusCoordinates, UnionStr, RadiusCoordinatesVector))
+		std::string UnionStr;
+		if (!ExtractAndInterperetStructField(ContextLine, StructureShape, StructureShape_Shape, StructureShapeVector, UnionStr))
 			return CommandFailed;
 
-		if (!ExtractAndInterperetStructField(ContextLine, StructureShape_Shape_RadiusCoordinates, StructureShape_Shape_RadiusCoordinates_X, RadiusCoordinatesVector, StructureShapeValue.Shape.RadiusCoordinates.X))
-			return CommandFailed;
-		if (!ExtractAndInterperetStructField(ContextLine, StructureShape_Shape_RadiusCoordinates, StructureShape_Shape_RadiusCoordinates_Y, RadiusCoordinatesVector, StructureShapeValue.Shape.RadiusCoordinates.Y))
-			return CommandFailed;
-		break;
+		switch (StructureShapeValue.AngleType)
+		{
+		case SStructureShape::None:
+			break;
+		case SStructureShape::AngleUpTo90:
+			if (!ExtractAndInterperetUnionField(ContextLine, StructureShape_Shape, StructureShape_Shape_SmallAngle, UnionStr, StructureShapeValue.Shape.SmallAngle))
+				return CommandFailed;
+			break;
+		case SStructureShape::AngleUpTo360:
+			if (!ExtractAndInterperetUnionField(ContextLine, StructureShape_Shape, StructureShape_Shape_BigAngle, UnionStr, StructureShapeValue.Shape.BigAngle))
+				return CommandFailed;
+			break;
+		case SStructureShape::Circular:
+			{
+				std::vector<std::string> RadiusCoordinatesVector;
+				if (!ExtractAndInterperetUnionField(ContextLine, StructureShape_Shape, StructureShape_Shape_RadiusCoordinates, UnionStr, RadiusCoordinatesVector))
+					return CommandFailed;
+
+				if (!ExtractAndInterperetStructField(ContextLine, StructureShape_Shape_RadiusCoordinates, StructureShape_Shape_RadiusCoordinates_X, RadiusCoordinatesVector, StructureShapeValue.Shape.RadiusCoordinates.X))
+					return CommandFailed;
+				if (!ExtractAndInterperetStructField(ContextLine, StructureShape_Shape_RadiusCoordinates, StructureShape_Shape_RadiusCoordinates_Y, RadiusCoordinatesVector, StructureShapeValue.Shape.RadiusCoordinates.Y))
+					return CommandFailed;
+				break;
+			}
+		default:
+			Assert(false);
+		};
 	}
-	default:
-		Assert(false);
-	};
 
 	CItemStructure ItemStructure;
 	ItemStructure.Encode(StructureShapeValue, MultiplicityValue);

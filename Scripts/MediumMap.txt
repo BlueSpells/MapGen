@@ -28,18 +28,18 @@ Pavement: Shape=Rect | Texture=Texture_NoParking | IsAdjacentToParking=false | S
 SignedJump: Type=SignedVerticalJump | dY=-162;
 Pavement: Shape=Rect | Texture=Texture_Building | IsAdjacentToParking=false | Size=false | SpecialVertexCurvature=Rectangular | VertexList={[Linear,24,100]};
 Position: Type=ForwardHorizontalJump | dX=10;
-Parking: Type=Handicap | Angle=Parallel | IsMirrorDoubled=false	| Orientation=Degrees0 | Multiplicity=[true,2] | StructureShape=[None,0] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[1,Squared];
+Parking: Type=Handicap | Angle=Parallel | IsMirrorDoubled=false	| Orientation=Degrees0 | Multiplicity=[true,2] | StructureShape=[None] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[1,Squared];
 Position: Type=ForwardVerticalJump | dY=12;
-Parking: Type=Handicap | Angle=Parallel | IsMirrorDoubled=false	| Orientation=Degrees0 | Multiplicity=[false] | StructureShape=[None,0] | IsPeriodicBetweenPoles=false;
-Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=false	| Orientation=Degrees0 | Multiplicity=[true,2] | StructureShape=[None,0] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[3,Squared];
+Parking: Type=Handicap | Angle=Parallel | IsMirrorDoubled=false	| Orientation=Degrees0 | Multiplicity=[false] | StructureShape=[None] | IsPeriodicBetweenPoles=false;
+Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=false	| Orientation=Degrees0 | Multiplicity=[true,2] | StructureShape=[None] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[3,Squared];
 
 %Bottom parking line
 Position: Type=ForwardHorizontalJump | dX=34;
-Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=false	| Orientation=Degrees90 | Multiplicity=[true,9] | StructureShape=[None,0] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[3,Squared];
+Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=false	| Orientation=Degrees90 | Multiplicity=[true,9] | StructureShape=[None] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[3,Squared];
 
 %Right parking line
 Position: Type=CR;
-Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=false | Orientation=Degrees180 | Multiplicity=[true,8] | StructureShape=[None,0] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[3,Squared];
+Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=false | Orientation=Degrees180 | Multiplicity=[true,8] | StructureShape=[None] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[3,Squared];
 BasicItem: Type=Staircase;
 Pavement: Shape=Rect | Texture=Texture_Building | IsAdjacentToParking=false | Size=true | SpecialVertexCurvature=Rectangular | VertexList={[Linear,34,16]};
 %The carriage should now be at the beginning
@@ -64,7 +64,7 @@ SignedJump: Type=SignedHorizontalJump | dX=-12;
 Pavement: Shape=Rect | Texture=Texture_NoParking | IsAdjacentToParking=false | Size=true | SpecialVertexCurvature=Rectangular | VertexList={[Linear,44,56]};
 SignedJump: Type=SignedVerticalJump | dY=-48;
 Complex: UID=2 | NumberOfObjects=2 | IsReplicationPartOfDefinition=false | IsVerticalMirror=false | IsHorizontalMirror=true | IsVerticalReplication=true | IsHorizontalReplication = false | VerticalReplication=[0,2];
-Parking: Type=Handicap | Angle=Parallel | IsMirrorDoubled=true	| IsWallBetweenMirrors=false | Orientation=Degrees180 | Multiplicity=[false] | StructureShape=[None,0] | IsPeriodicBetweenPoles=false;
+Parking: Type=Handicap | Angle=Parallel | IsMirrorDoubled=true	| IsWallBetweenMirrors=false | Orientation=Degrees180 | Multiplicity=[false] | StructureShape=[None] | IsPeriodicBetweenPoles=false;
 Pavement: Shape=Rect | Texture=Texture_NoParking | IsAdjacentToParking=false | Size=true | SpecialVertexCurvature=Rectangular | VertexList={[Linear,50,10]};
 
 %Second parking line
@@ -76,20 +76,20 @@ SignedJump: Type=SignedDiagonalJump | dX=-4 | dY=-126;
 Pavement: Shape=Rect | Texture=Texture_Pavement | IsAdjacentToParking=false | Size=true | SpecialVertexCurvature=Rectangular | VertexList={[Linear,8,30]};
 BasicItem: Type=CarGate;
 Pavement: Shape=Hexagon | Texture=Texture_Pavement | IsAdjacentToParking=false | Size=false | SpecialVertexCurvature=Linear | VertexList={[Linear,0,60] [Linear,18,60] [Linear,18,76] [Linear,50,76] [Concave,0,8]};
-Parking: Type=Handicap | Angle=Parallel | IsMirrorDoubled=false	| IsWallBetweenMirrors=false | Orientation=Degrees180 | Multiplicity=[false] | StructureShape=[None,0] | IsPeriodicBetweenPoles=false;
+Parking: Type=Handicap | Angle=Parallel | IsMirrorDoubled=false	| IsWallBetweenMirrors=false | Orientation=Degrees180 | Multiplicity=[false] | StructureShape=[None] | IsPeriodicBetweenPoles=false;
 
 %Two doubled mirrored parkings between the road and pillars in 3 and 4 parking lines + pavement in the middle of the road
 SignedJump: Type=SignedDiagonalJump | dX=84 | dY=-40;
 Complex: UID=4 | NumberOfObjects=3 | IsReplicationPartOfDefinition=true | IsVerticalMirror=false | IsHorizontalMirror=false | IsVerticalReplication=false | IsHorizontalReplication = true | HorizontalReplication=[34,2];
 Pavement: Shape=Rect | Texture=Texture_Pavement | IsAdjacentToParking=false | Size=true | SpecialVertexCurvature=Rectangular | VertexList={[Linear,44,4]};
 Position: Type=ForwardVerticalJump | dY=24;
-Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=true	| IsWallBetweenMirrors=false | Orientation=Degrees180 | Multiplicity=[false] | StructureShape=[None,0] | IsPeriodicBetweenPoles=false;
+Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=true	| IsWallBetweenMirrors=false | Orientation=Degrees180 | Multiplicity=[false] | StructureShape=[None] | IsPeriodicBetweenPoles=false;
 
 %3 horizontaly and verticaly mirrored parkings in all parking lines +  pavement at the bottom
 %Cyclic jump to the first line
 Position: Type=ForwardHorizontalJump | dX=190;
 Complex: UID=5 | NumberOfObjects=2 | IsReplicationPartOfDefinition=true | IsVerticalMirror=false | IsHorizontalMirror=true | IsVerticalReplication=false | IsHorizontalReplication = true | HorizontalReplication=[34,4];
-Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=false	| IsWallBetweenMirrors=false | Orientation=Degrees180 | Multiplicity=[true,2] | StructureShape=[None,0] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[3,Squared];
+Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=false	| IsWallBetweenMirrors=false | Orientation=Degrees180 | Multiplicity=[true,2] | StructureShape=[None] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[3,Squared];
 Pavement: Shape=Rect | Texture=Texture_Pavement | IsAdjacentToParking=true | Side=true | SpecialVertexCurvature=Convex | ShortenVertexCoordinate=24 | VertexList={[Linear,24,2] [Linear,14,2]};
 
 %Cyclic jump to the building in the bottom of the first line
@@ -123,17 +123,17 @@ SignedJump: Type=SignedDiagonalJump | dX=22 | dY=-54;
 Complex: UID=6 | NumberOfObjects=5 | IsReplicationPartOfDefinition=true | IsVerticalMirror=false | IsHorizontalMirror=true | IsVerticalReplication=false | IsHorizontalReplication = true | HorizontalReplication=[30,1];
 Pavement: Shape=Pentagon | Texture=Texture_Pavement | IsAdjacentToParking=false | Size=false | SpecialVertexCurvature=Linear | VertexList={[Linear,0,90] [Convex,14,104] [Linear,48,104] [Linear,48,0]};
 SignedJump: Type=SignedDiagonalJump | dX=22 | dY=-86;
-Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=false	| IsWallBetweenMirrors=false | Orientation=Degrees0 | Multiplicity=[false] | StructureShape=[None,0] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[2,MarksOnRoad];
-Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=false	| IsWallBetweenMirrors=false | Orientation=Degrees0 | Multiplicity=[false] | StructureShape=[None,0] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[3,Squared];
-Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=false	| IsWallBetweenMirrors=false | Orientation=Degrees0 | Multiplicity=[false] | StructureShape=[None,0] | IsPeriodicBetweenPoles=false;
+Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=false	| IsWallBetweenMirrors=false | Orientation=Degrees0 | Multiplicity=[false] | StructureShape=[None] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[2,MarksOnRoad];
+Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=false	| IsWallBetweenMirrors=false | Orientation=Degrees0 | Multiplicity=[false] | StructureShape=[None] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[3,Squared];
+Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=false	| IsWallBetweenMirrors=false | Orientation=Degrees0 | Multiplicity=[false] | StructureShape=[None] | IsPeriodicBetweenPoles=false;
 
 SignedJump: Type=SignedDiagonalJump | dX=-18 | dY=-66;
 BasicItem: Type=CarGate;
 SignedJump: Type=SignedDiagonalJump | dX=34 | dY=-36;
 Pavement: Shape=Rect | Texture=Texture_Building | IsAdjacentToParking=false | Size=true | SpecialVertexCurvature=Rectangular | VertexList={[Linear,63,16]};
 Position: Type=ForwardDiagonalJump | dX=2 | dY=2;
-Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=false	| IsWallBetweenMirrors=false | Orientation=Degrees0 | Multiplicity=[false] | StructureShape=[None,0] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[2,MarksOnRoad];
-Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=false	| IsWallBetweenMirrors=false | Orientation=Degrees0 | Multiplicity=[false] | StructureShape=[None,0] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[3,Squared];
+Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=false	| IsWallBetweenMirrors=false | Orientation=Degrees0 | Multiplicity=[false] | StructureShape=[None] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[2,MarksOnRoad];
+Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=false	| IsWallBetweenMirrors=false | Orientation=Degrees0 | Multiplicity=[false] | StructureShape=[None] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[3,Squared];
 
 
 
