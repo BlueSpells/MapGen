@@ -9,7 +9,12 @@
 *.suo
 *.aps
 */debug/
-/debug/
+# the next line excludes the /debug/ folder itself. this means no exception can overrule it
+/debug/  
+# the next line excludes the content of the /debug/ folder. therefore, the following exception can be made:
+/debug/*
+# the next line adds ScriptCompilerApp.ini to git monitoring:
+!/debug/ScriptCompilerApp.ini
 */release/
 /release/
 ReadMe.txt
