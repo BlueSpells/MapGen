@@ -29,6 +29,7 @@ CScriptCompilerDlg::CScriptCompilerDlg(CWnd* pParent /*=NULL*/)
 {
 	//m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 	m_ItemsCounter = new int[EItemType_MaxEnum];
+	m_ItemsBitsCounter = new int[EItemType_MaxEnum];
 }
 
 void CScriptCompilerDlg::DoDataExchange(CDataExchange* pDX)
@@ -144,7 +145,12 @@ void CScriptCompilerDlg::OnBnClickedButtonLoad()
 
 
 		for (EItemType iItemType = (EItemType)0; iItemType < EItemType_MaxEnum; (*((int *)(&iItemType)))++)
+		{
 			m_ItemsCounter[iItemType] = 0;
+			m_ItemsBitsCounter[iItemType] = 0;
+		}
+		m_TotalBitsCounter = 0;
+
 
 		int BufferBitSize = 0;
 		for (unsigned int i = 0; i < m_HeaderList.size(); i++)
@@ -153,13 +159,18 @@ void CScriptCompilerDlg::OnBnClickedButtonLoad()
 		{
 			BufferBitSize += m_ItemsList[i]->GetBitBufferSize();
 			m_ItemsCounter[m_ItemsList[i]->GetType()]++;
+			m_ItemsBitsCounter[m_ItemsList[i]->GetType()] += m_ItemsList[i]->GetBitBufferSize();
+			m_TotalBitsCounter  += m_ItemsList[i]->GetBitBufferSize();
 		}
 
 		LogEvent(LE_INFOHIGH, __FUNCTION__ ": Script is encoded to a bit buffer with the size of: %d bits (%d%%)", BufferBitSize, BufferBitSize*100/2953/8);
 
 		for (EItemType iItemType = (EItemType)0; iItemType < EItemType_MaxEnum; (*((int *)(&iItemType)))++)
 		{
-			LogEvent(LE_INFOHIGH, __FUNCTION__ ": Number of %s: (%d%% of %d)", EnumToString(iItemType).c_str(), m_ItemsCounter[iItemType]*100/m_ItemsList.size(), m_ItemsList.size());
+			LogEvent(LE_INFOHIGH, __FUNCTION__ ": Number of %s: %d (%d%% of %d). Total bits used: %d (%d%% of %d)", 
+				EnumToString(iItemType).c_str(), 
+				m_ItemsCounter[iItemType], m_ItemsCounter[iItemType]*100/m_ItemsList.size(), m_ItemsList.size(),
+				m_ItemsBitsCounter[iItemType], m_ItemsBitsCounter[iItemType]*100/m_TotalBitsCounter, m_TotalBitsCounter);
 		}
 	}
 	else
@@ -198,4 +209,5 @@ void CScriptCompilerDlg::CleanLists()
 {
 	CleanLists();
 	delete[] m_ItemsCounter;
+	delete[] m_ItemsBitsCounter;
 }

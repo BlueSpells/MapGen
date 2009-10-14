@@ -58,6 +58,8 @@ protected:
 	std::vector<IItem *> m_ItemsList;
 	std::vector<IHeader *> m_HeaderList;
 	int *m_ItemsCounter;
+	int *m_ItemsBitsCounter;
+	int m_TotalBitsCounter;
 
 	void CleanLists();
 };
