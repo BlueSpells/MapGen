@@ -69,6 +69,23 @@ std::string CSimpleScriptReader::CleanTabsAndSpaces(std::string &Argument)
 	return Argument;
 }
 
+std::string CSimpleScriptReader::CleanComment(std::string &Argument)
+{
+	std::string CleanedArgument;
+
+	for (unsigned int i = 0; i < Argument.size(); i++)
+	{
+		if (Argument[i] == CommentMark[0])
+			break;
+	
+		CleanedArgument += Argument[i];
+	}
+
+	Argument = CleanedArgument;
+	return Argument;
+}
+
+
 /*virtual*/ bool CSimpleScriptReader::ReadLine(std::string &Command, std::vector<std::string> &ParametersList)
 {
 	ParametersList.clear();
@@ -82,6 +99,7 @@ std::string CSimpleScriptReader::CleanTabsAndSpaces(std::string &Argument)
 		m_LineIndex++;
 		iLineInCommand++;
 
+		// Read line from file
 		CString LineFromFile;
 		BOOL IsOK = m_StreamFile.ReadString(LineFromFile);
 
@@ -91,6 +109,7 @@ std::string CSimpleScriptReader::CleanTabsAndSpaces(std::string &Argument)
 			return false;
 		}
 
+		// deal with complete-line comment
 		if (LineFromFile[0] == CommentMark[0])
 		{
 			LogEvent(LE_DEBUG, __FUNCTION__ ": Line #%d contains a comment: %s. Moving to next line..", m_LineIndex, LineFromFile);
@@ -99,6 +118,10 @@ std::string CSimpleScriptReader::CleanTabsAndSpaces(std::string &Argument)
 			continue;
 		}
 
+		// remove comment within line
+		LineFromFile = CleanComment(std::string(LineFromFile)).c_str();
+
+		// Clean all tabs and spaces
 #pragma warning(push)
 #pragma warning (disable:4239)
 		if (CleanTabsAndSpaces(std::string(LineFromFile)).size() == 0)

@@ -14,5 +14,6 @@ public:
 
 private:
 	std::string CleanTabsAndSpaces(std::string &Argument);
+	std::string CleanComment(std::string &Argument);
 	CStdioFile m_StreamFile;
 };
