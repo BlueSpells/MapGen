@@ -20,6 +20,29 @@
 
 #define EnumName(x) #x
 
+#define DefineEnumToString14(EnumType, Val1, Val2, Val3, Val4, Val5, Val6, Val7, Val8, Val9, Val10, Val11, Val12, Val13, Val14)	\
+	static std::string EnumToString(EnumType Value)								\
+{																				\
+	switch(Value)																\
+	{																			\
+	RETURN_TYPE_STR(Val1);														\
+	RETURN_TYPE_STR(Val2);														\
+	RETURN_TYPE_STR(Val3);														\
+	RETURN_TYPE_STR(Val4);														\
+	RETURN_TYPE_STR(Val5);														\
+	RETURN_TYPE_STR(Val6);														\
+	RETURN_TYPE_STR(Val7);														\
+	RETURN_TYPE_STR(Val8);														\
+	RETURN_TYPE_STR(Val9);														\
+	RETURN_TYPE_STR(Val10);														\
+	RETURN_TYPE_STR(Val11);														\
+	RETURN_TYPE_STR(Val12);														\
+	RETURN_TYPE_STR(Val13);														\
+	RETURN_TYPE_STR(Val14);														\
+	HandleDefualtOfEnumToString(EnumType)										\
+	};																			\
+}\
+
 #define DefineEnumToString7(EnumType, Val1, Val2, Val3, Val4, Val5, Val6, Val7)	\
 	static std::string EnumToString(EnumType Value)								\
 {																				\
@@ -100,7 +123,7 @@ static std::string EnumToString(EnumType Value)									\
 DefineEnumToString4(EParkingAngle, Perpendicular, Parallel, Right45Degrees, Left45Degrees);
 DefineEnumToString4(EParkingType, Regular, Handicap, Bikes, BigParking);
 DefineEnumToString4(EParkingOrientation, Degrees0, Degrees90, Degrees180, Degrees270);
-DefineEnumToString5(EBasicItemType, Elevator, Staircase, WC, CarGate, PayingMachine);
+DefineEnumToString14(EBasicItemType, Elevator, Staircase_H, Staircase_V, WC, CarGate_Right, CarGate_Left, CarGate_Up, CarGate_Down, PayingMachine, Door, Sign, Column_Sqr, Column_Cir, Road);
 DefineEnumToString4(EPositionItemType, CR, ForwardHorizontalJump, ForwardVerticalJump, ForwardDiagonalJump);
 DefineEnumToString4(SPeriodicBetweenPoles::EPolesType, SPeriodicBetweenPoles::Pavement, SPeriodicBetweenPoles::Circular, SPeriodicBetweenPoles::Squared, SPeriodicBetweenPoles::Wall);
 DefineEnumToString4(SStructureShape::EAngleType, SStructureShape::None, SStructureShape::AngleUpTo90, SStructureShape::AngleUpTo360, SStructureShape::Circular);

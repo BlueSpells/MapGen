@@ -27,13 +27,13 @@ void CItemStructure::Encode(SStructureShape StructureShape, SMultiplicity Multip
 	IncreaseBitBufferSize(NumberOfBits);
 
 	CBitPointer BitPtr = AllocateBitBuffer();
-	
-	BitCopyAndContinue(BitPtr, StructureShape.AngleType);
+
 	BitCopyAndContinue(BitPtr, Multiplicity.IsMultiplied);
 	
 	if (Multiplicity.IsMultiplied)
 		BitCopyAndContinue(BitPtr, Multiplicity.Multiples);
 
+	BitCopyAndContinue(BitPtr, StructureShape.AngleType);
 	switch (StructureShape.AngleType)
 	{
 	case SStructureShape::None:
@@ -45,7 +45,8 @@ void CItemStructure::Encode(SStructureShape StructureShape, SMultiplicity Multip
 		BitCopyAndContinue(BitPtr, StructureShape.Shape.BigAngle);
 		break;
 	case SStructureShape::Circular:
-		BitCopyAndContinue(BitPtr, StructureShape.Shape.RadiusCoordinates);
+		BitCopyAndContinue(BitPtr, StructureShape.Shape.RadiusCoordinates.X);
+		BitCopyAndContinue(BitPtr, StructureShape.Shape.RadiusCoordinates.Y);
 		break;
 	};
 }
@@ -55,12 +56,13 @@ void CItemStructure::Encode(SStructureShape StructureShape, SMultiplicity Multip
 	int BitsToRead = UsedBits; BitsToRead;
 	CBitPointer BitPtr = Data + BitSize(GetType());
 
-	BitPasteAndContinue(BitPtr, m_StructureShape.AngleType);
+
 	BitPasteAndContinue(BitPtr, m_Multiplicity.IsMultiplied);
 
 	if (m_Multiplicity.IsMultiplied)
 		BitPasteAndContinue(BitPtr, m_Multiplicity.Multiples);
 
+	BitPasteAndContinue(BitPtr, m_StructureShape.AngleType);
 	switch (m_StructureShape.AngleType)
 	{
 	case SStructureShape::None:
@@ -72,7 +74,8 @@ void CItemStructure::Encode(SStructureShape StructureShape, SMultiplicity Multip
 		BitPasteAndContinue(BitPtr, m_StructureShape.Shape.BigAngle);
 		break;
 	case SStructureShape::Circular:
-		BitPasteAndContinue(BitPtr, m_StructureShape.Shape.RadiusCoordinates);
+		BitPasteAndContinue(BitPtr, m_StructureShape.Shape.RadiusCoordinates.X);
+		BitPasteAndContinue(BitPtr, m_StructureShape.Shape.RadiusCoordinates.Y);
 		break;
 	};
 
@@ -82,12 +85,13 @@ void CItemStructure::Encode(SStructureShape StructureShape, SMultiplicity Multip
 
 /*virtual*/	std::string	CItemStructure::GetItemBitBufferParsedString(std::string ParsedString, CBitPointer BitPtr)
 {
-	AddItemToBitString(m_StructureShape.AngleType, BitPtr, ParsedString);
+
 	AddItemToBitString(m_Multiplicity.IsMultiplied, BitPtr, ParsedString);
 	
 	if (m_Multiplicity.IsMultiplied)
 		AddItemToBitString(m_Multiplicity.Multiples, BitPtr, ParsedString);
 
+	AddItemToBitString(m_StructureShape.AngleType, BitPtr, ParsedString);
 	switch (m_StructureShape.AngleType)
 	{
 	case SStructureShape::None:
@@ -99,7 +103,8 @@ void CItemStructure::Encode(SStructureShape StructureShape, SMultiplicity Multip
 		AddItemToBitString(m_StructureShape.Shape.BigAngle, BitPtr, ParsedString);
 		break;
 	case SStructureShape::Circular:
-		AddItemToBitString(m_StructureShape.Shape.RadiusCoordinates, BitPtr, ParsedString);
+		AddItemToBitString(m_StructureShape.Shape.RadiusCoordinates.X, BitPtr, ParsedString);
+		AddItemToBitString(m_StructureShape.Shape.RadiusCoordinates.Y, BitPtr, ParsedString);
 		break;
 	};
 

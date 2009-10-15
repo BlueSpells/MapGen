@@ -34,11 +34,11 @@ DefineUnionStructBitSize3(SStructureShape, AngleType, Shape, SmallAngle, BigAngl
 struct SMultiplicity
 {
 	bool IsMultiplied;
-	Int8Bit Multiples;
+	Int6Bit Multiples;
 
 	SMultiplicity() {ZeroMemory(this, sizeof(*this));}
 	SMultiplicity(bool _IsMultiplied, int _Multiples = 0) 
-		: IsMultiplied(_IsMultiplied), Multiples(ConvertIntToInt8Bit(_Multiples)) {}
+		: IsMultiplied(_IsMultiplied), Multiples(ConvertIntToInt6Bit(_Multiples)) {}
 };
 DefineStructWithBoolBitSize2(SMultiplicity, IsMultiplied, Multiples);
 

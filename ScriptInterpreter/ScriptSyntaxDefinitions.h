@@ -93,7 +93,7 @@ static const std::string PeriodicBetweenPoles_PolesType				= "PolesType, enum, P
 
 static const std::string Multiplicity						= "Multiplicity, struct, IsMultiplied, Multiples";
 static const std::string Multiplicity_IsMultiplied			= "IsMultiplied, bool";
-static const std::string Multiplicity_Multiples				= "Multiples, Int8Bit";
+static const std::string Multiplicity_Multiples				= "Multiples, Int6Bit";
 
 static const std::string StructureShape								= "StructureShape, struct, AngleType, Shape";
 static const std::string StructureShape_AngleType					= "AngleType, enum, None, AngleUpTo90, AngleUpTo360, Circular";
@@ -110,8 +110,16 @@ static const std::string StructureShape_Shape_RadiusCoordinates_Y	= "Y, Int8Bit"
 // ---------------
 static const char *BasicItemCommand = "BasicItem";
 
-static const std::string BasicItemType			= "Type, enum, Elevator, Staircase, WC, CarGate, PayingMachine";
-
+static const std::string BasicItemType			= "Type, enum, Elevator, Staircase_H, Staircase_V, WC, CarGate_Right, CarGate_Left, CarGate_Up, CarGate_Down, PayingMachine, Door, Sign, Column_Sqr, Column_Cir, Road";
+static const std::string IsScaled				= "IsScaled, bool";
+static const std::string X						= "X, union, Size16bits, Size10bits, Size6bits";
+static const std::string X_Size16bits			= "X_Size16bits, Int16Bit";
+static const std::string X_Size10bits			= "X_Size10bits, Int10Bit";
+static const std::string X_Size6bits			= "X_Size6bits, Int6Bit";
+static const std::string Y						= "Y, union, Size16bits, Size10bits, Size6bits";
+static const std::string Y_Size16bits			= "Y_Size16bits, Int16Bit";
+static const std::string Y_Size10bits			= "Y_Size10bits, Int10Bit";
+static const std::string Y_Size6bits			= "Y_Size6bits, Int6Bit";
 
 // Position Syntax:
 // ---------------
@@ -135,8 +143,8 @@ static const std::string Signed_dY				= "dY, SignedInt8Bit";
 static const char *AbsoluteJumpCommand = "AbsoluteJump";
 
 static const std::string AbsoluteJumpItemType		= "Type, enum, Unused, AbsoluteHorizontalJump, AbsoluteVerticalJump, AbsoluteDiagonalJump";
-static const std::string X							= "X, Int16Bit";
-static const std::string Y							= "Y, Int16Bit";
+static const std::string Abs_X							= "X, Int16Bit";
+static const std::string Abs_Y							= "Y, Int16Bit";
 
 
 // ComplexItem Syntax:
