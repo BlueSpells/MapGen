@@ -26,14 +26,16 @@ ParkingMapHeader: ParkingGarageID=[1,2,3,4] | TextLanguage=Hebrew | ParkingGarag
 %	BasicItem: Type=PayingMachine;
 %	Position: Type=ForwardDiagonalJump | dX=5 | dY=8;
 	
-%Pavement: Shape=Rect | Texture=Texture_Pavement | Fill=14 | IsAdjacentToParking=false | Size=false | SpecialVertexCurvature=Convex | ShortenVertexCoordinate = 7 | VertexList={[Linear,2,3] [Convex,4,5] [Rectangular,7,8]};
+%Pavement: Shape=Quadrangle | Texture=Texture_Pavement | Fill=14 | IsAdjacentToParking=false | Size=true | SpecialVertexCurvature=Convex | ShortenVertexCoordinate = 7 | VertexList={[Linear,2,3] [Convex,4,5] [Rectangular,7,8]};
+
+Pavement: Shape=Pentagon | SpecialVertexCurvature=[Rectangular,true] | Side=true | ReducedSize=false | ShortenVertexCoordinate=3 | IsAdjacentToParking=true | Texture=Texture_NoParking | Fill=14 | VertexList={[2,3,Rectangular,true] [4,5,Convex,false] [8,9,Rectangular]};
 
 
 
 
 
 %Second central parking line (3 parking spaces, stairs, elevator, bikes)
-AbsoluteJump: Type=AbsoluteDiagonalJump | X=5 | Y=4;
-SignedJump: Type=SignedDiagonalJump | dX=5 | dY=-14;
-BasicItem: Type=CarGate_Up | IsScaled = true | X_Size6bits=2 | Y_Size6bits=3;
+%AbsoluteJump: Type=AbsoluteDiagonalJump | X=5 | Y=4;
+%SignedJump: Type=SignedDiagonalJump | dX=5 | dY=-14;
+%BasicItem: Type=CarGate_Up | IsScaled = true | X_Size6bits=2 | Y_Size6bits=3;
 End

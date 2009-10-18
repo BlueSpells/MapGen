@@ -14,7 +14,9 @@
 # the next line excludes the content of the /debug/ folder. therefore, the following exception can be made:
 /debug/*
 # the next line adds ScriptCompilerApp.ini to git monitoring:
-!/debug/ScriptCompilerApp.ini
+#!/debug/ScriptCompilerApp.ini
+# the next line removes ScriptCompilerApp.ini from git monitoring:
+/debug/ScriptCompilerApp.ini
 */release/
 /release/
 ReadMe.txt

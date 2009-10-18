@@ -143,8 +143,8 @@ static const std::string Signed_dY				= "dY, SignedInt8Bit";
 static const char *AbsoluteJumpCommand = "AbsoluteJump";
 
 static const std::string AbsoluteJumpItemType		= "Type, enum, Unused, AbsoluteHorizontalJump, AbsoluteVerticalJump, AbsoluteDiagonalJump";
-static const std::string Abs_X							= "X, Int16Bit";
-static const std::string Abs_Y							= "Y, Int16Bit";
+static const std::string Abs_X						= "X, Int16Bit";
+static const std::string Abs_Y						= "Y, Int16Bit";
 
 
 // ComplexItem Syntax:
@@ -171,22 +171,26 @@ static const std::string HorizontalReplication_TimesToReplicate		= "TimesToRepli
 // ---------------
 static const char *PavementCommand = "Pavement";
 
-static const std::string Shape								= "Shape, enum, Triangle, Rect, Pentagon, Hexagon";
+static const std::string Shape								= "Shape, enum, Wall, Right_Triangle, Triangle, Rect, Quadrangle, Pentagon";
 static const std::string Texture							= "Texture, enum, Texture_Pavement, Texture_Building, Texture_NoParking, SolidFill";
 static const std::string FillType							= "Fill, Int4Bit";
 static const std::string IsAdjacentToParking				= "IsAdjacentToParking, bool";
+static const std::string IsCircular							= "IsCircular, bool";
 static const std::string SizeOrSide							= "SizeOrSide, union, Side, Size";
 static const std::string SizeOrSide_Side					= "Side, bool";
-static const std::string SizeOrSide_Size					= "Size, bool";
-static const std::string SpecialVertexCurvature				= "SpecialVertexCurvature, enum, Linear, Convex, Concave, Rectangular";
+static const std::string SizeOrSide_ReducedSize				= "ReducedSize, bool";
+static const std::string SpecialVertexCurvature				= "SpecialVertexCurvature, struct, Type, IsCircular";
+static const std::string SpecialVertexCurvature_Type		= "Type, enum, Linear, Convex, Concave, Rectangular";
+static const std::string SpecialVertexCurvature_IsCircular	= "IsCircular, bool";
 static const std::string ShortenVertexCoordinate			= "ShortenVertexCoordinate, Int6Bit";
-static const std::string VertexList										= "VertexList, list, 0, 5" ; 
-static const std::string VertexList_VertexParameters					= "Vertex, struct, CurvatureType, X, Y";
-static const std::string VertexList_VertexParameters_CurvatureType		= "CurvatureType, enum, Linear, Convex, Concave, Rectangular";
+static const std::string VertexList										= "VertexList, list, 0, 4" ; 
+static const std::string VertexList_VertexParameters					= "Vertex, struct, X, Y, CurvatureType, IsCircular";
 static const std::string VertexList_VertexParameters_X					= "X, union, Size8bits, Size6bits";
 static const std::string VertexList_VertexParameters_X_Size8bits		= "Size8bits, Int8Bit";
 static const std::string VertexList_VertexParameters_X_Size6bits		= "Size6bits, Int6Bit";
 static const std::string VertexList_VertexParameters_Y					= "Y, union, Size8bits, Size6bits";
 static const std::string VertexList_VertexParameters_Y_Size8bits		= "Size8bits, Int8Bit";
 static const std::string VertexList_VertexParameters_Y_Size6bits		= "Size6bits, Int6Bit";
+static const std::string VertexList_VertexParameters_CurvatureType		= "CurvatureType, enum, Linear, Convex, Concave, Rectangular";
+static const std::string VertexList_VertexParameters_IsCircular			= "IsCircular, bool";
 

@@ -59,6 +59,21 @@
 	};																			\
 }\
 
+#define DefineEnumToString6(EnumType, Val1, Val2, Val3, Val4, Val5, Val6)	\
+	static std::string EnumToString(EnumType Value)								\
+{																				\
+	switch(Value)																\
+	{																			\
+	RETURN_TYPE_STR(Val1);														\
+	RETURN_TYPE_STR(Val2);														\
+	RETURN_TYPE_STR(Val3);														\
+	RETURN_TYPE_STR(Val4);														\
+	RETURN_TYPE_STR(Val5);														\
+	RETURN_TYPE_STR(Val6);														\
+	HandleDefualtOfEnumToString(EnumType)										\
+	};																			\
+}\
+
 #define DefineEnumToString5(EnumType, Val1, Val2, Val3, Val4, Val5)				\
 	static std::string EnumToString(EnumType Value)								\
 {																				\
@@ -132,7 +147,7 @@ DefineEnumToString4(EAbsoluteJumpItemType, Unused, AbsoluteHorizontalJump, Absol
 DefineEnumToString1(EBarcodeType, ParkingMap);
 //DefineEnumToString3(ETextLanguage, Empty, English, Hebrew);
 DefineEnumToString2(ETextLanguage, English, Hebrew);
-DefineEnumToString4(EShapeType, Triangle, Rect, Pentagon, Hexagon);
+DefineEnumToString6(EShapeType, Wall, Right_Triangle, Triangle, Rect, Quadrangle, Pentagon);
 DefineEnumToString4(ETextureType, Texture_Pavement, Texture_Building, Texture_NoParking, SolidFill);
 DefineEnumToString4(ECurvatureType, Linear, Convex, Concave, Rectangular);
 DefineEnumToString7(EItemType, SubItem, Parking, Position, Pavement, BasicComponent, ComplexStructure, ExtendedItem);

@@ -129,6 +129,7 @@ DefineNumericValue(8);
 DefineNumericValue(6);
 DefineNumericValue(5);
 DefineNumericValue(4);
+DefineNumericValue(2);
 
 
 #define AddItemToBitString(Item, BitPtr, BitString)	\
