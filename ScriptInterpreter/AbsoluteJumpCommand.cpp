@@ -41,7 +41,7 @@ CAbsoluteJumpCommand::~CAbsoluteJumpCommand(void)
 	CString XStr;
 	if (IsHorizontal) 
 	{
-		if (!ExtractAndInterperetArgumentValue(ContextLine, AbsoluteJumpCommand, X, ParsedArguments, XValue))
+		if (!ExtractAndInterperetArgumentValue(ContextLine, AbsoluteJumpCommand, Abs_X, ParsedArguments, XValue))
 			return CommandFailed;
 		XStr.Format(", dX = %d", XValue);
 	}
@@ -50,7 +50,7 @@ CAbsoluteJumpCommand::~CAbsoluteJumpCommand(void)
 	CString YStr;
 	if (IsVertical) 
 	{
-		if (!ExtractAndInterperetArgumentValue(ContextLine, AbsoluteJumpCommand, Y, ParsedArguments, YValue))
+		if (!ExtractAndInterperetArgumentValue(ContextLine, AbsoluteJumpCommand, Abs_Y, ParsedArguments, YValue))
 			return CommandFailed;
 		YStr.Format(", dY = %d", YValue);
 	}

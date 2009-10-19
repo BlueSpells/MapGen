@@ -7,7 +7,7 @@ ParkingMapHeader: ParkingGarageID=[1,2,3,4] | TextLanguage=Hebrew | ParkingGarag
 
 %Left upper side near the trees
 Position: Type=ForwardDiagonalJump | dX=40 | dY=60;
-BasicItem: Type=CarGate;
+BasicItem: Type=CarGate_Right | IsScaled=false;
 SignedJump: Type=SignedDiagonalJump | dX=-8 | dY=-4;
 Pavement: Shape=Rect | Texture=Texture_Pavement | IsAdjacentToParking=false | 
 				Size=true | SpecialVertexCurvature=Convex | 
@@ -33,9 +33,8 @@ Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=false	| Orientation=Deg
 Position: Type=ForwardVerticalJump | dY=34;
 Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=true	|  IsWallBetweenMirrors=false | Orientation=Degrees90 | Multiplicity=[false] | StructureShape=[None,0] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[3,Wall];
 SignedJump: Type=SignedDiagonalJump | dX=40 | dY=-46;
-SignedJump: Type=CarriageDir; 
-%Horizontal
-Complex: UID=1 | NumberOfObjects=4 | IsReplicationPartOfDefinition=true | IsVerticalMirror=false | IsHorizontalMirror=false | IsVerticalReplication=true | IsHorizontalReplication = false | VerticalReplication=[32,1];
+SignedJump: Type=CarriageDir; %Horizontal
+Complex: UID=1 | IsNew = true | NumberOfObjects=4 | IsReplicationPartOfDefinition=true | IsVerticalMirror=false | IsHorizontalMirror=false | IsVerticalReplication=true | IsHorizontalReplication = false | VerticalReplication=[32,1];
 Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=true	|  IsWallBetweenMirrors=true | Orientation=Degrees90 | Multiplicity=[false] | StructureShape=[None,0] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[3,Squared];
 Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=true	|  IsWallBetweenMirrors=false | Orientation=Degrees90 | Multiplicity=[true,2] | StructureShape=[None,0] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[3,Squared];
 Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=true	|  IsWallBetweenMirrors=false | Orientation=Degrees90 | Multiplicity=[false] | StructureShape=[None,0] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[2,Squared];
@@ -43,8 +42,7 @@ Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=true	|  IsWallBetweenMi
 
 
 %Last set of 6(3*2) parking spaces in the middle lines
-SignedJump: Type=CarriageDir; 
-%Vertical
+SignedJump: Type=CarriageDir; %Vertical
 Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=true	|  IsWallBetweenMirrors=true | Orientation=Degrees90 | Multiplicity=[false] | StructureShape=[None,0] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[3,Squared];
 Position: Type=ForwardVerticalJump | dY=34;
 Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=true	|  IsWallBetweenMirrors=false | Orientation=Degrees90 | Multiplicity=[false] | StructureShape=[None,0] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[3,Squared];
@@ -54,11 +52,10 @@ Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=true	|  IsWallBetweenMi
 %Second central parking line (3 parking spaces, stairs, elevator, bikes)
 AbsoluteJump: Type=AbsoluteVerticalJump | X=50 | Y=240;
 Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=false	| Orientation=Degrees90 | Multiplicity=[false] | StructureShape=[None,0] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[3,Squared];
-BasicItem: Type=Staircase;
-SignedJump: Type=CarriageDir; 
-%Horizontal
+BasicItem: Type=Staircase_H | IsScaled=false;
+SignedJump: Type=CarriageDir; %Horizontal
 Parking: Type=Bikes | Angle=Parallel | IsMirrorDoubled=false	| Orientation=Degrees270 | Multiplicity=[true,7] | StructureShape=[None,0] | IsPeriodicBetweenPoles=false;
-BasicItem: Type=Elevator;
+BasicItem: Type=Elevator | IsScaled=false;
 SignedJump: Type=SignedVerticalJump | dY=-10;
 Pavement: Shape=Rect | Texture=Texture_Pavement | IsAdjacentToParking=false | Size=true | SpecialVertexCurvature=Rectangular | VertexList={[Rectangular,12,26]};
 
@@ -67,8 +64,7 @@ SignedJump: Type=SignedDiagonalJump | dX=-42 | dY=34;
 Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=false	| Orientation=Degrees90 | Multiplicity=[true,4] | StructureShape=[None,0] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[3,Squared];
 Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=false	| Orientation=Degrees90 | Multiplicity=[false] | StructureShape=[None,0] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[2,Squared];
 Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=false	| Orientation=Degrees90 | Multiplicity=[true,2] | StructureShape=[None,0] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[3,Squared];
-SignedJump: Type=CarriageDir; 
-%Vertical
+SignedJump: Type=CarriageDir; %Vertical
 Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=false	| Orientation=Degrees90 | Multiplicity=[false] | StructureShape=[None,0] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[2,Squared];
 
 %Right side
@@ -81,8 +77,8 @@ Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=false	| Orientation=Deg
 %Upper area left to center(stairs, elevators and other shit)
 AbsoluteJump: Type=AbsoluteVerticalJump | X=100 | Y=0;
 Pavement: Shape=Rect | Texture=Texture_Building | IsAdjacentToParking=false | Size=true | SpecialVertexCurvature=Rectangular | VertexList={[Linear,62,58]};
-BasicItem: Type=Staircase;
-BasicItem: Type=Elevator;
+BasicItem: Type=Staircase_H | IsScaled=false;
+BasicItem: Type=Elevator | IsScaled=false;
 Pavement: Shape=Rect | Texture=Texture_Building | IsAdjacentToParking=false | Size=true | SpecialVertexCurvature=Rectangular | VertexList={[Rectangular,40,12]};
 Parking: Type=Bikes | Angle=Parallel | IsMirrorDoubled=false	| Orientation=Degrees270 | Multiplicity=[true,21] | StructureShape=[None,0] | IsPeriodicBetweenPoles=false;
 % Area right to the single elevator
@@ -96,16 +92,15 @@ Position: Type=ForwardHorizontalJump | dX=10;
 Pavement: Shape=Rect | Texture=Texture_Building | IsAdjacentToParking=false | Size=true | SpecialVertexCurvature=Rectangular | VertexList={[Rectangular,14,18]};
 
 SignedJump: Type=SignedDiagonalJump | dX=20 | dY=-10;
-BasicItem: Type=Elevator;
-BasicItem: Type=Elevator;
+BasicItem: Type=Elevator | IsScaled=false;
+BasicItem: Type=Elevator | IsScaled=false;
 Position: Type=CR;
 
 %3 parking places above the staircase (right to the building)
 Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=false	| Orientation=Degrees0 | Multiplicity=[true,3] | StructureShape=[None,0] | IsPeriodicBetweenPoles=false;
 
-SignedJump: Type=CarriageDir; 
-%Horizontal
-BasicItem: Type=Staircase;
+SignedJump: Type=CarriageDir; %Horizontal
+BasicItem: Type=Staircase_V | IsScaled=false;
 % Single parking space to the right from the staircase(not sure if it's indeed parking...)
 Parking: Type=Regular | Angle=Perpendicular | IsMirrorDoubled=false	| Orientation=Degrees0 | Multiplicity=[false] | StructureShape=[None,0] | IsPeriodicBetweenPoles=false;
 SignedJump: Type=SignedDiagonalJump | dX=-30 | dY=30;
@@ -116,15 +111,14 @@ Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=false	| Orientation=Deg
 Position: Type=CR;
 
 % Upper Right Corner
-SignedJump: Type=CarriageDir; 
-%Vertical
+SignedJump: Type=CarriageDir; %Vertical
 Position: Type=ForwardDiagonalJump | dX=50 | dY=20;
 Pavement: Shape=Rect | Texture=Texture_Pavement | IsAdjacentToParking=false | Size=false | SpecialVertexCurvature=Rectangular | VertexList={[Rectangular,80,40]};
 Pavement: Shape=Rect | Texture=Texture_Pavement | IsAdjacentToParking=false | Size=true | SpecialVertexCurvature=Rectangular | VertexList={[Rectangular,44,24]};
 Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=false	| Orientation=Degrees270 | Multiplicity=[true,2] | StructureShape=[None,0] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[3,Squared];
 SignedJump: Type=SignedDiagonalJump | dX=-52 | dY=-40;
-BasicItem: Type=Staircase;
-BasicItem: Type=Elevator;
+BasicItem: Type=Staircase_H | IsScaled=false;
+BasicItem: Type=Elevator | IsScaled=false;
 
 
 

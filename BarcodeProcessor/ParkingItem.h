@@ -38,7 +38,7 @@ struct SPeriodicBetweenPoles
 	Int4Bit NumberOfParkingPlaces;
 	enum EPolesType
 	{
-		MarksOnRoad,
+		Pavement,
 		Circular,
 		Squared,
 		Wall,

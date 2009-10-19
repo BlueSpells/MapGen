@@ -47,6 +47,9 @@ void CComplexItem::Encode(Int5Bit ComplexItemUID, Int5Bit NumberOfEncodedItems,
 			bool IsVerticalReplication, bool IsHorizontalReplication, bool IsReplicationPartOfDefinition,
 			SReplication *VerticalReplication /*= NULL*/, SReplication *HorizontalReplication /*= NULL*/)
 {
+	// Note, this is a hack!:
+	// Normally Encode does not touch local members, but it does fill up the following
+	// member for the sake of GetItemBitBufferParsedString accurate interpretation.
 	m_IsFirstDefinitionOfComplexItem = true;
 
 //	Int5Bit UID = ConvertIntToInt5Bit(ComplexItemUID);
@@ -219,6 +222,10 @@ void CComplexItem::Encode(Int5Bit ComplexItemUID, bool IsVerticalMirror, bool Is
 	int UsedBits = 0;
 	Decode(GetBitBuffer(), UsedBits, NULL);
 
+	// Note, that m_IsFirstDefinitionOfComplexItem contains the correct value
+	// as Encode added it appropriately.
+	// This is a hack to bypass the fact the the Item itself could not otherwise know
+	// if it is the definition or usage.
 	int IsFirstTimeFlag = (m_IsFirstDefinitionOfComplexItem) ? 0 : 1;
 	Decode(GetBitBuffer(), UsedBits, &IsFirstTimeFlag);
 

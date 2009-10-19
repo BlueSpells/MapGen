@@ -123,11 +123,13 @@ num.value = ConvertIntToInt##NUMBEROFBITS##Bit(abs(x)); return num;}
 
 DefineNumericValue(32);
 DefineNumericValue(16);
+DefineNumericValue(10);
 DefineNumericValue(9);
 DefineNumericValue(8);
 DefineNumericValue(6);
 DefineNumericValue(5);
 DefineNumericValue(4);
+DefineNumericValue(2);
 
 
 #define AddItemToBitString(Item, BitPtr, BitString)	\

@@ -89,11 +89,11 @@ static const std::string IsPeriodicBetweenPoles = "IsPeriodicBetweenPoles, bool"
 
 static const std::string PeriodicBetweenPoles						= "PeriodicBetweenPoles, struct, NumberOfParkingPlaces, PolesType";
 static const std::string PeriodicBetweenPoles_NumberOfParkingPlaces = "NumberOfParkingPlaces, Int4Bit";
-static const std::string PeriodicBetweenPoles_PolesType				= "PolesType, enum, MarksOnRoad, Circular, Squared, Wall, EPolesType_MaxEnum";
+static const std::string PeriodicBetweenPoles_PolesType				= "PolesType, enum, Pavement, Circular, Squared, Wall, EPolesType_MaxEnum";
 
 static const std::string Multiplicity						= "Multiplicity, struct, IsMultiplied, Multiples";
 static const std::string Multiplicity_IsMultiplied			= "IsMultiplied, bool";
-static const std::string Multiplicity_Multiples				= "Multiples, Int8Bit";
+static const std::string Multiplicity_Multiples				= "Multiples, Int6Bit";
 
 static const std::string StructureShape								= "StructureShape, struct, AngleType, Shape";
 static const std::string StructureShape_AngleType					= "AngleType, enum, None, AngleUpTo90, AngleUpTo360, Circular";
@@ -110,8 +110,16 @@ static const std::string StructureShape_Shape_RadiusCoordinates_Y	= "Y, Int8Bit"
 // ---------------
 static const char *BasicItemCommand = "BasicItem";
 
-static const std::string BasicItemType			= "Type, enum, Elevator, Staircase, WC, CarGate, PayingMachine";
-
+static const std::string BasicItemType			= "Type, enum, Elevator, Staircase_H, Staircase_V, WC, CarGate_Right, CarGate_Left, CarGate_Up, CarGate_Down, PayingMachine, Door, Sign, Column_Sqr, Column_Cir, Road";
+static const std::string IsScaled				= "IsScaled, bool";
+static const std::string X						= "X, union, Size16bits, Size10bits, Size6bits";
+static const std::string X_Size16bits			= "X_Size16bits, Int16Bit";
+static const std::string X_Size10bits			= "X_Size10bits, Int10Bit";
+static const std::string X_Size6bits			= "X_Size6bits, Int6Bit";
+static const std::string Y						= "Y, union, Size16bits, Size10bits, Size6bits";
+static const std::string Y_Size16bits			= "Y_Size16bits, Int16Bit";
+static const std::string Y_Size10bits			= "Y_Size10bits, Int10Bit";
+static const std::string Y_Size6bits			= "Y_Size6bits, Int6Bit";
 
 // Position Syntax:
 // ---------------
@@ -135,14 +143,15 @@ static const std::string Signed_dY				= "dY, SignedInt8Bit";
 static const char *AbsoluteJumpCommand = "AbsoluteJump";
 
 static const std::string AbsoluteJumpItemType		= "Type, enum, Unused, AbsoluteHorizontalJump, AbsoluteVerticalJump, AbsoluteDiagonalJump";
-static const std::string X							= "X, Int16Bit";
-static const std::string Y							= "Y, Int16Bit";
+static const std::string Abs_X						= "X, Int16Bit";
+static const std::string Abs_Y						= "Y, Int16Bit";
 
 
 // ComplexItem Syntax:
 // ---------------
 static const char *ComplexItemCommand = "Complex";
 
+static const std::string IsNew										= "IsNew, bool";
 static const std::string UID										= "UID, Int5Bit";
 static const std::string NumberOfObjectsInComplex					= "NumberOfObjects, Int5Bit";
 static const std::string IsReplicationPartOfDefinition				= "IsReplicationPartOfDefinition, bool";
@@ -162,22 +171,26 @@ static const std::string HorizontalReplication_TimesToReplicate		= "TimesToRepli
 // ---------------
 static const char *PavementCommand = "Pavement";
 
-static const std::string Shape								= "Shape, enum, Triangle, Rect, Pentagon, Hexagon";
+static const std::string Shape								= "Shape, enum, Wall, Right_Triangle, Triangle, Rect, Quadrangle, Pentagon";
 static const std::string Texture							= "Texture, enum, Texture_Pavement, Texture_Building, Texture_NoParking, SolidFill";
 static const std::string FillType							= "Fill, Int4Bit";
 static const std::string IsAdjacentToParking				= "IsAdjacentToParking, bool";
+static const std::string IsCircular							= "IsCircular, bool";
 static const std::string SizeOrSide							= "SizeOrSide, union, Side, Size";
 static const std::string SizeOrSide_Side					= "Side, bool";
-static const std::string SizeOrSide_Size					= "Size, bool";
-static const std::string SpecialVertexCurvature				= "SpecialVertexCurvature, enum, Linear, Convex, Concave, Rectangular";
+static const std::string SizeOrSide_ReducedSize				= "ReducedSize, bool";
+static const std::string SpecialVertexCurvature				= "SpecialVertexCurvature, struct, Type, IsCircular";
+static const std::string SpecialVertexCurvature_Type		= "Type, enum, Linear, Convex, Concave, Rectangular";
+static const std::string SpecialVertexCurvature_IsCircular	= "IsCircular, bool";
 static const std::string ShortenVertexCoordinate			= "ShortenVertexCoordinate, Int6Bit";
-static const std::string VertexList										= "VertexList, list, 0, 5" ; 
-static const std::string VertexList_VertexParameters					= "Vertex, struct, CurvatureType, X, Y";
-static const std::string VertexList_VertexParameters_CurvatureType		= "CurvatureType, enum, Linear, Convex, Concave, Rectangular";
+static const std::string VertexList										= "VertexList, list, 0, 4" ; 
+static const std::string VertexList_VertexParameters					= "Vertex, struct, X, Y, CurvatureType, IsCircular";
 static const std::string VertexList_VertexParameters_X					= "X, union, Size8bits, Size6bits";
 static const std::string VertexList_VertexParameters_X_Size8bits		= "Size8bits, Int8Bit";
 static const std::string VertexList_VertexParameters_X_Size6bits		= "Size6bits, Int6Bit";
 static const std::string VertexList_VertexParameters_Y					= "Y, union, Size8bits, Size6bits";
 static const std::string VertexList_VertexParameters_Y_Size8bits		= "Size8bits, Int8Bit";
 static const std::string VertexList_VertexParameters_Y_Size6bits		= "Size6bits, Int6Bit";
+static const std::string VertexList_VertexParameters_CurvatureType		= "CurvatureType, enum, Linear, Convex, Concave, Rectangular";
+static const std::string VertexList_VertexParameters_IsCircular			= "IsCircular, bool";
 

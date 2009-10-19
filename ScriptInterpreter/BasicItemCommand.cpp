@@ -31,14 +31,55 @@ CBasicItemCommand::~CBasicItemCommand(void)
 	}
 
 	EBasicItemType BasicItemValue;
+	bool IsScaledValue = false;
+	UScalingCoordinates X_Value, Y_Value;
+	X_Value.Size16bits=ConvertIntToInt16Bit(0);
+	Y_Value.Size16bits=ConvertIntToInt16Bit(0);
+	CString IsScaledStr;
+	CString ScalingStr;
 	if (!ExtractAndInterperetArgumentValue(ContextLine, BasicItemCommand, BasicItemType, ParsedArguments, BasicItemValue))
 		return CommandFailed;
 
-	CBasicItem *BasicItem = new CBasicItem;
-	BasicItem->Encode(BasicItemValue);
+	if (!((BasicItemValue == Door) || (BasicItemValue == CarGate_Left) || (BasicItemValue == CarGate_Right) || (BasicItemValue == CarGate_Down)))
+	{
+		if (!ExtractAndInterperetArgumentValue(ContextLine, BasicItemCommand, IsScaled, ParsedArguments, IsScaledValue))
+			return CommandFailed;
+		IsScaledStr.Format(", IsScaled = %s", BooleanStr(IsScaledValue));
 
-	LogEvent(LE_INFO, __FUNCTION__ ": %s Command Parsed Successfully: BasicItemType = %s)", 
-		BasicItemCommand, EnumToString(BasicItemValue).c_str());
+		if (BasicItemValue == Road)
+		{
+			if (IsScaledValue) 
+			{
+				if (!ExtractAndInterperetArgumentValue(ContextLine, BasicItemCommand, X_Size16bits, ParsedArguments, X_Value.Size16bits))
+					return CommandFailed;
+				if (!ExtractAndInterperetArgumentValue(ContextLine, BasicItemCommand, Y_Size16bits, ParsedArguments, Y_Value.Size16bits))
+					return CommandFailed;
+				ScalingStr.Format(", Scaling(16bit) = [X=%d, Y=%d]", X_Value.Size16bits, Y_Value.Size16bits);
+			}
+			else
+			{
+				if (!ExtractAndInterperetArgumentValue(ContextLine, BasicItemCommand, X_Size10bits, ParsedArguments, X_Value.Size10bits))
+					return CommandFailed;
+				if (!ExtractAndInterperetArgumentValue(ContextLine, BasicItemCommand, Y_Size10bits, ParsedArguments, Y_Value.Size10bits))
+					return CommandFailed;
+				ScalingStr.Format(", Scaling(10bit) = [X=%d, Y=%d]", X_Value.Size10bits, Y_Value.Size10bits);
+			}
+		}
+		else if (IsScaledValue)
+		{
+			if (!ExtractAndInterperetArgumentValue(ContextLine, BasicItemCommand, X_Size6bits, ParsedArguments, X_Value.Size6bits))
+				return CommandFailed;
+			if (!ExtractAndInterperetArgumentValue(ContextLine, BasicItemCommand, Y_Size6bits, ParsedArguments, Y_Value.Size6bits))
+				return CommandFailed;
+			ScalingStr.Format(", Scaling(6bit) = [X=%d, Y=%d]", X_Value.Size6bits, Y_Value.Size6bits);
+		}
+	}
+
+	CBasicItem *BasicItem = new CBasicItem;
+	BasicItem->Encode(BasicItemValue, IsScaledValue, X_Value, Y_Value);
+
+	LogEvent(LE_INFO, __FUNCTION__ ": %s Command Parsed Successfully: BasicItemType = %s%s%s", 
+		BasicItemCommand, EnumToString(BasicItemValue).c_str(), IsScaledStr, ScalingStr);
 
 	Element = (void *)BasicItem;
 	ElementType = AddItem;

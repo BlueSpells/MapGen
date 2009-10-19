@@ -86,32 +86,34 @@ CComplexItemCommand::~CComplexItemCommand(void)
 	CComplexItem *ComplexItem = new CComplexItem;
 	bool IsReplicationPartOfDefinitionValue;
 	Int5Bit NumberOfObjectsInComplexValue;
-	if (!ExtractAndInterperetArgumentValue(ContextLine, ComplexItemCommand, IsReplicationPartOfDefinition, ParsedArguments, IsReplicationPartOfDefinitionValue))
+	bool IsNewValue;
+	if (!ExtractAndInterperetArgumentValue(ContextLine, ComplexItemCommand, IsNew, ParsedArguments, IsNewValue))
+		return CommandFailed;
+	if (IsNewValue)
 	{
+		if (!ExtractAndInterperetArgumentValue(ContextLine, ComplexItemCommand, IsReplicationPartOfDefinition, ParsedArguments, IsReplicationPartOfDefinitionValue))
+			return CommandFailed;
 		if (!ExtractAndInterperetArgumentValue(ContextLine, ComplexItemCommand, NumberOfObjectsInComplex, ParsedArguments, NumberOfObjectsInComplexValue))
-		{
-			ComplexItem->Encode(UID_Value, IsVerticalMirrorValue, IsHorizontalMirrorValue, IsVerticalReplicationValue,
-							IsHorizontalReplicationValue, ((IsVerticalReplicationValue) ? &VerticalReplicationValue : NULL),
-							((IsHorizontalReplicationValue) ? &HorizontalReplicationValue : NULL));
+			return CommandFailed;
 
-			LogEvent(LE_INFO, __FUNCTION__ ": %s Command Parsed Successfully: UID = %d, IsVerticalMirror = %s, IsHorizontalMirror = %s, IsVerticalReplication = %s, IsHorizontalReplication = %s,%s%s)", 
-				ComplexItemCommand, UID_Value, BooleanStr(IsVerticalMirrorValue), BooleanStr(IsHorizontalMirrorValue), 
-				BooleanStr(IsVerticalReplicationValue), BooleanStr(IsHorizontalReplicationValue), VerticalReplicationStr, HorizontalReplicationStr);
-		}
+		ComplexItem->Encode(UID_Value, NumberOfObjectsInComplexValue, IsVerticalMirrorValue, IsHorizontalMirrorValue, 
+			IsVerticalReplicationValue,	IsHorizontalReplicationValue, IsReplicationPartOfDefinitionValue, 
+			((IsVerticalReplicationValue) ? &VerticalReplicationValue : NULL),
+			((IsHorizontalReplicationValue) ? &HorizontalReplicationValue : NULL));
+
+		LogEvent(LE_INFO, __FUNCTION__ ": %s Command Parsed Successfully: UID = %d, NumberOfObjectsInComplex = %d, IsVerticalMirror = %s, IsHorizontalMirror = %s, IsVerticalReplication = %s, IsHorizontalReplication = %s, IsReplicationPartOfDefinition = %s%s%s)", 
+			ComplexItemCommand, UID_Value, NumberOfObjectsInComplexValue, BooleanStr(IsVerticalMirrorValue), BooleanStr(IsHorizontalMirrorValue), BooleanStr(IsVerticalReplicationValue), BooleanStr(IsHorizontalReplicationValue), BooleanStr(IsReplicationPartOfDefinitionValue), VerticalReplicationStr, HorizontalReplicationStr);
 	}
 	else
 	{		
-		if (!ExtractAndInterperetArgumentValue(ContextLine, ComplexItemCommand, NumberOfObjectsInComplex, ParsedArguments, NumberOfObjectsInComplexValue))
-			return CommandFailed;
-		ComplexItem->Encode(UID_Value, NumberOfObjectsInComplexValue, IsVerticalMirrorValue, IsHorizontalMirrorValue, 
-							IsVerticalReplicationValue,	IsHorizontalReplicationValue, IsReplicationPartOfDefinitionValue, 
-							((IsVerticalReplicationValue) ? &VerticalReplicationValue : NULL),
-							((IsHorizontalReplicationValue) ? &HorizontalReplicationValue : NULL));
+		ComplexItem->Encode(UID_Value, IsVerticalMirrorValue, IsHorizontalMirrorValue, IsVerticalReplicationValue,
+			IsHorizontalReplicationValue, ((IsVerticalReplicationValue) ? &VerticalReplicationValue : NULL),
+			((IsHorizontalReplicationValue) ? &HorizontalReplicationValue : NULL));
 
-		LogEvent(LE_INFO, __FUNCTION__ ": %s Command Parsed Successfully: UID = %d, NumberOfObjectsInComplex = %d, IsVerticalMirror = %s, IsHorizontalMirror = %s, IsVerticalReplication = %s, IsHorizontalReplication = %s, IsReplicationPartOfDefinition = %s%s%s)", 
-					ComplexItemCommand, UID_Value, NumberOfObjectsInComplexValue, BooleanStr(IsVerticalMirrorValue), BooleanStr(IsHorizontalMirrorValue), BooleanStr(IsVerticalReplicationValue), BooleanStr(IsHorizontalReplicationValue), BooleanStr(IsReplicationPartOfDefinitionValue), VerticalReplicationStr, HorizontalReplicationStr);
+		LogEvent(LE_INFO, __FUNCTION__ ": %s Command Parsed Successfully: UID = %d, IsVerticalMirror = %s, IsHorizontalMirror = %s, IsVerticalReplication = %s, IsHorizontalReplication = %s,%s%s)", 
+			ComplexItemCommand, UID_Value, BooleanStr(IsVerticalMirrorValue), BooleanStr(IsHorizontalMirrorValue), 
+			BooleanStr(IsVerticalReplicationValue), BooleanStr(IsHorizontalReplicationValue), VerticalReplicationStr, HorizontalReplicationStr);
 	}
-
 
 
 	Element = (void *)ComplexItem;
