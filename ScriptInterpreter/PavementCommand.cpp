@@ -85,7 +85,7 @@ CPavementCommand::~CPavementCommand(void)
 	CString SizeOrSideStr;
 	if (IsAdjacentToParkingValue)
 	{
-		if ((ShapeValue == Triangle) || (ShapeValue == Right_Triangle))
+		if (!(ShapeValue == Wall))
 		{
 			if (!ExtractAndInterperetArgumentValue(ContextLine, PavementCommand, SizeOrSide_Side, ParsedArguments, SizeOrSide_Value.Side))
 				return CommandFailed;
