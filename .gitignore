@@ -1,4 +1,8 @@
 # Untracked files:
+==================
+
+# Temporary \ Self-Generated File Types
+# -------------------------------------
 *.obj
 *.pdb
 *.idb
@@ -8,6 +12,16 @@
 *.ncb
 *.suo
 *.aps
+*.exe
+*.res
+*.log
+*.manifest
+*.manifest.res
+*.txt.bak
+*.txt.orig
+
+# Temporary \ Self-Generated Folders
+# -------------------------------------
 */debug/
 # the next line excludes the /debug/ folder itself. this means no exception can overrule it
 /debug/  
@@ -19,23 +33,21 @@
 /debug/ScriptCompilerApp.ini
 */release/
 /release/
-ReadMe.txt
-readme.html
 /Communication/
 /MapGenerator/ImageStone/example/
 /MapGenerator/Debug/
 /MapGenerator/Release/
+/ScriptCompiler/Debug/
+/ScriptCompiler/Release/
+/ApplicationLogs/
+/ScriptCompiler/Debug/
+/ScriptCompiler/Release/
+
+# Specific uniteresting file names:
+# -------------------------------------
+ReadMe.txt
+readme.html
 VC*.txt
 example.html
 Thumbs.db
 BuildLog.htm
-/ScriptCompiler/Debug/
-/ScriptCompiler/Release/
-*.log
-/ApplicationLogs/
-/ScriptCompiler/Debug/
-/ScriptCompiler/Release/
-*.manifest
-*.manifest.res
-*.txt.bak
-*.txt.orig
