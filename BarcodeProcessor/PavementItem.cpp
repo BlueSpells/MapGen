@@ -90,7 +90,7 @@ void CPavementItem::Encode(	EShapeType ShapeType, ETextureType TextureType, Int4
 				NumberOfBits += BitSize(SpecialVertexCurvature.IsCircular);
 		}
 
-		if (IsAdjacentToParking && ((ShapeType == Triangle) || (ShapeType == Right_Triangle)))
+		if (IsAdjacentToParking && (!(ShapeType == Wall)))
 			NumberOfBits += BitSize(SizeOrSide.Side);
 		
 		if ((ShapeType == Quadrangle) || (ShapeType == Pentagon) || (! IsAdjacentToParking))
@@ -132,7 +132,7 @@ void CPavementItem::Encode(	EShapeType ShapeType, ETextureType TextureType, Int4
 		
 		if (IsAdjacentToParking)
 		{
-			if ((ShapeType == Triangle) || (ShapeType == Right_Triangle))
+			if (!(ShapeType == Wall))
 				BitCopyAndContinue(BitPtr, SizeOrSide.Side);
 		}
 		else
@@ -195,7 +195,7 @@ void CPavementItem::Encode(	EShapeType ShapeType, ETextureType TextureType, Int4
 
 	if (m_IsAdjacentToParking)
 	{
-		if ((m_ShapeID_int == 1) && (m_SpecialVertexCurvature.Type != Rectangular))
+		if (!(m_ShapeID_int == 0))
 			BitPasteAndContinue(BitPtr, m_SizeOrSide.Side);
 	}
 	else
@@ -319,7 +319,7 @@ void CPavementItem::Encode(	EShapeType ShapeType, ETextureType TextureType, Int4
 
 	if (m_IsAdjacentToParking)
 	{
-		if ((m_ShapeType == Triangle) || (m_ShapeType == Right_Triangle))
+		if (!(m_ShapeType == Wall))
 			AddItemToBitString(m_SizeOrSide.Side, BitPtr, ParsedString);
 	}
 	else
