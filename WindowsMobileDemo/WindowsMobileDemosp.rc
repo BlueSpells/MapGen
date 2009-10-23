@@ -1,6 +1,7 @@
 // Microsoft Visual C++ generated resource script.
 //
 #include "resourcesp.h"
+#include "resource.h"
 
 #define APSTUDIO_READONLY_SYMBOLS
 /////////////////////////////////////////////////////////////////////////////
@@ -88,7 +89,9 @@ EXSTYLE WS_EX_APPWINDOW | 0x80000000L
 CAPTION "WindowsMobileDemo"
 FONT 8, "MS Shell Dlg"
 BEGIN
-    LTEXT           "TODO:Place dialog controls here.",IDC_STATIC,19,36,77,32
+    CONTROL         129,IDC_BTN_APP_EXIT,"Static",SS_BITMAP | SS_NOTIFY | 
+                    SS_CENTERIMAGE | WS_BORDER,15,14,20,20,
+                    WS_EX_DLGMODALFRAME | WS_EX_STATICEDGE
 END
 
 
@@ -149,6 +152,12 @@ BEGIN
 END
 #endif    // APSTUDIO_INVOKED
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BMP_EXIT_APP        BITMAP  DISCARDABLE     "res\\exit_app.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
