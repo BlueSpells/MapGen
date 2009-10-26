@@ -231,6 +231,6 @@ CPavementCommand::~CPavementCommand(void)
 		PavementCommand, EnumToString(ShapeValue).c_str(), BooleanStr(IsAdjacentToParkingValue), SpecialVertexCurvatureStr, ShortenVertexCoordinateStr, SizeOrSideStr, ListOfVerticesStr, TextureAndFillStr);
 
 	Element = (void *)PavementItem;
-	ElementType = AddItem;
+	ElementType = AddItemCommand;
 	return CommandSucceeded;
 }

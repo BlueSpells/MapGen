@@ -82,6 +82,6 @@ CBasicItemCommand::~CBasicItemCommand(void)
 		BasicItemCommand, EnumToString(BasicItemValue).c_str(), IsScaledStr, ScalingStr);
 
 	Element = (void *)BasicItem;
-	ElementType = AddItem;
+	ElementType = AddItemCommand;
 	return CommandSucceeded;
 }

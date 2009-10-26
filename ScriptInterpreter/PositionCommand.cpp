@@ -65,6 +65,6 @@ CPositionCommand::~CPositionCommand(void)
 		PositionCommand, EnumToString(PositionItemTypeValue).c_str(), dXStr, dYStr);
 
 	Element = (void *)PositionItem;
-	ElementType = AddItem;
+	ElementType = AddItemCommand;
 	return CommandSucceeded;
 }

@@ -50,6 +50,6 @@ CGeneralHeaderCommand::~CGeneralHeaderCommand(void)
 		GeneralHeaderCommand, SignatureValue, VersionValue, EnumToString(BarcodeTypeValue).c_str());
 
 	Element = (void *)GeneralHeader;
-	ElementType = AddHeader;
+	ElementType = AddHeaderCommand;
 	return CommandSucceeded;
 }
