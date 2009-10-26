@@ -9,6 +9,7 @@
 #include "afxwin.h"
 #include "ScriptInterpreter/SimpleScriptReader.h"
 #include "ScriptInterpreter/parkingscriptinterpreter.h"
+#include "BarcodeProcessor/BarcodeEncoder.h"
 
 
 class IItem;
@@ -53,6 +54,7 @@ protected:
 
 	CSimpleScriptReader			m_ScriptReader;
 	CParkingScriptInterpreter	m_Interpreter;
+	CBarcodeEncoder				m_BarcodeEncoder;
 	bool m_IsFileLoaded;
 
 	std::vector<IItem *> m_ItemsList;
