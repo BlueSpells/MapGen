@@ -24,6 +24,8 @@ public:
   HRESULT RegisterNotificationWindow( HWND hwnd );
 
   HRESULT SetCameraResolution(DWORD dwId);
+  int	  GetFileCounter() {return m_Counter;}
+  CString BuildFileName() {CString str; str.Format(L"\\test%d.jpg", m_Counter); return str;}
 
 private:
 
@@ -31,7 +33,7 @@ private:
   HRESULT CreateCaptureGraphInternal();
   HRESULT RunCaptureGraphInternal();
   HRESULT CaptureStillImageInternal();
-  HRESULT NotifyMessage( DSHOW_MESSAGE message, WCHAR *wzText );
+  HRESULT NotifyMessage( DSHOW_MESSAGE message, const WCHAR *wzText );
   HRESULT ProcessCommand();
   HRESULT ProcessDShowEvent();
   HRESULT GetFirstCameraDriver( WCHAR *wzName );
@@ -47,4 +49,6 @@ private:
   CComPtr<ICaptureGraphBuilder2>  m_pCaptureGraphBuilder;
   CComPtr<IBaseFilter>			m_pVideoCaptureFilter;
   CComPtr<IImageSinkFilter>	    m_pImageSinkFilter;
+
+  int m_Counter;
 }; 

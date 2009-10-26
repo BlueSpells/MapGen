@@ -302,25 +302,57 @@ HRESULT CAppWindow::UpdateNotification( Message *pMessage )
     return S_OK;
   }
 
-  if (wcscmp(pMessage->wzMessage, L"File captured ...") == 0)
+  if (pMessage->dwMessage == MESSAGE_FILECAPTURED)
+  {
+// 	  m_ChildDialogRunning = true;
+// 	  RECT tbRect;
+// 	  HWND hTaskBar = NULL;
+// 	  CWmimgvwrDlg *lpDlg = new CWmimgvwrDlg();
+// 
+// 	  hTaskBar = ::FindWindow( L"HHTaskBar", L"" );
+// 	  if ( hTaskBar )
+// 	  {
+// 		  if ( ::GetWindowRect(hTaskBar, &tbRect) )
+// 			  vg_wintask_h = tbRect.bottom; 
+// 	  }
+// 
+// 	  vg_cmd_line = AfxGetApp()->m_lpCmdLine;
+// 
+// 	  /*  m_pMainWnd = lpDlg;*/
+// 
+// 	  lpDlg->DoModal();
+// 	  m_ChildDialogRunning = false;
+  }
+
+  if (pMessage->dwMessage == MESSAGE_FILEREADYTODECODE)
   {
 	  m_ChildDialogRunning = true;
-	  RECT tbRect;
-	  HWND hTaskBar = NULL;
-	  CWmimgvwrDlg *lpDlg = new CWmimgvwrDlg();
-
-	  hTaskBar = ::FindWindow( L"HHTaskBar", L"" );
-	  if ( hTaskBar )
+	  std::vector<void *> temp;
+	  if (!m_BarcodeDecoder.DecodeImage(pMessage->wzMessage, temp))
 	  {
-		  if ( ::GetWindowRect(hTaskBar, &tbRect) )
-			  vg_wintask_h = tbRect.bottom; 
+		  m_ChildDialogRunning = true;
+		  RECT tbRect;
+		  HWND hTaskBar = NULL;
+		  CWmimgvwrDlg *lpDlg = new CWmimgvwrDlg();
+		  
+		  hTaskBar = ::FindWindow( L"HHTaskBar", L"" );
+		  if ( hTaskBar )
+		  {
+		    if ( ::GetWindowRect(hTaskBar, &tbRect) )
+		  	  vg_wintask_h = tbRect.bottom; 
+		  }
+		  
+		  TCHAR szFullPath[MAX_PATH];
+		  GetFullPathToFile(szFullPath, pMessage->wzMessage);
+		  vg_cmd_line = szFullPath;
+		  
+		  /*  m_pMainWnd = lpDlg;*/
+		  
+		  lpDlg->DoModal();
+		  delete lpDlg;
+		  m_ChildDialogRunning = false;
+
 	  }
-
-	  vg_cmd_line = AfxGetApp()->m_lpCmdLine;
-
-	  /*  m_pMainWnd = lpDlg;*/
-
-	  lpDlg->DoModal();
 	  m_ChildDialogRunning = false;
   }
 
@@ -347,4 +379,10 @@ HRESULT CAppWindow::UpdateNotification( Message *pMessage )
 
 Cleanup:
   return hr;
+}
+
+
+HRESULT CAppWindow::InitBarcodeDecoder()
+{
+	return (m_BarcodeDecoder.Init()==true) ? S_OK : S_FALSE;
 }

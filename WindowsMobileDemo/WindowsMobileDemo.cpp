@@ -93,6 +93,9 @@ BOOL CWindowsMobileDemoApp::InitInstance()
 	// Initialize the UI Controls
 	CHK( appWindow.CreateControls( hInstance ));
 
+	// Init Barcode
+	CHK( appWindow.InitBarcodeDecoder() );
+
 	// Start the UI and run the message pump
 	CHK( appWindow.Run());
 

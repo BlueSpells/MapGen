@@ -32,6 +32,7 @@ CGraphManager::CGraphManager()
   m_hThread = NULL;
   m_hCommandCompleted = NULL;
   m_currentCommand = COMMAND_NOCOMMAND;
+  m_Counter = 0;
 }
 
 
@@ -227,6 +228,7 @@ CGraphManager::ProcessDShowEvent()
   if( lEventCode == EC_CAP_FILE_COMPLETED )
   {
     NotifyMessage( MESSAGE_FILECAPTURED, L"File captured ..." );
+	NotifyMessage( MESSAGE_FILEREADYTODECODE, BuildFileName().GetString());
   }
 
 
@@ -375,8 +377,7 @@ Cleanup:
 HRESULT
 CGraphManager::CaptureStillImageInternal()
 {
-  static int Counter = 0;
-  CString str;
+  TCHAR szFullPath[MAX_PATH]; //CString str;
   HRESULT hr = S_OK;
   CComPtr<IFileSinkFilter2> pFileSink;
   CComPtr<IUnknown>		 pUnkCaptureFilter;
@@ -390,8 +391,11 @@ CGraphManager::CaptureStillImageInternal()
 
   CHK( m_pImageSinkFilter.QueryInterface( &pFileSink ));
   CHK( pFileSink->SetMode(AM_FILE_OVERWRITE));
-  str.Format(L"\\test%d.jpg", ++Counter);
-  CHK( pFileSink->SetFileName( str, NULL ));
+  //str.Format(L"\\test%d.jpg", ++m_Counter);
+  
+  ++m_Counter;
+  GetFullPathToFile(szFullPath, BuildFileName().GetString());
+  CHK( pFileSink->SetFileName( szFullPath, NULL ));
 
   CHK( m_pVideoCaptureFilter.QueryInterface( &pUnkCaptureFilter ));
   CHK( m_pCaptureGraphBuilder->FindPin( pUnkCaptureFilter, PINDIR_OUTPUT, &PIN_CATEGORY_STILL, &MEDIATYPE_Video, FALSE, 0, &pStillPin ));
@@ -408,7 +412,7 @@ Cleanup:
 
 
 HRESULT
-CGraphManager::NotifyMessage( DSHOW_MESSAGE message, WCHAR *wzText )
+CGraphManager::NotifyMessage( DSHOW_MESSAGE message, const WCHAR *wzText )
 {
   HRESULT hr = S_OK;
   Message *pMessage;
