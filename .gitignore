@@ -19,6 +19,7 @@
 *.manifest.res
 *.txt.bak
 *.txt.orig
+*.zip
 
 # Temporary \ Self-Generated Folders
 # -------------------------------------

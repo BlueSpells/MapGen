@@ -8,7 +8,7 @@ class IAbstractBarcodeElement
 {
 public:
 	IAbstractBarcodeElement() : m_NumberOfBits(0) {}
-	~IAbstractBarcodeElement(void) {}
+	~IAbstractBarcodeElement(void) {/*delete m_BitBuffer;*/}
 
 	virtual void		Decode(IN const CBitPointer &Data, IN OUT int &UsedBits, IN int *Context /*when necessary*/) = 0;
 	/*virtual void		Encode();*/ //- Todo in the future?
@@ -19,7 +19,7 @@ public:
 
 	CBitPointer&	GetBitBuffer()								{return m_BitBuffer;}
 	void			IncreaseBitBufferSize(size_t NumberOfBits)	{m_NumberOfBits += NumberOfBits;}
-	size_t			GetBitBufferSize()							{return m_NumberOfBits;}
+	size_t			GetBitBufferSize() const					{return m_NumberOfBits;}
 	std::string		GetBitBufferRawString()						{return BinaryString(m_BitBuffer, m_NumberOfBits);};
 
 	virtual CBitPointer&	AllocateBitBuffer()							

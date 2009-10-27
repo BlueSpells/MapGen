@@ -77,10 +77,10 @@ bool CScriptInterpreter::InterperetFile(std::string FileName, std::vector<IHeade
 		// if we got here - command was parsed successfully!
 		switch (ElementType)
 		{
-		case AddItem:
+		case AddItemCommand:
 			ItemsList.push_back((IItem *)Element);
 			break;
-		case AddHeader:
+		case AddHeaderCommand:
 			HeaderList.push_back((IHeader *)Element);
 			break;
 		default:
@@ -90,8 +90,8 @@ bool CScriptInterpreter::InterperetFile(std::string FileName, std::vector<IHeade
 
 		LogEvent(LE_INFO, __FUNCTION__ ": [Line #%d]: Command %s Parsed Successfully.  { #%s = %d }", 
 			m_ScriptReader->GetLineIndex(), Command.c_str(), 
-			(ElementType == AddItem) ? "Item" : "Header",
-			(ElementType == AddItem) ? ItemsList.size() : HeaderList.size());
+			(ElementType == AddItemCommand) ? "Item" : "Header",
+			(ElementType == AddItemCommand) ? ItemsList.size() : HeaderList.size());
 	}
 
 	if (m_ScriptReader->GetLineIndex() == 0)

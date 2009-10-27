@@ -12,8 +12,8 @@ enum ECommandResult
 
 enum EElementType
 {
-	AddItem,
-	AddHeader
+	AddItemCommand,
+	AddHeaderCommand
 };
 
 class IScriptCommand

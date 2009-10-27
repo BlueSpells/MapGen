@@ -64,6 +64,6 @@ CSignedJumpCommand::~CSignedJumpCommand(void)
 		SignedJumpCommand, EnumToString(SignedJumpItemTypeValue).c_str(), dXStr, dYStr);
 
 	Element = (void *)SignedJumpExtendedItem;
-	ElementType = AddItem;
+	ElementType = AddItemCommand;
 	return CommandSucceeded;
 }

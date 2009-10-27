@@ -180,6 +180,6 @@ CParkingCommand::~CParkingCommand(void)
 		EnumToString(StructureShapeValue.AngleType).c_str(), StructureShapeStatus);
 
 	Element = (void *)ParkingItem;
-	ElementType = AddItem;
+	ElementType = AddItemCommand;
 	return CommandSucceeded;
 }

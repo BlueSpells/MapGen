@@ -118,8 +118,11 @@ std::string CSimpleScriptReader::CleanComment(std::string &Argument)
 			continue;
 		}
 
+#pragma warning(push)
+#pragma warning (disable:4239)
 		// remove comment within line
 		LineFromFile = CleanComment(std::string(LineFromFile)).c_str();
+#pragma warning(pop)
 
 		// Clean all tabs and spaces
 #pragma warning(push)

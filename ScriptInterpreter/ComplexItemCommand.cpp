@@ -117,6 +117,6 @@ CComplexItemCommand::~CComplexItemCommand(void)
 
 
 	Element = (void *)ComplexItem;
-	ElementType = AddItem;
+	ElementType = AddItemCommand;
 	return CommandSucceeded;
 }

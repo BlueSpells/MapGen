@@ -64,6 +64,6 @@ CAbsoluteJumpCommand::~CAbsoluteJumpCommand(void)
 		AbsoluteJumpCommand, EnumToString(AbsoluteJumpItemTypeValue).c_str(), XStr, YStr);
 
 	Element = (void *)AbsoluteJumpExtendedItem;
-	ElementType = AddItem;
+	ElementType = AddItemCommand;
 	return CommandSucceeded;
 }

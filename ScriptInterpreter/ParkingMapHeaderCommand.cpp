@@ -151,6 +151,6 @@ CParkingMapHeaderCommand::~CParkingMapHeaderCommand(void)
 
 
 	Element = (void *)ParkingMapHeader;
-	ElementType = AddHeader;
+	ElementType = AddHeaderCommand;
 	return CommandSucceeded;
 }

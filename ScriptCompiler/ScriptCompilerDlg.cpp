@@ -70,6 +70,7 @@ BOOL CScriptCompilerDlg::OnInitDialog()
 	m_CreateBinaryButton.EnableWindow(FALSE);
 	m_ScriptReader.Init();
 	m_FileName = GetConfigString(ScriptConfigSection, "FileName", "").c_str();
+	m_OutPutFile = GetConfigString(ScriptConfigSection, "OutputFileName", "").c_str();
 	UpdateData(FALSE);
 	
 	return TRUE;  // return TRUE  unless you set the focus to a control
@@ -118,6 +119,8 @@ void CScriptCompilerDlg::OnBnClickedButtonLoad()
 	UpdateData();
 	if (!m_IsFileLoaded)
 	{
+		WriteConfigString(ScriptConfigSection, "FileName", m_FileName);
+
 		if (!m_Interpreter.InterperetFile((std::string)m_FileName, m_HeaderList, m_ItemsList) /*m_ScriptReader.OpenScriptFile(m_FileName)*/)
 		{
 			return;
@@ -128,8 +131,6 @@ void CScriptCompilerDlg::OnBnClickedButtonLoad()
 		m_OutputFileEdit.EnableWindow(TRUE);
 		m_CreateBinaryButton.EnableWindow(TRUE);
 		m_IsFileLoaded = true;
-		WriteConfigString(ScriptConfigSection, "FileName", m_FileName);
-
 
 		LogEvent(LE_DEBUG, __FUNCTION__ ": RAW STRINGS, as they appear in memory: ");
 		for (unsigned int i = 0; i < m_HeaderList.size(); i++)
@@ -187,7 +188,35 @@ void CScriptCompilerDlg::OnBnClickedButtonLoad()
 
 void CScriptCompilerDlg::OnBnClickedButtonCreate()
 {
-	// ToDo: In the future, in order to support longer scripts, create new thread here!
+	Assert(m_IsFileLoaded);
+	if (!m_IsFileLoaded)
+		return;
+
+	UpdateData();
+	WriteConfigString(ScriptConfigSection, "OutputFileName", m_OutPutFile);
+	
+	CFile Outputfile;
+	if (!Outputfile.Open(m_OutPutFile, CFile::modeWrite | CFile::modeCreate))
+	{
+		LogEvent(LE_ERROR, __FUNCTION__ ": Failed Creating\\Opening file %s", m_OutPutFile);
+		return;
+	}
+	LogEvent(LE_INFOHIGH, __FUNCTION__ ": Output file %s created successfully. Building Barcode...", m_OutPutFile);
+
+	BYTE *Data = NULL;
+	int   DataSize = 0;
+	if (!m_BarcodeEncoder.BuildBarcode(m_HeaderList, m_ItemsList))
+	{
+		LogEvent(LE_ERROR, __FUNCTION__ ": Failed To build barcode in memory", m_OutPutFile);
+		return;
+	}
+	LogEvent(LE_INFOHIGH, __FUNCTION__ ": Barcode built successfully. Writing to file...");
+
+	m_BarcodeEncoder.CompleteBarcodeAndGetBuffer(Data, DataSize);
+
+	Outputfile.Write(Data, DataSize);
+	Outputfile.Close();
+	LogEvent(LE_INFOHIGH, __FUNCTION__ ": Output file %s completed successfully.", m_OutPutFile);
 }
 
 void CScriptCompilerDlg::CleanLists()
