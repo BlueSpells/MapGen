@@ -327,8 +327,35 @@ HRESULT CAppWindow::UpdateNotification( Message *pMessage )
   if (pMessage->dwMessage == MESSAGE_FILEREADYTODECODE)
   {
 	  m_ChildDialogRunning = true;
-	  std::vector<void *> temp;
-	  if (!m_BarcodeDecoder.DecodeImage(pMessage->wzMessage, temp))
+	  std::vector<SBarcodeData> DecodedData;
+	  if (m_BarcodeDecoder.DecodeImage(pMessage->wzMessage, DecodedData))
+	  {
+		  int  count;
+		  char ch[64];
+
+		  sprintf( ch, "Find %d barcodes\n", DecodedData.size());
+		  CString str;
+		  str = ch;
+		  for( count=0; count<int(DecodedData.size()); count++)
+		  {
+			  int i;
+			  // 		sprintf( ch, " barcode %d:\n", count+1 );
+			  // 		str += ch;
+			  // 		for( i=0; i<int(DecodedData[count].DataLength); i++)
+			  // 			str += DecodedData[count]Data[i];
+
+			  str+=" Hex:\n";
+			  for( i=0; i<int(DecodedData[count].DataLength); i++)
+			  {
+				  sprintf( ch, "%x%x ", DecodedData[count].Data[i]>>4&0x0F, DecodedData[count].Data[i]&0x0F);   
+				  str += ch;
+			  } 
+
+			  str+="\n\n";
+		  }
+		  ::AfxMessageBox(str);
+	  }
+	  else
 	  {
 		  m_ChildDialogRunning = true;
 		  RECT tbRect;

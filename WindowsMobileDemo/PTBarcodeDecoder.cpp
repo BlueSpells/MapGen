@@ -29,42 +29,37 @@ CPTBarcodeDecoder::~CPTBarcodeDecoder(void)
 	return true;
 }
 
+// we need MAX_TIMES_TO_LOOP because if there really is a $ in the text, 
+// the loop would otherwise run infinitely.
+#define MAX_TIMES_TO_LOOP	3
 
-/*virtual*/ bool CPTBarcodeDecoder::DecodeImage(PTCHAR ImageFileName, std::vector<void *>DecodedBuffers)
+/*virtual*/ bool CPTBarcodeDecoder::DecodeImage(PTCHAR ImageFileName, std::vector<SBarcodeData> &DecodedBuffers)
 {
 	if (!OpenFile(ImageFileName))
 		return false;
 
 	if (!DecodeQRCode())
-		return false;
+ 		return false;
+
+
+	for(int count=0; count<int(m_BarInfo.dwTotalCount); count++)
+	{
+		SBarcodeData BarcodeData;
+		m_Codec.Decode(m_BarInfo.InfoList[count].Data, m_BarInfo.InfoList[count].dwDataLen);
+		m_Codec.DetachBuffer(BarcodeData.Data, BarcodeData.DataLength);
+		DecodedBuffers.push_back(BarcodeData);
+	}
 
 	return true;
 }
 
-bool CPTBarcodeDecoder::ParseDecodedBarcode( PTTOTALBARCODEINFO* pBar )
+bool CPTBarcodeDecoder::ParseDecodedBarcode( PTTOTALBARCODEINFO* pBar, bool IsFirstDecoding )
 {
-	int  count, i;
+	int  count;
 	char ch[200];
-	if( pBar->dwTotalCount<=0 )
-	{
-		::AfxMessageBox(L"No barcodes were found");
+	
+	if (!ExtractBarcodeData(pBar, IsFirstDecoding))
 		return false;
-	}
-
-	m_BarInfo.dwTotalCount = pBar->dwTotalCount;
-	for( i=0; i<int(pBar->dwTotalCount); i++ )
-	{
-		m_BarInfo.InfoList[i].dwDataLen = pBar->pInfoList[i].dwDataLen;
-		memcpy( m_BarInfo.InfoList[i].Data , pBar->pInfoList[i].pData, pBar->pInfoList[i].dwDataLen );
-		m_BarInfo.InfoList[i].dwX1 =pBar->pInfoList[i].dwX1;
-		m_BarInfo.InfoList[i].dwX2 =pBar->pInfoList[i].dwX2;
-		m_BarInfo.InfoList[i].dwX3 =pBar->pInfoList[i].dwX3;
-		m_BarInfo.InfoList[i].dwX4 =pBar->pInfoList[i].dwX4;
-		m_BarInfo.InfoList[i].dwY1 =pBar->pInfoList[i].dwY1;
-		m_BarInfo.InfoList[i].dwY2 =pBar->pInfoList[i].dwY2;
-		m_BarInfo.InfoList[i].dwY3 =pBar->pInfoList[i].dwY3;
-		m_BarInfo.InfoList[i].dwY4 =pBar->pInfoList[i].dwY4;
-	}
 
 	sprintf( ch, "Find %d barcodes\n", m_BarInfo.dwTotalCount );
 	CString str;
@@ -72,18 +67,18 @@ bool CPTBarcodeDecoder::ParseDecodedBarcode( PTTOTALBARCODEINFO* pBar )
 	for( count=0; count<int(m_BarInfo.dwTotalCount); count++)
 	{
 		int i;
-		sprintf( ch, "barcode %d:\n", count+1 );
-		str += ch;
+// 		sprintf( ch, " barcode %d:\n", count+1 );
+// 		str += ch;
+// 		for( i=0; i<int(m_BarInfo.InfoList[count].dwDataLen); i++)
+// 			str += m_BarInfo.InfoList[count].Data[i];
+		
+		str+=" Hex:\n";
 		for( i=0; i<int(m_BarInfo.InfoList[count].dwDataLen); i++)
-			str += m_BarInfo.InfoList[count].Data[i];
-		/*
-		str+="Hex:\n";
-		for( i=0; i<int(m_BarInfo.pInfoList[count].dwDataLen); i++)
 		{
-		sprintf( ch, "%x%x ", m_BarInfo.pInfoList[count].pData[i]>>4&0x0F, m_bar.pInfoList[count].pData[i]&0x0F);   
-		str += ch;
+			sprintf( ch, "%x%x ", m_BarInfo.InfoList[count].Data[i]>>4&0x0F, m_BarInfo.InfoList[count].Data[i]&0x0F);   
+			str += ch;
 		} 
-		*/
+		
 		str+="\n\n";
 	}
 	::AfxMessageBox(str);
@@ -100,6 +95,7 @@ bool CPTBarcodeDecoder::DecodeQRCode()
 	} 
 
 	InitBarCodeInfo( );
+
 	CWaitCursor wait;
 	PTTOTALBARCODEINFO QRCodeInfo;
 	PtQRDecodeInit(&QRCodeInfo);
@@ -108,13 +104,20 @@ bool CPTBarcodeDecoder::DecodeQRCode()
 
 	//if(  PtQRDecodeFromFile ( GetPathName(), &m_para, &QRCodeInfo ) != PT_QRDECODE_SUCCESS )
 	bool ok = true;
-	if(  PtQRDecode ( &m_image, &m_para, &QRCodeInfo ) != PT_QRDECODE_SUCCESS )
+	
+	int i = 0;
+	do 
 	{
-		::AfxMessageBox(L"An error occurred while recognition ");
-		ok = false;
-	}
-	else
-		ok = ParseDecodedBarcode(&QRCodeInfo);
+		if(  PtQRDecode ( &m_image, &m_para, &QRCodeInfo ) != PT_QRDECODE_SUCCESS )
+		{
+			::AfxMessageBox(L"An error occurred while recognition ");
+			ok = false;
+		}
+		else
+			ok = ExtractBarcodeData(&QRCodeInfo, i==0);//ParseDecodedBarcode(&QRCodeInfo, IsFirstDecoding);
+
+	} while(!HaveWeRemovedAllDollars() && ++i <= MAX_TIMES_TO_LOOP && ok);
+
 
 	PtQRDecodeFree( &QRCodeInfo );//release the mem allocated while decoding
 	return ok;
@@ -158,4 +161,62 @@ void CPTBarcodeDecoder::InitBarCodeInfo( )
 		m_BarInfo.InfoList[i].dwY3 = 0;
 		m_BarInfo.InfoList[i].dwY4 = 0;
 	}
+}
+
+bool CPTBarcodeDecoder::HaveWeRemovedAllDollars()
+{
+	ASSERT(m_BarInfo.dwTotalCount > 0);
+	if( m_BarInfo.dwTotalCount<=0 )
+	{
+		::AfxMessageBox(L"Error: No barcodes");
+		return false;
+	}
+
+	for(int count=0; count<int(m_BarInfo.dwTotalCount); count++)
+	{
+		for(int i=0; i<int(m_BarInfo.InfoList[count].dwDataLen); i++)
+		{
+			if (m_BarInfo.InfoList[count].Data[i] == '$')
+				return false;
+		} 
+	}
+	return true;
+}
+
+bool CPTBarcodeDecoder::ExtractBarcodeData( PTTOTALBARCODEINFO* pBar, bool IsFirstDecoding )
+{
+	if( pBar->dwTotalCount<=0 )
+	{
+		::AfxMessageBox(L"No barcodes were found");
+		return false;
+	}
+
+	m_BarInfo.dwTotalCount = pBar->dwTotalCount;
+	for(int i=0; i<int(pBar->dwTotalCount); i++ )
+	{
+		if (IsFirstDecoding)
+		{
+			m_BarInfo.InfoList[i].dwDataLen = pBar->pInfoList[i].dwDataLen;
+			memcpy( m_BarInfo.InfoList[i].Data , pBar->pInfoList[i].pData, pBar->pInfoList[i].dwDataLen );
+			m_BarInfo.InfoList[i].dwX1 =pBar->pInfoList[i].dwX1;
+			m_BarInfo.InfoList[i].dwX2 =pBar->pInfoList[i].dwX2;
+			m_BarInfo.InfoList[i].dwX3 =pBar->pInfoList[i].dwX3;
+			m_BarInfo.InfoList[i].dwX4 =pBar->pInfoList[i].dwX4;
+			m_BarInfo.InfoList[i].dwY1 =pBar->pInfoList[i].dwY1;
+			m_BarInfo.InfoList[i].dwY2 =pBar->pInfoList[i].dwY2;
+			m_BarInfo.InfoList[i].dwY3 =pBar->pInfoList[i].dwY3;
+			m_BarInfo.InfoList[i].dwY4 =pBar->pInfoList[i].dwY4;
+
+		}
+		else
+		{
+			for(int j=0; j<int(pBar->pInfoList[i].dwDataLen); j++)
+			{
+				if (pBar->pInfoList[i].pData[j] != '$' && m_BarInfo.InfoList[i].Data[j] == '$')
+					m_BarInfo.InfoList[i].Data[j] = pBar->pInfoList[i].pData[j];
+			} 
+		}
+	}
+
+	return true;
 }

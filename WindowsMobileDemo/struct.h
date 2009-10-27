@@ -21,11 +21,14 @@ const TCHAR MyPics[] = L"\\My Documents\\My Pictures\\";
 static void GetFullPathToFile(LPTSTR pszFullPath, LPCTSTR pszFilename)
 {
 	// Find the path to the current executable
-	
-	GetModuleFileName(GetModuleHandle(NULL), pszFullPath, MAX_PATH);
-	//wcscpy(pszFullPath, MyPics);
-
-	// Strip off the exe filename and replace it with
-	// the path provided by our second parameter.
-	wcscpy(wcsrchr(pszFullPath, '\\') /*+ 1*/, pszFilename);
+// 	
+// 	// choose one of the following:
+// 	//GetModuleFileName(GetModuleHandle(NULL), pszFullPath, MAX_PATH);
+// 	//wcscpy(pszFullPath, MyPics);
+// 
+// 	// Strip off the exe filename and replace it with
+// 	// the path provided by our second parameter.
+// 	wcscpy(wcsrchr(pszFullPath, '\\') /*+ 1*/, pszFilename);
+// 
+	wcscpy(pszFullPath, pszFilename);
 }

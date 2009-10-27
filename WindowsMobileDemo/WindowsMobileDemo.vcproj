@@ -127,6 +127,7 @@
 				Name="VCCLCompilerTool"
 				ExecutionBucket="7"
 				Optimization="0"
+				AdditionalIncludeDirectories=".."
 				PreprocessorDefinitions="_DEBUG;_WIN32_WCE=$(CEVER);UNDER_CE;$(PLATFORMDEFINES);WINCE;DEBUG;$(ARCHFAM);$(_ARCHFAM_);SMARTPHONE2003_UI_MODEL"
 				MinimalRebuild="true"
 				RuntimeLibrary="1"
@@ -148,10 +149,11 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				UseLibraryDependencyInputs="false"
 				AdditionalOptions=" /subsystem:windowsce,5.01"
 				AdditionalDependencies="Strmbase.lib Strmiids.lib PtDMDecode.lib PtImageRW.lib PtQRDecode.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="PtLibs"
+				AdditionalLibraryDirectories="PtLibs;"
 				GenerateDebugInformation="true"
 				EntryPointSymbol="WinMainCRTStartup"
 				TargetMachine="0"
@@ -292,6 +294,7 @@
 				Name="VCCLCompilerTool"
 				ExecutionBucket="7"
 				Optimization="2"
+				AdditionalIncludeDirectories=".."
 				PreprocessorDefinitions="NDEBUG;_WIN32_WCE=$(CEVER);UNDER_CE;$(PLATFORMDEFINES);WINCE;$(ARCHFAM);$(_ARCHFAM_);SMARTPHONE2003_UI_MODEL"
 				MinimalRebuild="false"
 				RuntimeLibrary="0"
@@ -316,7 +319,7 @@
 				AdditionalOptions=" /subsystem:windowsce,5.01"
 				AdditionalDependencies="Strmbase.lib Strmiids.lib PtDMDecode.lib PtImageRW.lib PtQRDecode.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="PtLibs"
+				AdditionalLibraryDirectories="PtLibs;"
 				GenerateDebugInformation="true"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
@@ -498,6 +501,18 @@
 			</File>
 			<File
 				RelativePath=".\res\WindowsMobileDemosp.rc2"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="FilesFromBarcodeProcessor"
+			>
+			<File
+				RelativePath="..\BarcodeProcessor\BitBufferCodec.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\BarcodeProcessor\BitBufferCodec.h"
 				>
 			</File>
 		</Filter>
