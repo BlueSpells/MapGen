@@ -9,9 +9,9 @@ ParkingMapHeader: ParkingGarageID=[1,2,3,4] | TextLanguage=Hebrew | ParkingGarag
 Position: Type=ForwardDiagonalJump | dX=40 | dY=60;
 BasicItem: Type=CarGate_Right | IsScaled=false;
 SignedJump: Type=SignedDiagonalJump | dX=-8 | dY=-4;
-Pavement: Shape=Rect | Texture=Texture_Pavement | IsAdjacentToParking=false | 
-				Size=true | SpecialVertexCurvature=Convex | 
-				VertexList={[Linear,0,50] [Linear,8,50] [Linear,8,16]};
+Pavement: Shape=Quadrangle | Texture=Texture_Pavement | IsAdjacentToParking=false | 
+				ReducedSize=true | SpecialVertexCurvature=[Convex,true] | 
+				VertexList={[0,50,Linear] [8,50,Linear] [8,16,Linear]};
 SignedJump: Type=SignedHorizontalJump | dX=-10;
 Parking: Type=Bikes | Angle=Parallel | IsMirrorDoubled=false	| Orientation=Degrees0 | Multiplicity=[true,11] | StructureShape=[None,0] | IsPeriodicBetweenPoles=false;
 
@@ -26,7 +26,7 @@ Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=false	| Orientation=Deg
 
 %Upper area near the car gate.
 Position: Type=ForwardVerticalJump | dY=60;
-Pavement: Shape=Rect | Texture=Texture_Pavement | IsAdjacentToParking=false | Size=true | SpecialVertexCurvature=Rectangular | VertexList={[Rectangular,40,26]};
+Pavement: Shape=Rect | Texture=Texture_Pavement | IsAdjacentToParking=false | ReducedSize=true | SpecialVertexCurvature=[Rectangular] | VertexList={[40,26,Rectangular]};
 Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=false	| Orientation=Degrees270 | Multiplicity=[false] | StructureShape=[None,0] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[3,Squared];
 
 %Central parking lines
@@ -57,7 +57,7 @@ SignedJump: Type=CarriageDir; %Horizontal
 Parking: Type=Bikes | Angle=Parallel | IsMirrorDoubled=false	| Orientation=Degrees270 | Multiplicity=[true,7] | StructureShape=[None,0] | IsPeriodicBetweenPoles=false;
 BasicItem: Type=Elevator | IsScaled=false;
 SignedJump: Type=SignedVerticalJump | dY=-10;
-Pavement: Shape=Rect | Texture=Texture_Pavement | IsAdjacentToParking=false | Size=true | SpecialVertexCurvature=Rectangular | VertexList={[Rectangular,12,26]};
+Pavement: Shape=Rect | Texture=Texture_Pavement | IsAdjacentToParking=false | ReducedSize=true | SpecialVertexCurvature=[Rectangular] | VertexList={[12,26,Rectangular]};
 
 %Bottom line (except for first 2 parking spaces)
 SignedJump: Type=SignedDiagonalJump | dX=-42 | dY=34;
@@ -76,20 +76,20 @@ Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=false	| Orientation=Deg
 
 %Upper area left to center(stairs, elevators and other shit)
 AbsoluteJump: Type=AbsoluteVerticalJump | X=100 | Y=0;
-Pavement: Shape=Rect | Texture=Texture_Building | IsAdjacentToParking=false | Size=true | SpecialVertexCurvature=Rectangular | VertexList={[Linear,62,58]};
+Pavement: Shape=Rect | Texture=Texture_Building | IsAdjacentToParking=false | ReducedSize=true | SpecialVertexCurvature=[Rectangular] | VertexList={[62,58,Linear]};
 BasicItem: Type=Staircase_H | IsScaled=false;
 BasicItem: Type=Elevator | IsScaled=false;
-Pavement: Shape=Rect | Texture=Texture_Building | IsAdjacentToParking=false | Size=true | SpecialVertexCurvature=Rectangular | VertexList={[Rectangular,40,12]};
+Pavement: Shape=Rect | Texture=Texture_Building | IsAdjacentToParking=false | ReducedSize=true | SpecialVertexCurvature=[Rectangular] | VertexList={[40,12,Rectangular]};
 Parking: Type=Bikes | Angle=Parallel | IsMirrorDoubled=false	| Orientation=Degrees270 | Multiplicity=[true,21] | StructureShape=[None,0] | IsPeriodicBetweenPoles=false;
 % Area right to the single elevator
 SignedJump: Type=SignedDiagonalJump | dX=14 | dY=-40;
-Pavement: Shape=Rect | Texture=Texture_Building | IsAdjacentToParking=false | Size=true | SpecialVertexCurvature=Rectangular | VertexList={[Linear,18,16]};
+Pavement: Shape=Rect | Texture=Texture_Building | IsAdjacentToParking=false | ReducedSize=true | SpecialVertexCurvature=[Rectangular] | VertexList={[18,16,Linear]};
 %Area in between 2 staircases
 SignedJump: Type=SignedDiagonalJump | dX=18 | dY=-30;
-Pavement: Shape=Rect | Texture=Texture_Building | IsAdjacentToParking=false | Size=true | SpecialVertexCurvature=Rectangular | VertexList={[Rectangular,42,30]};
+Pavement: Shape=Rect | Texture=Texture_Building | IsAdjacentToParking=false | ReducedSize=true | SpecialVertexCurvature=[Rectangular] | VertexList={[42,30,Rectangular]};
 %Area at the left from double elevators
 Position: Type=ForwardHorizontalJump | dX=10;
-Pavement: Shape=Rect | Texture=Texture_Building | IsAdjacentToParking=false | Size=true | SpecialVertexCurvature=Rectangular | VertexList={[Rectangular,14,18]};
+Pavement: Shape=Rect | Texture=Texture_Building | IsAdjacentToParking=false | ReducedSize=true | SpecialVertexCurvature=[Rectangular] | VertexList={[14,18,Rectangular]};
 
 SignedJump: Type=SignedDiagonalJump | dX=20 | dY=-10;
 BasicItem: Type=Elevator | IsScaled=false;
@@ -105,7 +105,7 @@ BasicItem: Type=Staircase_V | IsScaled=false;
 Parking: Type=Regular | Angle=Perpendicular | IsMirrorDoubled=false	| Orientation=Degrees0 | Multiplicity=[false] | StructureShape=[None,0] | IsPeriodicBetweenPoles=false;
 SignedJump: Type=SignedDiagonalJump | dX=-30 | dY=30;
 %Area at the right from double elevators
-Pavement: Shape=Rect | Texture=Texture_Pavement | IsAdjacentToParking=false | Size=true | SpecialVertexCurvature=Rectangular | VertexList={[Rectangular,16,26]};
+Pavement: Shape=Rect | Texture=Texture_Pavement | IsAdjacentToParking=false | ReducedSize=true | SpecialVertexCurvature=[Rectangular] | VertexList={[16,26,Rectangular]};
 % Single parking space below the staircase(not sure if it's indeed parking...)
 Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=false	| Orientation=Degrees270 | Multiplicity=[false] | StructureShape=[None,0] | IsPeriodicBetweenPoles=false;
 Position: Type=CR;
@@ -113,8 +113,8 @@ Position: Type=CR;
 % Upper Right Corner
 SignedJump: Type=CarriageDir; %Vertical
 Position: Type=ForwardDiagonalJump | dX=50 | dY=20;
-Pavement: Shape=Rect | Texture=Texture_Pavement | IsAdjacentToParking=false | Size=false | SpecialVertexCurvature=Rectangular | VertexList={[Rectangular,80,40]};
-Pavement: Shape=Rect | Texture=Texture_Pavement | IsAdjacentToParking=false | Size=true | SpecialVertexCurvature=Rectangular | VertexList={[Rectangular,44,24]};
+Pavement: Shape=Rect | Texture=Texture_Pavement | IsAdjacentToParking=false | ReducedSize=false | SpecialVertexCurvature=[Rectangular] | VertexList={[80,40,Rectangular]};
+Pavement: Shape=Rect | Texture=Texture_Pavement | IsAdjacentToParking=false | ReducedSize=true | SpecialVertexCurvature=[Rectangular] | VertexList={[44,24,Rectangular]};
 Parking: Type=Regular | Angle=Parallel | IsMirrorDoubled=false	| Orientation=Degrees270 | Multiplicity=[true,2] | StructureShape=[None,0] | IsPeriodicBetweenPoles=true | PeriodicBetweenPoles=[3,Squared];
 SignedJump: Type=SignedDiagonalJump | dX=-52 | dY=-40;
 BasicItem: Type=Staircase_H | IsScaled=false;
