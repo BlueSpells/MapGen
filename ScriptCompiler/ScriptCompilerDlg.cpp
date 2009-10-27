@@ -214,9 +214,25 @@ void CScriptCompilerDlg::OnBnClickedButtonCreate()
 
 	m_BarcodeEncoder.CompleteBarcodeAndGetBuffer(Data, DataSize);
 
+	
 	Outputfile.Write(Data, DataSize);
+//  The following is testing 0x01 to 0xFF:
+// 	Data = new BYTE[0xFF+1];
+// 	BYTE i = 0;
+// 	for (; i < 0xFF; i++)
+// 		Data[i] = i;
+// 	Data[i] = i;
+// 	DataSize = 0xFF+1;
+
+	// Since we are using a Barcode Creator which runs over the first 2 bytes we need to use a codec
+	// before writing the data to the binary file in order to pad the first two bytes:
+	m_Codec.Encode(Data, DataSize);
+
+	// Then, write to file and close it
+	Outputfile.Write(m_Codec.GetData(), m_Codec.GetDataSize());
 	Outputfile.Close();
 	LogEvent(LE_INFOHIGH, __FUNCTION__ ": Output file %s completed successfully.", m_OutPutFile);
+	LogEvent(LE_INFOHIGH, __FUNCTION__ ": BINARY Created Successfully");
 }
 
 void CScriptCompilerDlg::CleanLists()
