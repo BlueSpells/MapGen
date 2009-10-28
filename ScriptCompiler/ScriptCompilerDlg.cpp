@@ -214,7 +214,6 @@ void CScriptCompilerDlg::OnBnClickedButtonCreate()
 
 	m_BarcodeEncoder.CompleteBarcodeAndGetBuffer(Data, DataSize);
 
-	
 	Outputfile.Write(Data, DataSize);
 //  The following is testing 0x01 to 0xFF:
 // 	Data = new BYTE[0xFF+1];
