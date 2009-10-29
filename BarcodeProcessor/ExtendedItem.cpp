@@ -11,8 +11,8 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 
-//CExtendedItem::CExtendedItem(EExtendedItems ItemType) : IItem(ExtendedItem),
-//	m_ExtendedItemType((EExtendedItems)0xFFFFFFFF)
+//CExtendedItem::CExtendedItem(EExtendedItemType ItemType) : IItem(ExtendedItem),
+//	m_ExtendedItemType((EExtendedItemType)0xFFFFFFFF)
 //{
 //}
 
@@ -30,7 +30,7 @@ CExtendedItem::~CExtendedItem(void)
 }
 
 
-/*virtual*/ bool CExtendedItem::IsOfThisType(CBitPointer *Data)
+/*virtual*/ bool CExtendedItem::IsOfThisType(CBitPointer *Data) const
 {
 	if (*Data[0] != 1) return false;
 	if (*Data[1] != 1) return false;

@@ -52,7 +52,7 @@ public:
 	void Encode(SStructureShape StructureShape, SMultiplicity Multiplicity);
 
 	virtual void	InsertItemType() {}
-	virtual bool	IsOfThisType(CBitPointer* /*Data*/) {return false;}
+	virtual bool	IsOfThisType (CBitPointer* /*Data*/) const {return false;}
 	virtual void	Decode(IN const CBitPointer &Data, IN OUT int &UsedBits, IN int* /*Context unnecessary*/);
 
 	virtual	std::string	GetItemBitBufferParsedString(std::string ParsedString, CBitPointer BitPtr);

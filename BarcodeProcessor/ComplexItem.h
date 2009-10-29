@@ -45,7 +45,7 @@ public:
 
 
 	virtual void	InsertItemType();
-	virtual bool	IsOfThisType(CBitPointer *Data);
+	virtual bool	IsOfThisType (CBitPointer *Data) const;
 	
 	// IMPORTANT NOTE:
 	// Decoding of Complex item is done in two phases.

@@ -91,7 +91,7 @@ void CParkingItem::Encode(EParkingAngle ParkingAngle, EParkingType ParkingType,
 	(GetBitBuffer())[0] = 0;
 }
 
-/*virtual*/ bool CParkingItem::IsOfThisType(CBitPointer *Data)
+/*virtual*/ bool CParkingItem::IsOfThisType(CBitPointer *Data) const
 {
 	return (*Data[0] == 0);
 }

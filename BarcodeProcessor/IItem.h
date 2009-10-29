@@ -23,7 +23,7 @@ public:
 	~IItem(void) {}
 
 	virtual void	InsertItemType() = 0;
-	virtual bool	IsOfThisType(CBitPointer *Data) = 0;
+	virtual bool	IsOfThisType (CBitPointer *Data) const = 0;
 	EItemType		GetType() {return m_Type;}
 
 #pragma warning(push)

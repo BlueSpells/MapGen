@@ -1,7 +1,7 @@
 #pragma once
 #include "iitem.h"
 
-enum EExtendedItems
+enum EExtendedItemType
 {
 	SignedJump,
 	AbsoluteJump,
@@ -11,22 +11,22 @@ enum EExtendedItems
 	Extended16bit,
 	Extended24bit,
 	Extended32bit,
-	EExtendedItems_MaxEnum
+	EExtendedItemType_MaxEnum
 };
-DefineEnumBitSize(EExtendedItems);
+DefineEnumBitSize(EExtendedItemType);
 
 class CExtendedItem : public IItem
 {
 public:
 
-	CExtendedItem(EExtendedItems ItemType) : IItem(ExtendedItem) 
+	CExtendedItem(EExtendedItemType ItemType) : IItem(ExtendedItem) 
 		{m_ExtendedItemType = ItemType; IncreaseBitBufferSize(BitSize(ItemType));}
 
 	~CExtendedItem(void);
 
 	virtual void	InsertItemType();
-	virtual bool	IsOfThisType(CBitPointer *Data);
-	EExtendedItems  GetExtenededType() {return m_ExtendedItemType;}
+	virtual bool	IsOfThisType (CBitPointer *Data) const;
+	EExtendedItemType  GetExtenededType() {return m_ExtendedItemType;}
 
 
 #pragma warning(push)
@@ -45,5 +45,5 @@ public:
 
 private:
 	// Decoded data:
-	EExtendedItems m_ExtendedItemType;
+	EExtendedItemType m_ExtendedItemType;
 };

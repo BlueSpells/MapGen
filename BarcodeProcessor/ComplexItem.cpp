@@ -31,7 +31,7 @@ CComplexItem::~CComplexItem(void)
 }
 
 
-/*virtual*/ bool CComplexItem::IsOfThisType(CBitPointer *Data)
+/*virtual*/ bool CComplexItem::IsOfThisType(CBitPointer *Data) const
 {
 	if (*Data[0] != 1) return false;
 	if (*Data[1] != 1) return false;

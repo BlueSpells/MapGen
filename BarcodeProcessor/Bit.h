@@ -7,6 +7,8 @@
 #ifndef __BIT_H__
 #define __BIT_H__
 
+#define BitsInByte 8
+
 class CBit  
 {
 public:

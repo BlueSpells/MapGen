@@ -5,6 +5,8 @@
 #include "ParkingItem.h"
 #include "BasicItem.h"
 #include "ComplexItem.h"
+#include "SignedJumpExtendedItem.h"
+#include "AbsoluteJumpExtendedItem.h"
 
 
 #ifdef _DEBUG
@@ -43,6 +45,36 @@ CItemsFactory::~CItemsFactory(void)
 		NewItem = new CComplexItem;
 		break;
 	// TODO : add other item types
+	case ExtendedItem:
+		// BREAK; - in purpose !! Extended items should not be created here, but by using the EExtenedType directly!!
+	default:
+		ASSERT(false);
+	};
+
+	return NewItem;
+}
+
+/*static*/ IItem *CItemsFactory::CreateItem(EExtendedItemType ExtendedItemType)
+{
+	IItem *NewItem = NULL;
+
+	switch (ExtendedItemType)
+	{
+	case SignedJump:
+		NewItem = new CSignedJumpExtendedItem;
+		break;
+	case AbsoluteJump:
+		NewItem = new CAbsoluteJumpExtendedItem;
+		break;
+		// TODO : add other item types
+			/*Text,
+			Reserved,
+			Extended8bit,
+			Extended16bit,
+			Extended24bit,
+			Extended32bit,*/
+	case ExtendedItem:
+		// BREAK; - in purpose !! Extended items should not be created here, but by using the EExtenedType directly!!
 	default:
 		ASSERT(false);
 	};

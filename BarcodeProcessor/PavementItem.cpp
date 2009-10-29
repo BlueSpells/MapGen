@@ -369,7 +369,7 @@ void CPavementItem::Encode(	EShapeType ShapeType, ETextureType TextureType, Int4
 }
 
 
-/*virtual*/ bool CPavementItem::IsOfThisType(CBitPointer *Data)
+/*virtual*/ bool CPavementItem::IsOfThisType(CBitPointer *Data) const
 {
 	if (*Data[0] != 1) return false;
 	if (*Data[1] != 1) return false;

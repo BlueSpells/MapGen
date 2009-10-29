@@ -3,7 +3,7 @@
 #include "ItemHelper.h"
 #include "BitLib.h"
 
-#define BARCODE_MAX_SIZE_IN_BITS BARCODE_MAX_SIZE * 8
+#define BARCODE_MAX_SIZE_IN_BITS BARCODE_MAX_SIZE * BitsInByte
 
 CBarcodeEncoder::CBarcodeEncoder(void) : m_BitCount(0)
 {
@@ -69,10 +69,10 @@ void CBarcodeEncoder::CompleteBarcodeAndGetBuffer(BYTE *&Data, int &DataSize)
 	// No Need to complete barcode as ZeroMemory did all the job. Just need to copy the appropriate amount
 
 	Data = m_BarcodeData;
-	DataSize = (int)ceil(((float)m_BitCount) / 8);
+	DataSize = (int)ceil(((float)m_BitCount) / BitsInByte);
 	
 	ASSERT(DataSize == (BYTE *)m_BarcodeBitPointer.GetAddress() - m_BarcodeData
-				+ (int)ceil(((float)m_BarcodeBitPointer.GetBitOffset()) / 8));
+				+ (int)ceil(((float)m_BarcodeBitPointer.GetBitOffset()) / BitsInByte));
 }
 
 bool CBarcodeEncoder::BuildBarcode(std::vector<IHeader *>HeaderList, std::vector<IItem *>ItemList)

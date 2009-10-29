@@ -23,6 +23,7 @@ void CBarcodeDecoder::DecodeBuffer(IN BYTE *Data, IN int DataSize,
 {
 	m_BitPointer.Set(Data);
 
+	// ToDo: Deal with DataSize smaller than the minimum required by CGeneralHeader
 	CGeneralHeader *GeneralHeader = new CGeneralHeader;
 	BitDecodeAndContinue(GeneralHeader, m_BitPointer);
 	HeaderList.push_back(GeneralHeader);
@@ -41,8 +42,10 @@ void CBarcodeDecoder::DecodeBuffer(IN BYTE *Data, IN int DataSize,
 	case ParkingMap:
 		{
 			CBarcodeParkingMapDecoder MapDecoder(GeneralHeader->m_Version);
-			int RemainingBitsToDecode = DataSize*8-m_BitPointer.GetBitOffset();
-			MapDecoder.Decode(m_BitPointer, RemainingBitsToDecode);
+			int BitsUsed = (BYTE *)m_BitPointer.GetAddress()-Data;
+			MapDecoder.Decode(m_BitPointer, DataSize*BitsInByte, BitsUsed);
+			ASSERT(DataSize*BitsInByte - BitsUsed <= MINIMUM_SIZE_OF_ITEM_BIT_BUFFER);
+
 			CParkingMapHeader *Header = new CParkingMapHeader;
 			MapDecoder.GetExtractedHeader(*Header);
 			HeaderList.push_back(Header);

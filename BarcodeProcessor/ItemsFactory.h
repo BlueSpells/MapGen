@@ -1,6 +1,7 @@
 #pragma once
 
 #include "IItem.h"
+#include "ExtendedItem.h"
 
 class CItemsFactory
 {
@@ -10,4 +11,5 @@ private:
 
 public:
 	static IItem *CreateItem(EItemType ItemType);
+	static IItem *CreateItem(EExtendedItemType ExtendedItemType);
 };

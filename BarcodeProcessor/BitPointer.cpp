@@ -69,11 +69,11 @@ void CBitPointer::Set(void* p_pvAddress, int p_nBitOffset)
 {
 	//setup standard ByteAddress+offset
 	//offset range [0,7]
-	Byte *pByte = ((Byte*)p_pvAddress) + p_nBitOffset / 8;
-	m_nBitOffset = p_nBitOffset % 8;
+	Byte *pByte = ((Byte*)p_pvAddress) + p_nBitOffset / BitsInByte;
+	m_nBitOffset = p_nBitOffset % BitsInByte;
 	if (m_nBitOffset < 0)
 	{
-		m_nBitOffset += 8;
+		m_nBitOffset += BitsInByte;
 		pByte--;
 	}
 	//setup standard WordAddress+offset
@@ -82,7 +82,7 @@ void CBitPointer::Set(void* p_pvAddress, int p_nBitOffset)
 	//meaning word address least nibble = 0x0, 0x4, 0x8 or 0xC
 	int nByteOffset = (Word)pByte % sizeof(Word);
 	m_puAddress = (Word*)(pByte - nByteOffset);
-	m_nBitOffset += nByteOffset * 8;
+	m_nBitOffset += nByteOffset * BitsInByte;
 
 	//setup mask
 	m_uBitMask = 1 << m_nBitOffset;
@@ -101,7 +101,7 @@ void* CBitPointer::GetAddress() const
 
 void* CBitPointer::GetByteAddress() const
 {
-	return (char*)m_puAddress + m_nBitOffset / 8;
+	return (char*)m_puAddress + m_nBitOffset / BitsInByte;
 }
 
 int CBitPointer::GetBitOffset() const
@@ -111,7 +111,7 @@ int CBitPointer::GetBitOffset() const
 
 int CBitPointer::GetByteBitOffset() const
 {
-	return m_nBitOffset % 8;
+	return m_nBitOffset % BitsInByte;
 }
 
 CBitPointer& CBitPointer::New(size_t p_sizBitsSize)

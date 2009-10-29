@@ -25,7 +25,7 @@ public:
 	void Encode(	ESignedJumpItemType SignedJumpItemType, SignedInt8Bit dX, SignedInt8Bit dY);
 
 	virtual void	InsertItemType();
-	virtual bool	IsOfThisType(CBitPointer *Data);
+	virtual bool	IsOfThisType (CBitPointer *Data) const;
 	virtual void	Decode(IN const CBitPointer &Data, IN OUT int &UsedBits, IN int* /*Context unnecessary*/);
 
 	virtual	std::string	GetExtendedItemBitBufferParsedString(std::string ParsedString, CBitPointer BitPtr);

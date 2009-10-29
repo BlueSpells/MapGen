@@ -23,7 +23,7 @@ public:
 	void Encode(	EAbsoluteJumpItemType PositionItemType, Int16Bit X, Int16Bit Y);
 
 	virtual void	InsertItemType();
-	virtual bool	IsOfThisType(CBitPointer *Data);
+	virtual bool	IsOfThisType (CBitPointer *Data) const;
 	virtual void	Decode(IN const CBitPointer &Data, IN OUT int &UsedBits, IN int* /*Context unnecessary*/);
 
 	virtual	std::string	GetExtendedItemBitBufferParsedString(std::string ParsedString, CBitPointer BitPtr);

@@ -151,3 +151,12 @@ DefineEnumToString6(EShapeType, Wall, Right_Triangle, Triangle, Rect, Quadrangle
 DefineEnumToString4(ETextureType, Texture_Pavement, Texture_Building, Texture_NoParking, SolidFill);
 DefineEnumToString4(ECurvatureType, Linear, Convex, Concave, Rectangular);
 DefineEnumToString7(EItemType, SubItem, Parking, Position, Pavement, BasicComponent, ComplexStructure, ExtendedItem);
+
+
+
+
+
+// Enum Loops
+#define FirstElementOfEnum(Enum)		(Enum)0
+#define LastElementOfEnum(Enum)			(Enum)((int)Enum##_MaxEnum - 1)
+#define IncrementEnumIterator(EnumIter) (*((int *)&EnumIter))++

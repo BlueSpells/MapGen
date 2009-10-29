@@ -39,7 +39,7 @@ public:
 	void Encode(	EBasicItemType BasicItemType, bool IsScaled, UScalingCoordinates X, UScalingCoordinates Y);
 
 	virtual void	InsertItemType();
-	virtual bool	IsOfThisType(CBitPointer *Data);
+	virtual bool	IsOfThisType (CBitPointer *Data) const;
 	virtual void	Decode(IN const CBitPointer &Data, IN OUT int &UsedBits, IN int * /*Context unnecessary*/);
 
 	virtual	std::string	GetItemBitBufferParsedString(std::string ParsedString, CBitPointer BitPtr);

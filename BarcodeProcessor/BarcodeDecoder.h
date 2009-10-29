@@ -9,7 +9,7 @@ public:
 	CBarcodeDecoder(void);
 	~CBarcodeDecoder(void);
 
-	void DecodeBuffer(IN BYTE *Data, IN int DataSize, 
+	void DecodeBuffer(IN BYTE *Data, IN int DataSize/*Bytes*/, 
 		OUT std::vector<IHeader *> HeaderList, OUT std::vector<IItem *> ItemList);
 
 	CBitPointer m_BitPointer;

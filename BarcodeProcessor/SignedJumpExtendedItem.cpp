@@ -79,7 +79,7 @@ void CSignedJumpExtendedItem::Encode(ESignedJumpItemType SignedJumpItemType, Sig
 	(GetItemContentBuffer())[2] = 0;
 }
 
-/*virtual*/ bool CSignedJumpExtendedItem::IsOfThisType(CBitPointer *Data)
+/*virtual*/ bool CSignedJumpExtendedItem::IsOfThisType(CBitPointer *Data) const
 {
 	if (!CExtendedItem::IsOfThisType(Data))
 		return false;

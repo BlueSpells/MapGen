@@ -77,7 +77,7 @@ void CAbsoluteJumpExtendedItem::Encode(EAbsoluteJumpItemType AbsoluteJumpItemTyp
 	(GetItemContentBuffer())[2] = 1;
 }
 
-/*virtual*/ bool CAbsoluteJumpExtendedItem::IsOfThisType(CBitPointer *Data)
+/*virtual*/ bool CAbsoluteJumpExtendedItem::IsOfThisType(CBitPointer *Data) const
 {
 	if (!CExtendedItem::IsOfThisType(Data))
 		return false;
